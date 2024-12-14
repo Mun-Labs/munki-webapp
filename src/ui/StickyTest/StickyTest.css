@@ -1,0 +1,19 @@
+.sticky-container {
+    font-size: 40px;
+}
+.sticky-container .section {
+  background: blue;
+  height: 20vh;
+  overflow: scroll;
+}
+
+.child-container {
+  height: 120vh;
+  overflow: scroll;
+}
+.child-container .child {
+  background: green;
+}
+.sticky-container .child-bottom {
+    background: red;
+}

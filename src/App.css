@@ -1,0 +1,59 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+.demo-logo-vertical {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.section {
+  height: 1500px;
+  margin-bottom: 20px;
+  background-color: green;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/*<Layout style={layoutStyle}>*/
+/*  <Sider width="25%" style={siderStyle}>*/
+/*    <div>Sidebar</div>*/
+/*  </Sider>*/
+/*  <Layout>*/
+/*    <Header style={headerStyle}>*/
+/*    </Header>*/
+/*    <Content style={contentStyle}>*/
+/*      <div>Social trending</div>*/
+/*      <div>Mindshare map</div>*/
+/*      <div>Meme index</div>*/
+/*      <div>Hot list</div>*/
+/*      <div>Whale watch</div>*/
+/*      <div>Holders trend</div>*/
+/*    </Content>*/
+/*    <Footer style={footerStyle}>Footer</Footer>*/
+/*  </Layout>*/
+/*</Layout>*/
