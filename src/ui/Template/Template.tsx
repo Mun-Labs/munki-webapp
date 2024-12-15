@@ -5,7 +5,8 @@ interface TemplateProps extends ComponentProps<any> {}
 
 const TemplateStyled = styled.div.attrs({ className: "TemplateStyled" })``;
 
-export const Template: FC<TemplateProps> = ({ style }) => {
+export const Template: FC<TemplateProps> = (props) => {
+  const { style } = props;
   return (
     <TemplateStyled style={{ ...style }}>
       <div>Template</div>

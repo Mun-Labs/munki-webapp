@@ -8,6 +8,7 @@ import type { TableProps } from "antd";
 import { AnyObject } from "../../../domain/types/Types";
 
 interface TableWithFiltersProps<T = any> extends ComponentProps<any> {
+  label: string;
   data: TableProps<T>["dataSource"];
   columns: TableProps<T>["columns"];
 }
@@ -21,7 +22,7 @@ const TableWithFiltersStyled = styled.div.attrs({
 export function TableWithFilters<T = AnyObject>(
   props: TableWithFiltersProps<T>,
 ) {
-  const { style, data, columns } = props;
+  const { style, label, data, columns } = props;
   const onChange: TableProps<T>["onChange"] = (
     pagination,
     filters,
@@ -33,8 +34,8 @@ export function TableWithFilters<T = AnyObject>(
 
   return (
     <TableWithFiltersStyled style={{ ...style }}>
-      <Flex justify="space-between" align="center">
-        <div style={{ ...Styles.h2 }}>Smart Wallet Inflow 🧠</div>
+      <Flex justify="space-between" align="center" style={{ marginBottom: 30 }}>
+        <div style={{ ...Styles.h2 }}>{label}</div>
         <FilterByTime />
       </Flex>
 

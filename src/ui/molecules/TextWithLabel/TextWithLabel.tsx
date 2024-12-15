@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { COLORS } from "../../colors";
-import "./TextWithLabel.css";
 import { Flex } from "antd";
 import { Styles } from "../../uiStyles";
 
@@ -24,16 +23,21 @@ const Right = styled.div`
 `;
 
 interface ITextWithLabelProps {
-  label: string;
   text: string;
+  label?: string;
   right?: string;
+  left?: React.ReactNode;
+  leftIcon?: React.ReactNode;
 }
 
-export const TextWithLabel = ({ label, text, right }: ITextWithLabelProps) => {
+export const TextWithLabel = (props: ITextWithLabelProps) => {
+  const { label, text, left, right } = props;
+
   return (
     <TextWithLabelContainer className="TextWithLabelContainer">
-      <Label>{label} (i)</Label>
+      {label && <Label>{label} (i)</Label>}
       <Flex align="center">
+        {left && <div style={{ marginRight: 8 }}>{left}</div>}
         <MainText>{text}</MainText>
         <Right>{right}</Right>
       </Flex>

@@ -4,7 +4,7 @@ import { Flex } from "antd";
 import { COLORS, UI_COLORS } from "../../colors";
 import { MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
-import { Styles } from "../../uiStyles";
+import { debugStyles, Styles } from "../../uiStyles";
 import { IToken } from "../../../domain/entities/Entities";
 import { ComponentProps, FC } from "react";
 
@@ -13,7 +13,6 @@ const StyledTokenCard = styled.div`
   width: 420px;
   padding: 40px 28px;
   background: ${UI_COLORS.background};
-  border: 1px solid ${COLORS.white};
   border-radius: 24px;
 `;
 
@@ -22,7 +21,6 @@ export const MunkiImage = styled.div`
   width: 360px;
   margin: 0 auto;
   margin-bottom: 20px;
-  border: 1px solid ${COLORS.white};
   border-radius: 18px;
 `;
 
@@ -37,7 +35,7 @@ export const TokenCard: FC<TokenCardProps & ComponentProps<any>> = ({
   if (!token) token = MockTokens[0];
 
   return (
-    <Flex justify="center" style={{ ...style }}>
+    <Flex justify="center" style={{ ...debugStyles, ...style }}>
       <StyledTokenCard>
         <div style={{ position: "relative" }}>
           <MunkiImage>Image</MunkiImage>

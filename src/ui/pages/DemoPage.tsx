@@ -6,6 +6,8 @@ import { TableWithFilters } from "../organisms/TableWithFilters/TableWithFilters
 import { TokenCardDemo } from "../organisms/TokenCard/TokenCardDemo";
 import { IToken } from "../../domain/entities/Entities";
 import { MockTokens } from "../../api/MockData";
+import { TextWithLabelDemo } from "../molecules/TextWithLabel/TextWithLabelDemo";
+import { IconDemo } from "../demos/IconDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -19,6 +21,7 @@ const columns: TableColumnsType<HoldersTrendColumn> = [
     showSorterTooltip: { target: "full-header" },
     sorter: (a, b) => a.name.length - b.name.length,
     sortDirections: ["descend"],
+    render: (text) => <TextWithLabel text={text} left={<IconDemo />} />,
   },
   {
     title: "Holders",
@@ -57,7 +60,11 @@ export const DemoPage = () => {
       <h2>TableWithFilters</h2>
       <Flex justify="center" align="center" style={{ width: "100%" }}>
         <div style={{ width: 800 }}>
-          <TableWithFilters<HoldersTrendColumn> data={data} columns={columns} />
+          <TableWithFilters<HoldersTrendColumn>
+            data={data}
+            columns={columns}
+            label="hi"
+          />
         </div>
       </Flex>
       <br />
@@ -71,7 +78,7 @@ export const DemoPage = () => {
       <br />
 
       <h2>TextWithLabel</h2>
-      <TextWithLabel text={"text"} label="label" right="^12%" />
+      <TextWithLabelDemo />
       <br />
 
       <h2>TokenCardDemo</h2>

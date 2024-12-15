@@ -1,7 +1,13 @@
-import { Flex } from "antd";
+import { Flex, TableColumnsType } from "antd";
 import "./MunkiContent.css";
 import { debugStyles, Styles } from "../../uiStyles";
 import { HotList } from "./HotList/HotList";
+import { IToken } from "../../../domain/entities/Entities";
+import { MockTokens } from "../../../api/MockData";
+import { TableWithFilters } from "../TableWithFilters/TableWithFilters";
+import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
+import { IconDemo } from "../../demos/IconDemo";
+import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
 
 const contentStyles: React.CSSProperties = {
   ...debugStyles,
@@ -9,6 +15,52 @@ const contentStyles: React.CSSProperties = {
   padding: "20px",
   overflowY: "auto",
 };
+
+type HoldersTrendColumn = Pick<
+  IToken,
+  "name" | "accounts" | "twentyFourHourVolume" | "twentyFourHourPercentage"
+>;
+
+const holdersTrendColumns: TableColumnsType<HoldersTrendColumn> = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    showSorterTooltip: { target: "full-header" },
+    sorter: (a, b) => a.name.length - b.name.length,
+    sortDirections: ["descend"],
+    render: (text) => <TextWithLabel text={text} left={<IconDemo />} />,
+  },
+  {
+    title: "Holders",
+    dataIndex: "accounts",
+    defaultSortOrder: "descend",
+    sorter: (a, b) => {
+      if (!a.accounts || !b.accounts) return -1;
+      return a.accounts - b.accounts;
+    },
+  },
+  {
+    title: "24H",
+    dataIndex: "twentyFourHourVolume",
+    sorter: (a, b) => {
+      if (!a.twentyFourHourVolume || !b.twentyFourHourVolume) return -1;
+      return a.twentyFourHourVolume - b.twentyFourHourVolume;
+    },
+  },
+  {
+    title: "24H%",
+    dataIndex: "twentyFourHourPercentage",
+    sorter: (a, b) => {
+      if (!a.twentyFourHourPercentage || !b.twentyFourHourPercentage) return -1;
+      return a.twentyFourHourPercentage - b.twentyFourHourPercentage;
+    },
+  },
+];
+
+const holdersTrendData = MockTokens.map((token) => ({
+  ...token,
+  key: token.name,
+}));
 
 export const MunkiContent = () => {
   return (
@@ -18,17 +70,28 @@ export const MunkiContent = () => {
       <Flex justify="space-between">
         <div style={{ ...Styles.borders, flexGrow: 1, marginRight: 30 }}>
           Mindshare map
+          <FilterByTime label="Memecoins Mindshare 🌑" />
         </div>
         <div style={{ ...Styles.borders, flexGrow: 3 }}>Meme index</div>
       </Flex>
 
       <HotList />
 
-      <Flex>
+      <Flex style={{ marginTop: 60 }}>
         <div style={{ ...debugStyles, flexGrow: 1, marginRight: 48 }}>
-          Whale watch
+          <TableWithFilters<HoldersTrendColumn>
+            label="Smart Wallet Inflow 🧠"
+            data={holdersTrendData}
+            columns={holdersTrendColumns}
+          />
         </div>
-        <div style={{ ...debugStyles, flexGrow: 1 }}>Holders trend</div>
+        <div style={{ ...debugStyles, flexGrow: 1 }}>
+          <TableWithFilters<HoldersTrendColumn>
+            label="Holders Trend 🧠"
+            data={holdersTrendData}
+            columns={holdersTrendColumns}
+          />
+        </div>
       </Flex>
     </div>
   );
