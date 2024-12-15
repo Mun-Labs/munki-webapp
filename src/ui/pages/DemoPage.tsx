@@ -1,0 +1,81 @@
+import { Flex, TableColumnsType } from "antd";
+import { FilterByTime } from "../molecules/FilterByTime/FilterByTime";
+import { HorizontalFilterDemo } from "../molecules/HorizontalFilter/HorizontalFilterDemo";
+import { TextWithLabel } from "../molecules/TextWithLabel/TextWithLabel";
+import { TableWithFilters } from "../organisms/TableWithFilters/TableWithFilters";
+import { TokenCardDemo } from "../organisms/TokenCard/TokenCardDemo";
+import { IToken } from "../../domain/entities/Entities";
+import { MockTokens } from "../../api/MockData";
+
+type HoldersTrendColumn = Pick<
+  IToken,
+  "name" | "accounts" | "twentyFourHourVolume" | "twentyFourHourPercentage"
+>;
+
+const columns: TableColumnsType<HoldersTrendColumn> = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    showSorterTooltip: { target: "full-header" },
+    sorter: (a, b) => a.name.length - b.name.length,
+    sortDirections: ["descend"],
+  },
+  {
+    title: "Holders",
+    dataIndex: "accounts",
+    defaultSortOrder: "descend",
+    sorter: (a, b) => {
+      if (!a.accounts || !b.accounts) return -1;
+      return a.accounts - b.accounts;
+    },
+  },
+  {
+    title: "24H",
+    dataIndex: "twentyFourHourVolume",
+    sorter: (a, b) => {
+      if (!a.twentyFourHourVolume || !b.twentyFourHourVolume) return -1;
+      return a.twentyFourHourVolume - b.twentyFourHourVolume;
+    },
+  },
+  {
+    title: "24H%",
+    dataIndex: "twentyFourHourPercentage",
+    sorter: (a, b) => {
+      if (!a.twentyFourHourPercentage || !b.twentyFourHourPercentage) return -1;
+      return a.twentyFourHourPercentage - b.twentyFourHourPercentage;
+    },
+  },
+];
+
+const data = MockTokens.map((token) => ({ ...token, key: token.name }));
+
+export const DemoPage = () => {
+  return (
+    <>
+      <h1>DemoPage</h1>
+
+      <h2>TableWithFilters</h2>
+      <Flex justify="center" align="center" style={{ width: "100%" }}>
+        <div style={{ width: 800 }}>
+          <TableWithFilters<HoldersTrendColumn> data={data} columns={columns} />
+        </div>
+      </Flex>
+      <br />
+
+      <h2>FilterByTime</h2>
+      <FilterByTime label="Demo" />
+      <br />
+
+      <h2>HorizontalFilterDemo</h2>
+      <HorizontalFilterDemo />
+      <br />
+
+      <h2>TextWithLabel</h2>
+      <TextWithLabel text={"text"} label="label" right="^12%" />
+      <br />
+
+      <h2>TokenCardDemo</h2>
+      <TokenCardDemo />
+    </>
+  );
+};

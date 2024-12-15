@@ -1,6 +1,7 @@
 import { Flex } from "antd";
 import "./MunkiContent.css";
 import { debugStyles, Styles } from "../../uiStyles";
+import { HotList } from "./HotList/HotList";
 
 const contentStyles: React.CSSProperties = {
   ...debugStyles,
@@ -21,9 +22,7 @@ export const MunkiContent = () => {
         <div style={{ ...Styles.borders, flexGrow: 3 }}>Meme index</div>
       </Flex>
 
-      <Flex>
-        <div style={{ ...debugStyles, flexGrow: 1 }}>Hot list</div>
-      </Flex>
+      <HotList />
 
       <Flex>
         <div style={{ ...debugStyles, flexGrow: 1, marginRight: 48 }}>

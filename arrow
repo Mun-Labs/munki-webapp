@@ -1,9 +1,11 @@
-
 docs/todo.md
 arrow
 docs/product.md
 src/App.tsx
-src/ui/uiStyles.ts
 src/ui/organisms/MunkiHeader/MunkiHeader.tsx
 src/ui/organisms/MunkiContent/MunkiContent.tsx
 src/domain/entities/Entities.ts
+src/ui/pages/DemoPage.tsx
+src/ui/Template/Template.tsx
+src/ui/colors.ts
+src/ui/uiStyles.ts

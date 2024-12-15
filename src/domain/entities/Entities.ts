@@ -1,20 +1,23 @@
 export interface ISocials {
-  x: string;
-  web: string;
-  telegram: string;
+  x?: string;
+  web?: string;
+  telegram?: string;
 }
 
 export interface IToken {
   name: string;
-  tweets: number;
-  tweetsPercentage: number;
-  influencers: number;
-  influencersPercentage: number;
-  accounts: number;
-  accountsPercentage: number;
-  twentyFourHourPercentage: number;
-  volume: number;
-  socials: ISocials;
+  tweets?: number;
+  tweetsPercentage?: number;
+  influencers?: number;
+  influencersPercentage?: number;
+  accounts?: number;
+  accountsPercentage?: number;
+  twentyFourHourVolume?: number;
+  twentyFourHourPercentage?: number;
+  whaleCount?: number;
+  whaleCountPercentage?: number;
+  volume?: number;
+  socials?: ISocials;
 }
 
 export interface ISmartWallet {
