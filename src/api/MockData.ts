@@ -17,7 +17,7 @@ export const MockTokens: IToken[] = [
   },
 
   {
-    name: "$CHILLGUY1",
+    name: "$ATHENA",
     twentyFourHourVolume: 239.41,
     twentyFourHourPercentage: 12,
     accounts: 391.0,
@@ -31,7 +31,7 @@ export const MockTokens: IToken[] = [
     },
   },
   {
-    name: "$CHILLGUY2",
+    name: "$TOGA",
     twentyFourHourVolume: 239.41,
     twentyFourHourPercentage: 12,
     accounts: 391.0,
@@ -45,7 +45,7 @@ export const MockTokens: IToken[] = [
     },
   },
   {
-    name: "$CHILLGUY3",
+    name: "$DEEPAI",
     twentyFourHourVolume: 239.41,
     twentyFourHourPercentage: 12,
     accounts: 391.0,
@@ -59,7 +59,21 @@ export const MockTokens: IToken[] = [
     },
   },
   {
-    name: "$AIXBT",
+    name: "$REIKO",
+    twentyFourHourVolume: 139.41,
+    twentyFourHourPercentage: 12,
+    accounts: 391.0,
+    accountsPercentage: 92,
+    whaleCount: 80,
+    whaleCountPercentage: 333.5,
+    socials: {
+      x: "x",
+      telegram: "telegram",
+      web: "web",
+    },
+  },
+  {
+    name: "$LOLA",
     twentyFourHourVolume: 139.41,
     twentyFourHourPercentage: 12,
     accounts: 391.0,

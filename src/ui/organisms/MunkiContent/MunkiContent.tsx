@@ -8,6 +8,7 @@ import { TableWithFilters } from "../TableWithFilters/TableWithFilters";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { IconDemo } from "../../demos/IconDemo";
 import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
+import { TreeChartDemo } from "../../molecules/TreeChart/TreeChartDemo";
 
 const contentStyles: React.CSSProperties = {
   ...debugStyles,
@@ -68,11 +69,17 @@ export const MunkiContent = () => {
       <h1 style={{ textAlign: "initial" }}>Top Memecoin Mindshare on X 🧠</h1>
 
       <Flex justify="space-between">
-        <div style={{ ...Styles.borders, flexGrow: 1, marginRight: 30 }}>
-          Mindshare map
+        <div style={{ ...debugStyles, flexGrow: 1, marginRight: 30 }}>
           <FilterByTime label="Memecoins Mindshare 🌑" />
+          <TreeChartDemo />
         </div>
-        <div style={{ ...Styles.borders, flexGrow: 3 }}>Meme index</div>
+        <div style={{ ...debugStyles, flexGrow: 3 }}>
+          <TableWithFilters<HoldersTrendColumn>
+            label="Smart Wallet Inflow 🧠"
+            data={holdersTrendData}
+            columns={holdersTrendColumns}
+          />
+        </div>
       </Flex>
 
       <HotList />

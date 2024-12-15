@@ -24,7 +24,7 @@ export const Styles: RecursiveStyles = {
 };
 
 export const debugStyles: React.CSSProperties = {
-  ...Styles.borders,
+  // ...Styles.borders,
 };
 
 export const darkTheme: ThemeConfig = {

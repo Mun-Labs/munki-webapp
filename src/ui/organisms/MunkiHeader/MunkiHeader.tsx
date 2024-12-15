@@ -1,6 +1,11 @@
 import { Flex } from "antd";
 import "./MunkiHeader.css";
 import { debugStyles } from "../../uiStyles";
+import styled from "styled-components";
+import { COLORS } from "../../colors";
+import { MockTokens } from "../../../api/MockData";
+import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
+import { IconDemo } from "../../demos/IconDemo";
 
 const headerStyles: React.CSSProperties = {
   ...debugStyles,
@@ -12,7 +17,15 @@ const headerStyles: React.CSSProperties = {
   zIndex: 10,
 };
 
+const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
+  display: flex;
+  color: ${COLORS.black};
+  background: ${COLORS.yellow};
+`;
+
 export const MunkiHeader = () => {
+  const tokens = MockTokens;
+
   return (
     <section className="header" style={headerStyles}>
       <Flex justify="space-between" style={{ height: 88 }}>
@@ -26,7 +39,18 @@ export const MunkiHeader = () => {
           <div>Connect Wallet button</div>
         </Flex>
       </Flex>
-      <div style={{ height: 68 }}>Ticker banner</div>
+
+      <TickerStyled style={{ height: 68 }}>
+        {tokens.map((token) => (
+          <TextWithLabel
+            key={token.name}
+            text={token.name}
+            left={<IconDemo />}
+            right={(token.twentyFourHourPercentage?.toString() as string) + "%"}
+            style={{ padding: "12px 16px" }}
+          ></TextWithLabel>
+        ))}
+      </TickerStyled>
     </section>
   );
 };

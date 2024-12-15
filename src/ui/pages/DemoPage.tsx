@@ -8,6 +8,7 @@ import { IToken } from "../../domain/entities/Entities";
 import { MockTokens } from "../../api/MockData";
 import { TextWithLabelDemo } from "../molecules/TextWithLabel/TextWithLabelDemo";
 import { IconDemo } from "../demos/IconDemo";
+import { TreeChartDemo } from "../molecules/TreeChart/TreeChartDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -56,6 +57,10 @@ export const DemoPage = () => {
   return (
     <>
       <h1>DemoPage</h1>
+
+      <h2>TreeChartDemo</h2>
+      <TreeChartDemo />
+      <br />
 
       <h2>TableWithFilters</h2>
       <Flex justify="center" align="center" style={{ width: "100%" }}>

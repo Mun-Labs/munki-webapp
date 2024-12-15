@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { Flex } from "antd";
 import { Styles } from "../../uiStyles";
+import { ComponentProps } from "react";
 
 const TextWithLabelContainer = styled.div`
   height: 100%;
@@ -22,7 +23,7 @@ const Right = styled.div`
   color: ${COLORS.green};
 `;
 
-interface ITextWithLabelProps {
+interface ITextWithLabelProps extends ComponentProps<any> {
   text: string;
   label?: string;
   right?: string;
@@ -31,13 +32,22 @@ interface ITextWithLabelProps {
 }
 
 export const TextWithLabel = (props: ITextWithLabelProps) => {
-  const { label, text, left, right } = props;
+  const { style, label, text, left, right } = props;
 
   return (
-    <TextWithLabelContainer className="TextWithLabelContainer">
+    <TextWithLabelContainer
+      className="TextWithLabelContainer"
+      style={{ ...style }}
+    >
       {label && <Label>{label} (i)</Label>}
       <Flex align="center">
-        {left && <div style={{ marginRight: 8 }}>{left}</div>}
+        {left && (
+          <div
+            style={{ marginRight: 8, display: "flex", alignItems: "center" }}
+          >
+            {left}
+          </div>
+        )}
         <MainText>{text}</MainText>
         <Right>{right}</Right>
       </Flex>
