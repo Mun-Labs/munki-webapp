@@ -6,6 +6,7 @@ import { COLORS } from "../../colors";
 import { MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { IconDemo } from "../../demos/IconDemo";
+import { Percentage } from "../../atoms/Percentage/Percentage";
 
 const headerStyles: React.CSSProperties = {
   ...debugStyles,
@@ -46,7 +47,7 @@ export const MunkiHeader = () => {
             key={token.name}
             text={token.name}
             left={<IconDemo />}
-            right={(token.twentyFourHourPercentage?.toString() as string) + "%"}
+            right={<Percentage value={token.twentyFourHourPercentage} />}
             style={{ padding: "12px 16px" }}
           ></TextWithLabel>
         ))}

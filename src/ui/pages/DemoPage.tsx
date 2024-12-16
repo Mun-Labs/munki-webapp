@@ -11,6 +11,7 @@ import { IconDemo } from "../demos/IconDemo";
 import { TreeChartDemo } from "../molecules/TreeChart/TreeChartDemo";
 import { AnalyticsCardDemo } from "../molecules/AnalyticsCard/AnalyticsCardDemo";
 import { AvatarWithTextDemo } from "../molecules/AvatarWithText/AvatarWithTextDemo";
+import { PercentageDemo } from "../atoms/Percentage/PercentageDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -59,6 +60,10 @@ export const DemoPage = () => {
   return (
     <>
       <h1>DemoPage</h1>
+
+      <h2>PercentageDemo</h2>
+      <PercentageDemo />
+      <br />
 
       <h2>AvatarWithTextDemo</h2>
       <AvatarWithTextDemo />

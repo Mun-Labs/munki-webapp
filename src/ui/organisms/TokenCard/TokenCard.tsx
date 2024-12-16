@@ -7,6 +7,7 @@ import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { debugStyles, Styles } from "../../uiStyles";
 import { IToken } from "../../../domain/entities/Entities";
 import { ComponentProps, FC } from "react";
+import { Percentage } from "../../atoms/Percentage/Percentage";
 
 const StyledTokenCard = styled.div`
   height: 570px;
@@ -24,14 +25,11 @@ export const MunkiImage = styled.div`
   border-radius: 18px;
 `;
 
-interface TokenCardProps {
+interface TokenCardProps extends ComponentProps<any> {
   token: IToken;
 }
 
-export const TokenCard: FC<TokenCardProps & ComponentProps<any>> = ({
-  style,
-  token,
-}) => {
+export const TokenCard: FC<TokenCardProps> = ({ style, token }) => {
   if (!token) token = MockTokens[0];
 
   return (
@@ -41,7 +39,7 @@ export const TokenCard: FC<TokenCardProps & ComponentProps<any>> = ({
           <MunkiImage>Image</MunkiImage>
           <Flex style={{ position: "absolute", bottom: 20, left: 20 }}>
             <div>🐋 {token.whaleCount}</div>|
-            <div>📈 +{token.whaleCountPercentage}%</div>
+            <Percentage value={token.whaleCountPercentage} plusMinus />
           </Flex>
         </div>
 
@@ -50,12 +48,10 @@ export const TokenCard: FC<TokenCardProps & ComponentProps<any>> = ({
           <div>
             <span>11h</span>
             <Flex style={{ display: "inline" }}>
-              {Object.entries(token.socials ?? ({} as IToken["socials"])).map(
-                ([, value]) => (
-                  // @ts-ignore
+              {token.socials &&
+                Object.entries(token.socials).map(([, value]) => (
                   <span key={value}>{value}</span>
-                ),
-              )}
+                ))}
             </Flex>
           </div>
         </Flex>
@@ -63,12 +59,12 @@ export const TokenCard: FC<TokenCardProps & ComponentProps<any>> = ({
           <TextWithLabel
             label="Volume 24h"
             text={token.twentyFourHourVolume?.toString() ?? ""}
-            right={`^${token.twentyFourHourPercentage}%`}
+            right={<Percentage value={token.twentyFourHourPercentage} />}
           ></TextWithLabel>
           <TextWithLabel
             label="Volume 24h"
             text={token.accounts?.toString() ?? ""}
-            right={`^${token.accountsPercentage}%`}
+            right={<Percentage value={token.accountsPercentage} />}
           ></TextWithLabel>
         </Flex>
       </StyledTokenCard>

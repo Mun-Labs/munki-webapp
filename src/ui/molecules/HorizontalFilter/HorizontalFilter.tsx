@@ -36,7 +36,7 @@ export const HorizontalFilter: FC<HorizontalFilterProps & SegmentedProps> = ({
 }) => {
   return (
     <HorizontalFilterStyled style={{ ...style }}>
-      <Flex justify="space-between" align="center">
+      <Flex justify="end" align="center">
         <div style={{ ...labelStyles, marginRight: 18 }}>{label}</div>
         <SegmentedStyled<string>
           options={options}

@@ -34,7 +34,11 @@ export function TableWithFilters<T = AnyObject>(
 
   return (
     <TableWithFiltersStyled style={{ ...style }}>
-      <Flex justify="space-between" align="center" style={{ marginBottom: 30 }}>
+      <Flex
+        justify="space-between"
+        align="center"
+        style={{ marginBottom: 20, padding: 14 }}
+      >
         <div style={{ ...Styles.h2 }}>{label}</div>
         <FilterByTime />
       </Flex>

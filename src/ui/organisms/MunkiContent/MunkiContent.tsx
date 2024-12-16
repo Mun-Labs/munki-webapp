@@ -1,4 +1,4 @@
-import { Flex, TableColumnsType } from "antd";
+import { Flex, TableColumnsType, Typography } from "antd";
 import "./MunkiContent.css";
 import { debugStyles, Styles } from "../../uiStyles";
 import { HotList } from "./HotList/HotList";
@@ -9,6 +9,7 @@ import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { IconDemo } from "../../demos/IconDemo";
 import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
 import { TreeChartDemo } from "../../molecules/TreeChart/TreeChartDemo";
+import { Percentage } from "../../atoms/Percentage/Percentage";
 
 const contentStyles: React.CSSProperties = {
   ...debugStyles,
@@ -51,6 +52,7 @@ const holdersTrendColumns: TableColumnsType<HoldersTrendColumn> = [
   {
     title: "24H%",
     dataIndex: "twentyFourHourPercentage",
+    render: (value) => <Percentage value={value} />,
     sorter: (a, b) => {
       if (!a.twentyFourHourPercentage || !b.twentyFourHourPercentage) return -1;
       return a.twentyFourHourPercentage - b.twentyFourHourPercentage;
@@ -66,11 +68,18 @@ const holdersTrendData = MockTokens.map((token) => ({
 export const MunkiContent = () => {
   return (
     <div className="content" style={contentStyles}>
-      <h1 style={{ textAlign: "initial" }}>Top Memecoin Mindshare on X 🧠</h1>
+      <Typography.Title style={{ textAlign: "initial" }}>
+        Top Memecoin Mindshare on X 🧠
+      </Typography.Title>
 
       <Flex justify="space-between">
         <div style={{ ...debugStyles, flexGrow: 1, marginRight: 30 }}>
-          <FilterByTime label="Memecoins Mindshare 🌑" />
+          <Flex justify="space-between" style={{ padding: 12 }}>
+            <Typography.Title level={2} style={{ textAlign: "initial" }}>
+              Memecoins Mindshare 🌑
+            </Typography.Title>
+            <FilterByTime />
+          </Flex>
           <TreeChartDemo />
         </div>
         <div style={{ ...debugStyles, flexGrow: 3 }}>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { Flex } from "antd";
 import { Styles } from "../../uiStyles";
-import { ComponentProps } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 const TextWithLabelContainer = styled.div`
   height: 100%;
@@ -26,9 +26,9 @@ const Right = styled.div`
 interface ITextWithLabelProps extends ComponentProps<any> {
   text: string;
   label?: string;
-  right?: string;
-  left?: React.ReactNode;
-  leftIcon?: React.ReactNode;
+  right?: ReactNode;
+  left?: ReactNode;
+  leftIcon?: ReactNode;
 }
 
 export const TextWithLabel = (props: ITextWithLabelProps) => {
