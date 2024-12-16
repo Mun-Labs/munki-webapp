@@ -6,8 +6,11 @@ import styled from "styled-components";
 import { debugStyles } from "../uiStyles";
 import { FilterByTime } from "../molecules/FilterByTime/FilterByTime";
 import { AnalyticsCard } from "../molecules/AnalyticsCard/AnalyticsCard";
-import { IconDemo } from "../demos/IconDemo";
 import { AvatarWithText } from "../molecules/AvatarWithText/AvatarWithText";
+import { BarChartDemo } from "../demos/BarChartDemo";
+import { LineChartDemo } from "../demos/LineChartDemo";
+import { ComposedChartDemo } from "../demos/ComposedChartDemo";
+import { AreaChartDemo } from "../demos/AreaChartDemo";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
@@ -59,16 +62,26 @@ export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
         <br />
         <Row>
           <Col span={6}>
-            <div style={{ height: 150 }}>First</div>
-            <div style={{ height: 150 }}>Second</div>
+            <div style={{ height: 150 }}>
+              <LineChartDemo />
+            </div>
+            <div style={{ height: 150 }}>
+              <LineChartDemo />
+            </div>
           </Col>
           <Col span={6}>
-            <div style={{ height: 150 }}>First</div>
-            <div style={{ height: 150 }}>Second</div>
+            <div style={{ height: 150 }}>
+              <BarChartDemo />
+            </div>
+            <div style={{ height: 150 }}>
+              <BarChartDemo />
+            </div>
           </Col>
           <Col span={12}>
             <div style={{ height: 50 }}>First</div>
-            <div style={{ height: 250 }}>Second</div>
+            <div style={{ height: 250 }}>
+              <ComposedChartDemo />
+            </div>
           </Col>
         </Row>
       </section>
@@ -82,17 +95,23 @@ export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
             label="Reach"
             bottom={"bottom 1 "}
             style={{ flexGrow: 1 }}
-          ></AnalyticsCard>
+          >
+            <AreaChartDemo />
+          </AnalyticsCard>
           <AnalyticsCard
             label="Engagement"
             bottom={"bottom 2"}
             style={{ flexGrow: 1 }}
-          ></AnalyticsCard>
+          >
+            <AreaChartDemo />
+          </AnalyticsCard>
           <AnalyticsCard
             label="Followers"
             bottom={"bottom 3"}
             style={{ flexGrow: 1 }}
-          ></AnalyticsCard>
+          >
+            <AreaChartDemo />
+          </AnalyticsCard>
         </Flex>
       </section>
 

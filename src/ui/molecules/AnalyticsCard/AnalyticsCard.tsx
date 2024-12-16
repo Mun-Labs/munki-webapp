@@ -5,7 +5,7 @@ import { Styles } from "../../uiStyles";
 import { Flex } from "antd";
 
 const LABEL_HEIGHT = 54;
-const PADDING = 14
+const PADDING = 14;
 
 const AnalyticsCardStyled = styled.div.attrs({
   className: "AnalyticsCardStyled",
@@ -20,7 +20,7 @@ interface AnalyticsCardProps extends ComponentProps<any> {
 }
 
 export const AnalyticsCard: FC<AnalyticsCardProps> = (props) => {
-  const { style, label, bottom } = props;
+  const { children, style, label, bottom } = props;
   return (
     <AnalyticsCardStyled style={{ ...style }}>
       {label && (
@@ -40,7 +40,7 @@ export const AnalyticsCard: FC<AnalyticsCardProps> = (props) => {
         vertical
         style={{ height: `calc(100% - ${LABEL_HEIGHT}px)`, padding: PADDING }}
       >
-        <div>AnalyticsCard</div>
+        <div style={{ width: "100%", height: "100%" }}>{children}</div>
         {bottom && (
           <div style={{ color: COLORS.white70, marginTop: "auto" }}>
             {bottom}
