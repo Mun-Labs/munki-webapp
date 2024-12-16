@@ -24,7 +24,7 @@ export const Styles: RecursiveStyles = {
 };
 
 export const debugStyles: React.CSSProperties = {
-  // ...Styles.borders,
+  ...Styles.borders,
 };
 
 export const darkTheme: ThemeConfig = {
@@ -35,14 +35,17 @@ export const darkTheme: ThemeConfig = {
     colorBgBase: COLORS.black10,
     colorPrimary: "#00b96b",
     borderRadius: 2,
+    colorBorderSecondary: COLORS.grey50,
 
     // Alias Token
     colorBgContainer: COLORS.black,
-
   },
   components: {
+    Card: {
+      borderRadiusLG: 8,
+    },
     Segmented: {
-      itemSelectedBg: COLORS.rose,
+      itemSelectedBg: COLORS.magenta,
       fontSize: Styles.h3.fontSize as number,
       fontWeightStrong: Styles.h3.fontWeight as number,
       borderRadiusSM: 4,

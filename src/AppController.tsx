@@ -2,9 +2,9 @@ import { ComponentProps, FC, useEffect } from "react";
 import styled from "styled-components";
 import App from "./App";
 import { DemoPage } from "./ui/pages/DemoPage.tsx";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
-import { ConfigProvider } from "antd";
-import { darkTheme } from "./ui/uiStyles.ts";
+import { Route, Routes, useNavigate } from "react-router";
+import { TokenDetailsPage } from "./ui/pages/TokenDetailsPage.tsx";
+import { AppLayout } from "./AppLayout.tsx";
 
 interface AppControllerProps extends ComponentProps<any> {}
 
@@ -27,11 +27,11 @@ export const AppController: FC<AppControllerProps> = (props) => {
         case "d":
           navigate("/demo");
           break;
-        case "o":
-          navigate("/one");
-          break;
         case "l":
           navigate("/");
+          break;
+        case "t":
+          navigate("/details");
           break;
         default:
           break;
@@ -44,6 +44,15 @@ export const AppController: FC<AppControllerProps> = (props) => {
       <Routes>
         <Route path="/" index element={<App />} />
         <Route path="/demo" index element={<DemoPage />} />
+        <Route
+          path="/:tokenName"
+          index
+          element={
+            <AppLayout>
+              <TokenDetailsPage />
+            </AppLayout>
+          }
+        />
       </Routes>
     </AppControllerStyled>
   );

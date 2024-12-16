@@ -9,6 +9,8 @@ import { MockTokens } from "../../api/MockData";
 import { TextWithLabelDemo } from "../molecules/TextWithLabel/TextWithLabelDemo";
 import { IconDemo } from "../demos/IconDemo";
 import { TreeChartDemo } from "../molecules/TreeChart/TreeChartDemo";
+import { AnalyticsCardDemo } from "../molecules/AnalyticsCard/AnalyticsCardDemo";
+import { AvatarWithTextDemo } from "../molecules/AvatarWithText/AvatarWithTextDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -58,6 +60,14 @@ export const DemoPage = () => {
     <>
       <h1>DemoPage</h1>
 
+      <h2>AvatarWithTextDemo</h2>
+      <AvatarWithTextDemo />
+      <br />
+
+      <h2>AnalyticsCardDemo</h2>
+      <AnalyticsCardDemo />
+      <br />
+
       <h2>TreeChartDemo</h2>
       <TreeChartDemo />
       <br />
@@ -68,7 +78,7 @@ export const DemoPage = () => {
           <TableWithFilters<HoldersTrendColumn>
             data={data}
             columns={columns}
-            label="hi"
+            label="demo label 1"
           />
         </div>
       </Flex>

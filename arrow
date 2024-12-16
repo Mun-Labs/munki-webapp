@@ -9,4 +9,4 @@ src/domain/entities/Entities.ts
 src/ui/pages/DemoPage.tsx
 src/ui/Template/Template.tsx
 src/ui/colors.ts
-src/ui/uiStyles.ts
+
