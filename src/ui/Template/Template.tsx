@@ -10,5 +10,5 @@ interface TemplateProps extends ComponentProps<any> {}
 
 export const Template: FC<TemplateProps> = (props) => {
   const { style } = props;
-  return <TemplateStyled style={{ ...style }}>Template</TemplateStyled>;
+  return <TemplateStyled style={{ ...style }}>Template</TemplateStyled>
 };

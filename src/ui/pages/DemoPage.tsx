@@ -13,6 +13,8 @@ import { AnalyticsCardDemo } from "../molecules/AnalyticsCard/AnalyticsCardDemo"
 import { AvatarWithTextDemo } from "../molecules/AvatarWithText/AvatarWithTextDemo";
 import { PercentageDemo } from "../atoms/Percentage/PercentageDemo";
 import { TokenImageCardDemo } from "../organisms/TokenImageCard/TokenImageCardDemo";
+import { MemeCoinTableDemo } from "../organisms/MemeCoinTable/MemeCoinTableDemo";
+import { CurrencyDemo } from "../atoms/Currency/CurrencyDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -62,6 +64,17 @@ export const DemoPage = () => {
     <>
       <h1>DemoPage</h1>
 
+      <h2>CurrencyDemo</h2>
+      <CurrencyDemo />
+      <br />
+
+      <h2>MemeCoinTableDemo</h2>
+      <MemeCoinTableDemo />
+      <br />
+
+      <h2>TokenImageCardDemo</h2>
+      <TokenImageCardDemo />
+      <br />
 
       <h2>TreeChartDemo</h2>
       <TreeChartDemo />

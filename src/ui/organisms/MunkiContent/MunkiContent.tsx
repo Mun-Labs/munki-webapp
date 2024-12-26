@@ -10,6 +10,7 @@ import { IconDemo } from "../../demos/IconDemo";
 import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
 import { TreeChartDemo } from "../../molecules/TreeChart/TreeChartDemo";
 import { Percentage } from "../../atoms/Percentage/Percentage";
+import { MemeCoinTable } from "../MemeCoinTable/MemeCoinTable";
 
 const contentStyles: React.CSSProperties = {
   ...debugStyles,
@@ -93,6 +94,7 @@ export const MunkiContent = () => {
               label="Memecoin Index 🧠"
               data={holdersTrendData}
               columns={holdersTrendColumns}
+              table={<MemeCoinTable />}
             />
           </div>
         </Col>

@@ -21,6 +21,19 @@ export interface IToken {
   volume?: number;
   socials?: ISocials;
   logoUrl?: string;
+
+  // market
+  mindshare: number;
+  mindshare7D: number;
+  marketCap: number;
+  marketCap7D: number;
+  topTweets: any[];
+  avgImpressions: number;
+  avgImpressions7D: number;
+  avgEngagement: number;
+  avgEngagement7D: number;
+  price: number;
+  price7D: number;
 }
 
 export interface ISmartWallet {

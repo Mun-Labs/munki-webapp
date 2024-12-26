@@ -55,7 +55,7 @@ export const darkTheme: ThemeConfig = {
     },
     Table: {
       headerBg: COLORS.white25,
-      borderColor: COLORS.grey70,
+      borderColor: COLORS.black,
       colorIcon: COLORS.white,
       colorBorder: COLORS.grey70,
       headerSortActiveBg: COLORS.white25,

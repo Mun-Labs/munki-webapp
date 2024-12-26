@@ -1,11 +1,12 @@
 import { IToken } from "../../domain/entities/Entities";
+import { generateId } from "./generateId";
 import { RandomService } from "./RandomService";
 
 export class MockService {
   public static generateToken(input: Partial<IToken>): IToken {
-    const twentyFourHourPercentage = RandomService.generateRandomNumber(0, 100);
-    // @ts-ignore
+    const id = generateId();
     return {
+      name: "Token:" + id,
       tweets: 100,
       tweetsPercentage: 100,
       influencers: 100,
@@ -22,6 +23,18 @@ export class MockService {
         telegram: "https://www.telegram.com",
       },
       twentyFourHourPercentage: RandomService.generateRandomNumber(-100, 100),
+      // market
+      mindshare: RandomService.percent(),
+      mindshare7D: RandomService.percent({ negative: true }),
+      marketCap: RandomService.number("M"),
+      marketCap7D: RandomService.percent({ negative: true }),
+      topTweets: [],
+      avgImpressions: RandomService.number("K"),
+      avgImpressions7D: RandomService.percent({ negative: true }),
+      avgEngagement: RandomService.number(),
+      avgEngagement7D: RandomService.percent({ negative: true }),
+      price: RandomService.number("decimal"),
+      price7D: RandomService.percent({ negative: true }),
       ...input,
     };
   }

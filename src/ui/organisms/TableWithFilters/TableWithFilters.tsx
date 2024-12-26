@@ -11,6 +11,7 @@ interface TableWithFiltersProps<T = any> extends ComponentProps<any> {
   label: string;
   data: TableProps<T>["dataSource"];
   columns: TableProps<T>["columns"];
+  table?: React.ReactNode;
 }
 
 const TableWithFiltersStyled = styled.div.attrs({
@@ -22,7 +23,7 @@ const TableWithFiltersStyled = styled.div.attrs({
 export function TableWithFilters<T = AnyObject>(
   props: TableWithFiltersProps<T>,
 ) {
-  const { style, label, data, columns } = props;
+  const { style, label, data, table, columns } = props;
   const onChange: TableProps<T>["onChange"] = (
     pagination,
     filters,
@@ -43,12 +44,16 @@ export function TableWithFilters<T = AnyObject>(
         <FilterByTime />
       </Flex>
 
-      <Table<T>
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        showSorterTooltip={{ target: "sorter-icon" }}
-      />
+      {table ? (
+        table
+      ) : (
+        <Table<T>
+          columns={columns}
+          dataSource={data}
+          onChange={onChange}
+          showSorterTooltip={{ target: "sorter-icon" }}
+        />
+      )}
     </TableWithFiltersStyled>
   );
 }
