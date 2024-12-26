@@ -1,24 +1,13 @@
 import { ComponentProps, FC, useCallback } from "react";
-import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { Treemap, ResponsiveContainer } from "recharts";
+import { ITreeChartNode } from "../../../domain/types/Types";
 
-interface TreeChartProps extends ComponentProps<any> {}
+interface TreeChartProps extends ComponentProps<any> {
+  data: ITreeChartNode[];
+}
 
 const TreeChartStyled = styled.div.attrs({ className: "TreeChartStyled" })``;
-
-const data = [
-  {
-    name: "axis",
-    children: [
-      { name: "Axis", size: 24593 },
-      { name: "CartesianAxes", size: 6703 },
-      { name: "Axes", size: 1302 },
-      { name: "AxisGridLine", size: 652 },
-      { name: "AxisLabel", size: 636 },
-    ],
-  },
-];
 
 const COLORS = [
   "#8889DD",
@@ -29,23 +18,44 @@ const COLORS = [
   "#F8C12D",
 ];
 
-class CustomizedContent extends PureComponent {
-  render() {
-    const {
-      root,
-      depth,
-      x,
-      y,
-      width,
-      height,
-      index,
-      payload,
-      colors,
-      rank,
-      name,
-    } = this.props;
+interface CustomizedContentProps {
+  // Define your prop types here
+  // For example:
+  root?: any;
+  depth?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  index?: number;
+  payload?: any;
+  colors?: string[];
+  rank?: number;
+  value?: string;
+  name?: string;
+  imageUrl?: string;
+}
 
-    return (
+const CustomizedContent: React.FC<CustomizedContentProps> = (
+  props: CustomizedContentProps,
+) => {
+  const {
+    root,
+    depth,
+    x,
+    y,
+    width,
+    height,
+    index,
+    payload,
+    colors,
+    rank,
+    name,
+    imageUrl,
+  } = props;
+
+  return (
+    <>
       <g>
         <rect
           x={x}
@@ -55,7 +65,7 @@ class CustomizedContent extends PureComponent {
           style={{
             fill:
               depth < 2
-                ? colors[Math.floor((index / root.children.length) * 6)]
+                ? colors?.[Math.floor((index / root.children?.length) * 6)]
                 : "#ffffff00",
             stroke: "#fff",
             strokeWidth: 2 / (depth + 1e-10),
@@ -63,35 +73,51 @@ class CustomizedContent extends PureComponent {
           }}
         />
         {true ? (
-          <text
-            x={x + width / 2}
-            y={y + height / 2 + 7}
-            textAnchor="middle"
-            fill="#fff"
-            fontSize={14}
-          >
-            {name}
-          </text>
+          <>
+            <text
+              x={x + width / 2}
+              y={y + height / 2 + 7}
+              textAnchor="middle"
+              fill="#fff"
+              fontSize={14}
+            >
+              {name}
+            </text>
+            <foreignObject style={{ position: "relative" }} x="0" y="0" width={width} height={height}>
+              <div
+                style={{
+                  position: "absolute",
+                  backgroundImage: 'url("/chillguy.jpeg")',
+                  backgroundSize: "cover",
+                  backgroundPosition: "center center",
+                  backgroundRepeat: "no-repeat",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                }}
+              ></div>
+            </foreignObject>
+          </>
         ) : null}
       </g>
-    );
-  }
-}
+    </>
+  );
+};
 
-        //{true ? (
-        //  <text
-        //    x={x + 4}
-        //    y={y + 18}
-        //    fill="#fff"
-        //    fontSize={16}
-        //    fillOpacity={0.9}
-        //  >
-        //    {index + 1}
-        //  </text>
-        //) : null}
+//{true ? (
+//  <text
+//    x={x + 4}
+//    y={y + 18}
+//    fill="#fff"
+//    fontSize={16}
+//    fillOpacity={0.9}
+//  >
+//    {index + 1}
+//  </text>
+//) : null}
 
 export const TreeChart: FC<TreeChartProps> = (props) => {
-  const { style } = props;
+  const { style, data } = props;
 
   const handleClick = useCallback((args) => {
     /*prettier-ignore*/ console.log("[TreeChart.tsx,216] args: ", args);

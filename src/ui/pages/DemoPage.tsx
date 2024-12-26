@@ -61,6 +61,11 @@ export const DemoPage = () => {
     <>
       <h1>DemoPage</h1>
 
+      <h2>TreeChartDemo</h2>
+      <TreeChartDemo />
+      <br />
+
+
       <h2>PercentageDemo</h2>
       <PercentageDemo />
       <br />
@@ -71,10 +76,6 @@ export const DemoPage = () => {
 
       <h2>AnalyticsCardDemo</h2>
       <AnalyticsCardDemo />
-      <br />
-
-      <h2>TreeChartDemo</h2>
-      <TreeChartDemo />
       <br />
 
       <h2>TableWithFilters</h2>
