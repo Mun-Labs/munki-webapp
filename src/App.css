@@ -9,17 +9,22 @@
   border-radius: 6px;
 }
 
+@font-face {
+  font-family: "GROBOLD";
+  src: local("GROBOLD-Regular"),
+    url("./assets/fonts/GROBOLD/GROBOLD-Regular.ttf");
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "GROBOLD", sans-serif !important;
 }
 
 body,
 html {
   height: 100%;
-  font-family: Arial, sans-serif;
 }
 
 .container {

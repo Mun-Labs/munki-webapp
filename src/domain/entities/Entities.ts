@@ -1,3 +1,5 @@
+export interface ITicker {}
+
 export interface ISocials {
   x?: string;
   web?: string;
@@ -18,6 +20,7 @@ export interface IToken {
   whaleCountPercentage?: number;
   volume?: number;
   socials?: ISocials;
+  logoUrl?: string;
 }
 
 export interface ISmartWallet {
@@ -36,4 +39,12 @@ export interface IHolders {
   twentyFourHourPercentage: number;
   twentyFourHourInPercent: number;
   twentyFourHourInPercentPercentage: number;
+}
+
+export interface IWhales {
+  name: string;
+  sold?: number;
+  bought?: number;
+  coin: IToken;
+  logoUrl?: string;
 }
