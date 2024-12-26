@@ -146,19 +146,7 @@ const COLORS = [
 
 class CustomizedContent extends PureComponent {
   render() {
-    const {
-      root,
-      depth,
-      x,
-      y,
-      width,
-      height,
-      index,
-      payload,
-      colors,
-      rank,
-      name,
-    } = this.props;
+    const { root, depth, x, y, width, height, index, name } = this.props as any;
 
     return (
       <g>
@@ -170,7 +158,7 @@ class CustomizedContent extends PureComponent {
           style={{
             fill:
               depth < 2
-                ? colors[Math.floor((index / root.children.length) * 6)]
+                ? COLORS[Math.floor((index / root.children.length) * 6)]
                 : "#ffffff00",
             stroke: "#fff",
             strokeWidth: 2 / (depth + 1e-10),
@@ -218,7 +206,7 @@ export default class Example extends PureComponent {
           dataKey="size"
           stroke="#fff"
           fill="#8884d8"
-          content={<CustomizedContent colors={COLORS} />}
+          content={<CustomizedContent />}
         />
       </ResponsiveContainer>
     );

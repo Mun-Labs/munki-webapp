@@ -53,7 +53,7 @@ import { Currency } from "../../atoms/Currency/Currency";
 import { COLORS } from "../../colors";
 
 const useStyle = createStyles(({ css, token }) => {
-  const { antCls } = token;
+  const { antCls } = token as any;
   return {
     customTable: css`
       ${antCls}-table {

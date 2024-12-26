@@ -1,5 +1,11 @@
-import { Template } from "./Template";
+import { TableWithFilters } from "./TableWithFilters";
 
-export const TemplateDemo = () => {
-  return <Template></Template>;
+export const TableWithFiltersDemo = () => {
+  return (
+    <TableWithFilters
+      label="Smart Wallet Inflow 🧠"
+      data={[]}
+      columns={[]}
+    ></TableWithFilters>
+  );
 };

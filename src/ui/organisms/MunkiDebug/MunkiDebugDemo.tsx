@@ -1,5 +1,5 @@
-import { Template } from "./Template";
+import { Munki___Debug___ } from "./MunkiDebug";
 
-export const TemplateDemo = () => {
-  return <Template></Template>;
+export const MunkiDebugDemo = () => {
+  return <Munki___Debug___></Munki___Debug___>;
 };

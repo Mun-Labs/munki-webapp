@@ -1,4 +1,4 @@
-import { AnyObject } from "@/domain/types/types";
+import { AnyObject } from "../../domain/types/Types";
 
 export class TypeService {
   public static mapKeys<FromType extends AnyObject, ToType extends AnyObject>(
@@ -25,22 +25,21 @@ export class TypeService {
   }
 }
 
-const hi = {
-  hi: "hi",
-  bye: "bye",
-};
-
-const okay = {
-  okay: "okay",
-};
-
-interface IHi {
-  hi: string;
-  bye: string;
-}
-
-interface IOkay {
-  okay: string;
-}
-
+//const hi = {
+//  hi: "hi",
+//  bye: "bye",
+//};
+//
+//const okay = {
+//  okay: "okay",
+//};
+//
+//interface IHi {
+//  hi: string;
+//  bye: string;
+//}
+//
+//interface IOkay {
+//  okay: string;
+//}
 // const result = TypeService.mapKeys<IHi, IOkay>(hi, [["hi", "okay"]]);

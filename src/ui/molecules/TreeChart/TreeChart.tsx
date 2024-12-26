@@ -2,7 +2,6 @@ import { ComponentProps, FC, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Treemap, ResponsiveContainer } from "recharts";
 import { ITreeChartNode } from "../../../domain/types/Types";
-import { Percentage } from "../../atoms/Percentage/Percentage";
 import { TokenImageCard } from "../../organisms/TokenImageCard/TokenImageCard";
 
 interface TreeChartProps extends ComponentProps<any> {
@@ -50,9 +49,7 @@ const CustomizedContent: React.FC<CustomizedContentProps> = (
     width,
     height,
     index,
-    payload,
     colors,
-    rank,
     name,
     logoUrl,
     twentyFourHourPercentage,
@@ -67,19 +64,19 @@ const CustomizedContent: React.FC<CustomizedContentProps> = (
         height={height}
         style={{
           fill:
-            depth < 2
-              ? colors?.[Math.floor((index / root.children?.length) * 6)]
+            (depth ?? 0 < 2)
+              ? colors?.[Math.floor((index ?? 0 / root.children?.length) * 6)]
               : "#ffffff00",
           stroke: "#fff",
-          strokeWidth: 2 / (depth + 1e-10),
-          strokeOpacity: 1 / (depth + 1e-10),
+          strokeWidth: 2 / (depth ?? 0 + 1e-10),
+          strokeOpacity: 1 / (depth ?? 0 + 1e-10),
         }}
       />
       {true ? (
         <>
           <text
-            x={x + width / 2}
-            y={y + height / 2 + 7}
+            x={x ?? 0 + (width ?? 0) / 2}
+            y={y ?? 0 + (height ?? 0) / 2 + 7}
             textAnchor="middle"
             fill="#fff"
             fontSize={14}

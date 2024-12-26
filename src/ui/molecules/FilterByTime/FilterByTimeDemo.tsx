@@ -1,5 +1,5 @@
-import { Template } from "./Template";
+import { FilterByTime } from "./FilterByTime";
 
-export const TemplateDemo = () => {
-  return <Template></Template>;
+export const FilterByTimeDemo = () => {
+  return <FilterByTime></FilterByTime>;
 };
