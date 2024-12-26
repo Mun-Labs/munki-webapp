@@ -23,7 +23,7 @@ export const SegmentedStyled = styled(Segmented).attrs({
   align-content: center;
   .ant-segmented-item-label {
     height: 44px;
-    padding: 7px 14px;
+    padding: 7px;
   }
 `;
 

@@ -9,8 +9,9 @@ const TextWithLabelContainer = styled.div`
   text-align: left;
 `;
 
-const Label = styled.div`
+const Label = styled.div.attrs({ className: "Label" })`
   color: ${COLORS.white70};
+  font-size: ${Styles.h3.fontSize as string};
 `;
 
 const MainText = styled.div`
@@ -19,8 +20,9 @@ const MainText = styled.div`
   margin-right: 8px;
 `;
 
-const Right = styled.div`
+const Right = styled.div.attrs({ className: "Right" })`
   color: ${COLORS.green};
+  font-size: ${Styles.h3.fontSize as string};
 `;
 
 interface ITextWithLabelProps extends ComponentProps<any> {

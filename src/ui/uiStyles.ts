@@ -19,7 +19,10 @@ export const Styles: RecursiveStyles = {
   },
   h3: {
     fontWeight: 800,
-    fontSize: 17.3,
+    fontSize: "17.3px",
+  },
+  textSm: {
+    fontSize: "14px",
   },
 };
 

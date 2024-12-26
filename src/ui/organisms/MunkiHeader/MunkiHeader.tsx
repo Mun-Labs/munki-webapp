@@ -41,7 +41,7 @@ export const MunkiHeader = () => {
         </Flex>
       </Flex>
 
-      <TickerStyled style={{ height: 68 }}>
+      <TickerStyled style={{ height: 56 }}>
         {tokens.map((token) => (
           <TextWithLabel
             key={token.name}

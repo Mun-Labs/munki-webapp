@@ -1,10 +1,22 @@
 import { Avatar } from "antd";
 import { TextWithLabel } from "./TextWithLabel";
 import { COLORS } from "../../colors";
+import { COIN_MAP } from "../../../api/MockData";
+import { IconDemo } from "../../demos/IconDemo";
+import { Percentage } from "../../atoms/Percentage/Percentage";
 
 export const TextWithLabelDemo = () => {
+  const token = COIN_MAP.chillGuy;
   return (
     <>
+      <TextWithLabel
+        key={token.name}
+        text={token.name}
+        left={<IconDemo />}
+        right={<Percentage value={token.twentyFourHourPercentage} />}
+        style={{ padding: "12px 16px" }}
+      ></TextWithLabel>
+
       <TextWithLabel text={"text"} label="label" right="^12%" />
       <TextWithLabel
         text="text 1"

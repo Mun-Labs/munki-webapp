@@ -13,19 +13,24 @@ interface FilterByTimeProps extends ComponentProps<any> {
   labelStyles?: HorizontalFilterProps["labelStyles"];
 }
 
-export const FilterByTime: FC<FilterByTimeProps> = ({ label, labelStyles }) => {
+export const FilterByTime: FC<FilterByTimeProps> = ({
+  style,
+  label,
+  labelStyles,
+}) => {
   return (
-    <Flex justify="end">
+    <Flex justify="end" style={{ ...style }}>
       <HorizontalFilter
-        style={{ width: 600 }}
         label={label ?? "= Filter By"}
         labelStyles={{ color: COLORS.grey70, ...labelStyles }}
-        segmentedStyles={{ ...Styles.h3 }}
-        options={[1440, 720, 360, 60, 5, 1].map(TimeService.minutesToTimeString)}
+        segmentedStyles={{ ...Styles.textSm }}
+        options={[1440, 720, 360, 60, 5, 1].map(
+          TimeService.minutesToTimeString,
+        )}
       />
     </Flex>
   );
 };
-        //options={[1440, 720, 360, 60, 5, 1].map(
-        //  TimeService.minutesToTimeString,
-        //)}
+//options={[1440, 720, 360, 60, 5, 1].map(
+//  TimeService.minutesToTimeString,
+//)}

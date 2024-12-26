@@ -1,6 +1,6 @@
-import { Flex, TableColumnsType, Typography } from "antd";
+import { Col, Flex, Row, TableColumnsType, Typography } from "antd";
 import "./MunkiContent.css";
-import { debugStyles, Styles } from "../../uiStyles";
+import { debugStyles } from "../../uiStyles";
 import { HotList } from "./HotList/HotList";
 import { IToken } from "../../../domain/entities/Entities";
 import { MockTokens } from "../../../api/MockData";
@@ -72,24 +72,31 @@ export const MunkiContent = () => {
         Top Memecoin Mindshare on X 🧠
       </Typography.Title>
 
-      <Flex justify="space-between">
-        <div style={{ ...debugStyles, flexGrow: 1, marginRight: 30 }}>
-          <Flex justify="space-between" style={{ padding: 12 }}>
-            <Typography.Title level={2} style={{ textAlign: "initial" }}>
-              Memecoins Mindshare 🌑
-            </Typography.Title>
-            <FilterByTime />
-          </Flex>
-          <TreeChartDemo />
-        </div>
-        <div style={{ ...debugStyles, flexGrow: 3 }}>
-          <TableWithFilters<HoldersTrendColumn>
-            label="Smart Wallet Inflow 🧠"
-            data={holdersTrendData}
-            columns={holdersTrendColumns}
-          />
-        </div>
-      </Flex>
+      <Row>
+        <Col span={8}>
+          <div style={{ ...debugStyles, flexGrow: 1, marginRight: 30 }}>
+            <Flex justify="space-between" align="center">
+              <Typography.Title
+                level={3}
+                style={{ textAlign: "initial", width: 156 }}
+              >
+                Memecoins Mindshare 🌑
+              </Typography.Title>
+              <FilterByTime style={{ fontSize: 14 }} />
+            </Flex>
+            <TreeChartDemo />
+          </div>
+        </Col>
+        <Col span={16}>
+          <div style={{ ...debugStyles, flexGrow: 3 }}>
+            <TableWithFilters<HoldersTrendColumn>
+              label="Memecoin Index 🧠"
+              data={holdersTrendData}
+              columns={holdersTrendColumns}
+            />
+          </div>
+        </Col>
+      </Row>
 
       <HotList />
 

@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 
-const PercentageStyled = styled.div.attrs({ className: "PercentageStyled" })``;
+const PercentageStyled = styled.div.attrs({ className: "PercentageStyled" })`
+  display: flex;
+`;
 
 interface PercentageProps extends ComponentProps<any> {
   value: number | undefined;
