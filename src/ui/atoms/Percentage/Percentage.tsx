@@ -8,15 +8,21 @@ const PercentageStyled = styled.div.attrs({ className: "PercentageStyled" })``;
 interface PercentageProps extends ComponentProps<any> {
   value: number | undefined;
   plusMinus?: boolean;
+  neutralColor?: boolean;
 }
 
 export const Percentage: FC<PercentageProps> = (props) => {
-  const { style, plusMinus, value } = props;
+  const { style, neutralColor, plusMinus, value } = props;
   if (!value) return <>N/A</>;
-  const color = value > 0 ? COLORS.green : COLORS.magenta;
+
+  let color = value > 0 ? COLORS.green : COLORS.magenta;
+  if (neutralColor) {
+    color = COLORS.white;
+  }
+
   let icon = value > 0 ? <CaretUpOutlined /> : <CaretDownOutlined />;
   if (plusMinus) {
-    icon = value > 0 ? <>+</> : <>-</>;
+    icon = value > 0 ? <>+</> : <></>;
   }
 
   return (

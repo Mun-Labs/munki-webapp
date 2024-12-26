@@ -4,7 +4,7 @@ export function getCssVar(
   documentElement = document.documentElement,
 ): number {
   const cssVar = getComputedStyle(documentElement).getPropertyValue(varName);
-    /*prettier-ignore*/ console.log("[asht.ts,7] cssVar: ", cssVar);
+  /*prettier-ignore*/ console.log("[asht.ts,7] cssVar: ", cssVar);
 
   if (isPixel) {
     return getValueFromPixelString(cssVar);

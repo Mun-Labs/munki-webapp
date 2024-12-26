@@ -1,89 +1,61 @@
+import { MockService } from "../common/modules/MockService";
+import { RandomService } from "../common/modules/RandomService";
 import { IToken } from "../domain/entities/Entities";
 
-export const MockTokens: IToken[] = [
-  {
-    name: "$CHILLGUY",
-    twentyFourHourVolume: 239.41,
-    twentyFourHourPercentage: 12,
-    accounts: 391.0,
-    accountsPercentage: 92,
-    whaleCount: 80,
-    whaleCountPercentage: 333.5,
-    socials: {
-      x: "x",
-      telegram: "telegram",
-      web: "web",
-    },
-  },
+export const COIN_MAP = {
+  chillGuy: MockService.generateToken({
+    name: "CHILLGUY",
+    logoUrl: "/chillguy.jpeg",
+    volume: RandomService.generateRandomNumber(1000, 1000),
+  }),
+  chillgirl: MockService.generateToken({
+    name: "CHILLGIRL",
+    logoUrl: "/chillgirl.png",
+  }),
+  pnut: MockService.generateToken({
+    name: "PNUT",
+    logoUrl: "/pnut.png",
+  }),
+  degays: MockService.generateToken({
+    name: "DEGAYS",
+    logoUrl: "/degays.png",
+  }),
+  aixbt: MockService.generateToken({
+    name: "AIXBT",
+    logoUrl: "/aixbt.jpeg",
+  }),
+  adonis: MockService.generateToken({
+    name: "ADONIS",
+    logoUrl: "/adonis.jpeg",
+  }),
+  god: MockService.generateToken({
+    name: "GOD",
+    logoUrl: "/god.png",
+  }),
+  intern: MockService.generateToken({
+    name: "INTERN",
+    logoUrl: "/intern.jpeg",
+  }),
+  ai16z: MockService.generateToken({
+    name: "AI16Z",
+    logoUrl: "/ai16z.jpeg",
+  }),
+  fartcoin: MockService.generateToken({
+    name: "FARTCOIN",
+    logoUrl: "/fartcoin.png",
+  }),
+  goat: MockService.generateToken({
+    name: "GOAT",
+    logoUrl: "/goat.png",
+  }),
+  luigi: MockService.generateToken({
+    name: "LUIGI",
+    logoUrl: "/luigi.png",
+  }),
+  pusheen: MockService.generateToken({
+    name: "PUSHEEN",
+    logoUrl: "/pusheen.png",
+  }),
+};
 
-  {
-    name: "$ATHENA",
-    twentyFourHourVolume: 239.41,
-    twentyFourHourPercentage: 12,
-    accounts: 391.0,
-    accountsPercentage: 92,
-    whaleCount: 80,
-    whaleCountPercentage: 333.5,
-    socials: {
-      x: "x",
-      telegram: "telegram",
-      web: "web",
-    },
-  },
-  {
-    name: "$TOGA",
-    twentyFourHourVolume: 239.41,
-    twentyFourHourPercentage: 12,
-    accounts: 391.0,
-    accountsPercentage: 92,
-    whaleCount: 80,
-    whaleCountPercentage: 333.5,
-    socials: {
-      x: "x",
-      telegram: "telegram",
-      web: "web",
-    },
-  },
-  {
-    name: "$DEEPAI",
-    twentyFourHourVolume: 239.41,
-    twentyFourHourPercentage: 12,
-    accounts: 391.0,
-    accountsPercentage: 92,
-    whaleCount: 80,
-    whaleCountPercentage: 333.5,
-    socials: {
-      x: "x",
-      telegram: "telegram",
-      web: "web",
-    },
-  },
-  {
-    name: "$REIKO",
-    twentyFourHourVolume: 139.41,
-    twentyFourHourPercentage: 12,
-    accounts: 391.0,
-    accountsPercentage: 92,
-    whaleCount: 80,
-    whaleCountPercentage: 333.5,
-    socials: {
-      x: "x",
-      telegram: "telegram",
-      web: "web",
-    },
-  },
-  {
-    name: "$LOLA",
-    twentyFourHourVolume: 139.41,
-    twentyFourHourPercentage: 12,
-    accounts: 391.0,
-    accountsPercentage: 92,
-    whaleCount: 80,
-    whaleCountPercentage: 333.5,
-    socials: {
-      x: "x",
-      telegram: "telegram",
-      web: "web",
-    },
-  },
-];
+export const MockTokens: IToken[] = Object.values(COIN_MAP);
