@@ -5,10 +5,9 @@ import { COLORS, UI_COLORS } from "../../colors";
 import { MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { debugStyles, Styles } from "../../uiStyles";
-import { ISocials, IToken } from "../../../domain/entities/Entities";
+import { IToken } from "../../../domain/entities/Entities";
 import { ComponentProps, FC } from "react";
 import { Percentage } from "../../atoms/Percentage/Percentage";
-import { Icon } from "../../atoms/Icon/Icon";
 import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
 import { SocialKeys } from "../../../domain/types/Types";
 import { Token } from "../../atoms/Token/Token";
@@ -53,7 +52,11 @@ export const TokenCard: FC<TokenCardProps> = ({ style, token }) => {
         </div>
 
         <Flex justify="space-between" style={{ marginBottom: 14 }}>
-          <Token token={token} style={{margin: '12px 0'}} textStyle={{ ...Styles.h1, color: COLORS.yellow }} />
+          <Token
+            token={token}
+            style={{ margin: "12px 0" }}
+            textStyle={{ ...Styles.h1, color: COLORS.yellow }}
+          />
           <Flex align="center">
             <span style={{ marginRight: 8 }}>11h</span>
             <SocialMediaSegment

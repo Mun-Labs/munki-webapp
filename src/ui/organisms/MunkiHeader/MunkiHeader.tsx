@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { COLORS, UI_COLORS } from "../../colors";
 import { MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
-import { AvatarDemo } from "../../demos/IconDemo";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Token } from "../../atoms/Token/Token";
 import { RoundIcon } from "../../atoms/RoundIcon";

@@ -13,7 +13,7 @@ import { TreeChart } from "../../molecules/TreeChart/TreeChart";
 import { TypeService } from "../../../common/modules/TypeService";
 import { ITreeChartNode } from "../../../domain/types/Types";
 import { COLORS } from "../../colors";
-import { WhaleWatch, WhaleWatchColumn } from "../WhaleWatch/WhaleWatch";
+import { WhaleWatch } from "../WhaleWatch/WhaleWatch";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Token } from "../../atoms/Token/Token";
 
