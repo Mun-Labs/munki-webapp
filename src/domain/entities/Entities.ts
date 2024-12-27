@@ -6,6 +6,7 @@ export type ISocials = Record<SocialKeys, string>;
 
 export interface IToken {
   name: string;
+  address: string;
   tweets?: number;
   tweetsPercentage?: number;
   influencers?: number;

@@ -58,6 +58,9 @@ export const COIN_MAP = {
   }),
 };
 
+const a = COIN_MAP.chillGuy;
+/*prettier-ignore*/ console.log("[MockData.ts,62] a: ", a);
+
 export const MockTokens: IToken[] = Object.values(COIN_MAP);
 
 export const MockWhaleWatchBase: IWhale[] = [

@@ -1,5 +1,8 @@
 import { IToken } from "../../domain/entities/Entities";
-import { generateId } from "./generateId";
+import {
+  generateAddressWithSeed,
+  generateId,
+} from "./generateId";
 import { RandomService } from "./RandomService";
 
 export class MockService {
@@ -9,6 +12,7 @@ export class MockService {
     const ensureDollar = name.startsWith("$") ? name : "$" + name;
 
     return {
+      address: generateAddressWithSeed(name),
       tweets: 100,
       tweetsPercentage: 100,
       influencers: 100,
