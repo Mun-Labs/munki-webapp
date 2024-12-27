@@ -1,4 +1,4 @@
-import { ComponentProps } from "react";
+import { ComponentProps, useMemo } from "react";
 import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
 import { Styles } from "../../uiStyles";
 import { Flex } from "antd";
@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Table } from "antd";
 import type { TableProps } from "antd";
 import { AnyObject } from "../../../domain/types/Types";
+import { useElementWidth } from "../../../domain/hooks/useElementWidth";
 
 interface TableWithFiltersProps<T = any> extends ComponentProps<any> {
   label: string;
@@ -13,6 +14,8 @@ interface TableWithFiltersProps<T = any> extends ComponentProps<any> {
   columns: TableProps<T>["columns"];
   table?: React.ReactNode;
   tableStyles?: React.CSSProperties;
+  defaultFilterWidth?: number;
+  breakWidth?: number;
 }
 
 const TableWithFiltersStyled = styled.div.attrs({
@@ -24,7 +27,7 @@ const TableWithFiltersStyled = styled.div.attrs({
 export function TableWithFilters<T = AnyObject>(
   props: TableWithFiltersProps<T>,
 ) {
-  const { style, tableStyles, label, data, table, columns } = props;
+  const { style, tableStyles, breakWidth, label, data, table, columns } = props;
   const onChange: TableProps<T>["onChange"] = (
     pagination,
     filters,
@@ -33,12 +36,18 @@ export function TableWithFilters<T = AnyObject>(
   ) => {
     console.log("params", pagination, filters, sorter, extra);
   };
+  const { width, elementRef } = useElementWidth();
+  const isTwoRow = useMemo((): boolean => {
+    if (!width || !breakWidth) return false;
+    const isSmaller = width < breakWidth;
+    return isSmaller;
+  }, [width, breakWidth]);
 
   return (
-    <TableWithFiltersStyled style={{ ...style }}>
+    <TableWithFiltersStyled ref={elementRef} style={{ ...style }}>
       <Flex justify="space-between" align="center" style={{ padding: 14 }}>
         <div style={{ ...Styles.h2 }}>{label}</div>
-        <FilterByTime />
+        <FilterByTime isTwoRow={isTwoRow} />
       </Flex>
 
       {table ? (

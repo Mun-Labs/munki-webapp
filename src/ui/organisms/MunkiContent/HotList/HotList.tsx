@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Flex } from "antd";
 import "./HotList.css";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import { HorizontalFilter } from "../../../molecules/HorizontalFilter/Horizontal
 import { Styles } from "../../../uiStyles";
 import { COLORS } from "../../../colors";
 import { FilterByTime } from "../../../molecules/FilterByTime/FilterByTime";
+import { useElementWidth } from "../../../../domain/hooks/useElementWidth";
 
 interface HotListProps {}
 
@@ -19,13 +20,22 @@ const CardList = styled.div.attrs({ className: "CardList" })`
   overflow-x: auto;
 `;
 
+const breakWidth = 790;
+
 export const HotList = ({}: HotListProps) => {
   const tokens = MockTokens;
+
+  const { width, elementRef } = useElementWidth();
+  const isTwoRow = useMemo((): boolean => {
+    if (!width || !breakWidth) return false;
+    const isSmaller = width < breakWidth;
+    return isSmaller;
+  }, [width, breakWidth]);
 
   return (
     <__Munki__Debug__ style={{ margin: "20px 0" }}>
       <TitleRow style={{ padding: 20 }}>
-        <Flex justify="space-between">
+        <Flex ref={elementRef} justify="space-between">
           <HorizontalFilter
             label="Hot list 🔥"
             options={["Trending", "Gainers", "Losers", "Recents"]}
@@ -39,7 +49,7 @@ export const HotList = ({}: HotListProps) => {
           />
 
           <div>
-            <FilterByTime label="= Filter By" />
+            <FilterByTime label="= Filter By" isTwoRow={isTwoRow} />
           </div>
         </Flex>
       </TitleRow>

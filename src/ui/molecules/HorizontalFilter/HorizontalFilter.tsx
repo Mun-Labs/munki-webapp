@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useMemo } from "react";
 import { Flex, Segmented, SegmentedProps } from "antd";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
@@ -7,6 +7,7 @@ export interface HorizontalFilterProps extends ComponentProps<any> {
   label: string;
   labelStyles?: React.CSSProperties;
   segmentedStyles?: React.CSSProperties;
+  isTwoRow?: boolean;
 }
 
 const HorizontalFilterStyled = styled.div.attrs({
@@ -36,10 +37,18 @@ export const HorizontalFilter: FC<HorizontalFilterProps & SegmentedProps> = ({
   labelStyles,
   segmentedStyles,
   options,
+  isTwoRow,
 }) => {
+  const twoRowStyles = useMemo((): React.CSSProperties => {
+    return {
+      flexDirection: isTwoRow ? "column" : "row",
+      alignItems: isTwoRow ? "flex-start" : "center",
+    };
+  }, [isTwoRow]);
+
   return (
     <HorizontalFilterStyled style={{ ...style }}>
-      <Flex justify="end" align="center">
+      <Flex justify="end" align="center" style={{ ...twoRowStyles }}>
         <div style={{ ...labelStyles, marginRight: 18 }}>{label}</div>
         <SegmentedStyled<string>
           options={options}

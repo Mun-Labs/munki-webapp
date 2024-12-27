@@ -1,4 +1,4 @@
-import { Col, Flex, Row, TableColumnsType, Typography } from "antd";
+import { Col, Flex, Grid, Row, TableColumnsType, Typography } from "antd";
 import "./MunkiContent.css";
 import { debugStyles, Styles } from "../../uiStyles";
 import { HotList } from "./HotList/HotList";
@@ -84,6 +84,8 @@ const contentHeaderHeight = 82;
 const contentHeight = contentContainerHeight - contentHeaderHeight - 2; // - 2 for border
 
 export const MunkiContent = () => {
+  const screens = Grid.useBreakpoint();
+
   return (
     <div className="content" style={contentStyles}>
       <Typography.Title style={{ textAlign: "initial" }}>
@@ -110,7 +112,7 @@ export const MunkiContent = () => {
                 <Row>
                   <Col>
                     <Typography.Title
-                      level={3}
+                      level={screens.xl ? 3 : 5}
                       style={{ textAlign: "initial", marginBottom: 0 }}
                     >
                       Memecoins Mindshare 🌑
@@ -136,6 +138,7 @@ export const MunkiContent = () => {
               columns={holdersTrendColumns}
               table={<MemeCoinTable style={{ height: contentHeight }} />}
               tableStyles={{ height: contentHeight }}
+              breakWidth={600}
             />
           </div>
         </Col>

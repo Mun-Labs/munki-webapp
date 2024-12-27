@@ -11,12 +11,14 @@ import { TimeService } from "../../../common/modules/TimeService";
 interface FilterByTimeProps extends ComponentProps<any> {
   label?: string;
   labelStyles?: HorizontalFilterProps["labelStyles"];
+  isTwoRow?: boolean;
 }
 
 export const FilterByTime: FC<FilterByTimeProps> = ({
   style,
   label,
   labelStyles,
+  isTwoRow,
 }) => {
   return (
     <Flex justify="end" style={{ ...style }}>
@@ -27,6 +29,7 @@ export const FilterByTime: FC<FilterByTimeProps> = ({
         options={[1440, 720, 360, 60, 5, 1].map(
           TimeService.minutesToTimeString,
         )}
+        isTwoRow={isTwoRow}
       />
     </Flex>
   );
