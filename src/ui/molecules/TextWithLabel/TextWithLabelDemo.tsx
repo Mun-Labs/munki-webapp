@@ -2,7 +2,7 @@ import { Avatar } from "antd";
 import { TextWithLabel } from "./TextWithLabel";
 import { COLORS } from "../../colors";
 import { COIN_MAP } from "../../../api/MockData";
-import { IconDemo } from "../../demos/IconDemo";
+import { AvatarDemo } from "../../demos/IconDemo";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 
 export const TextWithLabelDemo = () => {
@@ -12,7 +12,7 @@ export const TextWithLabelDemo = () => {
       <TextWithLabel
         key={token.name}
         text={token.name}
-        left={<IconDemo />}
+        left={<AvatarDemo />}
         right={<Percentage value={token.twentyFourHourPercentage} />}
         style={{ padding: "12px 16px" }}
       ></TextWithLabel>

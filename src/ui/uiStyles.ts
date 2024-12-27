@@ -10,6 +10,10 @@ export const Styles: RecursiveStyles = {
     display: "flex",
     alignItems: "center",
   },
+  backgroundImage: {
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  },
   borders: {
     border: `1px solid ${COLORS.white}`,
   },

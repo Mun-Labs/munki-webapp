@@ -2,8 +2,8 @@ import { Template } from "./Template";
 
 export const TemplateDemo = () => {
   return (
-    <div style={{ width: 500, height: 500 }}>
-      <Template></Template>;
+    <div style={{ width: 300, height: 300 }}>
+      <Template></Template>
     </div>
   );
 };

@@ -5,9 +5,12 @@ import { COLORS, UI_COLORS } from "../../colors";
 import { MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { debugStyles, Styles } from "../../uiStyles";
-import { IToken } from "../../../domain/entities/Entities";
+import { ISocials, IToken } from "../../../domain/entities/Entities";
 import { ComponentProps, FC } from "react";
 import { Percentage } from "../../atoms/Percentage/Percentage";
+import { Icon } from "../../atoms/Icon/Icon";
+import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
+import { SocialKeys } from "../../../domain/types/Types";
 
 const StyledTokenCard = styled.div`
   height: 570px;
@@ -36,24 +39,26 @@ export const TokenCard: FC<TokenCardProps> = ({ style, token }) => {
     <Flex justify="center" style={{ ...debugStyles, ...style }}>
       <StyledTokenCard>
         <div style={{ position: "relative" }}>
-          <MunkiImage>Image</MunkiImage>
+          <MunkiImage
+            style={{
+              ...Styles.backgroundImage,
+              backgroundImage: `url(${token.logoUrl})`,
+            }}
+          ></MunkiImage>
           <Flex style={{ position: "absolute", bottom: 20, left: 20 }}>
-            <div>🐋 {token.whaleCount}</div>|
+            <div>🐋 {token.whaleCount}</div>| 📈{" "}
             <Percentage value={token.whaleCountPercentage} plusMinus />
           </Flex>
         </div>
 
         <Flex justify="space-between" style={{ marginBottom: 14 }}>
           <div style={{ ...Styles.h1, color: COLORS.yellow }}>{token.name}</div>
-          <div>
-            <span>11h</span>
-            <Flex style={{ display: "inline" }}>
-              {token.socials &&
-                Object.entries(token.socials).map(([, value]) => (
-                  <span key={value}>{value}</span>
-                ))}
-            </Flex>
-          </div>
+          <Flex align="center">
+            <span style={{ marginRight: 8 }}>11h</span>
+            <SocialMediaSegment
+              socials={Object.keys(token.socials ?? {}) as SocialKeys[]}
+            ></SocialMediaSegment>
+          </Flex>
         </Flex>
         <Flex justify="space-between">
           <TextWithLabel

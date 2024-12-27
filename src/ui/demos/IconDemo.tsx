@@ -7,7 +7,7 @@ interface IconDemoProps extends ComponentProps<any> {
   size?: AvatarProps["size"];
 }
 
-export const IconDemo: FC<IconDemoProps> = (props) => {
+export const AvatarDemo: FC<IconDemoProps> = (props) => {
   const { size } = props;
   return (
     <>

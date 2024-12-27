@@ -1,10 +1,8 @@
+import { SocialKeys } from "../types/Types";
+
 export interface ITicker {}
 
-export interface ISocials {
-  x?: string;
-  web?: string;
-  telegram?: string;
-}
+export type ISocials = Record<SocialKeys, string>;
 
 export interface IToken {
   name: string;

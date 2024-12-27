@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
-import { IconDemo } from "../../demos/IconDemo";
+import { AvatarDemo } from "../../demos/IconDemo";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 
 const headerStyles: React.CSSProperties = {
@@ -46,7 +46,7 @@ export const MunkiHeader = () => {
           <TextWithLabel
             key={token.name}
             text={token.name}
-            left={<IconDemo />}
+            left={<AvatarDemo />}
             right={<Percentage value={token.twentyFourHourPercentage} />}
             style={{ padding: "12px 16px" }}
           ></TextWithLabel>

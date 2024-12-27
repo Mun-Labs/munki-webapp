@@ -6,7 +6,7 @@ import { IToken } from "../../../domain/entities/Entities";
 import { MockTokens } from "../../../api/MockData";
 import { TableWithFilters } from "../TableWithFilters/TableWithFilters";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
-import { IconDemo } from "../../demos/IconDemo";
+import { AvatarDemo } from "../../demos/IconDemo";
 import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { MemeCoinTable } from "../MemeCoinTable/MemeCoinTable";
@@ -33,7 +33,7 @@ const holdersTrendColumns: TableColumnsType<HoldersTrendColumn> = [
     showSorterTooltip: { target: "full-header" },
     sorter: (a, b) => a.name.length - b.name.length,
     sortDirections: ["descend"],
-    render: (text) => <TextWithLabel text={text} left={<IconDemo />} />,
+    render: (text) => <TextWithLabel text={text} left={<AvatarDemo />} />,
   },
   {
     title: "Holders",

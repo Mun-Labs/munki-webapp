@@ -11,7 +11,6 @@ export const useElementWidth = () => {
     const resizeObserver = new ResizeObserver((entries) => {
       if (entries.length === 0) return;
       const entry = entries[0];
-      /*prettier-ignore*/ console.log("[useElementWidth.ts,14] entry: ", entry);
       setWidth(entry.contentRect.width);
     });
 

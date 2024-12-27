@@ -7,7 +7,7 @@ import { TokenCardDemo } from "../organisms/TokenCard/TokenCardDemo";
 import { IToken } from "../../domain/entities/Entities";
 import { MockTokens } from "../../api/MockData";
 import { TextWithLabelDemo } from "../molecules/TextWithLabel/TextWithLabelDemo";
-import { IconDemo } from "../demos/IconDemo";
+import { AvatarDemo } from "../demos/IconDemo";
 import { TreeChartDemo } from "../molecules/TreeChart/TreeChartDemo";
 import { AnalyticsCardDemo } from "../molecules/AnalyticsCard/AnalyticsCardDemo";
 import { AvatarWithTextDemo } from "../molecules/AvatarWithText/AvatarWithTextDemo";
@@ -16,6 +16,8 @@ import { TokenImageCardDemo } from "../organisms/TokenImageCard/TokenImageCardDe
 import { MemeCoinTableDemo } from "../organisms/MemeCoinTable/MemeCoinTableDemo";
 import { CurrencyDemo } from "../atoms/Currency/CurrencyDemo";
 import { GridResponsivenessExample } from "../demos/GridResponsivenessExample";
+import { SocialMediaSegmentDemo } from "../molecules/SocialMediaSegment/SocialMediaSegmentDemo";
+import { IconDemo } from "../atoms/Icon/IconDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -29,7 +31,7 @@ const columns: TableColumnsType<HoldersTrendColumn> = [
     showSorterTooltip: { target: "full-header" },
     sorter: (a, b) => a.name.length - b.name.length,
     sortDirections: ["descend"],
-    render: (text) => <TextWithLabel text={text} left={<IconDemo />} />,
+    render: (text) => <TextWithLabel text={text} left={<AvatarDemo />} />,
   },
   {
     title: "Holders",
@@ -120,6 +122,15 @@ export const DemoPage = () => {
       <h2>TextWithLabel</h2>
       <TextWithLabelDemo />
       <br />
+
+      <h2>IconDemo</h2>
+      <IconDemo />
+      <br />
+
+      <h2>SocialMediaSegmentDemo</h2>
+      <SocialMediaSegmentDemo />
+      <br />
+
 
       <h2>TokenCardDemo</h2>
       <TokenCardDemo />

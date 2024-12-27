@@ -1,7 +1,7 @@
 import { Flex } from "antd";
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
-import { IconDemo } from "../../demos/IconDemo";
+import { AvatarDemo } from "../../demos/IconDemo";
 import { COLORS } from "../../colors";
 import { Styles } from "../../uiStyles";
 
@@ -16,7 +16,7 @@ export const AvatarWithText: FC<AvatarWithTextProps> = (props) => {
   return (
     <AvatarWithTextStyled style={{ ...style }}>
       <Flex align="center">
-        <IconDemo size={40} />
+        <AvatarDemo size={40} />
         <div style={{ marginLeft: 12 }}>
           <div style={{ color: COLORS.magenta, ...Styles.h3 }}>INTERNS</div>
           <div style={{ color: COLORS.yellow }}>@Intern_ai</div>

@@ -7,3 +7,15 @@ export interface ITreeChartNode {
   twentyFourHourPercentage?: number;
   children?: ITreeChartNode[];
 }
+
+export const socials = ["web", "website", "telegram", "x"] as const;
+export type SocialKeys = (typeof socials)[number];
+
+export type IIconMap = Record<
+  SocialKeys,
+  {
+    src: string;
+    width?: number;
+    height?: number;
+  }
+>;

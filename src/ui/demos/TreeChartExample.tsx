@@ -161,8 +161,8 @@ class CustomizedContent extends PureComponent {
                 ? COLORS[Math.floor((index / root.children.length) * 6)]
                 : "#ffffff00",
             stroke: "#fff",
-            strokeWidth: 2 / (depth + 1e-10),
-            strokeOpacity: 1 / (depth + 1e-10),
+            strokeWidth: 2,
+            strokeOpacity: 1 / (depth ?? 0.1 + 1e-10),
           }}
         />
         {depth === 1 ? (

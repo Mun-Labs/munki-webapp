@@ -3,6 +3,7 @@ import { COLORS } from "../../colors";
 import { Flex } from "antd";
 import { Styles } from "../../uiStyles";
 import { ComponentProps, ReactNode } from "react";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 const TextWithLabelContainer = styled.div`
   height: 100%;
@@ -41,7 +42,11 @@ export const TextWithLabel = (props: ITextWithLabelProps) => {
       className="TextWithLabelContainer"
       style={{ ...style }}
     >
-      {label && <Label>{label} (i)</Label>}
+      {label && (
+        <Label>
+          {label} <InfoCircleOutlined />
+        </Label>
+      )}
       <Flex align="center">
         {left && (
           <div
