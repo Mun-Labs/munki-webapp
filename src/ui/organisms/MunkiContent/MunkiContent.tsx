@@ -3,16 +3,18 @@ import "./MunkiContent.css";
 import { debugStyles, Styles } from "../../uiStyles";
 import { HotList } from "./HotList/HotList";
 import { IToken } from "../../../domain/entities/Entities";
-import { MockTokens } from "../../../api/MockData";
+import { MockTokens, MockWhaleWatch } from "../../../api/MockData";
 import { TableWithFilters } from "../TableWithFilters/TableWithFilters";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
-import { AvatarDemo } from "../../demos/IconDemo";
 import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { MemeCoinTable } from "../MemeCoinTable/MemeCoinTable";
 import { TreeChart } from "../../molecules/TreeChart/TreeChart";
 import { TypeService } from "../../../common/modules/TypeService";
 import { ITreeChartNode } from "../../../domain/types/Types";
+import { COLORS } from "../../colors";
+import { WhaleWatch } from "../WhaleWatch/WhaleWatch";
+import { RoundIcon } from "../../atoms/RoundIcon";
 
 const contentStyles: React.CSSProperties = {
   ...debugStyles,
@@ -23,17 +25,23 @@ const contentStyles: React.CSSProperties = {
 
 type HoldersTrendColumn = Pick<
   IToken,
-  "name" | "accounts" | "twentyFourHourVolume" | "twentyFourHourPercentage"
+  | "name"
+  | "accounts"
+  | "twentyFourHourVolume"
+  | "twentyFourHourPercentage"
+  | "logoUrl"
 >;
 
 const holdersTrendColumns: TableColumnsType<HoldersTrendColumn> = [
   {
-    title: "Name",
+    title: "Token Name",
     dataIndex: "name",
     showSorterTooltip: { target: "full-header" },
     sorter: (a, b) => a.name.length - b.name.length,
     sortDirections: ["descend"],
-    render: (text) => <TextWithLabel text={text} left={<AvatarDemo />} />,
+    render: (text, record) => (
+      <TextWithLabel text={text} left={<RoundIcon src={record.logoUrl} />} />
+    ),
   },
   {
     title: "Holders",
@@ -146,22 +154,56 @@ export const MunkiContent = () => {
 
       <HotList />
 
-      <Flex style={{ marginTop: 60 }}>
-        <div style={{ ...debugStyles, flexGrow: 1, marginRight: 48 }}>
+      <Row style={{ marginTop: 60 }} gutter={48}>
+        <Col span={12} style={{ ...debugStyles, flexGrow: 1 }}>
           <TableWithFilters<HoldersTrendColumn>
-            label="Smart Wallet Inflow 🧠"
+            label={
+              <Flex align="center">
+                <span>Whale Watch</span>
+                <div
+                  style={{
+                    width: 8,
+                    height: 8,
+                    marginLeft: 8,
+                    borderRadius: 16,
+                    backgroundColor: COLORS.green55,
+                  }}
+                ></div>
+              </Flex>
+            }
+            description="Track what whales are buying and selling in real time."
+            table={
+              <Flex justify="space-between">
+                <WhaleWatch whales={MockWhaleWatch} style={{ flexGrow: 1 }} />
+                <WhaleWatch whales={MockWhaleWatch} style={{ flexGrow: 1 }} />
+              </Flex>
+            }
+            data={[]}
+            columns={[]}
+          />
+        </Col>
+        <Col span={12} style={{ ...debugStyles, flexGrow: 1 }}>
+          <TableWithFilters<HoldersTrendColumn>
+            label={
+              <Flex align="center">
+                <span>Holders Watch</span>
+                <div
+                  style={{
+                    width: 8,
+                    height: 8,
+                    marginLeft: 8,
+                    borderRadius: 16,
+                    backgroundColor: COLORS.green55,
+                  }}
+                ></div>
+              </Flex>
+            }
+            description="Show trending token holders over time to indicate growth or decline in interest."
             data={holdersTrendData}
             columns={holdersTrendColumns}
           />
-        </div>
-        <div style={{ ...debugStyles, flexGrow: 1 }}>
-          <TableWithFilters<HoldersTrendColumn>
-            label="Holders Trend 🧠"
-            data={holdersTrendData}
-            columns={holdersTrendColumns}
-          />
-        </div>
-      </Flex>
+        </Col>
+      </Row>
     </div>
   );
 };

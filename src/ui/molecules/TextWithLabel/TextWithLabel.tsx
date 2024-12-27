@@ -50,13 +50,15 @@ export const TextWithLabel = (props: ITextWithLabelProps) => {
       <Flex align="center">
         {left && (
           <div
-            style={{ marginRight: 8, display: "flex", alignItems: "center" }}
+            style={{ marginRight: 9, display: "flex", alignItems: "center" }}
           >
             {left}
           </div>
         )}
-        <MainText>{text}</MainText>
-        <Right>{right}</Right>
+        <Flex align="center" style={{ marginTop: 4 }}>
+          <MainText>{text}</MainText>
+          <Right>{right}</Right>
+        </Flex>
       </Flex>
     </TextWithLabelContainer>
   );

@@ -32,6 +32,14 @@ export const Styles: RecursiveStyles = {
   textSm: {
     fontSize: "14px",
   },
+  fontSansSerif: {
+    fontFamily: "sans-serif",
+  },
+  ellipsis: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
 };
 
 export const debugStyles: React.CSSProperties = {

@@ -3,8 +3,10 @@ import { Flex, Segmented, SegmentedProps } from "antd";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 
-export interface HorizontalFilterProps extends ComponentProps<any> {
-  label: string;
+export interface HorizontalFilterProps
+  extends ComponentProps<any>,
+    Omit<SegmentedProps, "label"> {
+  label?: React.ReactNode;
   labelStyles?: React.CSSProperties;
   segmentedStyles?: React.CSSProperties;
   isTwoRow?: boolean;
@@ -31,7 +33,7 @@ export const SegmentedStyled = styled(Segmented).attrs({
   }
 `;
 
-export const HorizontalFilter: FC<HorizontalFilterProps & SegmentedProps> = ({
+export const HorizontalFilter: FC<HorizontalFilterProps> = ({
   style,
   label,
   labelStyles,

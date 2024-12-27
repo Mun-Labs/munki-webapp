@@ -7,9 +7,10 @@ import { COLORS } from "../../colors";
 import { Styles } from "../../uiStyles";
 import { Flex } from "antd";
 import { TimeService } from "../../../common/modules/TimeService";
+import { FilterOutlined } from "@ant-design/icons";
 
 interface FilterByTimeProps extends ComponentProps<any> {
-  label?: string;
+  label?: React.ReactNode;
   labelStyles?: HorizontalFilterProps["labelStyles"];
   isTwoRow?: boolean;
 }
@@ -23,7 +24,14 @@ export const FilterByTime: FC<FilterByTimeProps> = ({
   return (
     <Flex justify="end" style={{ ...style }}>
       <HorizontalFilter
-        label={label ?? "= Filter By"}
+        label={
+          label ?? (
+            <div>
+              <FilterOutlined style={{ marginRight: 8 }} />
+              Filter By
+            </div>
+          )
+        }
         labelStyles={{ color: COLORS.grey70, ...labelStyles }}
         segmentedStyles={{ ...Styles.textSm }}
         options={[1440, 720, 360, 60, 5, 1].map(

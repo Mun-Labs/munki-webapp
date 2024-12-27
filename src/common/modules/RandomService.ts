@@ -7,6 +7,10 @@ export class RandomService {
     return Array.from({ length }, () => this.generateRandomNumber(min, max));
   }
 
+  public pickRandom<T>(array: T[]) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
   public static number(
     size: "B" | "M" | "K" | "decimal" | undefined = undefined,
     settings: { negative?: boolean } = { negative: false },

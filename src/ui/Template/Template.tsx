@@ -6,9 +6,9 @@ const TemplateStyled = styled.div.attrs({
   className: "TemplateStyled",
 })``;
 
-interface TemplateProps extends ComponentProps<any> {}
+interface ITemplateProps extends ComponentProps<any> {}
 
-export const Template: FC<TemplateProps> = (props) => {
+export const Template: FC<ITemplateProps> = (props) => {
   const { style } = props;
   return <TemplateStyled style={{ ...style }}>Template</TemplateStyled>
 };

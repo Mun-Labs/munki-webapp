@@ -18,6 +18,9 @@ import { CurrencyDemo } from "../atoms/Currency/CurrencyDemo";
 import { GridResponsivenessExample } from "../demos/GridResponsivenessExample";
 import { SocialMediaSegmentDemo } from "../molecules/SocialMediaSegment/SocialMediaSegmentDemo";
 import { IconDemo } from "../atoms/Icon/IconDemo";
+import { WhaleWatchDemo } from "../organisms/WhaleWatch/WhaleWatchDemo";
+import { TextWithDescriptionDemo } from "../molecules/TextWithDescription/TextWithDescriptionDemo";
+import { CoinWithLogoAndDescriptionDemo } from "../molecules/CoinWithLogoAndDescription/CoinWithLogoAndDescriptionDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -69,35 +72,35 @@ export const DemoPage = () => {
 
       <h2>GridResponsivenessExample</h2>
       <GridResponsivenessExample />
-      <br />
+      <br /> <hr />
 
       <h2>CurrencyDemo</h2>
       <CurrencyDemo />
-      <br />
+      <br /> <hr />
 
       <h2>MemeCoinTableDemo</h2>
       <MemeCoinTableDemo />
-      <br />
+      <br /> <hr />
 
       <h2>TokenImageCardDemo</h2>
       <TokenImageCardDemo />
-      <br />
+      <br /> <hr />
 
       <h2>TreeChartDemo</h2>
       <TreeChartDemo />
-      <br />
+      <br /> <hr />
 
       <h2>PercentageDemo</h2>
       <PercentageDemo />
-      <br />
+      <br /> <hr />
 
       <h2>AvatarWithTextDemo</h2>
       <AvatarWithTextDemo />
-      <br />
+      <br /> <hr />
 
       <h2>AnalyticsCardDemo</h2>
       <AnalyticsCardDemo />
-      <br />
+      <br /> <hr />
 
       <h2>TableWithFilters</h2>
       <Flex justify="center" align="center" style={{ width: "100%" }}>
@@ -109,27 +112,39 @@ export const DemoPage = () => {
           />
         </div>
       </Flex>
-      <br />
+      <br /> <hr />
 
       <h2>FilterByTime</h2>
       <FilterByTime label="Demo" />
-      <br />
+      <br /> <hr />
 
       <h2>HorizontalFilterDemo</h2>
       <HorizontalFilterDemo />
-      <br />
+      <br /> <hr />
 
       <h2>TextWithLabel</h2>
       <TextWithLabelDemo />
-      <br />
+      <br /> <hr />
+
+      <h2>TextWithDescriptionDemo</h2>
+      <TextWithDescriptionDemo />
+      <br /> <hr />
+
+      <h2>CoinWithLogoAndDescriptionDemo</h2>
+      <CoinWithLogoAndDescriptionDemo />
+      <br /> <hr />
+
+      <h2>WhaleWatchDemo</h2>
+      <WhaleWatchDemo />
+      <br /> <hr />
 
       <h2>IconDemo</h2>
       <IconDemo />
-      <br />
+      <br /> <hr />
 
       <h2>SocialMediaSegmentDemo</h2>
       <SocialMediaSegmentDemo />
-      <br />
+      <br /> <hr />
 
 
       <h2>TokenCardDemo</h2>

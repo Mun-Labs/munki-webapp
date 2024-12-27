@@ -5,8 +5,10 @@ import { RandomService } from "./RandomService";
 export class MockService {
   public static generateToken(input: Partial<IToken>): IToken {
     const id = generateId();
+    const name = input.name || "Token " + id;
+    const ensureDollar = name.startsWith("$") ? name : "$" + name;
+
     return {
-      name: "Token:" + id,
       tweets: 100,
       tweetsPercentage: 100,
       influencers: 100,
@@ -20,6 +22,7 @@ export class MockService {
       socials: {
         x: "https://www.x.com",
         web: "https://www.web.com",
+        website: "https://www.web.com",
         telegram: "https://www.telegram.com",
       },
       twentyFourHourPercentage: RandomService.generateRandomNumber(-100, 100),
@@ -36,6 +39,7 @@ export class MockService {
       price: RandomService.number("decimal"),
       price7D: RandomService.percent({ negative: true }),
       ...input,
+      name: ensureDollar,
     };
   }
 }

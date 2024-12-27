@@ -1,6 +1,6 @@
 import { MockService } from "../common/modules/MockService";
 import { RandomService } from "../common/modules/RandomService";
-import { IToken } from "../domain/entities/Entities";
+import { IToken, IWhale } from "../domain/entities/Entities";
 
 export const COIN_MAP = {
   chillGuy: MockService.generateToken({
@@ -59,3 +59,30 @@ export const COIN_MAP = {
 };
 
 export const MockTokens: IToken[] = Object.values(COIN_MAP);
+
+export const MockWhaleWatchBase: IWhale[] = [
+  {
+    name: "ACT Whale",
+    purchased: 8,
+    token: COIN_MAP.fartcoin,
+    logoUrl: "/user-whale1.png",
+  },
+  {
+    name: "ACT Whale",
+    purchased: -8,
+    token: COIN_MAP.luigi,
+    logoUrl: "/user-whale1.png",
+  },
+  {
+    name: "ACT FWOG",
+    purchased: -8,
+    token: COIN_MAP.pusheen,
+    logoUrl: "/user-whale2.png",
+  },
+];
+
+export const MockWhaleWatch: IWhale[] = [
+  ...MockWhaleWatchBase,
+  ...MockWhaleWatchBase,
+  ...MockWhaleWatchBase,
+];

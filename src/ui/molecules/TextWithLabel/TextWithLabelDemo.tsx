@@ -10,6 +10,7 @@ export const TextWithLabelDemo = () => {
   return (
     <>
       <TextWithLabel
+        label="testi"
         key={token.name}
         text={token.name}
         left={<AvatarDemo />}

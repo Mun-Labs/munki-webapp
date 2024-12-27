@@ -52,10 +52,10 @@ export interface IHolders {
   twentyFourHourInPercentPercentage: number;
 }
 
-export interface IWhales {
+export interface IWhale {
   name: string;
-  sold?: number;
-  bought?: number;
-  coin: IToken;
+  purchased?: number;
+  token: IToken;
   logoUrl?: string;
+  timeAgo?: string;
 }

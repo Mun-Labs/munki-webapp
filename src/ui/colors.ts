@@ -13,8 +13,12 @@ export const COLORS = {
   yellow: "hsl(49, 93%, 78%)",
   yellow30: "hsl(51, 23%, 34%)",
   green: "hsl(115,66%,63%)",
+  green55: "hsl(154, 56%, 55%)",
+  blue75: "hsl(190, 100%, 75%)",
   blue10: "hsl(218,18%,12%)",
 };
 export const UI_COLORS = {
   background: COLORS.blue10,
+  border: COLORS.grey50,
+  secondaryText: COLORS.grey70,
 };
