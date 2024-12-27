@@ -27,7 +27,7 @@ const Right = styled.div.attrs({ className: "Right" })`
 `;
 
 interface ITextWithLabelProps extends ComponentProps<any> {
-  text: string;
+  text: ReactNode;
   label?: string;
   right?: ReactNode;
   left?: ReactNode;

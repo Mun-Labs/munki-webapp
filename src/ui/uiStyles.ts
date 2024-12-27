@@ -32,6 +32,9 @@ export const Styles: RecursiveStyles = {
   textSm: {
     fontSize: "14px",
   },
+  textShadowRedBlue: {
+    textShadow: "1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue",
+  },
   fontSansSerif: {
     fontFamily: "sans-serif",
   },

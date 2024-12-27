@@ -51,6 +51,7 @@ import { MockTokens } from "../../../api/MockData";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Currency } from "../../atoms/Currency/Currency";
 import { COLORS } from "../../colors";
+import { Token } from "../../atoms/Token/Token";
 
 const useStyle = createStyles(({ css, token }) => {
   const { antCls } = token as any;
@@ -81,6 +82,7 @@ const columns: TableColumnsType<DataType> = [
     dataIndex: "name",
     key: "name",
     fixed: "left",
+    render: (_, record) => <Token token={record} />,
   },
   {
     title: "Mindshare",

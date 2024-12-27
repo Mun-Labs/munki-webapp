@@ -23,6 +23,7 @@ const TableWithFiltersStyled = styled.div.attrs({
   className: "TableWithFiltersStyled",
 })`
   width: 100%;
+  height: 100%;
 `;
 
 export function TableWithFilters<T = AnyObject>(

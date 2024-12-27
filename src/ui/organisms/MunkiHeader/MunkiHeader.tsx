@@ -1,12 +1,14 @@
 import { Flex } from "antd";
 import "./MunkiHeader.css";
-import { debugStyles } from "../../uiStyles";
+import { debugStyles, Styles } from "../../uiStyles";
 import styled from "styled-components";
-import { COLORS } from "../../colors";
+import { COLORS, UI_COLORS } from "../../colors";
 import { MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { AvatarDemo } from "../../demos/IconDemo";
 import { Percentage } from "../../atoms/Percentage/Percentage";
+import { Token } from "../../atoms/Token/Token";
+import { RoundIcon } from "../../atoms/RoundIcon";
 
 const headerStyles: React.CSSProperties = {
   ...debugStyles,
@@ -41,12 +43,12 @@ export const MunkiHeader = () => {
         </Flex>
       </Flex>
 
-      <TickerStyled style={{ height: 56 }}>
+      <TickerStyled style={{ height: 62 }}>
         {tokens.map((token) => (
           <TextWithLabel
             key={token.name}
-            text={token.name}
-            left={<AvatarDemo />}
+            text={<Token token={token} textStyle={{ color: UI_COLORS.reversePrimaryText, ...Styles.h2 }} />}
+            left={<RoundIcon src={token.logoUrl} />}
             right={<Percentage value={token.twentyFourHourPercentage} />}
             style={{ padding: "12px 16px" }}
           ></TextWithLabel>

@@ -1,16 +1,16 @@
 // WhaleWatch
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useMemo } from "react";
 import styled from "styled-components";
-import { MockWhaleWatch } from "../../../api/MockData";
 import { IWhale } from "../../../domain/entities/Entities";
 import { Styles } from "../../uiStyles";
 import { UI_COLORS } from "../../colors";
 import { CoinWithLogoAndDescription } from "../../molecules/CoinWithLogoAndDescription/CoinWithLogoAndDescription";
-import { Flex } from "antd";
+import { Col, Flex, Row } from "antd";
 import { TextWithDescription } from "../../molecules/TextWithDescription/TextWithDescription";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Currency } from "../../atoms/Currency/Currency";
 import { Icon } from "../../atoms/Icon/Icon";
+import { useElementWidth } from "../../../domain/hooks/useElementWidth";
 
 const WhaleWatchStyled = styled.div.attrs({
   className: "WhaleWatchStyled",
@@ -66,7 +66,7 @@ interface WhaleWatchProps extends ComponentProps<any> {
   whales: IWhale[];
 }
 
-export const WhaleWatch: FC<WhaleWatchProps> = (props) => {
+export const WhaleWatchColumn: FC<WhaleWatchProps> = (props) => {
   const { style, whales } = props;
   return (
     <WhaleWatchStyled style={{ ...style }}>
@@ -74,5 +74,39 @@ export const WhaleWatch: FC<WhaleWatchProps> = (props) => {
         <WhaleWatchCard key={whale.name + index} whale={whale} />
       ))}
     </WhaleWatchStyled>
+  );
+};
+
+export const WhaleWatch: FC<{ whales: IWhale[] }> = (props) => {
+  const { whales } = props;
+
+  const { width, elementRef } = useElementWidth();
+
+  const finalSpan = useMemo(() => {
+    /*prettier-ignore*/ console.log("[WhaleWatch.tsx,86] width: ", width);
+    if (!width) return;
+    if (width < 670) return 24;
+    return 12;
+  }, [width]);
+
+  return (
+    <Row
+      className="WhaleWatch"
+      ref={elementRef}
+      style={{ width: "100%", height: 900, overflow: "scroll" }}
+    >
+      <Col
+        span={finalSpan}
+        style={{
+          borderRight:
+            finalSpan === 12 ? (Styles.borders.border as string) : undefined,
+        }}
+      >
+        <WhaleWatchColumn whales={whales} style={{ flexGrow: 1 }} />
+      </Col>
+      <Col span={finalSpan}>
+        <WhaleWatchColumn whales={whales} style={{ flexGrow: 1 }} />
+      </Col>
+    </Row>
   );
 };

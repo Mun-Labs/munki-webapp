@@ -6,6 +6,7 @@ import { TextWithDescription } from "../TextWithDescription/TextWithDescription"
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Currency } from "../../atoms/Currency/Currency";
 import { Styles } from "../../uiStyles";
+import { Token } from "../../atoms/Token/Token";
 
 const CoinWithLogoAndDescriptionStyled = styled.div.attrs({
   className: "CoinWithLogoAndDescriptionStyled",
@@ -22,7 +23,7 @@ export const CoinWithLogoAndDescription: FC<CoinWithLogoAndDescriptionProps> = (
   return (
     <CoinWithLogoAndDescriptionStyled style={{ height: 45, ...style }}>
       <TextWithDescription
-        text={token.name}
+        text={ <Token token={token} textStyle={{ ...Styles.ellipsis, width: 81 }} /> }
         left={<RoundIcon src={token.logoUrl} />}
         description={
           <Currency

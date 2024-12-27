@@ -13,8 +13,9 @@ import { TreeChart } from "../../molecules/TreeChart/TreeChart";
 import { TypeService } from "../../../common/modules/TypeService";
 import { ITreeChartNode } from "../../../domain/types/Types";
 import { COLORS } from "../../colors";
-import { WhaleWatch } from "../WhaleWatch/WhaleWatch";
+import { WhaleWatch, WhaleWatchColumn } from "../WhaleWatch/WhaleWatch";
 import { RoundIcon } from "../../atoms/RoundIcon";
+import { Token } from "../../atoms/Token/Token";
 
 const contentStyles: React.CSSProperties = {
   ...debugStyles,
@@ -39,8 +40,11 @@ const holdersTrendColumns: TableColumnsType<HoldersTrendColumn> = [
     showSorterTooltip: { target: "full-header" },
     sorter: (a, b) => a.name.length - b.name.length,
     sortDirections: ["descend"],
-    render: (text, record) => (
-      <TextWithLabel text={text} left={<RoundIcon src={record.logoUrl} />} />
+    render: (_, record) => (
+      <TextWithLabel
+        text={<Token token={record as any} textStyle={{ ...Styles.h2 }} />}
+        left={<RoundIcon src={record.logoUrl} />}
+      />
     ),
   },
   {
@@ -154,8 +158,8 @@ export const MunkiContent = () => {
 
       <HotList />
 
-      <Row style={{ marginTop: 60 }} gutter={48}>
-        <Col span={12} style={{ ...debugStyles, flexGrow: 1 }}>
+      <Row style={{ marginTop: 60, height: 1006 }} gutter={48}>
+        <Col span={12} style={{ ...debugStyles, flexGrow: 1, height: "100%" }}>
           <TableWithFilters<HoldersTrendColumn>
             label={
               <Flex align="center">
@@ -172,12 +176,7 @@ export const MunkiContent = () => {
               </Flex>
             }
             description="Track what whales are buying and selling in real time."
-            table={
-              <Flex justify="space-between">
-                <WhaleWatch whales={MockWhaleWatch} style={{ flexGrow: 1 }} />
-                <WhaleWatch whales={MockWhaleWatch} style={{ flexGrow: 1 }} />
-              </Flex>
-            }
+            table={<WhaleWatch whales={MockWhaleWatch} />}
             data={[]}
             columns={[]}
           />

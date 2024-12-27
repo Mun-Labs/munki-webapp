@@ -10,6 +10,8 @@ import {
 import { getFontSizeFromRatio } from "../../../common/modules/numbers";
 import { fontSizeResizeHeightMap } from "../../../common/constants";
 import { COLORS } from "../../colors";
+import { Token } from "../../atoms/Token/Token";
+import { Styles } from "../../uiStyles";
 
 const TokenImageCardStyled = styled.div.attrs({
   className: "TokenImageCardStyled",
@@ -77,11 +79,12 @@ export const TokenImageCard: FC<TokenImageCardProps> = (props) => {
           zIndex: 1,
           padding: padding,
           fontSize: fontSize,
-          textShadow: '1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue'
+          textShadow: "1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue",
           // textShadow: '1px 1px 2px #e4d0d0, 0px 0px 1em #16161f, 0px 0px 0.2em #16161f'
         }}
       >
-        {name}
+        <Token token={token as any} textStyle={{ ...Styles.textShadowRedBlue }} />
+
         <Percentage
           value={twentyFourHourPercentage}
           plusMinus

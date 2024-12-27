@@ -20,5 +20,7 @@ export const COLORS = {
 export const UI_COLORS = {
   background: COLORS.blue10,
   border: COLORS.grey50,
+  primaryText: COLORS.white,
+  reversePrimaryText: COLORS.black,
   secondaryText: COLORS.grey70,
 };

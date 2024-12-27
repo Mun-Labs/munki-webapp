@@ -21,6 +21,7 @@ import { IconDemo } from "../atoms/Icon/IconDemo";
 import { WhaleWatchDemo } from "../organisms/WhaleWatch/WhaleWatchDemo";
 import { TextWithDescriptionDemo } from "../molecules/TextWithDescription/TextWithDescriptionDemo";
 import { CoinWithLogoAndDescriptionDemo } from "../molecules/CoinWithLogoAndDescription/CoinWithLogoAndDescriptionDemo";
+import { TokenDemo } from "../atoms/Token/TokenDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -69,6 +70,10 @@ export const DemoPage = () => {
   return (
     <>
       <h1>DemoPage</h1>
+
+      <h2>TokenDemo</h2>
+      <TokenDemo />
+      <br /> <hr />
 
       <h2>GridResponsivenessExample</h2>
       <GridResponsivenessExample />

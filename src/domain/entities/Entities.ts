@@ -55,6 +55,7 @@ export interface IHolders {
 
 export interface IWhale {
   name: string;
+  address?: string;
   purchased?: number;
   token: IToken;
   logoUrl?: string;

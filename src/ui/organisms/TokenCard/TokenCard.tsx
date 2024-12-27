@@ -11,6 +11,7 @@ import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Icon } from "../../atoms/Icon/Icon";
 import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
 import { SocialKeys } from "../../../domain/types/Types";
+import { Token } from "../../atoms/Token/Token";
 
 const StyledTokenCard = styled.div`
   height: 570px;
@@ -52,7 +53,7 @@ export const TokenCard: FC<TokenCardProps> = ({ style, token }) => {
         </div>
 
         <Flex justify="space-between" style={{ marginBottom: 14 }}>
-          <div style={{ ...Styles.h1, color: COLORS.yellow }}>{token.name}</div>
+          <Token token={token} style={{margin: '12px 0'}} textStyle={{ ...Styles.h1, color: COLORS.yellow }} />
           <Flex align="center">
             <span style={{ marginRight: 8 }}>11h</span>
             <SocialMediaSegment
