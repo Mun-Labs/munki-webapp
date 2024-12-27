@@ -13,6 +13,7 @@ const HorizontalFilterStyled = styled.div.attrs({
   className: "HorizontalFilterStyled",
 })`
   height: 54px;
+  display: flex;
   align-items: center;
 `;
 
@@ -22,8 +23,10 @@ export const SegmentedStyled = styled(Segmented).attrs({
   height: 100%;
   align-content: center;
   .ant-segmented-item-label {
-    height: 44px;
+    height: 34px;
     padding: 7px;
+    display: flex;
+    align-items: center;
   }
 `;
 

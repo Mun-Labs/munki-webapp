@@ -74,15 +74,6 @@ const CustomizedContent: React.FC<CustomizedContentProps> = (
       />
       {true ? (
         <>
-          <text
-            x={x ?? 0 + (width ?? 0) / 2}
-            y={y ?? 0 + (height ?? 0) / 2 + 7}
-            textAnchor="middle"
-            fill="#fff"
-            fontSize={14}
-          >
-            {name}
-          </text>
           <foreignObject
             style={{ position: "relative" }}
             x={x}

@@ -15,6 +15,7 @@ import { PercentageDemo } from "../atoms/Percentage/PercentageDemo";
 import { TokenImageCardDemo } from "../organisms/TokenImageCard/TokenImageCardDemo";
 import { MemeCoinTableDemo } from "../organisms/MemeCoinTable/MemeCoinTableDemo";
 import { CurrencyDemo } from "../atoms/Currency/CurrencyDemo";
+import { GridResponsivenessExample } from "../demos/GridResponsivenessExample";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -63,6 +64,10 @@ export const DemoPage = () => {
   return (
     <>
       <h1>DemoPage</h1>
+
+      <h2>GridResponsivenessExample</h2>
+      <GridResponsivenessExample />
+      <br />
 
       <h2>CurrencyDemo</h2>
       <CurrencyDemo />

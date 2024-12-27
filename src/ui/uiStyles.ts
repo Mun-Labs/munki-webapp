@@ -6,6 +6,10 @@ type RecursiveStyles = {
 };
 
 export const Styles: RecursiveStyles = {
+  centerVertically: {
+    display: "flex",
+    alignItems: "center",
+  },
   borders: {
     border: `1px solid ${COLORS.white}`,
   },

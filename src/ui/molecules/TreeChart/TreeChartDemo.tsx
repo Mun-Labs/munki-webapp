@@ -34,7 +34,7 @@ const data: ITreeChartNode[] = [
 
 export const TreeChartDemo = () => {
   return (
-    <div style={{ width: 550, height: 570 }}>
+    <div style={{ width: "100%", height: "100%" }}>
       <TreeChart data={data}></TreeChart>
     </div>
   );

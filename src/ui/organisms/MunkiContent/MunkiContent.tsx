@@ -1,6 +1,6 @@
 import { Col, Flex, Row, TableColumnsType, Typography } from "antd";
 import "./MunkiContent.css";
-import { debugStyles } from "../../uiStyles";
+import { debugStyles, Styles } from "../../uiStyles";
 import { HotList } from "./HotList/HotList";
 import { IToken } from "../../../domain/entities/Entities";
 import { MockTokens } from "../../../api/MockData";
@@ -8,9 +8,11 @@ import { TableWithFilters } from "../TableWithFilters/TableWithFilters";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { IconDemo } from "../../demos/IconDemo";
 import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
-import { TreeChartDemo } from "../../molecules/TreeChart/TreeChartDemo";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { MemeCoinTable } from "../MemeCoinTable/MemeCoinTable";
+import { TreeChart } from "../../molecules/TreeChart/TreeChart";
+import { TypeService } from "../../../common/modules/TypeService";
+import { ITreeChartNode } from "../../../domain/types/Types";
 
 const contentStyles: React.CSSProperties = {
   ...debugStyles,
@@ -66,6 +68,21 @@ const holdersTrendData = MockTokens.map((token) => ({
   key: token.name,
 }));
 
+const data = TypeService.mapKeysArray<IToken, ITreeChartNode>(
+  MockTokens,
+  // MockTokens.slice(0, 3),
+  [
+    ["name", "name"],
+    ["volume", "size"],
+    ["logoUrl", "logoUrl"],
+    ["twentyFourHourPercentage", "twentyFourHourPercentage"],
+  ],
+);
+
+const contentContainerHeight = 653;
+const contentHeaderHeight = 82;
+const contentHeight = contentContainerHeight - contentHeaderHeight - 2; // - 2 for border
+
 export const MunkiContent = () => {
   return (
     <div className="content" style={contentStyles}>
@@ -73,19 +90,42 @@ export const MunkiContent = () => {
         Top Memecoin Mindshare on X 🧠
       </Typography.Title>
 
-      <Row>
+      <Row style={{ height: contentContainerHeight }}>
         <Col span={8}>
           <div style={{ ...debugStyles, flexGrow: 1, marginRight: 30 }}>
-            <Flex justify="space-between" align="center">
-              <Typography.Title
-                level={3}
-                style={{ textAlign: "initial", width: 156 }}
+            <Row
+              style={{
+                ...Styles.centerVertically,
+                height: contentHeaderHeight,
+              }}
+            >
+              <Col
+                xs={{ flex: "100%" }}
+                sm={{ flex: "70%" }}
+                md={{ flex: "100%" }}
+                lg={{ flex: "100%" }}
+                xl={{ flex: "100%" }}
+                xxl={{ flex: "35%" }}
               >
-                Memecoins Mindshare 🌑
-              </Typography.Title>
-              <FilterByTime style={{ fontSize: 14 }} />
-            </Flex>
-            <TreeChartDemo />
+                <Row>
+                  <Col>
+                    <Typography.Title
+                      level={3}
+                      style={{ textAlign: "initial", marginBottom: 0 }}
+                    >
+                      Memecoins Mindshare 🌑
+                    </Typography.Title>
+                  </Col>
+                </Row>
+              </Col>
+              <Col sm={{ flex: "100%" }} xxl={{ flex: "65%" }}>
+                <FilterByTime style={{ fontSize: 14 }} />
+              </Col>
+            </Row>
+            <TreeChart
+              data={data}
+              style={{ height: contentHeight }}
+            ></TreeChart>
           </div>
         </Col>
         <Col span={16}>
@@ -94,7 +134,8 @@ export const MunkiContent = () => {
               label="Memecoin Index 🧠"
               data={holdersTrendData}
               columns={holdersTrendColumns}
-              table={<MemeCoinTable />}
+              table={<MemeCoinTable style={{ height: contentHeight }} />}
+              tableStyles={{ height: contentHeight }}
             />
           </div>
         </Col>
