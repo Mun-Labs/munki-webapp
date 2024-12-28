@@ -1,9 +1,9 @@
 import { Card, Flex, Typography } from "antd";
 import { Col, Row } from "antd";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useMemo } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
-import { debugStyles } from "../uiStyles";
+import { debugStyles, Styles } from "../uiStyles";
 import { FilterByTime } from "../molecules/FilterByTime/FilterByTime";
 import { AnalyticsCard } from "../molecules/AnalyticsCard/AnalyticsCard";
 import { AvatarWithText } from "../molecules/AvatarWithText/AvatarWithText";
@@ -11,6 +11,11 @@ import { BarChartDemo } from "../demos/BarChartDemo";
 import { LineChartDemo } from "../demos/LineChartDemo";
 import { ComposedChartDemo } from "../demos/ComposedChartDemo";
 import { AreaChartDemo } from "../demos/AreaChartDemo";
+import { MockTokens } from "../../api/MockData";
+import { IToken } from "../../domain/entities/Entities";
+import { COLORS, UI_COLORS } from "../colors";
+import { Address } from "../atoms/Address/Address";
+import { Chip } from "../atoms/Chip/Chip";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
@@ -28,27 +33,67 @@ const TokenDetailsPageStyled = styled.div.attrs({
 
 export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
   const { style } = props;
-  const params = useParams<{ tokenName: string }>();
-  const { tokenName } = params;
+  const params = useParams<{ address: string }>();
+  const { address } = params;
+
+  const token = useMemo((): IToken | undefined => {
+    const target = MockTokens.find((token) => token.address === address);
+    return target;
+  }, [address]);
+
+  if (!token) return <>N/A Token</>;
+
   return (
     <TokenDetailsPageStyled style={{ ...style }}>
-      <section>Back mun.analytics/{tokenName}</section>
+      <section>Back mun.analytics/{token.name}</section>
 
       <br />
 
       <Flex justify="space-between" style={{ width: "100%" }}>
         <Flex>
-          <div style={{ ...debugStyles, width: 200, height: 200 }}>img</div>
-          <Flex style={{ ...debugStyles, width: 300, flexDirection: "column" }}>
-            <div>{tokenName}</div>
-            <Flex justify="space-between">
-              <div>@Intern_AI</div>
-              <div>$INTERN</div>
+          <img
+            src={token.logoUrl}
+            style={{ ...debugStyles, ...Styles.backgroundImage }}
+            width={300}
+            height={300}
+          />
+          <Flex
+            style={{
+              ...debugStyles,
+              width: 500,
+              flexDirection: "column",
+              padding: "25px 37px",
+            }}
+          >
+            <h1 style={{ ...Styles.h1, fontSize: 48, color: COLORS.yellow }}>
+              {token.name}
+            </h1>
+            <Flex justify="space-between" style={{ marginBottom: 18 }}>
+              <div style={{ color: UI_COLORS.secondaryText, ...Styles.h1 }}>
+                @{token.name}
+              </div>
+              <div
+                style={{
+                  ...Styles.h1,
+                  color: COLORS.green70,
+                  backgroundColor: COLORS.green23,
+                  padding: "0 10px",
+                  borderRadius: 13,
+                }}
+              >
+                {token.name}
+              </div>
             </Flex>
-            <div>0xhad1ashtu3drwufsht</div>
+            <Address
+              address={token.address}
+              chain="solana"
+              style={{
+                marginBottom: 18,
+              }}
+            />
             <Flex justify="space-between">
-              <div>Twitter</div>
-              <div>Dexscreener</div>
+              <Chip value="Twitter" style={{...Styles.h2}} />
+              <Chip value="Dexscreener" style={{...Styles.h2}}/>
             </Flex>
           </Flex>
         </Flex>

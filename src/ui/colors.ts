@@ -1,7 +1,9 @@
 export const COLORS = {
   white: "hsl(0,0%,100%)",
+  white80: "hsl(0,0%,80%)",
   white70: "hsl(0,0%,70%)",
   white60: "hsl(0,0%,60%)",
+  white35: "hsl(0,0%,35%)",
   white25: "hsl(0,0%,25%)",
   grey70: "hsl(226, 16%, 74%)",
   grey50: "hsl(223, 8%, 56%)",
@@ -13,11 +15,15 @@ export const COLORS = {
   yellow: "hsl(49, 93%, 78%)",
   yellow30: "hsl(51, 23%, 34%)",
   green: "hsl(115,66%,63%)",
+  green23: "hsl(101, 100%, 23%)",
   green55: "hsl(154, 56%, 55%)",
+  green70: "hsl(101, 100%, 72%)",
   blue75: "hsl(190, 100%, 75%)",
   blue10: "hsl(218,18%,12%)",
 };
 export const UI_COLORS = {
+  primaryBackround: COLORS.black,
+  reversePrimaryBackround: COLORS.white,
   background: COLORS.blue10,
   border: COLORS.grey50,
   primaryText: COLORS.white,

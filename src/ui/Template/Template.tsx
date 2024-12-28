@@ -10,5 +10,9 @@ interface ITemplateProps extends ComponentProps<any> {}
 
 export const Template: FC<ITemplateProps> = (props) => {
   const { style } = props;
-  return <TemplateStyled style={{ ...style }}>Template</TemplateStyled>
+  return (
+    <>
+      <TemplateStyled style={{ ...style }}>Template</TemplateStyled>
+    </>
+  );
 };

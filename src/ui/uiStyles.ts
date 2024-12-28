@@ -10,9 +10,14 @@ export const Styles: RecursiveStyles = {
     display: "flex",
     alignItems: "center",
   },
+  centerHorizontally: {
+    display: "flex",
+    justifyContent: "center",
+  },
   backgroundImage: {
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    backgroundPosition: "center center",
   },
   borders: {
     border: `1px solid ${COLORS.white}`,
@@ -61,6 +66,7 @@ export const darkTheme: ThemeConfig = {
 
     // Alias Token
     colorBgContainer: COLORS.black,
+    fontFamily: "GROBOLD, sans serif",
   },
   components: {
     Card: {

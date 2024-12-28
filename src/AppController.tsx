@@ -45,7 +45,7 @@ export const AppController: FC<AppControllerProps> = (props) => {
         <Route path="/" index element={<App />} />
         <Route path="/demo" index element={<DemoPage />} />
         <Route
-          path="token/:tokenName"
+          path="token/:address"
           index
           element={
             <AppLayout>
