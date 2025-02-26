@@ -20,7 +20,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
 
   const ensurePercent = value < 1 ? value * 100 : value;
 
-  let color = ensurePercent > 0 ? COLORS.green : COLORS.red;
+  let color = ensurePercent > 0 ? COLORS.japanese_laurel : COLORS.red;
   if (neutralColor) {
     color = COLORS.white;
   }

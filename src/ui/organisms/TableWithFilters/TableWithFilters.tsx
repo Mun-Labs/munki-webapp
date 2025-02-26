@@ -57,10 +57,10 @@ export function TableWithFilters<T = AnyObject>(
   return (
     <TableWithFiltersStyled ref={elementRef} style={{ ...style }}>
       <section style={{ padding: 14 }}>
-        <Flex justify="space-between" align="center">
+        <HeadTableStyled>
           <div style={{ ...Styles.h2 }}>{label}</div>
           <FilterByTime isTwoRow={isTwoRow} />
-        </Flex>
+        </HeadTableStyled>
         {description && (
           <Typography.Text style={{ fontFamily: "sans-serif" }}>
             {description}
@@ -83,3 +83,14 @@ export function TableWithFilters<T = AnyObject>(
     </TableWithFiltersStyled>
   );
 }
+
+const HeadTableStyled = styled.div.attrs({ className: "HeadTableStyled" })`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 821px) {
+    flex-direction: column;
+    text-align: center;
+  }
+`;

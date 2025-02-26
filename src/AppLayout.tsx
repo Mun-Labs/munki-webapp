@@ -5,8 +5,8 @@ import { MunkiSidebar } from "./ui/organisms/MunkiSidebar/MunkiSidebar";
 import { MunkiFooter } from "./ui/organisms/MunkiFooter/MunkiFooter";
 
 const appStyles: React.CSSProperties = {
-  ...debugStyles,
-  background: "#080A0C",
+  // ...debugStyles,
+  background: "#010101",
 };
 
 export const AppLayout: React.FC<PropsWithChildren> = ({ children }) => {
