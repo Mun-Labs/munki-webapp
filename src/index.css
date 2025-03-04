@@ -22,10 +22,28 @@ body {
     /*color: #213547;*/
     /*background-color: #ffffff;*/
   }
+
   a:hover {
     /* color: #747bff; */
   }
+
   button {
     /* background-color: #f9f9f9; */
   }
+}
+
+::-ms-input-placeholder,
+::placeholder {
+  color: white !important;
+  opacity: 1;
+}
+
+.ant-select-selection-placeholder {
+  color: #fff;
+}
+
+.ant-input::placeholder {
+  color: white !important;
+  opacity: 1;
+
 }

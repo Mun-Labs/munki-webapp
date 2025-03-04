@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { debugStyles } from "./ui/uiStyles";
+/* import { debugStyles } from "./ui/uiStyles"; */
 import { MunkiHeader } from "./ui/organisms/MunkiHeader/MunkiHeader";
 import { MunkiSidebar } from "./ui/organisms/MunkiSidebar/MunkiSidebar";
 import { MunkiFooter } from "./ui/organisms/MunkiFooter/MunkiFooter";
@@ -14,7 +14,7 @@ export const AppLayout: React.FC<PropsWithChildren> = ({ children }) => {
     <div style={appStyles}>
       <MunkiHeader />
       <section className="container">
-        <MunkiSidebar />
+{/*         <MunkiSidebar /> */}
         {children}
       </section>
       <MunkiFooter />

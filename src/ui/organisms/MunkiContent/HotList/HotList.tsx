@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import { Flex, Typography } from "antd";
 import "./HotList.css";
 import styled from "styled-components";
 import { Munki___Debug___ as __Munki__Debug__ } from "../../MunkiDebug/MunkiDebug";

@@ -20,6 +20,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "GROBOLD", sans-serif;
+  outline: none;
 }
 
 body,
@@ -42,6 +43,18 @@ html {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
+}
+
+.ant-input::placeholder{
+  color: white;
+  opacity: 1;
+}
+.ant-drawer-header {
+  border-bottom: none !important;
+  display: none !important;
+}
+.ant-collapse-header {
+  color: yellow !important;
 }
 
 /*<Layout style={layoutStyle}>*/

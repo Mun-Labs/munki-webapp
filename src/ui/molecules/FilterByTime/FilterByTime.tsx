@@ -13,6 +13,7 @@ interface FilterByTimeProps extends ComponentProps<any> {
   label?: React.ReactNode;
   labelStyles?: HorizontalFilterProps["labelStyles"];
   isTwoRow?: boolean;
+  options?: number[];
 }
 
 export const FilterByTime: FC<FilterByTimeProps> = ({
@@ -20,7 +21,17 @@ export const FilterByTime: FC<FilterByTimeProps> = ({
   label,
   labelStyles,
   isTwoRow,
+  options,
 }) => {
+
+  const formatOptions = () => {
+    const opts = options || [1440, 720, 360, 60, 5, 1]
+
+    return opts.map(
+      TimeService.minutesToTimeString,
+    )
+  }
+
   return (
     <Flex justify="end" style={{ ...style }}>
       <HorizontalFilter
@@ -34,9 +45,7 @@ export const FilterByTime: FC<FilterByTimeProps> = ({
         }
         labelStyles={{ color: COLORS.grey70, ...labelStyles }}
         segmentedStyles={{ ...Styles.textSm }}
-        options={[1440, 720, 360, 60, 5, 1].map(
-          TimeService.minutesToTimeString,
-        )}
+        options={formatOptions()}
         isTwoRow={isTwoRow}
       />
     </Flex>

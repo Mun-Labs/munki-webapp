@@ -1,11 +1,11 @@
-import { ComponentProps, FC, useMemo } from "react";
-import { Flex, Segmented, SegmentedProps } from "antd";
+import { ComponentProps, FC, } from "react";
+import { Segmented, SegmentedProps } from "antd";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 
 export interface HorizontalFilterProps
   extends ComponentProps<any>,
-    Omit<SegmentedProps, "label"> {
+  Omit<SegmentedProps, "label"> {
   label?: React.ReactNode;
   labelStyles?: React.CSSProperties;
   segmentedStyles?: React.CSSProperties;

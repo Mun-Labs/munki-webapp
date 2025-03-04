@@ -1,7 +1,7 @@
 import { ComponentProps, useMemo } from "react";
 import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
 import { Styles } from "../../uiStyles";
-import { Flex, Typography } from "antd";
+import { Typography } from "antd";
 import styled from "styled-components";
 import { Table } from "antd";
 import type { TableProps } from "antd";
