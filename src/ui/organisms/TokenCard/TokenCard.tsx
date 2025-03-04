@@ -36,7 +36,7 @@ export const TokenCard: FC<TokenCardProps> = ({ style, token }) => {
   if (!token) token = MockTokens[0];
 
   return (
-    <Flex justify="center" style={{ ...debugStyles, ...style }}>
+    <Flex justify="center" style={{ ...style }}>
       <StyledTokenCard>
         <div style={{ position: "relative" }}>
           <MunkiImage

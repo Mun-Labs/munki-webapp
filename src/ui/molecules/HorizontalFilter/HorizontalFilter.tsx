@@ -12,14 +12,6 @@ export interface HorizontalFilterProps
   isTwoRow?: boolean;
 }
 
-const HorizontalFilterStyled = styled.div.attrs({
-  className: "HorizontalFilterStyled",
-})`
-  height: 54px;
-  display: flex;
-  align-items: center;
-`;
-
 export const SegmentedStyled = styled(Segmented).attrs({
   className: "SegmentedStyled",
 })`
@@ -39,19 +31,11 @@ export const HorizontalFilter: FC<HorizontalFilterProps> = ({
   labelStyles,
   segmentedStyles,
   options,
-  isTwoRow,
 }) => {
-  const twoRowStyles = useMemo((): React.CSSProperties => {
-    return {
-      flexDirection: isTwoRow ? "column" : "row",
-      alignItems: isTwoRow ? "flex-start" : "center",
-    };
-  }, [isTwoRow]);
-
   return (
     <HorizontalFilterStyled style={{ ...style }}>
-      <Flex justify="end" align="center" style={{ ...twoRowStyles }}>
-        <div style={{ ...labelStyles, marginRight: 18 }}>{label}</div>
+      <HeadHorizontalStyled>
+        <div style={{ ...labelStyles }}>{label}</div>
         <SegmentedStyled<string>
           options={options}
           onChange={(value) => {
@@ -62,7 +46,42 @@ export const HorizontalFilter: FC<HorizontalFilterProps> = ({
             ...segmentedStyles,
           }}
         />
-      </Flex>
+      </HeadHorizontalStyled>
     </HorizontalFilterStyled>
   );
 };
+
+const HorizontalFilterStyled = styled.div.attrs({
+  className: "HorizontalFilterStyled",
+})`
+  height: 54px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  @media (max-width: 821px) {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-flow: row;
+    flex-direction: column;
+  }
+`;
+
+const HeadHorizontalStyled = styled.div.attrs({
+  className: "HeadHorizontalStyled",
+})`
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  @media (max-width: 821px) {
+    flex-direction: column;
+    text-align: center;
+    flex-flow: row;
+    align-items: center;
+  }
+`;

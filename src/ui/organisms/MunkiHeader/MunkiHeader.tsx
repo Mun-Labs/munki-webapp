@@ -10,7 +10,7 @@ import { Token } from "../../atoms/Token/Token";
 import { RoundIcon } from "../../atoms/RoundIcon";
 
 const headerStyles: React.CSSProperties = {
-  ...debugStyles,
+  // ...debugStyles,
   background: "#080A0C",
   position: "sticky",
   top: 0,
@@ -22,7 +22,8 @@ const headerStyles: React.CSSProperties = {
 const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
   display: flex;
   color: ${COLORS.black};
-  background: ${COLORS.yellow};
+  background: ${COLORS.jonquil};
+  overflow: hidden;
 `;
 
 export const MunkiHeader = () => {

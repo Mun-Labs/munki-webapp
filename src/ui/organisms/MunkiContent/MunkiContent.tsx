@@ -1,6 +1,6 @@
-import { Col, Flex, Grid, Row, TableColumnsType, Typography } from "antd";
+import { Flex, TableColumnsType } from "antd";
 import "./MunkiContent.css";
-import { debugStyles, Styles } from "../../uiStyles";
+import { Styles } from "../../uiStyles";
 import { HotList } from "./HotList/HotList";
 import { IToken } from "../../../domain/entities/Entities";
 import { MockTokens, MockWhaleWatch } from "../../../api/MockData";
@@ -16,12 +16,11 @@ import { COLORS } from "../../colors";
 import { WhaleWatch } from "../WhaleWatch/WhaleWatch";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Token } from "../../atoms/Token/Token";
+import styled from "styled-components";
 
 const contentStyles: React.CSSProperties = {
-  ...debugStyles,
-  flexGrow: 1,
   padding: "20px",
-  overflowY: "auto",
+  overflowX: "auto",
 };
 
 type HoldersTrendColumn = Pick<
@@ -96,113 +95,140 @@ const contentHeaderHeight = 82;
 const contentHeight = contentContainerHeight - contentHeaderHeight - 2; // - 2 for border
 
 export const MunkiContent = () => {
-  const screens = Grid.useBreakpoint();
-
   return (
     <div className="content" style={contentStyles}>
-      <Typography.Title style={{ textAlign: "initial" }}>
-        Top Memecoin Mindshare on X 🧠
-      </Typography.Title>
+      <BigTitleStyled>Top Memecoin Mindshare on X 🧠</BigTitleStyled>
 
-      <Row style={{ height: contentContainerHeight }}>
-        <Col span={8}>
-          <div style={{ ...debugStyles, flexGrow: 1, marginRight: 30 }}>
-            <Row
-              style={{
-                ...Styles.centerVertically,
-                height: contentHeaderHeight,
-              }}
-            >
-              <Col
-                xs={{ flex: "100%" }}
-                sm={{ flex: "70%" }}
-                md={{ flex: "100%" }}
-                lg={{ flex: "100%" }}
-                xl={{ flex: "100%" }}
-                xxl={{ flex: "35%" }}
-              >
-                <Row>
-                  <Col>
-                    <Typography.Title
-                      level={screens.xl ? 3 : 5}
-                      style={{ textAlign: "initial", marginBottom: 0 }}
-                    >
-                      Memecoins Mindshare 🌑
-                    </Typography.Title>
-                  </Col>
-                </Row>
-              </Col>
-              <Col sm={{ flex: "100%" }} xxl={{ flex: "65%" }}>
-                <FilterByTime style={{ fontSize: 14 }} />
-              </Col>
-            </Row>
-            <TreeChart
-              data={data}
-              style={{ height: contentHeight }}
-            ></TreeChart>
+      <TopMemeStyled>
+        <div className="section-mindshare">
+          <div className="head">
+            <p style={{ ...Styles.h2 }}>Memecoins Mindshare 🌑</p>
+            <FilterByTime style={{ fontSize: 14 }} />
           </div>
-        </Col>
-        <Col span={16}>
-          <div style={{ ...debugStyles, flexGrow: 3 }}>
-            <TableWithFilters<HoldersTrendColumn>
-              label="Memecoin Index 🧠"
-              data={holdersTrendData}
-              columns={holdersTrendColumns}
-              table={<MemeCoinTable style={{ height: contentHeight }} />}
-              tableStyles={{ height: contentHeight }}
-              breakWidth={600}
-            />
-          </div>
-        </Col>
-      </Row>
-
-      <HotList />
-
-      <Row style={{ marginTop: 60, height: 1006 }} gutter={48}>
-        <Col span={12} style={{ ...debugStyles, flexGrow: 1, height: "100%" }}>
+          <TreeChart data={data} style={{ height: contentHeight }}></TreeChart>
+        </div>
+        <div className="section-memeindex">
           <TableWithFilters<HoldersTrendColumn>
-            label={
-              <Flex align="center">
-                <span>Whale Watch</span>
-                <div
-                  style={{
-                    width: 8,
-                    height: 8,
-                    marginLeft: 8,
-                    borderRadius: 16,
-                    backgroundColor: COLORS.green55,
-                  }}
-                ></div>
-              </Flex>
-            }
-            description="Track what whales are buying and selling in real time."
-            table={<WhaleWatch whales={MockWhaleWatch} />}
-            data={[]}
-            columns={[]}
-          />
-        </Col>
-        <Col span={12} style={{ ...debugStyles, flexGrow: 1 }}>
-          <TableWithFilters<HoldersTrendColumn>
-            label={
-              <Flex align="center">
-                <span>Holders Watch</span>
-                <div
-                  style={{
-                    width: 8,
-                    height: 8,
-                    marginLeft: 8,
-                    borderRadius: 16,
-                    backgroundColor: COLORS.green55,
-                  }}
-                ></div>
-              </Flex>
-            }
-            description="Show trending token holders over time to indicate growth or decline in interest."
+            label="Memecoin Index 🧠"
             data={holdersTrendData}
             columns={holdersTrendColumns}
+            table={<MemeCoinTable style={{ height: contentHeight }} />}
+            tableStyles={{ height: contentHeight }}
+            breakWidth={600}
           />
-        </Col>
-      </Row>
+        </div>
+      </TopMemeStyled>
+      <HotList />
+      <WhaleWatchStyled>
+        <TableWithFilters<HoldersTrendColumn>
+          label={
+            <Flex align="center">
+              <span>Whale Watch</span>
+              <div
+                style={{
+                  width: 8,
+                  height: 8,
+                  marginLeft: 8,
+                  borderRadius: 16,
+                  backgroundColor: COLORS.green55,
+                }}
+              ></div>
+            </Flex>
+          }
+          description="Track what whales are buying and selling in real time."
+          table={<WhaleWatch whales={MockWhaleWatch} />}
+          data={[]}
+          columns={[]}
+        />
+        <TableWithFilters<HoldersTrendColumn>
+          label={
+            <Flex align="center">
+              <span>Holders Watch</span>
+              <div
+                style={{
+                  width: 8,
+                  height: 8,
+                  marginLeft: 8,
+                  borderRadius: 16,
+                  backgroundColor: COLORS.green55,
+                }}
+              ></div>
+            </Flex>
+          }
+          description="Show trending token holders over time to indicate growth or decline in interest."
+          data={holdersTrendData}
+          columns={holdersTrendColumns}
+        />
+      </WhaleWatchStyled>
     </div>
   );
 };
+
+const BigTitleStyled = styled.div.attrs({
+  className: "BigTitleStyled",
+})`
+  font-size: 80px;
+  padding: 18px 0;
+
+  @media (max-width: 767px) {
+    text-align: center;
+    padding: 12px;
+  }
+`;
+
+const TopMemeStyled = styled.div.attrs({
+  className: "TopMemeStyled",
+})`
+  overflow: hidden;
+  gap: 12px;
+  display: grid;
+  justify-content: center;
+  align-items: start;
+  grid-template-columns: 560px 1fr;
+  /* grid-template-rows: 500px 500px; */
+
+  .section-mindshare {
+    overflow: hidden;
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .section-memeindex {
+    overflow: hidden;
+  }
+
+  @media (max-width: 821px) {
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    .section-mindshare {
+      .head {
+        flex-direction: column;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-memeindex {
+      padding-top: 24px;
+    }
+  }
+`;
+
+const WhaleWatchStyled = styled.div.attrs({ className: "WhaleWatchStyled" })`
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 34px;
+
+  .TableWithFiltersStyled {
+    overflow-y: scroll;
+  }
+
+  @media (max-width: 1324px) {
+    flex-direction: column;
+  }
+`;
