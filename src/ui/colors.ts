@@ -18,6 +18,7 @@ export const COLORS = {
   blue10: "hsl(218,18%,12%)",
   jonquil: "rgb(250, 204, 20)",
   japanese_laurel: "rgb(42, 110, 49)",
+  chlorophyll_green: "#54F209",
 };
 export const UI_COLORS = {
   background: COLORS.blue10,

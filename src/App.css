@@ -57,6 +57,12 @@ html {
   color: yellow !important;
 }
 
+.cl-mun-score {
+  background: -webkit-linear-gradient(360deg, #FBE892, #EE1B84);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /*<Layout style={layoutStyle}>*/
 /*  <Sider width="25%" style={siderStyle}>*/
 /*    <div>Sidebar</div>*/

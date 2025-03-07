@@ -2,8 +2,8 @@ import { CaretDownFilled } from "@ant-design/icons";
 import { Image, Flex } from "antd";
 import styled from "styled-components";
 import { COLORS } from "../../../colors";
-import { FilterByTime } from "../../../molecules/FilterByTime/FilterByTime";
 import { Styles } from "../../../uiStyles";
+import FearAndGreedyChart from "../../FearAndGreedyChart";
 
 function FearAndGreedWidget() {
   return (
@@ -16,18 +16,9 @@ function FearAndGreedWidget() {
         <Flex justify="start" align="center" gap={'middle'}>
           <p style={{ ...Styles.h2 }}>Meme coin index</p>
         </Flex>
-        <FilterByTime style={{ fontSize: 14 }} />
+        {/* <FilterByTime style={{ fontSize: 14 }} /> */}
       </FlexStyled>
-      <iframe
-        src="/public/iframe/fear-and-greedy.html"
-        width="100%"
-        height="240"
-        title="Fear and Greed Widget"
-        frameBorder={0}
-        style={{
-          overflow: 'hidden'
-        }}
-      ></iframe>
+      <FearAndGreedyChart value={20} />
       <IndexInfoStyled color={COLORS.red}>
         <div>
           <div className="flex-horizontal">
