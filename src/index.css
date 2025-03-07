@@ -32,18 +32,3 @@ body {
   }
 }
 
-::-ms-input-placeholder,
-::placeholder {
-  color: white !important;
-  opacity: 1;
-}
-
-.ant-select-selection-placeholder {
-  color: #fff;
-}
-
-.ant-input::placeholder {
-  color: white !important;
-  opacity: 1;
-
-}
