@@ -1,29 +1,10 @@
 import styled from "styled-components";
 import "./MunkiSidebar.css";
 import { COLORS } from "../../colors";
-import { Collapse, CollapseProps } from "antd";
-
-const text = (
-  <ul style={{
-    whiteSpace: 'nowrap'
-  }}>
-    <li>Homepage</li>
-    <li>Meme radar</li>
-    <li>Token insight</li>
-  </ul>
-);
-
-const items: CollapseProps['items'] = [
-  {
-    key: '1',
-    label: 'Home page',
-    children: text,
-  },
-];
 
 export const MunkiSidebar = () => {
   return <MunkiSidebarStyled>
-{/*     <Collapse expandIconPosition='end' style={{ whiteSpace: 'nowrap' }} items={items} bordered={false} /> */}
+    {/*     <Collapse expandIconPosition='end' style={{ whiteSpace: 'nowrap' }} items={items} bordered={false} /> */}
 
   </MunkiSidebarStyled>
 };
