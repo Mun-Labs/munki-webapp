@@ -46,7 +46,7 @@ const TopMemeStyled = styled.div.attrs({
   justify-content: center;
   align-items: start;
   flex-wrap: wrap;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 700px;
   margin-bottom: 24px;
 
   .section-mindshare {
@@ -62,7 +62,7 @@ const TopMemeStyled = styled.div.attrs({
     overflow: hidden;
   }
 
-  @media (max-width: 821px) {
+  @media (max-width: 1195px) {
     justify-content: center;
     align-items: center;
     grid-template-columns: auto;

@@ -45,6 +45,20 @@ html {
   }
 }
 
+
+.cl-ex-fear {
+  color: #EE1B84;
+}
+
+.cl-fear {
+  color : #F35D7A;
+}
+.cl-greed {
+  color: #FFEE64;
+}
+.cl-ex-greed {
+  color: #54F209
+}
 /*<Layout style={layoutStyle}>*/
 /*  <Sider width="25%" style={siderStyle}>*/
 /*    <div>Sidebar</div>*/

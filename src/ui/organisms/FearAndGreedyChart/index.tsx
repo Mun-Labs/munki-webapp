@@ -39,9 +39,11 @@ export default FearAndGreedyChart;
 const ContainerStyled = styled.div.attrs({ className: 'ContainerStyled' })
   `
   position: relative;
-  width: 275px;
+  width: auto ;
   height: 150px;
   margin: auto; 
+  display: flex;
+  justify-content: center;
 `
 
 interface CircleProps {

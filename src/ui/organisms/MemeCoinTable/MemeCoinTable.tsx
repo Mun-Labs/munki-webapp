@@ -10,10 +10,33 @@ import { Currency } from "../../atoms/Currency/Currency";
 import { COLORS } from "../../colors";
 import { UITokenWhale } from "../../atoms/UITokenWhale";
 import { AntDesignOutlined } from "@ant-design/icons";
+import useSmallScreen from "../../../hooks/useSmallScreen";
+import { MunkiBadge } from "../../atoms/MunkiBadge";
+import { Percentage } from "../../atoms/Percentage/Percentage";
 
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
 })`
+
+    /* this one prepare for add class that rowitem has new data */
+    .active.ant-table-row-level-0 {
+      .ant-table-cell {
+        background-color: #000;
+        animation: rowActive 3s infinite;
+      }
+    }
+  
+  @keyframes rowActive {
+    0% {
+      background: #403B19; 
+    }
+    
+    
+    100% {
+      background : #000;
+    }
+  }
+ 
   border-top: 1px solid ${COLORS.white60};
   .head {
     display: block;
@@ -61,8 +84,8 @@ const MemeCoinTableStyled = styled.div.attrs({
               }
     }
   }
-
-  .ant-table-body {
+   
+    
     tbody {
       tr {
         td:first-child {
@@ -78,8 +101,7 @@ const MemeCoinTableStyled = styled.div.attrs({
   }
 `;
 
-interface MemeCoinTableProps extends ComponentProps<any> { }
-
+interface MemeCoinTableProps extends ComponentProps<any> {}
 
 const useStyle = createStyles(({ css, token }) => {
   const { antCls } = token as any;
@@ -103,141 +125,6 @@ interface DataType extends IToken {
   key: React.Key;
 }
 
-const columns: TableColumnsType<DataType> = [
-  {
-    title: <div className="head" style={{ textAlign: 'left', color: COLORS.white }}>Buyers</div>,
-    width: 170,
-    dataIndex: "name",
-    key: "name",
-    fixed: "left",
-    render: (_, _record) => <UITokenWhale name="Fartcoin" value={'200$'} src="/public/user4.png" />,
-  },
-  {
-    title: <div className="head">Alpha</div>,
-    width: 100,
-    dataIndex: "mindshare",
-    key: "mindshare",
-    fixed: "left",
-    render: (_value) => <div className="head">🐳</div>,
-  },
-  {
-    title: <div className="head">Times</div>,
-    width: 80,
-    dataIndex: "mindshare",
-    key: "mindshare",
-    fixed: "left",
-    render: (_value) => <div className="head">1m</div>,
-  },
-  {
-    title: <div className="head">%hold</div>,
-    dataIndex: "mindshare7D",
-    key: "mindshare7D",
-    width: 120,
-    fixed: 'left',
-    render: (_value) => <div className="head" style={{ color: "#C5BC95" }}>10%</div>,
-  },
-  {
-    title: <div className="head" style={{ textAlign: 'left', color: COLORS.white }}>Token</div>,
-    dataIndex: "marketCap",
-    key: "marketCap",
-    width: 200,
-    fixed: 'left',
-    render: (_value) => <UITokenWhale name="Fartcoin" value={'200$'} src="/public/user4.png" />,
-  },
-  {
-    title: <div className="head" style={{ fontFamily: 'GROBOLD', fontWeight: 600, fontSize: '20px' }}>Mun score</div>,
-    dataIndex: "marketCap7D",
-    key: "marketCap7D",
-    width: 120,
-    render: (_value) => <div className="cl-mun-score" style={{ fontSize: '24px', textAlign: 'center' }}>4332</div>,
-  },
-  {
-    title: <div className="head" style={{ fontFamily: 'GROBOLD', fontSize: '20px' }}>Risk score</div>,
-    dataIndex: "marketCap7D",
-    key: "marketCap7D",
-    width: 120,
-    render: (_value) => <div style={{ fontSize: '24px', textAlign: 'center' }}>21</div>,
-  },
-  {
-    title: <div className="head" style={{ textAlign: 'left' }}># of smarts wallet in top holder</div>,
-    dataIndex: "avgImpressions",
-    key: "avgImpressions",
-    width: 180,
-    render: (value) => <Currency value={value} />,
-  },
-  {
-    title: <div className="head" style={{ textAlign: 'left' }}># of fresh wallets in top holers</div>,
-    dataIndex: "avgImpressions",
-    key: "avgImpressions",
-    width: 180,
-    render: (value) => <Currency value={value} />,
-  },
-  {
-    title: <div className="head">Smart followers</div>,
-    dataIndex: "avgImpressions",
-    key: "avgImpressions",
-    width: 150,
-    render: (_value) => <div className="content">433</div>,
-  },
-  {
-    title: <div className="head">Followers</div>,
-    dataIndex: "avgImpressions",
-    key: "avgImpressions",
-    width: 150,
-    render: (_value) => <div className="content">52k</div>,
-  },
-  {
-    title: <div className="head">Top.Followers</div>,
-    dataIndex: "avgImpressions",
-    key: "avgImpressions",
-    width: 150,
-    render: (_value) => <Avatar.Group>
-      <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
-      <a href="https://ant.design">
-        <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
-      </a>
-      <Avatar style={{ backgroundColor: '#1677ff' }} icon={<AntDesignOutlined />} />
-    </Avatar.Group>,
-  },
-  {
-    title: <div className="head">Volume</div>,
-    dataIndex: "avgImpressions",
-    key: "avgImpressions",
-    width: 150,
-    render: (_value) => <div className="content">52k</div>,
-  },
-  {
-    title: <div className="head">Price</div>,
-    dataIndex: "price",
-    key: "price",
-    width: 120,
-    render: (_value) => {
-      return <div className="content">52k</div>
-    },
-  },
-  {
-    title: <div className="head">M.Cap</div>,
-    dataIndex: "price7D",
-    key: "price7D",
-    width: 120,
-    render: (_value) => <div className="content">52k</div>,
-  },
-  {
-    title: <div className="head">△%24hrs</div>,
-    dataIndex: "price7D",
-    key: "price7D",
-    width: 120,
-    render: (_value) => <div className="content">52k</div>,
-  },
-  {
-    title: <div className="head">Holders</div>,
-    dataIndex: "price7D",
-    key: "price7D",
-    width: 120,
-    render: (_value) => <div className="content">52k</div>,
-  },
-];
-
 const dataSource: DataType[] = MockTokens.map((token) => ({
   ...token,
   key: token.name,
@@ -246,15 +133,215 @@ const dataSource: DataType[] = MockTokens.map((token) => ({
 export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   const { style } = props;
   const { styles } = useStyle();
+  const isSmallScreen = useSmallScreen(1265);
 
-  console.log({ dataSource })
-  console.log({ MockTokens })
+  console.log({ dataSource });
+  console.log({ MockTokens });
+  console.log({ styles });
+
+  const columns: TableColumnsType<DataType> = [
+    {
+      title: (
+        <div
+          className="head"
+          style={{ textAlign: "left", color: COLORS.white }}
+        >
+          Buyers
+        </div>
+      ),
+      width: 170,
+      dataIndex: "name",
+      key: "name",
+      fixed: isSmallScreen ? undefined : "left",
+      render: (_, _record) => (
+        <UITokenWhale name="Fartcoin" value={"200$"} src="/public/user4.png" />
+      ),
+    },
+    {
+      title: <div className="head">Alpha</div>,
+      width: 100,
+      dataIndex: "mindshare",
+      key: "mindshare",
+      fixed: isSmallScreen ? undefined : "left",
+      render: (_value) => <div className="head">🐳</div>,
+    },
+    {
+      title: <div className="head">Times</div>,
+      width: 80,
+      dataIndex: "mindshare",
+      key: "mindshare",
+      fixed: isSmallScreen ? undefined : "left",
+      render: (_value) => <div className="head">1m</div>,
+    },
+    {
+      title: <div className="head">%hold</div>,
+      dataIndex: "mindshare7D",
+      key: "mindshare7D",
+      width: 120,
+      fixed: isSmallScreen ? undefined : "left",
+      render: (_value) => (
+        <div className="head" style={{ color: "#C5BC95" }}>
+          10%
+        </div>
+      ),
+    },
+    {
+      title: (
+        <div
+          className="head"
+          style={{ textAlign: "left", color: COLORS.white }}
+        >
+          Token
+        </div>
+      ),
+      dataIndex: "marketCap",
+      key: "marketCap",
+      width: 200,
+      fixed: isSmallScreen ? undefined : "left",
+      render: (_value) => (
+        <UITokenWhale name="Fartcoin" value={"200$"} src="/public/user4.png" />
+      ),
+    },
+    {
+      title: (
+        <div
+          className="head"
+          style={{ fontFamily: "GROBOLD", fontWeight: 600, fontSize: "20px" }}
+        >
+          Mun score
+        </div>
+      ),
+      dataIndex: "marketCap7D",
+      key: "marketCap7D",
+      width: 120,
+      render: (_value) => (
+        <div
+          className="cl-mun-score"
+          style={{ fontSize: "24px", textAlign: "center" }}
+        >
+          4332
+        </div>
+      ),
+    },
+    {
+      title: (
+        <div
+          className="head"
+          style={{ fontFamily: "GROBOLD", fontSize: "20px" }}
+        >
+          Risk score
+        </div>
+      ),
+      dataIndex: "marketCap7D",
+      key: "marketCap7D",
+      width: 120,
+      render: (_value) => (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Percentage style={{ fontSize: '20px' }} noSigns value={10}></Percentage>
+        </div>
+      ),
+    },
+    {
+      title: (
+        <div className="head" style={{ textAlign: "left" }}>
+          # of smarts wallet in top holder
+        </div>
+      ),
+      dataIndex: "avgImpressions",
+      key: "avgImpressions",
+      width: 180,
+      render: (value) => <MunkiBadge>10/50</MunkiBadge>,
+    },
+    {
+      title: (
+        <div className="head" style={{ textAlign: "left" }}>
+          # of fresh wallets in top holers
+        </div>
+      ),
+      dataIndex: "avgImpressions",
+      key: "avgImpressions",
+      width: 180,
+      render: (value) => <MunkiBadge color={COLORS.yellow30}>10/50</MunkiBadge>,
+    },
+    {
+      title: <div className="head">Smart followers</div>,
+      dataIndex: "avgImpressions",
+      key: "avgImpressions",
+      width: 150,
+      render: (_value) => <div className="content">433</div>,
+    },
+    {
+      title: <div className="head">Followers</div>,
+      dataIndex: "avgImpressions",
+      key: "avgImpressions",
+      width: 150,
+      render: (_value) => <div className="content">52k</div>,
+    },
+    {
+      title: <div className="head">Top.Followers</div>,
+      dataIndex: "avgImpressions",
+      key: "avgImpressions",
+      width: 150,
+      render: (_value) => (
+        <Avatar.Group>
+          <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+          <a href="https://ant.design">
+            <Avatar style={{ backgroundColor: "#f56a00" }}>K</Avatar>
+          </a>
+          <Avatar
+            style={{ backgroundColor: "#1677ff" }}
+            icon={<AntDesignOutlined />}
+          />
+        </Avatar.Group>
+      ),
+    },
+    {
+      title: <div className="head">Volume</div>,
+      dataIndex: "avgImpressions",
+      key: "avgImpressions",
+      width: 150,
+      render: (_value) => <div className="content">52k</div>,
+    },
+    {
+      title: <div className="head">Price</div>,
+      dataIndex: "price",
+      key: "price",
+      width: 120,
+      render: (_value) => {
+        return <div className="content">52k</div>;
+      },
+    },
+    {
+      title: <div className="head">M.Cap</div>,
+      dataIndex: "price7D",
+      key: "price7D",
+      width: 120,
+      render: (_value) => <div className="content">52k</div>,
+    },
+    {
+      title: <div className="head">△%24hrs</div>,
+      dataIndex: "price7D",
+      key: "price7D",
+      width: 120,
+      render: (_value) => <div className="content">52k</div>,
+    },
+    {
+      title: <div className="head">Holders</div>,
+      dataIndex: "price7D",
+      key: "price7D",
+      width: 120,
+      render: (_value) => <div className="content">52k</div>,
+    },
+  ];
 
   return (
     <MemeCoinTableStyled style={{ ...style }}>
       <Table<DataType>
         className={styles.customTable}
         columns={columns}
+        rowClassName={(record) => {
+          return record?.address === "0x6e6c3659" ? "active" : "";
+        }}
         dataSource={dataSource}
         pagination={{ position: ["none", "bottomCenter"] }}
         size="middle"
