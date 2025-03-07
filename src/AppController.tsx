@@ -1,19 +1,19 @@
-import { ComponentProps, FC, } from "react";
+import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import App from "./App";
 import { DemoPage } from "./ui/pages/DemoPage.tsx";
-import { Route, Routes, } from "react-router";
-import { TokenDetailsPage } from "./ui/pages/TokenDetailsPage.tsx";
+import { Route, Routes } from "react-router";
 import { AppLayout } from "./AppLayout.tsx";
+import { TokenDetailsPage } from "./ui/pages/TokenDetailsPage/index.tsx";
 
-interface AppControllerProps extends ComponentProps<any> { }
+interface AppControllerProps extends ComponentProps<any> {}
 
 const AppControllerStyled = styled.div.attrs({
   className: "AppControllerStyled",
 })``;
 
 export const AppController: FC<AppControllerProps> = (props) => {
-  const { } = props;
+  const {} = props;
   /*   let navigate = useNavigate(); */
 
   //const {

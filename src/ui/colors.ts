@@ -22,6 +22,7 @@ export const COLORS = {
   raisin_black: "#242424",
   chinese_black: "#121212",
   dark_charcoal: "#313131",
+  old_silver: "#838589",
 };
 export const UI_COLORS = {
   background: COLORS.blue10,

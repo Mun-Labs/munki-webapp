@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const getColorFromValue = (value: number) => {
   const clampedValue = Math.min(Math.max(value, 0), 180);
@@ -17,17 +17,21 @@ const getColorFromValue = (value: number) => {
   }
 };
 
-const FearAndGreedyChart = ({ value }: { value: number }) => {
+interface IFearAndGreedChart {
+  value: number;
+  isShowNumber?: boolean;
+}
+
+const FearAndGreedyChart = ({
+  value,
+  isShowNumber = true,
+}: IFearAndGreedChart) => {
   return (
     <ContainerStyled>
-      <img
-        src='/public/fear-greedy-chart.png'
-        width={275}
-        height={150}
-      />
-      <CircleStyled degree={value}>
-        <div className='line'>
-          <p className='number'>{value}</p>
+      <img src="/public/fear-greedy-chart.png" width={275} height={150} />
+      <CircleStyled isShowNumber={isShowNumber} degree={value}>
+        <div className={isShowNumber ? "line withNumber" : "line"}>
+          {isShowNumber && <p className="number">{value}</p>}
         </div>
       </CircleStyled>
     </ContainerStyled>
@@ -36,31 +40,31 @@ const FearAndGreedyChart = ({ value }: { value: number }) => {
 
 export default FearAndGreedyChart;
 
-const ContainerStyled = styled.div.attrs({ className: 'ContainerStyled' })
-  `
+const ContainerStyled = styled.div.attrs({ className: "ContainerStyled" })`
   position: relative;
-  width: auto ;
+  width: auto;
   height: 150px;
-  margin: auto; 
+  margin: auto;
   display: flex;
   justify-content: center;
-`
+`;
 
 interface CircleProps {
   degree: number;
+  isShowNumber?: boolean;
 }
 
-
-const CircleStyled = styled.div.attrs<CircleProps>({ className: 'CircleStyled' })
-  `
+const CircleStyled = styled.div.attrs<CircleProps>({
+  className: "CircleStyled",
+})`
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%) rotate(${props => (props?.degree || 0)}deg);
+  transform: translateX(-50%) rotate(${(props) => props?.degree || 0}deg);
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #A7A7A7;
+  background-color: #a7a7a7;
 
   .line {
     position: absolute;
@@ -71,32 +75,46 @@ const CircleStyled = styled.div.attrs<CircleProps>({ className: 'CircleStyled' }
     width: 110px;
     height: 12px;
     box-shadow: 1px 1px 10px #000;
-    background: rgb(167,167,167);
-    background: -moz-linear-gradient(266deg, rgba(167,167,167,1) 0%, ${props => getColorFromValue(props.degree || 0)} 100%);
-    background: -webkit-linear-gradient(266deg, rgba(167,167,167,1) 0%, ${props => getColorFromValue(props.degree || 0)} 100%);
-    background: linear-gradient(266deg, rgba(167,167,167,1) 0%, ${props => getColorFromValue(props.degree || 0)} 100%);
+    background: rgb(167, 167, 167);
+    background: -moz-linear-gradient(
+      266deg,
+      rgba(167, 167, 167, 1) 0%,
+      ${(props) => getColorFromValue(props.degree || 0)} 100%
+    );
+    background: -webkit-linear-gradient(
+      266deg,
+      rgba(167, 167, 167, 1) 0%,
+      ${(props) => getColorFromValue(props.degree || 0)} 100%
+    );
+    background: linear-gradient(
+      266deg,
+      rgba(167, 167, 167, 1) 0%,
+      ${(props) => getColorFromValue(props.degree || 0)} 100%
+    );
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a7a7a7",endColorstr="#ee1b84",GradientType=1);
-    
+
     .number {
       position: absolute;
       z-index: 4;
       left: -55%;
-      top: 50%;      
+      top: 50%;
       transform: translateX(-50%) translateY(-50%) rotate(-90deg);
-      text-shadow: 1px 1px 8px #000; 
+      text-shadow: 1px 1px 8px #000;
     }
+  }
 
+  .line.withNumber {
     &::after {
       content: "";
       position: absolute;
       z-index: 2;
       left: -55%;
-      top: 50%;      
-      transform: translateX(-50%) translateY(-50%) ;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background-color: ${((props => (getColorFromValue(props?.degree) || 0)))};
+      background-color: ${(props) => getColorFromValue(props?.degree) || 0};
     }
   }
 
@@ -110,8 +128,6 @@ const CircleStyled = styled.div.attrs<CircleProps>({ className: 'CircleStyled' }
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: #A7A7A7;
+    background-color: #a7a7a7;
   }
-  
-  
-`
+`;
