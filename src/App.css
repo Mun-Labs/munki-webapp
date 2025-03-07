@@ -2,6 +2,7 @@
   margin: 0 auto;
   /* text-align: center; */
 }
+
 .demo-logo-vertical {
   height: 32px;
   margin: 16px;
@@ -30,7 +31,7 @@ html {
 
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .section {
@@ -51,14 +52,21 @@ html {
 }
 
 .cl-fear {
-  color : #F35D7A;
+  color: #F35D7A;
 }
+
 .cl-greed {
   color: #FFEE64;
 }
+
 .cl-ex-greed {
   color: #54F209
 }
+
+.cl-old-silver {
+  color: #838589
+}
+
 /*<Layout style={layoutStyle}>*/
 /*  <Sider width="25%" style={siderStyle}>*/
 /*    <div>Sidebar</div>*/
