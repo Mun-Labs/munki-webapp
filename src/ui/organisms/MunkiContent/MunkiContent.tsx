@@ -1,8 +1,6 @@
 import "./MunkiContent.css";
-import { HotList } from "./HotList/HotList";
 import { MemecoinMindshare } from "./MemecoinMindshare";
 import { AlphaMove } from "./AlphaMove";
-import { WhaleWatchContent } from "./WhaleWatchContent";
 import { MunkiHero } from "./MunkiHero";
 
 const contentStyles: React.CSSProperties = {

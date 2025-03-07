@@ -1,12 +1,11 @@
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import React from "react";
-import { Avatar, Table, Typography } from "antd";
+import { Avatar, Table } from "antd";
 import type { TableColumnsType } from "antd";
 import { createStyles } from "antd-style";
 import { IToken } from "../../../domain/entities/Entities";
 import { MockTokens } from "../../../api/MockData";
-import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Currency } from "../../atoms/Currency/Currency";
 import { COLORS } from "../../colors";
 import { UITokenWhale } from "../../atoms/UITokenWhale";
@@ -153,7 +152,7 @@ const columns: TableColumnsType<DataType> = [
     render: (_value) => <div className="cl-mun-score" style={{ fontSize: '24px', textAlign: 'center' }}>4332</div>,
   },
   {
-    title: <div className="head" style={{ fontFamily: 'GROBOLD', fontSize: '20px'}}>Risk score</div>,
+    title: <div className="head" style={{ fontFamily: 'GROBOLD', fontSize: '20px' }}>Risk score</div>,
     dataIndex: "marketCap7D",
     key: "marketCap7D",
     width: 120,
