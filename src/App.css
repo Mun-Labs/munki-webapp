@@ -20,6 +20,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "GROBOLD", sans-serif;
+  outline: none;
 }
 
 body,
@@ -43,7 +44,6 @@ html {
     animation: logo-spin infinite 20s linear;
   }
 }
-
 /*<Layout style={layoutStyle}>*/
 /*  <Sider width="25%" style={siderStyle}>*/
 /*    <div>Sidebar</div>*/

@@ -4,7 +4,7 @@ import { Flex } from "antd";
 import { COLORS, UI_COLORS } from "../../colors";
 import { MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
-import { debugStyles, Styles } from "../../uiStyles";
+import { Styles } from "../../uiStyles";
 import { IToken } from "../../../domain/entities/Entities";
 import { ComponentProps, FC } from "react";
 import { Percentage } from "../../atoms/Percentage/Percentage";

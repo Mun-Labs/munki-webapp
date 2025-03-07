@@ -1,0 +1,24 @@
+
+.ant-drawer-header {
+  border-bottom: none !important;
+  display: none !important;
+}
+.ant-collapse-header {
+  color: yellow !important;
+}
+
+::-ms-input-placeholder,
+::placeholder {
+  color: white !important;
+  opacity: 1;
+}
+
+.ant-select-selection-placeholder {
+  color: #fff;
+}
+
+.ant-input::placeholder {
+  color: white !important;
+  opacity: 1;
+
+}

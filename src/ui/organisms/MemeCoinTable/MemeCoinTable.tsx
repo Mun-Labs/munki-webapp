@@ -17,6 +17,10 @@ const MemeCoinTableStyled = styled.div.attrs({
     thead {
       tr {
         th:first-child {
+/*           border-right: 1px solid ${COLORS.white60}; */
+        }
+        th.ant-table-cell-fix-left-last {
+
           border-right: 1px solid ${COLORS.white60};
         }
         th:nth-child(2) {
@@ -30,6 +34,9 @@ const MemeCoinTableStyled = styled.div.attrs({
     tbody {
       tr {
         td:first-child {
+/*           border-right: 1px solid ${COLORS.white60}; */
+        }
+        td.ant-table-cell-fix-left-last {
           border-right: 1px solid ${COLORS.white60};
         }
         td:nth-child(2) {
@@ -40,7 +47,7 @@ const MemeCoinTableStyled = styled.div.attrs({
   }
 `;
 
-interface MemeCoinTableProps extends ComponentProps<any> {}
+interface MemeCoinTableProps extends ComponentProps<any> { }
 
 import React from "react";
 import { Table } from "antd";
@@ -88,14 +95,16 @@ const columns: TableColumnsType<DataType> = [
     title: "Mindshare",
     width: 120,
     dataIndex: "mindshare",
-    key: "mindshare",
+    key: "mindshare", 
+    fixed: "left",
     render: (value) => <Percentage value={value} neutralColor noSigns />,
   },
   {
     title: "△7D",
     dataIndex: "mindshare7D",
     key: "mindshare7D",
-    width: 70,
+    width: 70, 
+    fixed: 'left',
     render: (value) => <Percentage value={value} plusMinus />,
   },
   {

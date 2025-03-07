@@ -1,4 +1,4 @@
-import { Flex, TableColumnsType } from "antd";
+import { Flex, Input, TableColumnsType } from "antd";
 import "./MunkiContent.css";
 import { Styles } from "../../uiStyles";
 import { HotList } from "./HotList/HotList";
@@ -17,10 +17,12 @@ import { WhaleWatch } from "../WhaleWatch/WhaleWatch";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Token } from "../../atoms/Token/Token";
 import styled from "styled-components";
+import FearAndGreedWidget from "./FearAndGreedy";
+import { UserOutlined } from "@ant-design/icons";
 
 const contentStyles: React.CSSProperties = {
   padding: "20px",
-  overflowX: "auto",
+  overflowX: "hidden",
 };
 
 type HoldersTrendColumn = Pick<
@@ -97,27 +99,39 @@ const contentHeight = contentContainerHeight - contentHeaderHeight - 2; // - 2 f
 export const MunkiContent = () => {
   return (
     <div className="content" style={contentStyles}>
-      <BigTitleStyled>Top Memecoin Mindshare on X 🧠</BigTitleStyled>
+      <TopMunkiStyled>
+        <img
+          width={340}
+          height={340}
+          src='/public/munki-landing.png'
+          alt="Munki landing"
+        />
+      </TopMunkiStyled>
 
+      <BigTitleStyled>Hi, I’m Munki Ai</BigTitleStyled>
+      <Input size="large" style={{ flex: 1,margin: "10px 0px 24px", backgroundColor: "#242424", color: 'white', borderRadius: '8px' }} placeholder="search token" prefix={<UserOutlined />} />
       <TopMemeStyled>
         <div className="section-mindshare">
           <div className="head">
             <p style={{ ...Styles.h2 }}>Memecoins Mindshare 🌑</p>
             <FilterByTime style={{ fontSize: 14 }} />
           </div>
-          <TreeChart data={data} style={{ height: contentHeight }}></TreeChart>
+          <TreeChart data={data} style={{ height: 440 }}></TreeChart>
         </div>
         <div className="section-memeindex">
-          <TableWithFilters<HoldersTrendColumn>
-            label="Memecoin Index 🧠"
-            data={holdersTrendData}
-            columns={holdersTrendColumns}
-            table={<MemeCoinTable style={{ height: contentHeight }} />}
-            tableStyles={{ height: contentHeight }}
-            breakWidth={600}
-          />
+          <FearAndGreedWidget />
         </div>
       </TopMemeStyled>
+      <div>
+        <TableWithFilters<HoldersTrendColumn>
+          label="Alpha moves"
+          data={holdersTrendData}
+          columns={holdersTrendColumns}
+          table={<MemeCoinTable style={{ height: contentHeight }} />}
+          tableStyles={{ height: contentHeight }}
+          breakWidth={600}
+        />
+      </div>
       <HotList />
       <WhaleWatchStyled>
         <TableWithFilters<HoldersTrendColumn>
@@ -164,9 +178,19 @@ export const MunkiContent = () => {
   );
 };
 
+
+const TopMunkiStyled = styled.div.attrs({
+  className: "BigTitleStyled",
+})`
+display:flex;
+justify-content: center;
+align-items: center;
+`
+
 const BigTitleStyled = styled.div.attrs({
   className: "BigTitleStyled",
 })`
+  text-align: center;
   font-size: 80px;
   padding: 18px 0;
 
@@ -180,12 +204,13 @@ const TopMemeStyled = styled.div.attrs({
   className: "TopMemeStyled",
 })`
   overflow: hidden;
-  gap: 12px;
+  gap: 32px;
   display: grid;
   justify-content: center;
   align-items: start;
-  grid-template-columns: 560px 1fr;
-  /* grid-template-rows: 500px 500px; */
+  flex-wrap: wrap;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 24px;
 
   .section-mindshare {
     overflow: hidden;
@@ -193,6 +218,7 @@ const TopMemeStyled = styled.div.attrs({
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
   }
   .section-memeindex {

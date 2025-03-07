@@ -1,28 +1,49 @@
 import styled from "styled-components";
-// import { debugStyles } from "../../uiStyles";
 import "./MunkiSidebar.css";
+import { COLORS } from "../../colors";
+import { Collapse, CollapseProps } from "antd";
 
-// const siderStyles: React.CSSProperties = {
-//   ...debugStyles,
-//   position: "sticky",
-//   top: 0,
-//   width: "200px",
-//   height: "100vh",
-//   padding: 20,
-// };
+const text = (
+  <ul style={{
+    whiteSpace: 'nowrap'
+  }}>
+    <li>Homepage</li>
+    <li>Meme radar</li>
+    <li>Token insight</li>
+  </ul>
+);
+
+const items: CollapseProps['items'] = [
+  {
+    key: '1',
+    label: 'Home page',
+    children: text,
+  },
+];
 
 export const MunkiSidebar = () => {
-  return <MunkiSidebarStyled>Sticky Sidebar</MunkiSidebarStyled>;
+  return <MunkiSidebarStyled>
+{/*     <Collapse expandIconPosition='end' style={{ whiteSpace: 'nowrap' }} items={items} bordered={false} /> */}
+
+  </MunkiSidebarStyled>
 };
 
 const MunkiSidebarStyled = styled.div.attrs({
   className: "MunkiSidebarStyled",
 })`
-  position: sticky;
+  color: ${COLORS.yellow};
+  position: fixed;
+  z-index: 100;
   top: 0;
-  width: 200px;
+  left: 0;
+  width: 250px;
   height: 100vh;
-  padding: 20;
+  padding: 20px;
+  border-right: 1px solid ${COLORS.yellow};
+
+  .ant-collapse-header-text {
+    color: ${COLORS.yellow}
+  }
 
   @media (max-width: 767px) {
     display: none;
