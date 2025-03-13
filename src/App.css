@@ -1,0 +1,87 @@
+#root {
+  margin: 0 auto;
+  /* text-align: center; */
+}
+
+.demo-logo-vertical {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+@font-face {
+  font-family: "GROBOLD";
+  src: local("GROBOLD-Regular"),
+    url("./assets/fonts/GROBOLD/GROBOLD-Regular.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "GROBOLD", sans-serif;
+  outline: none;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.section {
+  height: 1500px;
+  margin-bottom: 20px;
+  background-color: green;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+
+.cl-ex-fear {
+  color: #EE1B84;
+}
+
+.cl-fear {
+  color: #F35D7A;
+}
+
+.cl-greed {
+  color: #FFEE64;
+}
+
+.cl-ex-greed {
+  color: #54F209
+}
+
+.cl-old-silver {
+  color: #838589
+}
+
+/*<Layout style={layoutStyle}>*/
+/*  <Sider width="25%" style={siderStyle}>*/
+/*    <div>Sidebar</div>*/
+/*  </Sider>*/
+/*  <Layout>*/
+/*    <Header style={headerStyle}>*/
+/*    </Header>*/
+/*    <Content style={contentStyle}>*/
+/*      <div>Social trending</div>*/
+/*      <div>Mindshare map</div>*/
+/*      <div>Meme index</div>*/
+/*      <div>Hot list</div>*/
+/*      <div>Whale watch</div>*/
+/*      <div>Holders trend</div>*/
+/*    </Content>*/
+/*    <Footer style={footerStyle}>Footer</Footer>*/
+/*  </Layout>*/
+/*</Layout>*/
