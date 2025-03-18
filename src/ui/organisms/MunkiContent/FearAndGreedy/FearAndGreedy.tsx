@@ -3,6 +3,14 @@ import styled from "styled-components";
 import { COLORS } from "../../../colors";
 import { Styles } from "../../../uiStyles";
 import FearAndGreedyChart from "../../FearAndGreedyChart/FearAndGreedyChart";
+import { useFearAndGreedApi } from "../../../../api/hooks/useFearAndGreedApi";
+import { MOCK_DATA_FEAR_AND_GREED } from "../../../../api/MockData";
+import { ComponentProps, FC } from "react";
+import {
+  defaultFearAndGreed,
+  FearAndGreed,
+  FearAndGreedClassification,
+} from "../../../../api/apiTypes";
 
 export const style = {
   paddingFlex: {
@@ -10,7 +18,66 @@ export const style = {
   },
 };
 
+interface FearAndGreedHistoryProps extends ComponentProps<any> {
+  values: FearAndGreed[];
+}
+
+const fearAndGreedColorMapping: Record<
+  FearAndGreed["valueClassification"],
+  string
+> = {
+  [FearAndGreedClassification.EXTREMELY_FEAR]: "#ee1b84",
+  [FearAndGreedClassification.FEAR]: "#f35d7a",
+  [FearAndGreedClassification.GREED]: "#ffee64",
+  [FearAndGreedClassification.EXTREMELY_GREED]: "#54f209",
+  "n/a": "grey",
+};
+const fearAndGreedTimeMapping: Record<number, string> = {
+  0: "Now",
+  1: "Yesterday",
+  2: "Last week",
+  3: "Last month",
+};
+
+export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
+  values,
+}) => {
+  while (values.length < 4) {
+    values.push(defaultFearAndGreed);
+  }
+
+  return (
+    <>
+      <h2 style={{ marginBottom: "12px" }}>History value</h2>
+      {values.map((value, index) => {
+        const { valueClassification } = value;
+        return (
+          <Flex
+            key={index}
+            style={style.paddingFlex}
+            justify="space-between"
+            align="center"
+          >
+            <div>
+              <h4>{fearAndGreedTimeMapping[index]}:</h4>
+              <h3
+                style={{ color: fearAndGreedColorMapping[valueClassification] }}
+              >
+                {valueClassification}
+              </h3>
+            </div>
+            <p>{Number.isNaN(value.value) ? "n/a" : value.value}</p>
+          </Flex>
+        );
+      })}
+    </>
+  );
+};
+
 function FearAndGreedWidget() {
+  const { data } = useFearAndGreedApi(undefined, MOCK_DATA_FEAR_AND_GREED);
+  const [current, ...history] = data!.fearAndGreed; // TODO: remove "!"
+
   return (
     <div>
       <FlexStyled justify="space-between" align="center" wrap={true}>
@@ -25,7 +92,7 @@ function FearAndGreedWidget() {
             <h1 className="cl-greed" style={{ paddingBottom: "52px" }}>
               Greed
             </h1>
-            <FearAndGreedyChart value={90} />
+            <FearAndGreedyChart value={current.value} />
             <p className="desc">
               The index ranges from 0 (Extreme Fear) to 100 (Extreme Greed),
               reflecting crypto market sentiment.
@@ -33,51 +100,7 @@ function FearAndGreedWidget() {
             <p className="desc">Last Update: February 28th. 2025.</p>
           </div>
           <div>
-            <h2 style={{ marginBottom: "12px" }}>History value</h2>
-            <Flex
-              style={style.paddingFlex}
-              justify="space-between"
-              align="center"
-            >
-              <div>
-                <h4>Now:</h4>
-                <h3 className="cl-ex-fear">Extremly fear</h3>
-              </div>
-              <p>10</p>
-            </Flex>
-            <Flex
-              style={style.paddingFlex}
-              justify="space-between"
-              align="center"
-            >
-              <div>
-                <h4>Yesterday:</h4>
-                <h3 className="cl-fear">Fear</h3>
-              </div>
-              <p>10</p>
-            </Flex>
-            <Flex
-              style={style.paddingFlex}
-              justify="space-between"
-              align="center"
-            >
-              <div>
-                <h4>Last week:</h4>
-                <h3 className="cl-greed">Greed</h3>
-              </div>
-              <p>10</p>
-            </Flex>
-            <Flex
-              style={style.paddingFlex}
-              justify="space-between"
-              align="center"
-            >
-              <div>
-                <h4>Last month:</h4>
-                <h3 className="cl-ex-greed">Extreme greed</h3>
-              </div>
-              <p>10</p>
-            </Flex>
+            <FearAndGreedHistory values={history} />
           </div>
         </WrapInfoStyled>
         <div
