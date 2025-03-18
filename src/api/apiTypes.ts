@@ -1,3 +1,4 @@
+import { FearAndGreedClassification } from "../domain/types/BusinessLogicTypes";
 import { Address, UnixTime } from "../domain/types/Types";
 
 export interface ApiResponse<T> {
@@ -9,16 +10,9 @@ export interface FearAndGreedResponse {
   tokenPrices: TokenPrices;
 }
 
-export enum FearAndGreedClassification {
-  EXTREMELY_FEAR = "Extreme Fear",
-  FEAR = "Fear",
-  GREED = "Greed",
-  EXTREMELY_GREED = "Extreme Greed",
-}
-
 export interface FearAndGreed {
   value: number;
-  valueClassification: FearAndGreedClassification | "n/a";
+  valueClassification: keyof typeof FearAndGreedClassification | "n/a";
   timestamp: UnixTime;
   chain: "solana";
 }

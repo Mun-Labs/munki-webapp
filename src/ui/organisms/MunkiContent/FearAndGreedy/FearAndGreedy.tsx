@@ -6,11 +6,18 @@ import FearAndGreedyChart from "../../FearAndGreedyChart/FearAndGreedyChart";
 import { useFearAndGreedApi } from "../../../../api/hooks/useFearAndGreedApi";
 import { MOCK_DATA_FEAR_AND_GREED } from "../../../../api/MockData";
 import { ComponentProps, FC } from "react";
+import { defaultFearAndGreed, FearAndGreed } from "../../../../api/apiTypes";
+import { unixToDate } from "../../../../common/modules/dateAndTime";
+import { Currency } from "../../../atoms/Currency/Currency";
 import {
-  defaultFearAndGreed,
-  FearAndGreed,
-  FearAndGreedClassification,
-} from "../../../../api/apiTypes";
+  fearAndGreedTimeMapping,
+  fearAndGreedColorMapping,
+} from "../../../../domain/businessLogic/fearAndGreed";
+import {
+  volumeColorMapping,
+  volumeMapping,
+} from "../../../../domain/businessLogic/volumeLogic";
+import { Percentage } from "../../../atoms/Percentage/Percentage";
 
 export const style = {
   paddingFlex: {
@@ -21,23 +28,6 @@ export const style = {
 interface FearAndGreedHistoryProps extends ComponentProps<any> {
   values: FearAndGreed[];
 }
-
-const fearAndGreedColorMapping: Record<
-  FearAndGreed["valueClassification"],
-  string
-> = {
-  [FearAndGreedClassification.EXTREMELY_FEAR]: "#ee1b84",
-  [FearAndGreedClassification.FEAR]: "#f35d7a",
-  [FearAndGreedClassification.GREED]: "#ffee64",
-  [FearAndGreedClassification.EXTREMELY_GREED]: "#54f209",
-  "n/a": "grey",
-};
-const fearAndGreedTimeMapping: Record<number, string> = {
-  0: "Now",
-  1: "Yesterday",
-  2: "Last week",
-  3: "Last month",
-};
 
 export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
   values,
@@ -76,7 +66,12 @@ export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
 
 function FearAndGreedWidget() {
   const { data } = useFearAndGreedApi(undefined, MOCK_DATA_FEAR_AND_GREED);
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ FearAndGreedy.tsx:80 ~ FearAndGreedWidget ~ data:', data)
   const [current, ...history] = data!.fearAndGreed; // TODO: remove "!"
+  const tokens = Object.values(data!.tokenPrices);
+  const tokenInfo = tokens[0];
+
+  const volumeLabel = volumeMapping(tokenInfo.volumeUSD);
 
   return (
     <div>
@@ -90,14 +85,14 @@ function FearAndGreedWidget() {
           <div>
             <h2>Status:</h2>
             <h1 className="cl-greed" style={{ paddingBottom: "52px" }}>
-              Greed
+              {current.valueClassification}
             </h1>
             <FearAndGreedyChart value={current.value} />
             <p className="desc">
               The index ranges from 0 (Extreme Fear) to 100 (Extreme Greed),
               reflecting crypto market sentiment.
             </p>
-            <p className="desc">Last Update: February 28th. 2025.</p>
+            <p className="desc">Last Update: {unixToDate(current.timestamp)}</p>
           </div>
           <div>
             <FearAndGreedHistory values={history} />
@@ -120,14 +115,24 @@ function FearAndGreedWidget() {
               alt="icon-solana"
               src="/icon-solana.png"
             />
-            <p style={{ fontSize: "18px" }}>$177.52</p>
-            <p style={{ color: "#DC4D3B", fontSize: "14px" }}>-0.11% (1d)</p>
+            <Currency
+              style={{ fontSize: "18px" }}
+              value={tokenInfo.price}
+            ></Currency>
+            <span
+              className="percentage-change"
+              style={{ color: "#DC4D3B", fontSize: "14px" }}
+            >
+              <Percentage value={tokenInfo.priceChangePercent} /> (1d)
+            </span>
           </GroupInfoStyled>
 
           <GroupInfoStyled>
             <p>24h volume:</p>
-            <p>$177.52</p>
-            <p className="cl-ex-fear">(LOW)</p>
+            <Currency value={tokenInfo.volumeUSD} />
+            <p style={{ color: volumeColorMapping[volumeLabel] }}>
+              ({volumeLabel})
+            </p>
           </GroupInfoStyled>
         </div>
       </IndexStyled>
@@ -169,6 +174,10 @@ const GroupInfoStyled = styled(Flex).attrs({
   border: 1px solid ${COLORS.dark_charcoal};
   background-color: ${COLORS.chinese_black};
   white-space: nowrap;
+
+  .percentage-change {
+    display: flex;
+  }
 `;
 
 const WrapInfoStyled = styled(Flex).attrs({

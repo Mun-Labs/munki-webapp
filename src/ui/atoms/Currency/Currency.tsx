@@ -11,12 +11,13 @@ interface CurrencyProps extends ComponentProps<any> {
   value: number | undefined;
   showColors?: boolean;
   prefixes?: [positive?: React.ReactNode, negative?: React.ReactNode];
+  fixed?: number;
 }
 
 const currencySymbol = "$";
 
 export const Currency: FC<CurrencyProps> = (props) => {
-  const { style, showColors, value, prefixes } = props;
+  const { style, showColors, value, fixed, prefixes } = props;
   if (!value) return <>N/A</>;
 
   let color;

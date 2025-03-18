@@ -9,21 +9,21 @@ export class NumbersService {
    */
   public static numberToNumberString(
     value: number | undefined,
-    settings: { rounded?: boolean } = { rounded: true },
+    settings: { fixed?: number } = { fixed: 2 },
   ): string {
     if (value == null) return "N/A";
 
-    const { rounded } = settings;
+    const { fixed } = settings;
     const absValue = Math.abs(value);
     let result = "";
     if (absValue >= 1000000000) {
-      result = `${(value / 1000000000).toFixed(rounded ? 1 : 2)}B`;
+      result = `${(value / 1000000000).toFixed(fixed)}B`;
     } else if (absValue >= 1000000) {
-      result = `${(value / 1000000).toFixed(rounded ? 1 : 2)}M`;
+      result = `${(value / 1000000).toFixed(fixed)}M`;
     } else if (absValue >= 1000) {
-      result = `${(value / 1000).toFixed(rounded ? 1 : 2)}K`;
+      result = `${(value / 1000).toFixed(fixed)}K`;
     } else {
-      result = value.toString();
+      result = value.toFixed(fixed);
     }
 
     return result;
