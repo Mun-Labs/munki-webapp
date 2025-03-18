@@ -134,9 +134,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   const { styles } = useStyle();
   const isSmallScreen = useSmallScreen(1265);
 
-  console.log({ dataSource });
-  console.log({ MockTokens });
-  console.log({ styles });
+  // console.log({ dataSource });
+  // console.log({ MockTokens });
+  // console.log({ styles });
 
   const columns: TableColumnsType<DataType> = [
     {

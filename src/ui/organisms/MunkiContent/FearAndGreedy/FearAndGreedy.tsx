@@ -3,6 +3,21 @@ import styled from "styled-components";
 import { COLORS } from "../../../colors";
 import { Styles } from "../../../uiStyles";
 import FearAndGreedyChart from "../../FearAndGreedyChart/FearAndGreedyChart";
+import { useFearAndGreedApi } from "../../../../api/hooks/useFearAndGreedApi";
+import { MOCK_DATA_FEAR_AND_GREED } from "../../../../api/MockData";
+import { ComponentProps, FC } from "react";
+import { defaultFearAndGreed, FearAndGreed } from "../../../../api/apiTypes";
+import { unixToDate } from "../../../../common/modules/dateAndTime";
+import { Currency } from "../../../atoms/Currency/Currency";
+import {
+  fearAndGreedTimeMapping,
+  fearAndGreedColorMapping,
+} from "../../../../domain/businessLogic/fearAndGreed";
+import {
+  volumeColorMapping,
+  volumeMapping,
+} from "../../../../domain/businessLogic/volumeLogic";
+import { Percentage } from "../../../atoms/Percentage/Percentage";
 
 export const style = {
   paddingFlex: {
@@ -10,12 +25,59 @@ export const style = {
   },
 };
 
+interface FearAndGreedHistoryProps extends ComponentProps<any> {
+  values: FearAndGreed[];
+}
+
+export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
+  values,
+}) => {
+  while (values.length < 4) {
+    values.push(defaultFearAndGreed);
+  }
+
+  return (
+    <>
+      <h2 style={{ marginBottom: "12px" }}>History value</h2>
+      {values.map((value, index) => {
+        const { valueClassification } = value;
+        return (
+          <Flex
+            key={index}
+            style={style.paddingFlex}
+            justify="space-between"
+            align="center"
+          >
+            <div>
+              <h4>{fearAndGreedTimeMapping[index]}:</h4>
+              <h3
+                style={{ color: fearAndGreedColorMapping[valueClassification] }}
+              >
+                {valueClassification}
+              </h3>
+            </div>
+            <p>{Number.isNaN(value.value) ? "n/a" : value.value}</p>
+          </Flex>
+        );
+      })}
+    </>
+  );
+};
+
 function FearAndGreedWidget() {
+  const { data } = useFearAndGreedApi(undefined, MOCK_DATA_FEAR_AND_GREED);
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ FearAndGreedy.tsx:80 ~ FearAndGreedWidget ~ data:', data)
+  const [current, ...history] = data!.fearAndGreed; // TODO: remove "!"
+  const tokens = Object.values(data!.tokenPrices);
+  const tokenInfo = tokens[0];
+
+  const volumeLabel = volumeMapping(tokenInfo.volumeUSD);
+
   return (
     <div>
       <FlexStyled justify="space-between" align="center" wrap={true}>
         <Flex dir="" justify="start" align="center" gap={"middle"}>
-          <p style={{ ...Styles.h2 }}>Memecoin Fear and Greed Index</p>
+          <p style={{ ...Styles.h2 }}>Memecoin Vibe Check</p>
         </Flex>
       </FlexStyled>
       <IndexStyled>
@@ -23,61 +85,17 @@ function FearAndGreedWidget() {
           <div>
             <h2>Status:</h2>
             <h1 className="cl-greed" style={{ paddingBottom: "52px" }}>
-              Greed
+              {current.valueClassification}
             </h1>
-            <FearAndGreedyChart value={90} />
+            <FearAndGreedyChart value={current.value} />
             <p className="desc">
               The index ranges from 0 (Extreme Fear) to 100 (Extreme Greed),
               reflecting crypto market sentiment.
             </p>
-            <p className="desc">Last Update: February 28th. 2025.</p>
+            <p className="desc">Last Update: {unixToDate(current.timestamp)}</p>
           </div>
           <div>
-            <h2 style={{ marginBottom: "12px" }}>History value</h2>
-            <Flex
-              style={style.paddingFlex}
-              justify="space-between"
-              align="center"
-            >
-              <div>
-                <h4>Now:</h4>
-                <h3 className="cl-ex-fear">Extremly fear</h3>
-              </div>
-              <p>10</p>
-            </Flex>
-            <Flex
-              style={style.paddingFlex}
-              justify="space-between"
-              align="center"
-            >
-              <div>
-                <h4>Yesterday:</h4>
-                <h3 className="cl-fear">Fear</h3>
-              </div>
-              <p>10</p>
-            </Flex>
-            <Flex
-              style={style.paddingFlex}
-              justify="space-between"
-              align="center"
-            >
-              <div>
-                <h4>Last week:</h4>
-                <h3 className="cl-greed">Greed</h3>
-              </div>
-              <p>10</p>
-            </Flex>
-            <Flex
-              style={style.paddingFlex}
-              justify="space-between"
-              align="center"
-            >
-              <div>
-                <h4>Last month:</h4>
-                <h3 className="cl-ex-greed">Extreme greed</h3>
-              </div>
-              <p>10</p>
-            </Flex>
+            <FearAndGreedHistory values={history} />
           </div>
         </WrapInfoStyled>
         <div
@@ -97,14 +115,24 @@ function FearAndGreedWidget() {
               alt="icon-solana"
               src="/icon-solana.png"
             />
-            <p style={{ fontSize: "18px" }}>$177.52</p>
-            <p style={{ color: "#DC4D3B", fontSize: "14px" }}>-0.11% (1d)</p>
+            <Currency
+              style={{ fontSize: "18px" }}
+              value={tokenInfo.price}
+            ></Currency>
+            <span
+              className="percentage-change"
+              style={{ color: "#DC4D3B", fontSize: "14px" }}
+            >
+              <Percentage value={tokenInfo.priceChangePercent} /> (1d)
+            </span>
           </GroupInfoStyled>
 
           <GroupInfoStyled>
             <p>24h volume:</p>
-            <p>$177.52</p>
-            <p className="cl-ex-fear">(LOW)</p>
+            <Currency value={tokenInfo.volumeUSD} />
+            <p style={{ color: volumeColorMapping[volumeLabel] }}>
+              ({volumeLabel})
+            </p>
           </GroupInfoStyled>
         </div>
       </IndexStyled>
@@ -146,6 +174,10 @@ const GroupInfoStyled = styled(Flex).attrs({
   border: 1px solid ${COLORS.dark_charcoal};
   background-color: ${COLORS.chinese_black};
   white-space: nowrap;
+
+  .percentage-change {
+    display: flex;
+  }
 `;
 
 const WrapInfoStyled = styled(Flex).attrs({

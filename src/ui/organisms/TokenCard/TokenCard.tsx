@@ -9,7 +9,7 @@ import { IToken } from "../../../domain/entities/Entities";
 import { ComponentProps, FC } from "react";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
-import { SocialKeys } from "../../../domain/types/Types";
+import { SocialKeys, SocialMedia } from "../../../domain/types/Types";
 import { Token } from "../../atoms/Token/Token";
 
 const StyledTokenCard = styled.div`
@@ -34,6 +34,14 @@ interface TokenCardProps extends ComponentProps<any> {
 
 export const TokenCard: FC<TokenCardProps> = ({ style, token }) => {
   if (!token) token = MockTokens[0];
+  const socials: SocialMedia[] = [];
+  Object.keys(token.socials ?? {}).forEach((key) => {
+    const socialKey = key as SocialKeys;
+    socials.push({
+      type: socialKey,
+      url: token.socials?.[socialKey] ?? "",
+    });
+  });
 
   return (
     <Flex justify="center" style={{ ...style }}>
@@ -59,9 +67,7 @@ export const TokenCard: FC<TokenCardProps> = ({ style, token }) => {
           />
           <Flex align="center">
             <span style={{ marginRight: 8 }}>11h</span>
-            <SocialMediaSegment
-              socials={Object.keys(token.socials ?? {}) as SocialKeys[]}
-            ></SocialMediaSegment>
+            <SocialMediaSegment socials={socials}></SocialMediaSegment>
           </Flex>
         </Flex>
         <Flex justify="space-between">

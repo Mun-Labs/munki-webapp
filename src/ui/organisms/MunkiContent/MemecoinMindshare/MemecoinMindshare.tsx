@@ -28,7 +28,7 @@ export const MemecoinMindshare = () => {
           <p style={{ ...Styles.h2 }}>Memecoins Mindshare 🌑</p>
           <FilterByTime style={{ fontSize: 14 }} />
         </div>
-        <TreeChart data={data} style={{ height: 440 }}></TreeChart>
+        <TreeChart data={data} style={{ height: 490 }}></TreeChart>
       </div>
       <div className="section-memeindex">
         <FearAndGreedWidget />

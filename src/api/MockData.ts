@@ -1,8 +1,9 @@
 import { MockService } from "../common/modules/MockService";
 import { RandomService } from "../common/modules/RandomService";
 import { IToken, IWhale } from "../domain/entities/Entities";
+import { ApiResponse, FearAndGreedResponse } from "./apiTypes";
 
-export const FEAR_AND_GREED = {
+export const MOCK_DATA_FEAR_AND_GREED: ApiResponse<FearAndGreedResponse> = {
   code: 200,
   response: {
     fearAndGreed: [

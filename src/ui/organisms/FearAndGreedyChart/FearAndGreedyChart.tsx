@@ -118,7 +118,8 @@ const CircleStyled = styled.div.attrs<ICircleProps>({
       z-index: 4;
       left: -55%;
       top: 50%;
-      transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+      transform: translateX(-50%) translateY(-50%)
+        rotate(-${(props) => props?.degree || 0}deg);
       text-shadow: 1px 1px 8px #000;
     }
   }
