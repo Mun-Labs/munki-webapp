@@ -1,52 +1,73 @@
 /* for handle */
-:where(.css-dev-only-do-not-override-1qfezbu).ant-slider .ant-slider-handle::after {
-    background-color: black !important;
-    box-shadow: 0 0 0 2px #000000;
+:where(.css-dev-only-do-not-override-1qfezbu).ant-slider
+  .ant-slider-handle::after {
+  background-color: black !important;
+  box-shadow: 0 0 0 2px #000000;
 }
 
 /* handle border on hover*/
-:where(.css-dev-only-do-not-override-1qfezbu).ant-slider .ant-slider-handle::hover::before {
-    border: black;
+:where(.css-dev-only-do-not-override-1qfezbu).ant-slider
+  .ant-slider-handle::hover::before {
+  border: black;
 }
 
-:where(.css-dev-only-do-not-override-1qfezbu).ant-slider .ant-slider-handle:hover::after,
-:where(.css-dev-only-do-not-override-1qfezbu).ant-slider .ant-slider-handle:active::after,
-:where(.css-dev-only-do-not-override-1qfezbu).ant-slider .ant-slider-handle:focus::after {
-    box-shadow: 0 0 0 4px rgb(128, 128, 128);
-    width: 12px;
-    height: 12px;
-    inset-inline-start: -1px;
-    inset-block-start: -1px;
+:where(.css-dev-only-do-not-override-1qfezbu).ant-slider
+  .ant-slider-handle:hover::after,
+:where(.css-dev-only-do-not-override-1qfezbu).ant-slider
+  .ant-slider-handle:active::after,
+:where(.css-dev-only-do-not-override-1qfezbu).ant-slider
+  .ant-slider-handle:focus::after {
+  box-shadow: 0 0 0 4px rgb(128, 128, 128);
+  width: 12px;
+  height: 12px;
+  inset-inline-start: -1px;
+  inset-block-start: -1px;
 }
 
 /* handle border */
-:where(.css-dev-only-do-not-override-1qfezbu).ant-slider:hover .ant-slider-handle::after {
-    box-shadow: 0 0 0 2px rgb(128, 128, 128);
+:where(.css-dev-only-do-not-override-1qfezbu).ant-slider:hover
+  .ant-slider-handle::after {
+  box-shadow: 0 0 0 2px rgb(128, 128, 128);
 }
 
 :where(.css-dev-only-do-not-override-q0oof3).ant-slider .ant-slider-track {
-    background: transparent !important;
+  background: transparent !important;
 }
 
 :where(.css-dev-only-do-not-override-q0oof3).ant-slider .ant-slider-mark-text {
-    top: 6px;
+  top: 6px;
 }
 
 span.ant-slider-dot {
-    display: none;
+  display: none;
 }
 
 .ant-slider-rail {
-    border-radius: 24px !important;
-    top: 0px !important;
-    height: 12px !important;
-    background: rgb(238, 27, 132);
-    background: -moz-linear-gradient(90deg, rgba(238, 27, 132, 1) 0%, rgba(248, 237, 142, 1) 49%, rgba(84, 242, 9, 1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(238, 27, 132, 1) 0%, rgba(248, 237, 142, 1) 49%, rgba(84, 242, 9, 1) 100%);
-    background: linear-gradient(90deg, rgba(238, 27, 132, 1) 0%, rgba(248, 237, 142, 1) 49%, rgba(84, 242, 9, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ee1b84", endColorstr="#54f209", GradientType=1);
+  border-radius: 24px !important;
+  top: 0px !important;
+  height: 12px !important;
+  background: rgb(238, 27, 132);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(238, 27, 132, 1) 0%,
+    rgba(248, 237, 142, 1) 49%,
+    rgba(84, 242, 9, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(238, 27, 132, 1) 0%,
+    rgba(248, 237, 142, 1) 49%,
+    rgba(84, 242, 9, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(238, 27, 132, 1) 0%,
+    rgba(248, 237, 142, 1) 49%,
+    rgba(84, 242, 9, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ee1b84", endColorstr="#54f209", GradientType=1);
 }
 
 .ant-slider-mark-text {
-    color: #fff !important;
+  color: #fff !important;
 }

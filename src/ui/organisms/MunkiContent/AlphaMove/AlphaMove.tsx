@@ -1,6 +1,6 @@
 import { MemeCoinTable } from "../../MemeCoinTable/MemeCoinTable";
 import styled from "styled-components";
-import { ButtonFilter } from "../../../atoms/ButtonFilter";
+import { ButtonFilter } from "../../../atoms/ButtonFilter/ButtonFilter";
 
 const contentContainerHeight = 653;
 const contentHeaderHeight = 82;
@@ -12,9 +12,15 @@ export const AlphaMove = () => {
       <div className="head">
         <div className="title">
           <h3>Alpha Moves</h3>
-          <ButtonFilter><p>Buy + Sell</p></ButtonFilter>
-          <ButtonFilter><p>Token (30)</p></ButtonFilter>
-          <ButtonFilter><p>Aplpha Group (3/3)</p></ButtonFilter>
+          <ButtonFilter>
+            <p>Buy + Sell</p>
+          </ButtonFilter>
+          <ButtonFilter>
+            <p>Token (30)</p>
+          </ButtonFilter>
+          <ButtonFilter>
+            <p>Aplpha Group (3/3)</p>
+          </ButtonFilter>
         </div>
         <div>
           <span>Last</span> 24h
@@ -25,8 +31,7 @@ export const AlphaMove = () => {
   );
 };
 
-const AlphaMoveStyled = styled.div.attrs({ className: "AlphaMoveStyled" })
-  `
+const AlphaMoveStyled = styled.div.attrs({ className: "AlphaMoveStyled" })`
   .head {
     display: flex;
     justify-content: space-between;
@@ -37,11 +42,11 @@ const AlphaMoveStyled = styled.div.attrs({ className: "AlphaMoveStyled" })
   .title {
     display: flex;
     justify-content: start;
-    align-items:center;
+    align-items: center;
     gap: 18px;
 
     h3 {
       font-size: 32px;
     }
   }
-`
+`;

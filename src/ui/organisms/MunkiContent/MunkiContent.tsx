@@ -1,7 +1,7 @@
 import "./MunkiContent.css";
-import { MemecoinMindshare } from "./MemecoinMindshare";
-import { AlphaMove } from "./AlphaMove";
-import { MunkiHero } from "./MunkiHero";
+import { MemecoinMindshare } from "./MemecoinMindshare/MemecoinMindshare";
+import { AlphaMove } from "./AlphaMove/AlphaMove";
+import { MunkiHero } from "./MunkiHero/MunkiHero";
 
 const contentStyles: React.CSSProperties = {
   padding: "20px",
@@ -14,9 +14,8 @@ export const MunkiContent = () => {
       <MunkiHero />
       <MemecoinMindshare />
       <AlphaMove />
-{/*       <HotList /> */}
-{/*       <WhaleWatchContent /> */}
+      {/*       <HotList /> */}
+      {/*       <WhaleWatchContent /> */}
     </div>
   );
 };
-

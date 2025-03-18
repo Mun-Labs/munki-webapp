@@ -26,14 +26,13 @@ export const Currency: FC<CurrencyProps> = (props) => {
     color = value > 0 ? COLORS.green : COLORS.red;
   }
   if (prefixes) {
-    prefix = value > 0 ? (prefixes[0] ?? "Bought") : (prefixes[1] ?? "Sold");
+    prefix = value > 0 ? prefixes[0] ?? "Bought" : prefixes[1] ?? "Sold";
   }
   const asValueString = NumbersService.numberToNumberString(value);
 
   return (
     <CurrencyStyled style={{ ...style, color }}>
-      {prefix}{" "}
-      {currencySymbol}
+      {prefix} {currencySymbol}
       {asValueString}
     </CurrencyStyled>
   );

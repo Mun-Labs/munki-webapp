@@ -1,10 +1,6 @@
 import { debugStyles } from "../../uiStyles";
 import "./MunkiDebug.css";
-import {
-  ComponentProps,
-  FC,
-  PropsWithChildren,
-} from "react";
+import { ComponentProps, FC, PropsWithChildren } from "react";
 
 interface MunkiDebugProps {}
 

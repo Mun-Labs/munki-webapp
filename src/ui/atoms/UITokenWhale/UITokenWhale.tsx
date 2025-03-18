@@ -10,22 +10,16 @@ interface IProps {
 export const UITokenWhale = ({ src, name, value }: IProps) => {
   return (
     <TokenWhaleStyled>
-      <img
-        width={48}
-        height={48}
-        src={src}
-        className="image"
-      />
+      <img width={48} height={48} src={src} className="image" />
       <div className="info">
         <p className="name">{name}</p>
         <p className="value">Bought {value}</p>
       </div>
     </TokenWhaleStyled>
-  )
-}
+  );
+};
 
-const TokenWhaleStyled = styled.div.attrs({className: "TokenWhaleStyled"})
-`
+const TokenWhaleStyled = styled.div.attrs({ className: "TokenWhaleStyled" })`
   display: flex;
   align-item: center;
   justify-content: start;
@@ -46,13 +40,12 @@ const TokenWhaleStyled = styled.div.attrs({className: "TokenWhaleStyled"})
   .name {
     font-size: 21px;
     font-weight: bold;
-    color: white
+    color: white;
   }
   .value {
     white-space: nowrap;
     font-family: monospace;
     font-size: 16px;
-    color: ${COLORS.chlorophyll_green}; 
+    color: ${COLORS.chlorophyll_green};
   }
-
-`
+`;

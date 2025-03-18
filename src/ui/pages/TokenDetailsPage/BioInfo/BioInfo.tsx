@@ -1,7 +1,7 @@
 import { ComponentProps, FC } from "react";
 // import { useParams } from "react-router";
 import styled from "styled-components";
-import { MunkiBadge } from "../../../atoms/MunkiBadge";
+import { MunkiBadge } from "../../../atoms/MunkiBadge/MunkiBadge";
 import { COLORS } from "../../../colors";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}

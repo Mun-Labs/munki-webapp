@@ -19,3 +19,6 @@ export type IIconMap = Record<
     height?: number;
   }
 >;
+
+export type UnixTime = number;
+export type Address = string;

@@ -9,13 +9,13 @@ import { ComposedChartDemo } from "../../demos/ComposedChartDemo";
 import { AreaChartDemo } from "../../demos/AreaChartDemo";
 import { AnalyticsCard } from "../../molecules/AnalyticsCard/AnalyticsCard";
 import { AvatarWithText } from "../../molecules/AvatarWithText/AvatarWithText";
-import { BioInfo } from "./BioInfo";
-import { Profile } from "./Profile";
-import { Head } from "./Head";
+import { BioInfo } from "./BioInfo/BioInfo";
+import { Profile } from "./Profile/Profile";
+import { Head } from "./Head/Head";
 import { COLORS } from "../../colors";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import "./TokenDetailPage.css";
-import FearAndGreedyChart from "../../organisms/FearAndGreedyChart";
+import FearAndGreedyChart from "../../organisms/FearAndGreedyChart/FearAndGreedyChart";
 
 const marks: SliderSingleProps["marks"] = {
   0: "0",

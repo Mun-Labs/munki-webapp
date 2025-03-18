@@ -4,7 +4,7 @@ import App from "./App";
 import { DemoPage } from "./ui/pages/DemoPage.tsx";
 import { Route, Routes } from "react-router";
 import { AppLayout } from "./AppLayout.tsx";
-import { TokenDetailsPage } from "./ui/pages/TokenDetailsPage/index.tsx";
+import { TokenDetailsPage } from "./ui/pages/TokenDetailsPage/TokenDetailsPage.tsx";
 
 interface AppControllerProps extends ComponentProps<any> {}
 

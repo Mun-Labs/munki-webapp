@@ -2,6 +2,36 @@ import { MockService } from "../common/modules/MockService";
 import { RandomService } from "../common/modules/RandomService";
 import { IToken, IWhale } from "../domain/entities/Entities";
 
+export const FEAR_AND_GREED = {
+  code: 200,
+  response: {
+    fearAndGreed: [
+      {
+        value: 34,
+        valueClassification: "Fear",
+        timestamp: 1742169600,
+        chain: "solana",
+      },
+      {
+        value: 34,
+        valueClassification: "Fear",
+        timestamp: 1742256000,
+        chain: "solana",
+      },
+    ],
+    tokenPrices: {
+      So11111111111111111111111111111111111111112: {
+        price: 125.218754,
+        updateUnixTime: 1742284756,
+        updateHumanTime: "2025-03-18T07:59:16",
+        volumeUSD: 1783902002.44057,
+        volumeChangePercent: 6.935431,
+        priceChangePercent: -3.15347,
+      },
+    },
+  },
+};
+
 export const COIN_MAP = {
   chillGuy: MockService.generateToken({
     name: "CHILLGUY",

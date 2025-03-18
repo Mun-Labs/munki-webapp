@@ -35,10 +35,7 @@ export const Token: FC<ITokenProps> = (props) => {
   const { style, textStyle, token } = props;
   return (
     <TokenStyled style={{ ...style }}>
-      <a
-        href={`/token/${token.address}`}
-        rel="noreferrer noopener"
-      >
+      <a href={`/token/${token.address}`} rel="noreferrer noopener">
         <Button type="link">
           <div style={{ textAlign: "start", ...textStyle }}>{token.name}</div>
         </Button>

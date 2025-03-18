@@ -83,7 +83,10 @@ export const TokenImageCard: FC<TokenImageCardProps> = (props) => {
           // textShadow: '1px 1px 2px #e4d0d0, 0px 0px 1em #16161f, 0px 0px 0.2em #16161f'
         }}
       >
-        <Token token={token as any} textStyle={{ ...Styles.textShadowRedBlue }} />
+        <Token
+          token={token as any}
+          textStyle={{ ...Styles.textShadowRedBlue }}
+        />
 
         <Percentage
           value={twentyFourHourPercentage}

@@ -46,25 +46,24 @@ html {
   }
 }
 
-
 .cl-ex-fear {
-  color: #EE1B84;
+  color: #ee1b84;
 }
 
 .cl-fear {
-  color: #F35D7A;
+  color: #f35d7a;
 }
 
 .cl-greed {
-  color: #FFEE64;
+  color: #ffee64;
 }
 
 .cl-ex-greed {
-  color: #54F209
+  color: #54f209;
 }
 
 .cl-old-silver {
-  color: #838589
+  color: #838589;
 }
 
 /*<Layout style={layoutStyle}>*/

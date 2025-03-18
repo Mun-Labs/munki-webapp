@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { QRCode } from "react-qrcode-logo";
 import { useCopyText } from "../../../../domain/hooks/useCopyText";
 import { COLORS } from "../../../colors";
-import { MunkiBadge } from "../../../atoms/MunkiBadge";
+import { MunkiBadge } from "../../../atoms/MunkiBadge/MunkiBadge";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
