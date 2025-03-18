@@ -6,7 +6,6 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  BarChart,
 } from "recharts";
 import { COLORS } from "../../../../../colors";
 

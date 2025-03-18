@@ -6,7 +6,6 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  BarChart,
 } from "recharts";
 import { COLORS } from "../../../../../colors";
 
@@ -127,10 +126,9 @@ const Metrics = styled.div`
   margin-bottom: 20px;
 `;
 
-
 const MetricTitle = styled.p`
   font-size: 21px;
-  color: ${COLORS.grey50}
+  color: ${COLORS.grey50};
 `;
 
 const MetricItem = styled.div`

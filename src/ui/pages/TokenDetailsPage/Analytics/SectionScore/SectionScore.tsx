@@ -14,7 +14,7 @@ const marks: SliderSingleProps["marks"] = {
 
 interface SectionScoreProps extends ComponentProps<any> {}
 
-export const SectionScore: FC<SectionScoreProps> = (props) => {
+export const SectionScore: FC<SectionScoreProps> = (_props) => {
   return (
     <SectionScoreStyled>
       <div className="mun-score wrap-score">

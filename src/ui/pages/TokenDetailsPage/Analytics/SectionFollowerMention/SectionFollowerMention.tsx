@@ -6,7 +6,7 @@ import { COLORS } from "../../../../colors";
 
 interface FollowerMentionProps extends ComponentProps<any> {}
 
-export const SectionFollowerMention: FC<FollowerMentionProps> = (props) => {
+export const SectionFollowerMention: FC<FollowerMentionProps> = (_props) => {
   return (
     <SectionFollowerMentionStyled>
       <div className="grid">
