@@ -2,6 +2,7 @@ import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import { SectionChart } from "./SectionChart/SectionChart";
 import { SectionScore } from "./SectionScore/SectionScore";
+import { SectionFollowerMention } from "./SectionFollowerMention/SectionFollowerMention";
 
 interface AnalyticsProps extends ComponentProps<any> {}
 
@@ -11,6 +12,7 @@ export const Analytics: FC<AnalyticsProps> = (props) => {
       <h3 className="title">Analytics</h3>
       <SectionChart />
       <SectionScore />
+      <SectionFollowerMention />
     </AnalyticsStyled>
   );
 };

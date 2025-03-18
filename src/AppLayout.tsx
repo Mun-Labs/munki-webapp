@@ -9,7 +9,7 @@ const appStyles: React.CSSProperties = {
 };
 
 const StyledMainContent = styled.section`
-  width: 1440px;
+  max-width: 1440px;
   margin: 0 auto;
 `;
 
@@ -18,7 +18,7 @@ export const AppLayout: React.FC<PropsWithChildren> = ({ children }) => {
     <div style={appStyles}>
       <MunkiHeader />
       <StyledMainContent className="container">
-        {/*         <MunkiSidebar /> */}
+        {/* <MunkiSidebar /> */}
         {children}
       </StyledMainContent>
       <MunkiFooter />
