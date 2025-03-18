@@ -34,6 +34,10 @@
   background: transparent !important;
 }
 
+.ant-slider-track {
+  background: transparent !important;
+}
+
 :where(.css-dev-only-do-not-override-q0oof3).ant-slider .ant-slider-mark-text {
   top: 6px;
 }

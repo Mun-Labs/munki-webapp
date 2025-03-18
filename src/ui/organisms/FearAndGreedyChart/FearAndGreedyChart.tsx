@@ -1,35 +1,43 @@
 import styled from "styled-components";
 
-const getColorFromValue = (value: number) => {
+const getColorFromValue = (value: number, reverse: boolean = false) => {
   const clampedValue = Math.min(Math.max(value, 0), 180);
-  if (clampedValue <= 30) {
-    return `rgb(238 28 132)`;
-  } else if (clampedValue <= 55) {
-    return `rgb(243 90 123)`;
-  } else if (clampedValue <= 75) {
-    return `rgb(253 211 104)`;
-  } else if (clampedValue <= 90) {
-    return `rgb(254 236 102)`;
-  } else if (clampedValue <= 110) {
-    return `rgb(180 239 61)`;
-  } else {
-    return `rgb(84 242 9)`;
-  }
+
+  const thresholds = [30, 55, 75, 90, 110, 180];
+  const colors = [
+    `rgb(238 28 132)`, // 0 - 30
+    `rgb(243 90 123)`, // 31 - 55
+    `rgb(253 211 104)`, // 56 - 75
+    `rgb(254 236 102)`, // 76 - 90
+    `rgb(180 239 61)`, // 91 - 110
+    `rgb(84 242 9)`, // 111 - 180
+  ];
+
+  const colorList = reverse ? [...colors].reverse() : colors;
+  const index = thresholds.findIndex((threshold) => clampedValue <= threshold);
+
+  return colorList[index !== -1 ? index : colors.length - 1];
 };
 
 interface IFearAndGreedChart {
   value: number;
   isShowNumber?: boolean;
+  isReverse?: boolean;
 }
 
 const FearAndGreedyChart = ({
   value,
   isShowNumber = true,
+  isReverse = false,
 }: IFearAndGreedChart) => {
   return (
     <ContainerStyled>
-      <img src="/fear-greedy-chart.png" width={275} height={150} />
-      <CircleStyled isShowNumber={isShowNumber} degree={value}>
+      <ImageStyled isReverse={isReverse} />
+      <CircleStyled
+        isReverse={isReverse}
+        isShowNumber={isShowNumber}
+        degree={value}
+      >
         <div className={isShowNumber ? "line withNumber" : "line"}>
           {isShowNumber && <p className="number">{value}</p>}
         </div>
@@ -40,6 +48,17 @@ const FearAndGreedyChart = ({
 
 export default FearAndGreedyChart;
 
+type TImageStyled = Omit<ICircleProps, "isShowNumber" | "degree">;
+
+const ImageStyled = styled.img.attrs<TImageStyled>({
+  className: "ImageStyled",
+  src: "/fear-greedy-chart.png",
+})`
+  width: 275;
+  height: 150;
+  transform: ${(props) => (props.isReverse ? "scaleX(-1)" : "scaleX(1)")};
+`;
+
 const ContainerStyled = styled.div.attrs({ className: "ContainerStyled" })`
   position: relative;
   width: auto;
@@ -49,12 +68,13 @@ const ContainerStyled = styled.div.attrs({ className: "ContainerStyled" })`
   justify-content: center;
 `;
 
-interface CircleProps {
+interface ICircleProps {
   degree: number;
   isShowNumber?: boolean;
+  isReverse?: boolean;
 }
 
-const CircleStyled = styled.div.attrs<CircleProps>({
+const CircleStyled = styled.div.attrs<ICircleProps>({
   className: "CircleStyled",
 })`
   position: absolute;
@@ -79,17 +99,17 @@ const CircleStyled = styled.div.attrs<CircleProps>({
     background: -moz-linear-gradient(
       266deg,
       rgba(167, 167, 167, 1) 0%,
-      ${(props) => getColorFromValue(props.degree || 0)} 100%
+      ${(props) => getColorFromValue(props.degree || 0, props.isReverse)} 100%
     );
     background: -webkit-linear-gradient(
       266deg,
       rgba(167, 167, 167, 1) 0%,
-      ${(props) => getColorFromValue(props.degree || 0)} 100%
+      ${(props) => getColorFromValue(props.degree || 0, props.isReverse)} 100%
     );
     background: linear-gradient(
       266deg,
       rgba(167, 167, 167, 1) 0%,
-      ${(props) => getColorFromValue(props.degree || 0)} 100%
+      ${(props) => getColorFromValue(props.degree || 0, props.isReverse)} 100%
     );
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a7a7a7",endColorstr="#ee1b84",GradientType=1);
 
@@ -115,7 +135,8 @@ const CircleStyled = styled.div.attrs<CircleProps>({
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background-color: ${(props) => getColorFromValue(props?.degree) || 0};
+      background-color: ${(props) =>
+        getColorFromValue(props?.degree, props.isReverse) || 0};
     }
   }
 
