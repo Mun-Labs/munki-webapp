@@ -1,8 +1,8 @@
 import { Address, UnixTime } from "../domain/types/Types";
 
-export interface Response {
+export interface ApiResponse<T> {
   code: number;
-  response: any;
+  response: T;
 }
 export interface FearAndGreedResponse {
   fearAndGreed: FearAndGreed[];
@@ -28,3 +28,9 @@ export interface TokenPriceInfo {
 export type TokenPrices = {
   [tokenAddress: Address]: TokenPriceInfo;
 };
+
+export interface TokenQueryParams {
+  q: string;
+  limit?: number;
+  offset?: number;
+}

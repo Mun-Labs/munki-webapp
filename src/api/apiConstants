@@ -1,2 +1,0 @@
-export const BASE_URL =
-  "https://munki-web-app-197975f706a0.herokuapp.com/api/v1";
