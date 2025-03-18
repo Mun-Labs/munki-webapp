@@ -1,8 +1,9 @@
+import { FearAndGreedClassification } from "../domain/types/BusinessLogicTypes";
 import { Address, UnixTime } from "../domain/types/Types";
 
-export interface Response {
+export interface ApiResponse<T> {
   code: number;
-  response: any;
+  response: T;
 }
 export interface FearAndGreedResponse {
   fearAndGreed: FearAndGreed[];
@@ -11,10 +12,17 @@ export interface FearAndGreedResponse {
 
 export interface FearAndGreed {
   value: number;
-  valueClassification: "Fear";
+  valueClassification: keyof typeof FearAndGreedClassification | "n/a";
   timestamp: UnixTime;
   chain: "solana";
 }
+
+export const defaultFearAndGreed: FearAndGreed = {
+  value: NaN,
+  valueClassification: "n/a",
+  timestamp: NaN,
+  chain: "solana",
+};
 
 export interface TokenPriceInfo {
   price: number;
@@ -28,3 +36,9 @@ export interface TokenPriceInfo {
 export type TokenPrices = {
   [tokenAddress: Address]: TokenPriceInfo;
 };
+
+export interface TokenQueryParams {
+  q: string;
+  limit?: number;
+  offset?: number;
+}

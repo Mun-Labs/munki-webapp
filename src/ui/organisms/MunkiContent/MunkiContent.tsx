@@ -5,7 +5,7 @@ import { MunkiHero } from "./MunkiHero/MunkiHero";
 
 const contentStyles: React.CSSProperties = {
   padding: "20px",
-  overflowX: "hidden",
+  width: "100%",
 };
 
 export const MunkiContent = () => {

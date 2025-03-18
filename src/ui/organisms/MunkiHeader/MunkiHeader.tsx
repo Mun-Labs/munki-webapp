@@ -101,9 +101,6 @@ export const MunkiHeader = () => {
           onClick={showDrawer}
           alt="munki"
         />
-        <Flex>
-          <div>Connect Wallet</div>
-        </Flex>
       </Flex>
 
       <TickerStyled style={{ height: 62 }}>
