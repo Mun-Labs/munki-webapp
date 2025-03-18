@@ -77,7 +77,7 @@ function FearAndGreedWidget() {
     <div>
       <FlexStyled justify="space-between" align="center" wrap={true}>
         <Flex dir="" justify="start" align="center" gap={"middle"}>
-          <p style={{ ...Styles.h2 }}>Memecoin Fear and Greed Index</p>
+          <p style={{ ...Styles.h2 }}>Memecoin Vibe Check</p>
         </Flex>
       </FlexStyled>
       <IndexStyled>
