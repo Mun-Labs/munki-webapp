@@ -67,52 +67,51 @@ const holdersTrendData = MockTokens.map((token) => ({
   key: token.name,
 }));
 
-
 export const WhaleWatchContent = () => {
   return (
     <WhaleWatchStyled>
-        <TableWithFilters<HoldersTrendColumn>
-          label={
-            <Flex align="center">
-              <span>Whale Watch</span>
-              <div
-                style={{
-                  width: 8,
-                  height: 8,
-                  marginLeft: 8,
-                  borderRadius: 16,
-                  backgroundColor: COLORS.green55,
-                }}
-              ></div>
-            </Flex>
-          }
-          description="Track what whales are buying and selling in real time."
-          table={<WhaleWatch whales={MockWhaleWatch} />}
-          data={[]}
-          columns={[]}
-        />
-        <TableWithFilters<HoldersTrendColumn>
-          label={
-            <Flex align="center">
-              <span>Holders Watch</span>
-              <div
-                style={{
-                  width: 8,
-                  height: 8,
-                  marginLeft: 8,
-                  borderRadius: 16,
-                  backgroundColor: COLORS.green55,
-                }}
-              ></div>
-            </Flex>
-          }
-          description="Show trending token holders over time to indicate growth or decline in interest."
-          data={holdersTrendData}
-          columns={holdersTrendColumns}
-        />
-      </WhaleWatchStyled>  );
+      <TableWithFilters<HoldersTrendColumn>
+        label={
+          <Flex align="center">
+            <span>Whale Watch</span>
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                marginLeft: 8,
+                borderRadius: 16,
+                backgroundColor: COLORS.green55,
+              }}
+            ></div>
+          </Flex>
+        }
+        description="Track what whales are buying and selling in real time."
+        table={<WhaleWatch whales={MockWhaleWatch} />}
+        data={[]}
+        columns={[]}
+      />
+      <TableWithFilters<HoldersTrendColumn>
+        label={
+          <Flex align="center">
+            <span>Holders Watch</span>
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                marginLeft: 8,
+                borderRadius: 16,
+                backgroundColor: COLORS.green55,
+              }}
+            ></div>
+          </Flex>
+        }
+        description="Show trending token holders over time to indicate growth or decline in interest."
+        data={holdersTrendData}
+        columns={holdersTrendColumns}
+      />
+    </WhaleWatchStyled>
+  );
 };
-
 
 const WhaleWatchStyled = styled.div.attrs({ className: "WhaleWatchStyled" })`
   display: flex;
@@ -127,4 +126,4 @@ const WhaleWatchStyled = styled.div.attrs({ className: "WhaleWatchStyled" })`
   @media (max-width: 1324px) {
     flex-direction: column;
   }
-`
+`;

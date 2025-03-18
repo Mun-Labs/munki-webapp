@@ -14,9 +14,8 @@ export const MunkiContent = () => {
       <MunkiHero />
       <MemecoinMindshare />
       <AlphaMove />
-{/*       <HotList /> */}
-{/*       <WhaleWatchContent /> */}
+      {/*       <HotList /> */}
+      {/*       <WhaleWatchContent /> */}
     </div>
   );
 };
-

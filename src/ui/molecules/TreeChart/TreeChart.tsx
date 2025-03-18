@@ -64,11 +64,11 @@ const CustomizedContent: React.FC<CustomizedContentProps> = (
         height={height}
         style={{
           fill:
-            (depth ?? 0 < 2)
+            depth ?? 0 < 2
               ? colors?.[Math.floor((index ?? 0 / root.children?.length) * 6)]
               : "#ffffff00",
           stroke: "#fff",
-          strokeWidth: 2 ,
+          strokeWidth: 2,
           strokeOpacity: 1,
         }}
       />

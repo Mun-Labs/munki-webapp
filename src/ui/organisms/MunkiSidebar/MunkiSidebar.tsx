@@ -3,10 +3,11 @@ import "./MunkiSidebar.css";
 import { COLORS } from "../../colors";
 
 export const MunkiSidebar = () => {
-  return <MunkiSidebarStyled>
-    {/*     <Collapse expandIconPosition='end' style={{ whiteSpace: 'nowrap' }} items={items} bordered={false} /> */}
-
-  </MunkiSidebarStyled>
+  return (
+    <MunkiSidebarStyled>
+      {/*     <Collapse expandIconPosition='end' style={{ whiteSpace: 'nowrap' }} items={items} bordered={false} /> */}
+    </MunkiSidebarStyled>
+  );
 };
 
 const MunkiSidebarStyled = styled.div.attrs({
@@ -23,7 +24,7 @@ const MunkiSidebarStyled = styled.div.attrs({
   border-right: 1px solid ${COLORS.yellow};
 
   .ant-collapse-header-text {
-    color: ${COLORS.yellow}
+    color: ${COLORS.yellow};
   }
 
   @media (max-width: 767px) {

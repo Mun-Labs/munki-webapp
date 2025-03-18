@@ -70,43 +70,33 @@ export const DemoPage = () => {
   return (
     <>
       <h1>DemoPage</h1>
-
       <h2>TokenDemo</h2>
       <TokenDemo />
       <br /> <hr />
-
       <h2>GridResponsivenessExample</h2>
       <GridResponsivenessExample />
       <br /> <hr />
-
       <h2>CurrencyDemo</h2>
       <CurrencyDemo />
       <br /> <hr />
-
       <h2>MemeCoinTableDemo</h2>
       <MemeCoinTableDemo />
       <br /> <hr />
-
       <h2>TokenImageCardDemo</h2>
       <TokenImageCardDemo />
       <br /> <hr />
-
       <h2>TreeChartDemo</h2>
       <TreeChartDemo />
       <br /> <hr />
-
       <h2>PercentageDemo</h2>
       <PercentageDemo />
       <br /> <hr />
-
       <h2>AvatarWithTextDemo</h2>
       <AvatarWithTextDemo />
       <br /> <hr />
-
       <h2>AnalyticsCardDemo</h2>
       <AnalyticsCardDemo />
       <br /> <hr />
-
       <h2>TableWithFilters</h2>
       <Flex justify="center" align="center" style={{ width: "100%" }}>
         <div style={{ width: 800 }}>
@@ -118,40 +108,30 @@ export const DemoPage = () => {
         </div>
       </Flex>
       <br /> <hr />
-
       <h2>FilterByTime</h2>
       <FilterByTime label="Demo" />
       <br /> <hr />
-
       <h2>HorizontalFilterDemo</h2>
       <HorizontalFilterDemo />
       <br /> <hr />
-
       <h2>TextWithLabel</h2>
       <TextWithLabelDemo />
       <br /> <hr />
-
       <h2>TextWithDescriptionDemo</h2>
       <TextWithDescriptionDemo />
       <br /> <hr />
-
       <h2>CoinWithLogoAndDescriptionDemo</h2>
       <CoinWithLogoAndDescriptionDemo />
       <br /> <hr />
-
       <h2>WhaleWatchDemo</h2>
       <WhaleWatchDemo />
       <br /> <hr />
-
       <h2>IconDemo</h2>
       <IconDemo />
       <br /> <hr />
-
       <h2>SocialMediaSegmentDemo</h2>
       <SocialMediaSegmentDemo />
       <br /> <hr />
-
-
       <h2>TokenCardDemo</h2>
       <TokenCardDemo />
     </>

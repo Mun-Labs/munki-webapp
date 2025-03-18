@@ -24,7 +24,7 @@ function simpleHash(seed: string): string {
     hash |= 0;
   }
   const value = hash.toString(16).replace(/-/g, "");
-  return value
+  return value;
 }
 
 export function generateAddressWithSeed(seed: string): string {

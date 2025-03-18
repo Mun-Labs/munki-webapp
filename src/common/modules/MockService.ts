@@ -1,8 +1,5 @@
 import { IToken } from "../../domain/entities/Entities";
-import {
-  generateAddressWithSeed,
-  generateId,
-} from "./generateId";
+import { generateAddressWithSeed, generateId } from "./generateId";
 import { RandomService } from "./RandomService";
 
 export class MockService {

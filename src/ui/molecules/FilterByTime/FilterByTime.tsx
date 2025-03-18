@@ -23,14 +23,11 @@ export const FilterByTime: FC<FilterByTimeProps> = ({
   isTwoRow,
   options,
 }) => {
-
   const formatOptions = () => {
-    const opts = options || [1440, 720, 360, 60, 5, 1]
+    const opts = options || [1440, 720, 360, 60, 5, 1];
 
-    return opts.map(
-      TimeService.minutesToTimeString,
-    )
-  }
+    return opts.map(TimeService.minutesToTimeString);
+  };
 
   return (
     <Flex justify="end" style={{ ...style }}>

@@ -1,5 +1,5 @@
 .sticky-container {
-    font-size: 40px;
+  font-size: 40px;
 }
 .sticky-container .section {
   background: blue;
@@ -15,5 +15,5 @@
   background: green;
 }
 .sticky-container .child-bottom {
-    background: red;
+  background: red;
 }

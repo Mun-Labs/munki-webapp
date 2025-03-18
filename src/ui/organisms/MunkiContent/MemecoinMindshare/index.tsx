@@ -80,4 +80,3 @@ const TopMemeStyled = styled.div.attrs({
     }
   }
 `;
-

@@ -12,7 +12,7 @@ export const AppLayout: React.FC<PropsWithChildren> = ({ children }) => {
     <div style={appStyles}>
       <MunkiHeader />
       <section className="container">
-{/*         <MunkiSidebar /> */}
+        {/*         <MunkiSidebar /> */}
         {children}
       </section>
       <MunkiFooter />
