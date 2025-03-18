@@ -1,6 +1,6 @@
 import { MemeCoinTable } from "../../MemeCoinTable/MemeCoinTable";
 import styled from "styled-components";
-import { ButtonFilter } from "../../../atoms/ButtonFilter";
+import { ButtonFilter } from "../../../atoms/ButtonFilter/ButtonFilter";
 
 const contentContainerHeight = 653;
 const contentHeaderHeight = 82;

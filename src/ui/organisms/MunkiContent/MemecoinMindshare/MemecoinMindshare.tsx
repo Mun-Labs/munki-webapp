@@ -5,7 +5,7 @@ import { ITreeChartNode } from "../../../../domain/types/Types";
 import { FilterByTime } from "../../../molecules/FilterByTime/FilterByTime";
 import { TreeChart } from "../../../molecules/TreeChart/TreeChart";
 import { Styles } from "../../../uiStyles";
-import FearAndGreedWidget from "../FearAndGreedy";
+import FearAndGreedWidget from "../FearAndGreedy/FearAndGreedy";
 
 import styled from "styled-components";
 

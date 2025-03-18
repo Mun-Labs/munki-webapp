@@ -7,10 +7,10 @@ import { createStyles } from "antd-style";
 import { IToken } from "../../../domain/entities/Entities";
 import { MockTokens } from "../../../api/MockData";
 import { COLORS } from "../../colors";
-import { UITokenWhale } from "../../atoms/UITokenWhale";
+import { UITokenWhale } from "../../atoms/UITokenWhale/UITokenWhale";
 import { AntDesignOutlined } from "@ant-design/icons";
 import useSmallScreen from "../../../hooks/useSmallScreen";
-import { MunkiBadge } from "../../atoms/MunkiBadge";
+import { MunkiBadge } from "../../atoms/MunkiBadge/MunkiBadge";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 
 const MemeCoinTableStyled = styled.div.attrs({

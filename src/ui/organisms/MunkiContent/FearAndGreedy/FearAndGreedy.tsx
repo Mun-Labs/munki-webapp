@@ -2,7 +2,7 @@ import { Flex } from "antd";
 import styled from "styled-components";
 import { COLORS } from "../../../colors";
 import { Styles } from "../../../uiStyles";
-import FearAndGreedyChart from "../../FearAndGreedyChart";
+import FearAndGreedyChart from "../../FearAndGreedyChart/FearAndGreedyChart";
 
 export const style = {
   paddingFlex: {
