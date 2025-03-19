@@ -1,16 +1,18 @@
-// SearchWithDropdown
+// TokenSearchWithDropdown
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 
-interface ISearchWithDropdownProps extends ComponentProps<any> {}
+interface ITokenSearchWithDropdownProps extends ComponentProps<any> {}
 
-export const SearchWithDropdown: FC<ISearchWithDropdownProps> = () => {
+export const TokenSearchWithDropdown: FC<
+  ITokenSearchWithDropdownProps
+> = () => {
   return (
     <>
-      <SearchWithDropdownStyled
+      <TokenSearchWithDropdownStyled
         size="large"
         placeholder="Search ticker, name, ca..."
         prefix={<SearchOutlined />}
@@ -19,8 +21,8 @@ export const SearchWithDropdown: FC<ISearchWithDropdownProps> = () => {
   );
 };
 
-const SearchWithDropdownStyled = styled(Input).attrs({
-  className: "SearchWithDropdownStyled",
+const TokenSearchWithDropdownStyled = styled(Input).attrs({
+  className: "TokenSearchWithDropdownStyled",
 })`
   &.ant-input-css-var {
     --ant-input-active-border-color: #ee1b84;

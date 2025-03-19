@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SearchWithDropdown } from "../../../molecules/SearchWithDropdown/SearchWithDropdown";
+import { TokenSearchWithDropdown } from "../../../molecules/TokenSearchWithDropdown/TokenSearchWithDropdown";
 import { Typography } from "antd";
 
 export const MunkiHero = () => {
@@ -19,7 +19,7 @@ export const MunkiHero = () => {
           🚀 <span>Enter a Token Address & Discover Insights</span> 🚀
         </StyledTitle>
       </BigTitleStyled>
-      <SearchWithDropdown />
+      <TokenSearchWithDropdown />
     </div>
   );
 };
