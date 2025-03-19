@@ -61,9 +61,16 @@ const StyledTitle = styled(Typography.Title)`
 `;
 
 const StyledInput = styled(Input)`
+  &.ant-input-css-var {
+    --ant-input-active-border-color: #ee1b84;
+    --ant-input-hover-border-color: #ee1b84;
+  }
+
   flex: 1;
   display: flex;
   width: 60%;
+  height: 50px;
+  padding: 0 20px;
   margin: 10px auto;
   margin-bottom: 50px;
   color: ${COLORS.white35};
@@ -75,6 +82,10 @@ const StyledInput = styled(Input)`
       border-box;
   border: 1px solid transparent;
   border-radius: 8px;
+
+  &.ant-input-outlined:hover {
+    // border-color: unset;
+  }
 
   input.ant-input::placeholder {
     color: ${COLORS.white60} !important; // TODO: please remove global css rules, eg MunkiContent.css
