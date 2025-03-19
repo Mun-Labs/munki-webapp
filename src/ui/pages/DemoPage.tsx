@@ -23,7 +23,6 @@ import { TextWithDescriptionDemo } from "../molecules/TextWithDescription/TextWi
 import { CoinWithLogoAndDescriptionDemo } from "../molecules/CoinWithLogoAndDescription/CoinWithLogoAndDescriptionDemo";
 import { TokenDemo } from "../atoms/Token/TokenDemo";
 import { DebounceSelectDemo } from "../molecules/DebounceSelect/DebounceSelectDemo";
-import { useTokenApi } from "../../api/hooks/useTokenApi";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -69,9 +68,6 @@ const columns: TableColumnsType<HoldersTrendColumn> = [
 const data = MockTokens.map((token) => ({ ...token, key: token.name }));
 
 export const DemoPage = () => {
-  const tokenResponse = useTokenApi(undefined, MOCK_DATA_TOKEN);
-  const mockTokens = tokenResponse.data;
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ DemoPage.tsx:74 ~ DemoPage ~ mockTokens:', mockTokens)
   return (
     <>
       <h1>DemoPage</h1>
