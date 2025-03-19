@@ -4,7 +4,16 @@ import { Address, UnixTime } from "../domain/types/Types";
 export interface ApiResponse<T> {
   code: number;
   response: T;
+  last_updated: UnixTime;
 }
+
+export interface Token {
+  token_address: Address;
+  name: string;
+  symbol: string;
+  logo_uri: string;
+}
+
 export interface FearAndGreedResponse {
   fearAndGreed: FearAndGreed[];
   tokenPrices: TokenPrices;
