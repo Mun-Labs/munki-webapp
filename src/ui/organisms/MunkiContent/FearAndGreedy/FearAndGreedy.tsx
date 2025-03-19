@@ -66,7 +66,6 @@ export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
 
 function FearAndGreedWidget() {
   const { data } = useFearAndGreedApi(undefined, MOCK_DATA_FEAR_AND_GREED);
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ FearAndGreedy.tsx:80 ~ FearAndGreedWidget ~ data:', data)
   const [current, ...history] = data!.fearAndGreed; // TODO: remove "!"
   const tokens = Object.values(data!.tokenPrices);
   const tokenInfo = tokens[0];

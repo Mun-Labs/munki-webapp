@@ -24,8 +24,6 @@ import { CoinWithLogoAndDescriptionDemo } from "../molecules/CoinWithLogoAndDesc
 import { TokenDemo } from "../atoms/Token/TokenDemo";
 import { DebounceSelectDemo } from "../molecules/DebounceSelect/DebounceSelectDemo";
 import { useTokenApi } from "../../api/hooks/useTokenApi";
-import { AvatarWithText } from "../molecules/AvatarWithText/AvatarWithText";
-import MunkiTokenList from "../molecules/MunkiTokenList/MunkiTokenList";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -72,14 +70,11 @@ const data = MockTokens.map((token) => ({ ...token, key: token.name }));
 
 export const DemoPage = () => {
   const tokenResponse = useTokenApi(undefined, MOCK_DATA_TOKEN);
-  const mockTokens = tokenResponse.data?.slice(0, 1);
+  const mockTokens = tokenResponse.data;
   /*prettier-ignore*/ console.log('>>>> _ >>>> ~ DemoPage.tsx:74 ~ DemoPage ~ mockTokens:', mockTokens)
-
   return (
     <>
-      <MunkiTokenList tokens={mockTokens!}></MunkiTokenList>
-
-      {/* <h1>DemoPage</h1>
+      <h1>DemoPage</h1>
       <h2>DebounceSelectDemo</h2>
       <DebounceSelectDemo />
       <br /> <hr />
@@ -146,7 +141,7 @@ export const DemoPage = () => {
       <SocialMediaSegmentDemo />
       <br /> <hr />
       <h2>TokenCardDemo</h2>
-      <TokenCardDemo /> */}
+      <TokenCardDemo />
     </>
   );
 };

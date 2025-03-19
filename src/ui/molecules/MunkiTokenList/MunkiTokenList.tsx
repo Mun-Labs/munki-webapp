@@ -63,16 +63,17 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
   return (
     <MunkiTokenListStyled>
       <List
+        bordered
         className="demo-loadmore-list"
         loading={initLoading}
         itemLayout="horizontal"
-        loadMore={loadMore}
+        // loadMore={loadMore}
         dataSource={tokens}
         renderItem={(token) => (
           <List.Item>
-            <Skeleton avatar title={false} loading={true} active>
+            <Skeleton avatar title={false} loading={false} active>
               <AvatarWithText
-                logoUrl={token.logo_uri}
+                // logoUrl={token.logo_uri}
                 name={token.name}
                 symbol={token.symbol}
               />
