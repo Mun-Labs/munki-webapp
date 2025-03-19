@@ -1,7 +1,6 @@
-import { Input, Typography } from "antd";
 import styled from "styled-components";
-import { SearchOutlined } from "@ant-design/icons";
-import { COLORS } from "../../../colors";
+import { SearchWithDropdown } from "../../../molecules/SearchWithDropdown/SearchWithDropdown";
+import { Typography } from "antd";
 
 export const MunkiHero = () => {
   return (
@@ -20,11 +19,7 @@ export const MunkiHero = () => {
           🚀 <span>Enter a Token Address & Discover Insights</span> 🚀
         </StyledTitle>
       </BigTitleStyled>
-      <StyledInput
-        size="large"
-        placeholder="Search ticker, name, ca..."
-        prefix={<SearchOutlined />}
-      />
+      <SearchWithDropdown />
     </div>
   );
 };
@@ -57,37 +52,5 @@ const StyledTitle = styled(Typography.Title)`
     background: linear-gradient(to bottom, white, #ffefbd);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-`;
-
-const StyledInput = styled(Input)`
-  &.ant-input-css-var {
-    --ant-input-active-border-color: #ee1b84;
-    --ant-input-hover-border-color: #ee1b84;
-  }
-
-  flex: 1;
-  display: flex;
-  width: 60%;
-  height: 50px;
-  padding: 0 20px;
-  margin: 10px auto;
-  margin-bottom: 50px;
-  color: ${COLORS.white35};
-  background-color: #242424;
-  box-shadow: 0 0 21.4px 0 #ffee64;
-
-  background: linear-gradient(${COLORS.raisin_black} 0 0) padding-box,
-    /*this is your grey background*/ linear-gradient(to right, #fbe892, #ee1b84)
-      border-box;
-  border: 1px solid transparent;
-  border-radius: 8px;
-
-  &.ant-input-outlined:hover {
-    // border-color: unset;
-  }
-
-  input.ant-input::placeholder {
-    color: ${COLORS.white60} !important; // TODO: please remove global css rules, eg MunkiContent.css
   }
 `;
