@@ -3,6 +3,7 @@ import { ComponentProps } from "react";
 import styled from "styled-components";
 import { Token } from "../../../api/apiTypes";
 import { AvatarWithText } from "../AvatarWithText/AvatarWithText";
+import { COLORS } from "../../colors";
 
 interface IMunkiTokenListProps extends ComponentProps<any> {
   tokens: Token[];
@@ -11,7 +12,15 @@ interface IMunkiTokenListProps extends ComponentProps<any> {
 
 const MunkiTokenListStyled = styled(List).attrs({
   className: "MunkiTokenListStyled",
-})``;
+})`
+  .ant-list-item {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: ${COLORS.black10};
+    }
+  }
+`;
 
 export function MunkiTokenList(props: IMunkiTokenListProps) {
   const { tokens, loading } = props;
@@ -26,15 +35,17 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
         // loadMore={loadMore}
         dataSource={tokens}
         renderItem={(token) => (
-          <List.Item>
-            <Skeleton avatar title={false} loading={false} active>
-              <AvatarWithText
-                // logoUrl={token.logo_uri}
-                name={token.name}
-                symbol={token.symbol}
-              />
-            </Skeleton>
-          </List.Item>
+          <a href={`/token/${token.token_address}`} rel="noreferrer noopener">
+            <List.Item>
+              <Skeleton avatar title={false} loading={false} active>
+                <AvatarWithText
+                  // logoUrl={token.logo_uri}
+                  name={token.name}
+                  symbol={token.symbol}
+                />
+              </Skeleton>
+            </List.Item>
+          </a>
         )}
       />
     </MunkiTokenListStyled>
