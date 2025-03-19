@@ -5,9 +5,9 @@ import { ComponentProps, FC, useCallback, useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { useTokenApi } from "../../../api/hooks/useTokenApi";
-import { MOCK_DATA_TOKEN } from "../../../api/MockData";
 import { MunkiTokenList } from "../MunkiTokenList/MunkiTokenList";
 import { debounce } from "../../../common/modules/debounce";
+import { MOCK_DATA_TOKEN } from "../../../api/MockData";
 
 interface ITokenSearchWithDropdownProps extends ComponentProps<any> {}
 
@@ -17,9 +17,11 @@ export const TokenSearchWithDropdown: FC<
   const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
 
+  const shouldFetch = Boolean(searchTerm && inputValue);
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ TokenSearchWithDropdown.tsx:21 ~ shouldFetch:', shouldFetch)
   const { data: tokens, isLoading } = useTokenApi(
-    searchTerm && inputValue ? { q: searchTerm } : null,
-    MOCK_DATA_TOKEN,
+    shouldFetch ? { q: searchTerm } : null,
+    shouldFetch ? MOCK_DATA_TOKEN : ({ data: [] } as any),
   );
 
   const debouncedSearch = useCallback(
@@ -38,6 +40,7 @@ export const TokenSearchWithDropdown: FC<
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onPressEnter={() => debouncedSearch(inputValue)}
+        autoFocus={true}
       />
       <FloatingContainer>
         {tokens && tokens.length > 0 && (
