@@ -1,10 +1,12 @@
-import { Input } from "antd";
+import { Input, Typography } from "antd";
 import styled from "styled-components";
-import { UserOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
+import { COLORS } from "../../../colors";
 
 export const MunkiHero = () => {
   return (
     <div>
+      <BigTitleStyled>Hi, I’m Munki Ai</BigTitleStyled>
       <TopMunkiStyled>
         <img
           width={340}
@@ -13,30 +15,19 @@ export const MunkiHero = () => {
           alt="Munki landing"
         />
       </TopMunkiStyled>
-      <BigTitleStyled>Hi, I’m Munki Ai</BigTitleStyled>
-      <Input
+      <BigTitleStyled>
+        <StyledTitle level={1}>
+          🚀 <span>Enter a Token Address & Discover Insights</span> 🚀
+        </StyledTitle>
+      </BigTitleStyled>
+      <StyledInput
         size="large"
-        style={{
-          flex: 1,
-          margin: "10px 0px 24px",
-          backgroundColor: "#242424",
-          color: "white",
-          borderRadius: "8px",
-        }}
-        placeholder="search token"
-        prefix={<UserOutlined />}
+        placeholder="Search ticker, name, ca..."
+        prefix={<SearchOutlined />}
       />
     </div>
   );
 };
-
-const TopMunkiStyled = styled.div.attrs({
-  className: "BigTitleStyled",
-})`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const BigTitleStyled = styled.div.attrs({
   className: "BigTitleStyled",
@@ -48,5 +39,44 @@ const BigTitleStyled = styled.div.attrs({
   @media (max-width: 767px) {
     text-align: center;
     padding: 12px;
+  }
+`;
+
+const TopMunkiStyled = styled.div.attrs({
+  className: "BigTitleStyled",
+})`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledTitle = styled(Typography.Title)`
+  margin-top: 19px;
+  span {
+    text-shadow: 0 1px 14.2px #ffee64;
+    background: linear-gradient(to bottom, white, #ffefbd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+`;
+
+const StyledInput = styled(Input)`
+  flex: 1;
+  display: flex;
+  width: 60%;
+  margin: 10px auto;
+  margin-bottom: 50px;
+  color: ${COLORS.white35};
+  background-color: #242424;
+  box-shadow: 0 0 21.4px 0 #ffee64;
+
+  background: linear-gradient(${COLORS.raisin_black} 0 0) padding-box,
+    /*this is your grey background*/ linear-gradient(to right, #fbe892, #ee1b84)
+      border-box;
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  input.ant-input::placeholder {
+    color: ${COLORS.white60} !important; // TODO: please remove global css rules, eg MunkiContent.css
   }
 `;
