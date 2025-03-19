@@ -46,9 +46,9 @@ export const MunkiFooter = () => {
           }}
         />
         <Row>
-          <FooterButton type="link">Privacy Policy</FooterButton>
-          <FooterButton type="link">Terms of User</FooterButton>
-          <FooterButton type="link">Terms of Sale</FooterButton>
+          {/* <FooterButton type="link">Privacy Policy</FooterButton> */}
+          <FooterButton type="link">Terms of Use</FooterButton>
+          {/* <FooterButton type="link">Terms of Sale</FooterButton> */}
           <FooterButton type="link">© 2025 MUN</FooterButton>
         </Row>
       </div>
