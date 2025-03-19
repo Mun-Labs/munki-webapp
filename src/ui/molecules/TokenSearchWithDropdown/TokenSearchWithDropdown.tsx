@@ -1,30 +1,49 @@
 // TokenSearchWithDropdown
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useCallback, useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { useTokenApi } from "../../../api/hooks/useTokenApi";
 import { MOCK_DATA_TOKEN } from "../../../api/MockData";
-import MunkiTokenList from "../MunkiTokenList/MunkiTokenList";
+import { MunkiTokenList } from "../MunkiTokenList/MunkiTokenList";
+import { debounce } from "../../../common/modules/debounce";
 
 interface ITokenSearchWithDropdownProps extends ComponentProps<any> {}
 
 export const TokenSearchWithDropdown: FC<
   ITokenSearchWithDropdownProps
 > = () => {
-  const tokenResponse = useTokenApi(undefined, MOCK_DATA_TOKEN);
-  const mockTokens = tokenResponse.data?.slice(0, 1);
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ DemoPage.tsx:74 ~ DemoPage ~ mockTokens:', mockTokens)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [inputValue, setInputValue] = useState("");
+
+  const { data: tokens, isLoading } = useTokenApi(
+    searchTerm && inputValue ? { q: searchTerm } : null,
+    MOCK_DATA_TOKEN,
+  );
+
+  const debouncedSearch = useCallback(
+    debounce((value: string) => {
+      setSearchTerm(value);
+    }, 0),
+    [],
+  );
 
   return (
     <TokenSearchWithDropdownStyled>
       <TokenInputStyled
         size="large"
         placeholder="Search ticker, name, ca..."
-        prefix={<SearchOutlined />}
+        prefix={<SearchOutlined style={{ marginRight: 6 }} />}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onPressEnter={() => debouncedSearch(inputValue)}
       />
-      <MunkiTokenList tokens={mockTokens!}></MunkiTokenList>
+      <FloatingContainer>
+        {tokens && tokens.length > 0 && (
+          <MunkiTokenList tokens={tokens!} loading={isLoading}></MunkiTokenList>
+        )}
+      </FloatingContainer>
     </TokenSearchWithDropdownStyled>
   );
 };
@@ -51,8 +70,7 @@ const TokenInputStyled = styled(Input).attrs({
   height: 50px;
   padding: 0 20px;
   margin: 10px auto;
-  margin-bottom: 6px;
-  color: ${COLORS.white35};
+  margin-bottom: 8px;
   background-color: #242424;
   box-shadow: 0 0 21.4px 0 #ffee64;
 
@@ -68,5 +86,18 @@ const TokenInputStyled = styled(Input).attrs({
 
   input.ant-input::placeholder {
     color: ${COLORS.white60} !important; // TODO: please remove global css rules, eg MunkiContent.css
+  }
+`;
+
+const FloatingContainer = styled.div.attrs({
+  className: "FloatingContainer",
+})`
+  position: relative;
+
+  .MunkiTokenListStyled {
+    position: absolute;
+    width: 100%;
+    background: black;
+    z-index: 10;
   }
 `;
