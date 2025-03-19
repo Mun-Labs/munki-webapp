@@ -3,7 +3,7 @@ import { RandomService } from "../common/modules/RandomService";
 import { IToken, IWhale } from "../domain/entities/Entities";
 import { ApiResponse, FearAndGreedResponse, Token } from "./apiTypes";
 
-export const MOC_DATA_TOKEN: ApiResponse<Token[]> = {
+export const MOCK_DATA_TOKEN: ApiResponse<Token[]> = {
   code: 200,
   response: [
     {

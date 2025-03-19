@@ -5,7 +5,7 @@ import { TextWithLabel } from "../molecules/TextWithLabel/TextWithLabel";
 import { TableWithFilters } from "../organisms/TableWithFilters/TableWithFilters";
 import { TokenCardDemo } from "../organisms/TokenCard/TokenCardDemo";
 import { IToken } from "../../domain/entities/Entities";
-import { MockTokens } from "../../api/MockData";
+import { MOCK_DATA_TOKEN, MockTokens } from "../../api/MockData";
 import { TextWithLabelDemo } from "../molecules/TextWithLabel/TextWithLabelDemo";
 import { AvatarDemo } from "../demos/IconDemo";
 import { TreeChartDemo } from "../molecules/TreeChart/TreeChartDemo";
@@ -22,6 +22,10 @@ import { WhaleWatchDemo } from "../organisms/WhaleWatch/WhaleWatchDemo";
 import { TextWithDescriptionDemo } from "../molecules/TextWithDescription/TextWithDescriptionDemo";
 import { CoinWithLogoAndDescriptionDemo } from "../molecules/CoinWithLogoAndDescription/CoinWithLogoAndDescriptionDemo";
 import { TokenDemo } from "../atoms/Token/TokenDemo";
+import { DebounceSelectDemo } from "../molecules/DebounceSelect/DebounceSelectDemo";
+import { useTokenApi } from "../../api/hooks/useTokenApi";
+import { AvatarWithText } from "../molecules/AvatarWithText/AvatarWithText";
+import MunkiTokenList from "../molecules/MunkiTokenList/MunkiTokenList";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -67,9 +71,18 @@ const columns: TableColumnsType<HoldersTrendColumn> = [
 const data = MockTokens.map((token) => ({ ...token, key: token.name }));
 
 export const DemoPage = () => {
+  const tokenResponse = useTokenApi(undefined, MOCK_DATA_TOKEN);
+  const mockTokens = tokenResponse.data?.slice(0, 1);
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ DemoPage.tsx:74 ~ DemoPage ~ mockTokens:', mockTokens)
+
   return (
     <>
-      <h1>DemoPage</h1>
+      <MunkiTokenList tokens={mockTokens!}></MunkiTokenList>
+
+      {/* <h1>DemoPage</h1>
+      <h2>DebounceSelectDemo</h2>
+      <DebounceSelectDemo />
+      <br /> <hr />
       <h2>TokenDemo</h2>
       <TokenDemo />
       <br /> <hr />
@@ -133,7 +146,7 @@ export const DemoPage = () => {
       <SocialMediaSegmentDemo />
       <br /> <hr />
       <h2>TokenCardDemo</h2>
-      <TokenCardDemo />
+      <TokenCardDemo /> */}
     </>
   );
 };
