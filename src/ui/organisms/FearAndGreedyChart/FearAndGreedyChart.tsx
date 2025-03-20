@@ -56,8 +56,8 @@ const ImageStyled = styled.img.attrs<TImageStyled>({
   className: "ImageStyled",
   src: "/fear-greedy-chart.png",
 })`
-  width: 275;
-  height: 150;
+  width: 275px;
+  height: 150px;
   transform: ${(props) => (props.$isReverse ? "scaleX(-1)" : "scaleX(1)")};
 `;
 
