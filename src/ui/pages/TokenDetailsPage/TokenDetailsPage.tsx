@@ -107,7 +107,9 @@ export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
         <Flex gap={32}>
           <Card
             size="small"
-            title={<AvatarWithText style={{ padding: 10 }} />}
+            title={
+              <AvatarWithText style={{ padding: 10 }} name={""} symbol={""} />
+            }
             extra={"..."}
             style={{ width: 400 }}
           >
@@ -118,7 +120,9 @@ export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
 
           <Card
             size="small"
-            title={<AvatarWithText style={{ padding: 10 }} />}
+            title={
+              <AvatarWithText style={{ padding: 10 }} name={""} symbol={""} />
+            }
             extra={"..."}
             style={{ width: 400 }}
           >

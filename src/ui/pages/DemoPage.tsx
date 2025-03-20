@@ -5,7 +5,7 @@ import { TextWithLabel } from "../molecules/TextWithLabel/TextWithLabel";
 import { TableWithFilters } from "../organisms/TableWithFilters/TableWithFilters";
 import { TokenCardDemo } from "../organisms/TokenCard/TokenCardDemo";
 import { IToken } from "../../domain/entities/Entities";
-import { MockTokens } from "../../api/MockData";
+import { MOCK_DATA_TOKEN, MockTokens } from "../../api/MockData";
 import { TextWithLabelDemo } from "../molecules/TextWithLabel/TextWithLabelDemo";
 import { AvatarDemo } from "../demos/IconDemo";
 import { TreeChartDemo } from "../molecules/TreeChart/TreeChartDemo";
@@ -22,6 +22,8 @@ import { WhaleWatchDemo } from "../organisms/WhaleWatch/WhaleWatchDemo";
 import { TextWithDescriptionDemo } from "../molecules/TextWithDescription/TextWithDescriptionDemo";
 import { CoinWithLogoAndDescriptionDemo } from "../molecules/CoinWithLogoAndDescription/CoinWithLogoAndDescriptionDemo";
 import { TokenDemo } from "../atoms/Token/TokenDemo";
+import { DebounceSelectDemo } from "../molecules/DebounceSelect/DebounceSelectDemo";
+import { MunkiTokenListDemo } from "../molecules/MunkiTokenList/MunkiTokenListDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -70,6 +72,12 @@ export const DemoPage = () => {
   return (
     <>
       <h1>DemoPage</h1>
+      <h2>MunkiTokenListDemo</h2>
+      <MunkiTokenListDemo />
+      <br /> <hr />
+      <h2>DebounceSelectDemo</h2>
+      <DebounceSelectDemo />
+      <br /> <hr />
       <h2>TokenDemo</h2>
       <TokenDemo />
       <br /> <hr />
