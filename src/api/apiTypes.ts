@@ -14,6 +14,14 @@ export interface Token {
   logo_uri: string;
 }
 
+export interface MindshareItem {
+  tokenAddress: Address;
+  changePercentage: number;
+  logoUrl: string;
+  name: string;
+  symbol: string;
+}
+
 export interface FearAndGreed {
   value: number;
   valueClassification: keyof typeof FearAndGreedClassification | "n/a";
