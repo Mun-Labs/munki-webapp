@@ -12,7 +12,7 @@ interface ISwrOptions {
 }
 
 const swrOptions: ISwrOptions = {
-  revalidateOnMount: false,
+  revalidateOnMount: true,
   revalidateOnReconnect: false,
   revalidateIfStale: false,
   revalidateOnFocus: false,
@@ -20,7 +20,6 @@ const swrOptions: ISwrOptions = {
 
 const fetcher = async (url: string) => {
   const response = await fetch(url);
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:23 ~ fetcher ~ response:', response)
 
   if (!response.ok) {
     throw new Error(`Failed to fetch data from ${url}`);
@@ -50,9 +49,7 @@ export function useApi<Response, Query extends Record<string, string> = any>(
     url += `?${new URLSearchParams(query)}`;
   }
 
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:48 ~ url:', url)
   const response = useSWR(url, fetcher, swrOptions);
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:53 ~ response:', response)
   return response;
 }
 

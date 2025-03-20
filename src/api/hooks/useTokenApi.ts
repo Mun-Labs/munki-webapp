@@ -8,7 +8,7 @@ export function useTokenApi(
   let finalQuery = query;
   if (query) {
     finalQuery = {
-      limit: 1,
+      limit: 6,
       offset: 0,
       ...query,
     };

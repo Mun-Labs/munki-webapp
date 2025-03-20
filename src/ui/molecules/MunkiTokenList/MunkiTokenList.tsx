@@ -39,7 +39,7 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
             <List.Item>
               <Skeleton avatar title={false} loading={false} active>
                 <AvatarWithText
-                  // logoUrl={token.logo_uri}
+                  logoUrl={token.logo_uri}
                   name={token.name}
                   symbol={token.symbol}
                 />
