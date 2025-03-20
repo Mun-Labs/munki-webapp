@@ -1,3 +1,3 @@
 export const DEBUG_FLAGS = {
-  useMockApi: true,
+  useMockApi: false,
 };
