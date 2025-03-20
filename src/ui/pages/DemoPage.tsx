@@ -23,6 +23,7 @@ import { TextWithDescriptionDemo } from "../molecules/TextWithDescription/TextWi
 import { CoinWithLogoAndDescriptionDemo } from "../molecules/CoinWithLogoAndDescription/CoinWithLogoAndDescriptionDemo";
 import { TokenDemo } from "../atoms/Token/TokenDemo";
 import { DebounceSelectDemo } from "../molecules/DebounceSelect/DebounceSelectDemo";
+import { MunkiTokenListDemo } from "../molecules/MunkiTokenList/MunkiTokenListDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -71,6 +72,9 @@ export const DemoPage = () => {
   return (
     <>
       <h1>DemoPage</h1>
+      <h2>MunkiTokenListDemo</h2>
+      <MunkiTokenListDemo />
+      <br /> <hr />
       <h2>DebounceSelectDemo</h2>
       <DebounceSelectDemo />
       <br /> <hr />
