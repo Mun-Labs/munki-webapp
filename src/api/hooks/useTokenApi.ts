@@ -5,6 +5,14 @@ export function useTokenApi(
   query?: TokenQueryParams | null,
   mockResponse?: ApiResponse<Token[]>,
 ) {
-  const url = query === null ? null : "token";
-  return useApi<Token[]>(url, query, mockResponse);
+  let finalQuery = query;
+  if (query) {
+    finalQuery = {
+      limit: 1,
+      offset: 0,
+      ...query,
+    };
+  }
+  const url = finalQuery === null ? null : "token";
+  return useApi<Token[]>(url, finalQuery, mockResponse);
 }

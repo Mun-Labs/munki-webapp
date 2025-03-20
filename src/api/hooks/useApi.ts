@@ -32,23 +32,25 @@ export function useApi<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
   mockResponse?: ApiResponse<Response>,
-): SWRResponse<Response> {
+): SWRResponse<ApiResponse<Response>> {
   if (DEBUG_FLAGS.useMockApi && mockResponse) {
     return {
-      data: mockResponse?.response,
+      data: mockResponse,
       error: null,
       isValidating: false,
       isLoading: false,
-      mutate: () => Promise.resolve(mockResponse?.response),
+      mutate: () => Promise.resolve(mockResponse),
     };
   }
 
   let url = endpoint === null ? null : `${BASE_URL}/${endpoint}`;
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:48 ~ url:', url)
   if (query) {
     url += `?${new URLSearchParams(query)}`;
   }
 
   const response = useSWR(url, fetcher, swrOptions);
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:53 ~ response:', response)
   return response;
 }
 

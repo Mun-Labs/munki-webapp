@@ -9,6 +9,7 @@ export const BASE_URL =
 export enum EndpointsEnum {
   "mindshare" = "mindshare",
   "fearandgreed" = "fearandgreed",
+  "vibecheck" = "vibecheck",
   "token" = "token",
 }
 

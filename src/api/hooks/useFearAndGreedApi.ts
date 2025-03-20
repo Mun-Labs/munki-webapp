@@ -5,5 +5,5 @@ export function useFearAndGreedApi(
   query?: Record<string, string>,
   mockResponse?: ApiResponse<FearAndGreedResponse>,
 ) {
-  return useApi<FearAndGreedResponse>("fearandgreed", query, mockResponse);
+  return useApi<FearAndGreedResponse>("vibecheck", query, mockResponse);
 }

@@ -8,6 +8,7 @@ import { useTokenApi } from "../../../api/hooks/useTokenApi";
 import { MunkiTokenList } from "../MunkiTokenList/MunkiTokenList";
 import { debounce } from "../../../common/modules/debounce";
 import { MOCK_DATA_TOKEN } from "../../../api/MockData";
+import { Token } from "../../../api/apiTypes";
 
 interface ITokenSearchWithDropdownProps extends ComponentProps<any> {}
 
@@ -18,11 +19,15 @@ export const TokenSearchWithDropdown: FC<
   const [inputValue, setInputValue] = useState("");
 
   const shouldFetch = Boolean(searchTerm && inputValue);
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ TokenSearchWithDropdown.tsx:21 ~ shouldFetch:', shouldFetch)
-  const { data: tokens, isLoading } = useTokenApi(
+  const { data, isLoading } = useTokenApi(
     shouldFetch ? { q: searchTerm } : null,
     shouldFetch ? MOCK_DATA_TOKEN : ({ data: [] } as any),
   );
+
+  let tokens: Token[] = [];
+  if (data) {
+    tokens = data.response;
+  }
 
   const debouncedSearch = useCallback(
     debounce((value: string) => {
