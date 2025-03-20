@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, ReactNode } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
@@ -12,10 +12,11 @@ interface PercentageProps extends ComponentProps<any> {
   plusMinus?: boolean;
   noSigns?: boolean;
   neutralColor?: boolean;
+  suffix?: ReactNode;
 }
 
 export const Percentage: FC<PercentageProps> = (props) => {
-  const { style, neutralColor, plusMinus, noSigns, value } = props;
+  const { style, neutralColor, plusMinus, noSigns, value, suffix } = props;
   if (!value) return <>N/A</>;
 
   const ensurePercent = value < 1 ? value * 100 : value;
@@ -35,7 +36,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
   return (
     <PercentageStyled style={{ ...style, color }}>
       {icon}
-      {ensurePercent.toFixed()}%
+      {ensurePercent.toFixed()}%{suffix}
     </PercentageStyled>
   );
 };

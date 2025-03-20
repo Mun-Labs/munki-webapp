@@ -104,7 +104,12 @@ function FearAndGreedWidget() {
         <WrapInfoStyled>
           <div>
             <h2>Status:</h2>
-            <h1 className="cl-greed" style={{ paddingBottom: "52px" }}>
+            <h1
+              style={{
+                paddingBottom: "52px",
+                color: fearAndGreedColorMapping[current.valueClassification],
+              }}
+            >
               {current.valueClassification}
             </h1>
             <FearAndGreedyChart value={current.value} />
@@ -139,11 +144,8 @@ function FearAndGreedWidget() {
               style={{ fontSize: "18px" }}
               value={tokenInfo.price}
             ></Currency>
-            <span
-              className="percentage-change"
-              style={{ color: "#DC4D3B", fontSize: "14px" }}
-            >
-              <Percentage value={tokenInfo.priceChangePercent} /> (1d)
+            <span className="percentage-change" style={{ fontSize: "14px" }}>
+              <Percentage value={tokenInfo.priceChangePercent} suffix=" (1d)" />
             </span>
           </GroupInfoStyled>
 
