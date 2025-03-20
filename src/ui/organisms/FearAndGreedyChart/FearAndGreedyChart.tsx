@@ -32,11 +32,11 @@ const FearAndGreedyChart = ({
 }: IFearAndGreedChart) => {
   return (
     <ContainerStyled>
-      <ImageStyled isReverse={isReverse} />
+      <ImageStyled $isReverse={isReverse} />
       <CircleStyled
-        isReverse={isReverse}
-        isShowNumber={isShowNumber}
-        degree={value}
+        $isReverse={isReverse}
+        $isShowNumber={isShowNumber}
+        $degree={value}
       >
         <div className={isShowNumber ? "line withNumber" : "line"}>
           {isShowNumber && <p className="number">{value}</p>}
@@ -48,7 +48,9 @@ const FearAndGreedyChart = ({
 
 export default FearAndGreedyChart;
 
-type TImageStyled = Omit<ICircleProps, "isShowNumber" | "degree">;
+type TImageStyled = {
+  $isReverse?: boolean;
+};
 
 const ImageStyled = styled.img.attrs<TImageStyled>({
   className: "ImageStyled",
@@ -56,7 +58,7 @@ const ImageStyled = styled.img.attrs<TImageStyled>({
 })`
   width: 275;
   height: 150;
-  transform: ${(props) => (props.isReverse ? "scaleX(-1)" : "scaleX(1)")};
+  transform: ${(props) => (props.$isReverse ? "scaleX(-1)" : "scaleX(1)")};
 `;
 
 const ContainerStyled = styled.div.attrs({ className: "ContainerStyled" })`
@@ -69,9 +71,9 @@ const ContainerStyled = styled.div.attrs({ className: "ContainerStyled" })`
 `;
 
 interface ICircleProps {
-  degree: number;
-  isShowNumber?: boolean;
-  isReverse?: boolean;
+  $degree: number;
+  $isShowNumber?: boolean;
+  $isReverse?: boolean;
 }
 
 const CircleStyled = styled.div.attrs<ICircleProps>({
@@ -80,7 +82,7 @@ const CircleStyled = styled.div.attrs<ICircleProps>({
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%) rotate(${(props) => props?.degree || 0}deg);
+  transform: translateX(-50%) rotate(${(props) => props?.$degree || 0}deg);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -99,17 +101,17 @@ const CircleStyled = styled.div.attrs<ICircleProps>({
     background: -moz-linear-gradient(
       266deg,
       rgba(167, 167, 167, 1) 0%,
-      ${(props) => getColorFromValue(props.degree || 0, props.isReverse)} 100%
+      ${(props) => getColorFromValue(props.$degree || 0, props.$isReverse)} 100%
     );
     background: -webkit-linear-gradient(
       266deg,
       rgba(167, 167, 167, 1) 0%,
-      ${(props) => getColorFromValue(props.degree || 0, props.isReverse)} 100%
+      ${(props) => getColorFromValue(props.$degree || 0, props.$isReverse)} 100%
     );
     background: linear-gradient(
       266deg,
       rgba(167, 167, 167, 1) 0%,
-      ${(props) => getColorFromValue(props.degree || 0, props.isReverse)} 100%
+      ${(props) => getColorFromValue(props.$degree || 0, props.$isReverse)} 100%
     );
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a7a7a7",endColorstr="#ee1b84",GradientType=1);
 
@@ -119,7 +121,7 @@ const CircleStyled = styled.div.attrs<ICircleProps>({
       left: -55%;
       top: 50%;
       transform: translateX(-50%) translateY(-50%)
-        rotate(-${(props) => props?.degree || 0}deg);
+        rotate(-${(props) => props?.$degree || 0}deg);
       text-shadow: 1px 1px 8px #000;
     }
   }
@@ -136,7 +138,7 @@ const CircleStyled = styled.div.attrs<ICircleProps>({
       height: 44px;
       border-radius: 50%;
       background-color: ${(props) =>
-        getColorFromValue(props?.degree, props.isReverse) || 0};
+        getColorFromValue(props?.$degree, props.$isReverse) || 0};
     }
   }
 
