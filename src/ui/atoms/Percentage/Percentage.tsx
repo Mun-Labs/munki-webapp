@@ -17,7 +17,7 @@ interface PercentageProps extends ComponentProps<any> {
 
 export const Percentage: FC<PercentageProps> = (props) => {
   const { style, neutralColor, plusMinus, noSigns, value, suffix } = props;
-  if (!value) return <>N/A</>;
+  if (!value) return <>n/a</>;
 
   const ensurePercent = value < 1 ? value * 100 : value;
 

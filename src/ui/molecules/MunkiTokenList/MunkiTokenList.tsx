@@ -1,9 +1,11 @@
-import { List, Skeleton } from "antd";
+import { Flex, List, Skeleton } from "antd";
 import { ComponentProps } from "react";
 import styled from "styled-components";
 import { Token } from "../../../api/apiTypes";
 import { AvatarWithText } from "../AvatarWithText/AvatarWithText";
 import { COLORS } from "../../colors";
+import { Currency } from "../../atoms/Currency/Currency";
+import { Percentage } from "../../atoms/Percentage/Percentage";
 
 interface IMunkiTokenListProps extends ComponentProps<any> {
   tokens: Token[];
@@ -43,6 +45,17 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
                   name={token.name}
                   symbol={token.symbol}
                 />
+                <Flex justify="space-between" vertical>
+                  <Flex>
+                    <Currency value={1} style={{ marginRight: 6 }} />
+                    <Percentage value={0.5} plusMinus suffix="1D" />
+                  </Flex>
+                  <Currency
+                    value={1_000_000_000}
+                    style={{ marginRight: 6, color: COLORS.white60 }}
+                    prefixes={["MC:", "MC"]}
+                  />
+                </Flex>
               </Skeleton>
             </List.Item>
           </a>
