@@ -12,7 +12,7 @@ interface ISwrOptions {
 }
 
 const swrOptions: ISwrOptions = {
-  revalidateOnMount: true,
+  revalidateOnMount: false,
   revalidateOnReconnect: false,
   revalidateIfStale: false,
   revalidateOnFocus: false,
@@ -20,6 +20,7 @@ const swrOptions: ISwrOptions = {
 
 const fetcher = async (url: string) => {
   const response = await fetch(url);
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:23 ~ fetcher ~ response:', response)
 
   if (!response.ok) {
     throw new Error(`Failed to fetch data from ${url}`);
@@ -34,6 +35,7 @@ export function useApi<Response, Query extends Record<string, string> = any>(
   mockResponse?: ApiResponse<Response>,
 ): SWRResponse<ApiResponse<Response>> {
   if (DEBUG_FLAGS.useMockApi && mockResponse) {
+    useSWR(null, fetcher, swrOptions);
     return {
       data: mockResponse,
       error: null,
@@ -44,11 +46,11 @@ export function useApi<Response, Query extends Record<string, string> = any>(
   }
 
   let url = endpoint === null ? null : `${BASE_URL}/${endpoint}`;
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:48 ~ url:', url)
   if (query) {
     url += `?${new URLSearchParams(query)}`;
   }
 
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:48 ~ url:', url)
   const response = useSWR(url, fetcher, swrOptions);
   /*prettier-ignore*/ console.log('>>>> _ >>>> ~ useApi.ts:53 ~ response:', response)
   return response;

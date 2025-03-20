@@ -4,7 +4,6 @@ import { COLORS } from "../../../colors";
 import { Styles } from "../../../uiStyles";
 import FearAndGreedyChart from "../../FearAndGreedyChart/FearAndGreedyChart";
 import { useFearAndGreedApi } from "../../../../api/hooks/useFearAndGreedApi";
-import { MOCK_DATA_FEAR_AND_GREED } from "../../../../api/MockData";
 import { ComponentProps, FC } from "react";
 import { defaultFearAndGreed, FearAndGreed } from "../../../../api/apiTypes";
 import { unixToDate } from "../../../../common/modules/dateAndTime";
@@ -18,6 +17,7 @@ import {
   volumeMapping,
 } from "../../../../domain/businessLogic/volumeLogic";
 import { Percentage } from "../../../atoms/Percentage/Percentage";
+import { MOCK_DATA_FEAR_AND_GREED } from "../../../../api/MockData";
 
 export const style = {
   paddingFlex: {
@@ -65,10 +65,31 @@ export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
 };
 
 function FearAndGreedWidget() {
-  const { data } = useFearAndGreedApi(undefined);
-  const [current, ...history] = data!.fearAndGreed; // TODO: remove "!"
-  const tokens = Object.values(data!.tokenPrices);
-  const tokenInfo = tokens[0];
+  const { data, isLoading } = useFearAndGreedApi(
+    undefined,
+    MOCK_DATA_FEAR_AND_GREED,
+  );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!data?.response) {
+    return <div>No Response...</div>;
+  }
+
+  // @ts-expect-error
+  let fearAndGreed: FearAndGreed[] = [{}, {}];
+  // @ts-expect-error
+  let tokens: TokenPriceInfo[] = [];
+  if (data) {
+    fearAndGreed = data.response.fearAndGreed;
+    tokens = Object.values(data.response.tokenPrices);
+  }
+
+  const current = data.response;
+  const history = current.fearAndGreed; // TODO: remove "!"
+  const tokenInfo = tokens[0] ?? {};
 
   const volumeLabel = volumeMapping(tokenInfo.volumeUSD);
 

@@ -14,16 +14,16 @@ export interface Token {
   logo_uri: string;
 }
 
-export interface FearAndGreedResponse {
-  fearAndGreed: FearAndGreed[];
-  tokenPrices: TokenPrices;
-}
-
 export interface FearAndGreed {
   value: number;
   valueClassification: keyof typeof FearAndGreedClassification | "n/a";
   timestamp: UnixTime;
   chain: "solana";
+}
+
+export interface FearAndGreedResponse extends FearAndGreed {
+  fearAndGreed: FearAndGreed[];
+  tokenPrices: TokenPrices;
 }
 
 export const defaultFearAndGreed: FearAndGreed = {

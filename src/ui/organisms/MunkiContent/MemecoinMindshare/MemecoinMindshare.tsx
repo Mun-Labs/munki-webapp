@@ -30,7 +30,9 @@ export const MemecoinMindshare = () => {
         </div>
         <TreeChart data={data} style={{ height: 490 }}></TreeChart>
       </div>
-      <div className="section-memeindex">{/* <FearAndGreedWidget /> */}</div>
+      <div className="section-memeindex">
+        <FearAndGreedWidget />
+      </div>
     </TopMemeStyled>
   );
 };

@@ -48,31 +48,30 @@ export const MOCK_DATA_TOKEN: ApiResponse<Token[]> = {
 export const MOCK_DATA_FEAR_AND_GREED: ApiResponse<FearAndGreedResponse> = {
   code: 200,
   response: {
+    value: 39,
+    valueClassification: "Fear",
+    timestamp: 1742428800,
+    chain: "solana",
     fearAndGreed: [
       {
         value: 34,
         valueClassification: "Fear",
-        timestamp: 1742169600,
-        chain: "solana",
-      },
-      {
-        value: 34,
-        valueClassification: "Fear",
-        timestamp: 1742256000,
+        timestamp: 1742342400,
         chain: "solana",
       },
     ],
     tokenPrices: {
       So11111111111111111111111111111111111111112: {
-        price: 125.218754,
-        updateUnixTime: 1742284756,
-        updateHumanTime: "2025-03-18T07:59:16",
-        volumeUSD: 1783902002.44057,
-        volumeChangePercent: 6.935431,
-        priceChangePercent: -3.15347,
+        price: 133.903446,
+        updateUnixTime: 1742443149,
+        updateHumanTime: "2025-03-20T03:59:09",
+        volumeUSD: 1970433578.14212,
+        volumeChangePercent: 9.730745,
+        priceChangePercent: 5.910767,
       },
     },
   },
+  last_updated: 1742445807,
 };
 
 export const COIN_MAP = {
@@ -130,9 +129,6 @@ export const COIN_MAP = {
     logoUrl: "/pusheen.png",
   }),
 };
-
-const a = COIN_MAP.chillGuy;
-/*prettier-ignore*/ console.log("[MockData.ts,62] a: ", a);
 
 export const MockTokens: IToken[] = Object.values(COIN_MAP);
 
