@@ -3,6 +3,7 @@ import "./MunkiFooter.css";
 import styled from "styled-components";
 import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
 import { SocialMedia } from "../../../domain/types/Types";
+import { COLORS } from "../../colors";
 
 const footerStyle: React.CSSProperties = {
   height: "84px",
@@ -14,10 +15,13 @@ const footerStyle: React.CSSProperties = {
 };
 
 const FooterButton = styled(Button)`
-  color: white;
+  color: ${COLORS.grey70};
   margin: 0 10px;
   padding: unset;
   font-size: 12px;
+  p {
+    color: ${COLORS.grey70};
+  }
 `;
 
 const socials: SocialMedia[] = [
@@ -47,9 +51,19 @@ export const MunkiFooter = () => {
         />
         <Row>
           {/* <FooterButton type="link">Privacy Policy</FooterButton> */}
-          <FooterButton type="link">Terms of Use</FooterButton>
+          <FooterButton type="link">
+            <p>Privacy policy</p>
+          </FooterButton>
+          <FooterButton type="link">
+            <p>Terms of Use</p>
+          </FooterButton>
+          <FooterButton type="link">
+            <p>Terms of Sale</p>
+          </FooterButton>
           {/* <FooterButton type="link">Terms of Sale</FooterButton> */}
-          <FooterButton type="link">© 2025 MUN</FooterButton>
+          <FooterButton type="link">
+            <p>© 2025 MUN</p>
+          </FooterButton>
         </Row>
       </div>
       <div

@@ -1,0 +1,178 @@
+import { ITopHolder } from "../../../domain/entities/Entities";
+
+export const dataSource: ITopHolder[] = [
+  {
+    rank: 1,
+    wallet: "0x123..321",
+    netWorth: 1111,
+    holdingValue: 1111,
+    winRate: 1111,
+    holdingTime: 1111,
+    topHoldings: [
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+    ],
+    scan: "https://solscan.io/",
+  },
+  {
+    rank: 2,
+    wallet: "0x123..321",
+    netWorth: 1111,
+    holdingValue: 1111,
+    winRate: 1111,
+    holdingTime: 1111,
+    topHoldings: [
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+    ],
+    scan: "https://solscan.io/",
+  },
+  {
+    rank: 3,
+    wallet: "0x123..321",
+    netWorth: 1111,
+    holdingValue: 1111,
+    winRate: 1111,
+    holdingTime: 1111,
+    topHoldings: [
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+    ],
+    scan: "https://solscan.io/",
+  },
+  {
+    rank: 4,
+    wallet: "0x123..321",
+    netWorth: 1111,
+    holdingValue: 1111,
+    winRate: 1111,
+    holdingTime: 1111,
+    topHoldings: [
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+    ],
+    scan: "https://solscan.io/",
+  },
+  {
+    rank: 5,
+    wallet: "0x123..321",
+    netWorth: 1111,
+    holdingValue: 1111,
+    winRate: 1111,
+    holdingTime: 1111,
+    topHoldings: [
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+    ],
+    scan: "https://solscan.io/",
+  },
+  {
+    rank: 6,
+    wallet: "0x123..321",
+    netWorth: 1111,
+    holdingValue: 1111,
+    winRate: 1111,
+    holdingTime: 1111,
+    topHoldings: [
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+      {
+        image: "Name Token",
+        name: "Name Token",
+        volume: 222,
+        percent: 222,
+      },
+    ],
+    scan: "https://solscan.io/",
+  },
+];

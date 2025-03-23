@@ -16,23 +16,21 @@ import { Percentage } from "../../atoms/Percentage/Percentage";
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
 })`
-
-    /* this one prepare for add class that rowitem has new data */
-    .active.ant-table-row-level-0 {
-      .ant-table-cell {
-        background-color: #000;
-        animation: rowActive 3s infinite;
-      }
+  /* this one prepare for add class that rowitem has new data */
+  .active.ant-table-row-level-0 {
+    .ant-table-cell {
+      background-color: #000;
+      animation: rowActive 3s infinite;
     }
+  }
 
   @keyframes rowActive {
     0% {
-      background: #403B19;
+      background: #403b19;
     }
 
-
     100% {
-      background : #000;
+      background: #000;
     }
   }
 
@@ -74,27 +72,24 @@ const MemeCoinTableStyled = styled.div.attrs({
         th:first-child {
         }
         th.ant-table-cell-fix-left-last {
-
           border-right: 1px solid ${COLORS.white60};
         }
         th:nth-child(2) {
           padding-left: 15px !important;
         }
-              }
+      }
     }
   }
 
-
-    tbody {
-      tr {
-        td:first-child {
-        }
-        td.ant-table-cell-fix-left-last {
-          border-right: 1px solid ${COLORS.white60};
-        }
-        td:nth-child(2) {
-          padding-left: 15px !important;
-        }
+  tbody {
+    tr {
+      td:first-child {
+      }
+      td.ant-table-cell-fix-left-last {
+        border-right: 1px solid ${COLORS.white60};
+      }
+      td:nth-child(2) {
+        padding-left: 15px !important;
       }
     }
   }

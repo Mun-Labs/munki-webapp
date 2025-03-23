@@ -3,6 +3,7 @@ import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import FearAndGreedyChart from "../../../../organisms/FearAndGreedyChart/FearAndGreedyChart";
 import { COLORS } from "../../../../colors";
+import { TopFollowerItem } from "./TopFollowerItem";
 
 const marks: SliderSingleProps["marks"] = {
   0: "0",
@@ -67,21 +68,10 @@ export const SectionScore: FC<SectionScoreProps> = () => {
           <p>Profile</p>
           <p>Followers</p>
         </div>
-        <TopFollowersItemStyled>
-          <div className="profile">
-            <img
-              className="profile-img"
-              src="/user4.png"
-              width={44}
-              height={44}
-            />
-            <div className="profile-info">
-              <p className="profile-info--xname font-normal">@meowjupiter</p>
-              <p className="profile-info--name font-normal">Meow Jupiter</p>
-            </div>
-          </div>
-          <div className="follower font-normal">233.33k</div>
-        </TopFollowersItemStyled>
+        <TopFollowerItem />
+        <TopFollowerItem />
+        <TopFollowerItem />
+        <TopFollowerItem />
       </div>
     </SectionScoreStyled>
   );

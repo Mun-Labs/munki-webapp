@@ -247,6 +247,7 @@ export const MOCK_DATA_FEAR_AND_GREED: ApiResponse<FearAndGreedResponse> = {
 export const COIN_MAP = {
   chillGuy: MockService.generateToken({
     name: "CHILLGUY",
+    wallet: '0x123...321',
     logoUrl: "/chillguy.jpeg",
     volume: RandomService.generateRandomNumber(1000, 1000),
   }),

@@ -112,6 +112,10 @@ const ChartContainer = styled.div`
   .recharts-curve.recharts-tooltip-cursor {
     display: none !important;
   }
+
+  .font-normal {
+    font-family: Arial, Helvetica, sans-serif;
+  }
 `;
 
 const Title = styled.h2`
@@ -154,6 +158,10 @@ const TooltipContainer = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   color: #fff;
   font-size: 12px;
+
+  .font-normal {
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
   p {
     margin: 2px 0;

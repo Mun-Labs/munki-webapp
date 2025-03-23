@@ -14,21 +14,12 @@ import { Profile } from "./Profile/Profile";
 import { Head } from "./Head/Head";
 import { Analytics } from "./Analytics/Analytics";
 import "./TokenDetailPage.css";
+import TopHolder from "./TopHolder/TopHolder";
+import TokenDistribution from "./TokenDistribution/TokenDistribution";
+import { COLORS } from "../../colors";
+import TotalHolders from "./TotalHolders/TotalHolders";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
-
-const TokenDetailsPageStyled = styled.div.attrs({
-  className: "TokenDetailsPageStyled",
-})`
-  padding: 20px;
-  width: 100%;
-  max-width: 1535px;
-  margin: auto;
-
-  .ant-col,
-  .ant-col > div {
-  }
-`;
 
 export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
   const { style } = props;
@@ -42,96 +33,38 @@ export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
       <BioInfo />
       <br />
       <Analytics />
-      <section>
-        <FilterByTime />
-        <br />
-        <Row>
-          <Col span={6}>
-            <div style={{ height: 150 }}>
-              <LineChartDemo />
-            </div>
-            <div style={{ height: 150 }}>
-              <LineChartDemo />
-            </div>
-          </Col>
-          <Col span={6}>
-            <div style={{ height: 150 }}>
-              <BarChartDemo />
-            </div>
-            <div style={{ height: 150 }}>
-              <BarChartDemo />
-            </div>
-          </Col>
-          <Col span={12}>
-            <div style={{ height: 50 }}>First</div>
-            <div style={{ height: 250 }}>
-              <ComposedChartDemo />
-            </div>
-          </Col>
-        </Row>
-      </section>
 
-      <br />
+      <TopHolder />
 
-      <section>
-        <Typography.Title>Analytics</Typography.Title>
-        <Flex style={{ height: 400 }}>
-          <AnalyticsCard
-            label="Reach"
-            bottom={"bottom 1 "}
-            style={{ flexGrow: 1 }}
-          >
-            <AreaChartDemo />
-          </AnalyticsCard>
-          <AnalyticsCard
-            label="Engagement"
-            bottom={"bottom 2"}
-            style={{ flexGrow: 1 }}
-          >
-            <AreaChartDemo />
-          </AnalyticsCard>
-          <AnalyticsCard
-            label="Followers"
-            bottom={"bottom 3"}
-            style={{ flexGrow: 1 }}
-          >
-            <AreaChartDemo />
-          </AnalyticsCard>
-        </Flex>
-      </section>
-
-      <br />
-
-      <section>
-        <Typography.Title>Top tweets</Typography.Title>
-        <Flex gap={32}>
-          <Card
-            size="small"
-            title={
-              <AvatarWithText style={{ padding: 10 }} name={""} symbol={""} />
-            }
-            extra={"..."}
-            style={{ width: 400 }}
-          >
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-          </Card>
-
-          <Card
-            size="small"
-            title={
-              <AvatarWithText style={{ padding: 10 }} name={""} symbol={""} />
-            }
-            extra={"..."}
-            style={{ width: 400 }}
-          >
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-          </Card>
-        </Flex>
-      </section>
+      <div className="info-holder">
+        <TokenDistribution />
+        <TotalHolders />
+      </div>
     </TokenDetailsPageStyled>
   );
 };
+
+const TokenDetailsPageStyled = styled.div.attrs({
+  className: "TokenDetailsPageStyled",
+})`
+  padding: 20px;
+  width: 100%;
+  max-width: 1535px;
+  margin: auto;
+
+  .info-holder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid ${COLORS.magenta};
+  }
+
+  .ant-col,
+  .ant-col > div {
+  }
+
+  @media (max-width: 1180px) {
+    .info-holder {
+      display: block;
+    }
+  }
+`;
