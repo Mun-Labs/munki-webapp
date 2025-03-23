@@ -1,5 +1,5 @@
 import { AvatarWithText } from "./AvatarWithText";
 
 export const AvatarWithTextDemo = () => {
-  return <AvatarWithText></AvatarWithText>;
+  return <AvatarWithText name={""} symbol={""}></AvatarWithText>;
 };

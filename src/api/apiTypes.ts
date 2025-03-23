@@ -4,10 +4,22 @@ import { Address, UnixTime } from "../domain/types/Types";
 export interface ApiResponse<T> {
   code: number;
   response: T;
+  last_updated: UnixTime;
 }
-export interface FearAndGreedResponse {
-  fearAndGreed: FearAndGreed[];
-  tokenPrices: TokenPrices;
+
+export interface Token {
+  token_address: Address;
+  name: string;
+  symbol: string;
+  logo_uri: string;
+}
+
+export interface MindshareItem {
+  tokenAddress: Address;
+  changePercentage: number;
+  logoUrl: string;
+  name: string;
+  symbol: string;
 }
 
 export interface FearAndGreed {
@@ -15,6 +27,11 @@ export interface FearAndGreed {
   valueClassification: keyof typeof FearAndGreedClassification | "n/a";
   timestamp: UnixTime;
   chain: "solana";
+}
+
+export interface FearAndGreedResponse extends FearAndGreed {
+  fearAndGreed: FearAndGreed[];
+  tokenPrices: TokenPrices;
 }
 
 export const defaultFearAndGreed: FearAndGreed = {

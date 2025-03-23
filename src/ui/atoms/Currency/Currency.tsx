@@ -17,7 +17,7 @@ const currencySymbol = "$";
 
 export const Currency: FC<CurrencyProps> = (props) => {
   const { style, showColors, value, prefixes } = props;
-  if (!value) return <>N/A</>;
+  if (!value) return <>n/a</>;
 
   let color;
   let prefix = null;
@@ -31,7 +31,7 @@ export const Currency: FC<CurrencyProps> = (props) => {
   const asValueString = NumbersService.numberToNumberString(value);
 
   return (
-    <CurrencyStyled style={{ ...style, color }}>
+    <CurrencyStyled style={{ color, ...style }}>
       {prefix} {currencySymbol}
       {asValueString}
     </CurrencyStyled>

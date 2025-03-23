@@ -3,11 +3,10 @@ import React from "react";
 export type AnyObject = Record<PropertyKey, any>;
 
 export interface ITreeChartNode {
-  name: string;
   size: number;
-  logoUrl?: string;
   twentyFourHourPercentage?: number;
-  children?: ITreeChartNode[];
+  logoUrl?: string;
+  name: string;
 }
 
 export const socials = ["web", "website", "telegram", "x"] as const;

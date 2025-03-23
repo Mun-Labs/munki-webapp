@@ -17,7 +17,7 @@ const TokenStyled = styled.div.attrs({
   }
 
   button {
-    color: ${UI_COLORS.primaryText};
+    color: ${UI_COLORS.primaryText} !important; // !important due to specificy issue with "where()" https://github.com/ant-design/ant-design/issues/52879
     padding: 0;
   }
 

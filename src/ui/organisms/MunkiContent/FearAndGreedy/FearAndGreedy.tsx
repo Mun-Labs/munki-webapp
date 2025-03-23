@@ -4,7 +4,6 @@ import { COLORS } from "../../../colors";
 import { Styles } from "../../../uiStyles";
 import FearAndGreedyChart from "../../FearAndGreedyChart/FearAndGreedyChart";
 import { useFearAndGreedApi } from "../../../../api/hooks/useFearAndGreedApi";
-import { MOCK_DATA_FEAR_AND_GREED } from "../../../../api/MockData";
 import { ComponentProps, FC } from "react";
 import { defaultFearAndGreed, FearAndGreed } from "../../../../api/apiTypes";
 import { unixToDate } from "../../../../common/modules/dateAndTime";
@@ -18,6 +17,7 @@ import {
   volumeMapping,
 } from "../../../../domain/businessLogic/volumeLogic";
 import { Percentage } from "../../../atoms/Percentage/Percentage";
+import { MOCK_DATA_FEAR_AND_GREED } from "../../../../api/MockData";
 
 export const style = {
   paddingFlex: {
@@ -65,11 +65,31 @@ export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
 };
 
 function FearAndGreedWidget() {
-  const { data } = useFearAndGreedApi(undefined, MOCK_DATA_FEAR_AND_GREED);
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ FearAndGreedy.tsx:80 ~ FearAndGreedWidget ~ data:', data)
-  const [current, ...history] = data!.fearAndGreed; // TODO: remove "!"
-  const tokens = Object.values(data!.tokenPrices);
-  const tokenInfo = tokens[0];
+  const { data, isLoading } = useFearAndGreedApi(
+    undefined,
+    MOCK_DATA_FEAR_AND_GREED,
+  );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!data?.response) {
+    return <div>No Response...</div>;
+  }
+
+  // @ts-expect-error
+  let fearAndGreed: FearAndGreed[] = [{}, {}];
+  // @ts-expect-error
+  let tokens: TokenPriceInfo[] = [];
+  if (data) {
+    fearAndGreed = data.response.fearAndGreed;
+    tokens = Object.values(data.response.tokenPrices);
+  }
+
+  const current = data.response;
+  const history = current.fearAndGreed; // TODO: remove "!"
+  const tokenInfo = tokens[0] ?? {};
 
   const volumeLabel = volumeMapping(tokenInfo.volumeUSD);
 
@@ -84,7 +104,12 @@ function FearAndGreedWidget() {
         <WrapInfoStyled>
           <div>
             <h2>Status:</h2>
-            <h1 className="cl-greed" style={{ paddingBottom: "52px" }}>
+            <h1
+              style={{
+                paddingBottom: "52px",
+                color: fearAndGreedColorMapping[current.valueClassification],
+              }}
+            >
               {current.valueClassification}
             </h1>
             <FearAndGreedyChart value={current.value} />
@@ -119,11 +144,8 @@ function FearAndGreedWidget() {
               style={{ fontSize: "18px" }}
               value={tokenInfo.price}
             ></Currency>
-            <span
-              className="percentage-change"
-              style={{ color: "#DC4D3B", fontSize: "14px" }}
-            >
-              <Percentage value={tokenInfo.priceChangePercent} /> (1d)
+            <span className="percentage-change" style={{ fontSize: "14px" }}>
+              <Percentage value={tokenInfo.priceChangePercent} suffix=" (1d)" />
             </span>
           </GroupInfoStyled>
 

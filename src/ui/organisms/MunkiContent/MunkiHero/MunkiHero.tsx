@@ -1,10 +1,11 @@
-import { Input } from "antd";
 import styled from "styled-components";
-import { UserOutlined } from "@ant-design/icons";
+import { TokenSearchWithDropdown } from "../../../molecules/TokenSearchWithDropdown/TokenSearchWithDropdown";
+import { Typography } from "antd";
 
 export const MunkiHero = () => {
   return (
     <div>
+      <BigTitleStyled>Hi, I’m Munki Ai</BigTitleStyled>
       <TopMunkiStyled>
         <img
           width={340}
@@ -13,30 +14,15 @@ export const MunkiHero = () => {
           alt="Munki landing"
         />
       </TopMunkiStyled>
-      <BigTitleStyled>Hi, I’m Munki Ai</BigTitleStyled>
-      <Input
-        size="large"
-        style={{
-          flex: 1,
-          margin: "10px 0px 24px",
-          backgroundColor: "#242424",
-          color: "white",
-          borderRadius: "8px",
-        }}
-        placeholder="search token"
-        prefix={<UserOutlined />}
-      />
+      <BigTitleStyled>
+        <StyledTitle level={1}>
+          🚀 <span>Enter a Token Address & Discover Insights</span> 🚀
+        </StyledTitle>
+      </BigTitleStyled>
+      <TokenSearchWithDropdown />
     </div>
   );
 };
-
-const TopMunkiStyled = styled.div.attrs({
-  className: "BigTitleStyled",
-})`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const BigTitleStyled = styled.div.attrs({
   className: "BigTitleStyled",
@@ -48,5 +34,23 @@ const BigTitleStyled = styled.div.attrs({
   @media (max-width: 767px) {
     text-align: center;
     padding: 12px;
+  }
+`;
+
+const TopMunkiStyled = styled.div.attrs({
+  className: "BigTitleStyled",
+})`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledTitle = styled(Typography.Title)`
+  margin-top: 19px;
+  span {
+    text-shadow: 0 1px 14.2px #ffee64;
+    background: linear-gradient(to bottom, white, #ffefbd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 `;

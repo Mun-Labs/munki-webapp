@@ -62,6 +62,7 @@ export const darkTheme: ThemeConfig = {
     colorBgBase: COLORS.black10,
     colorPrimary: "#00b96b",
     borderRadius: 2,
+    colorBorder: COLORS.grey50,
     colorBorderSecondary: COLORS.grey50,
 
     // Alias Token
