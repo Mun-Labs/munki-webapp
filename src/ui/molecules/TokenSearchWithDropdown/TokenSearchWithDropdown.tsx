@@ -59,7 +59,7 @@ export const TokenSearchWithDropdown: FC<
 const TokenSearchWithDropdownStyled = styled.div.attrs({
   className: "TokenSearchWithDropdownStyled",
 })`
-  width: 60%;
+  width: 65%;
   margin: 10px auto;
   margin-bottom: 50px;
 `;
@@ -78,7 +78,7 @@ const TokenInputStyled = styled(Input).attrs({
   height: 50px;
   padding: 0 20px;
   margin: 10px auto;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
   background-color: #242424;
   box-shadow: 0 0 21.4px 0 #ffee64;
 
@@ -92,6 +92,10 @@ const TokenInputStyled = styled(Input).attrs({
     // border-color: unset;
   }
 
+  &.ant-input-outlined:focus-within {
+    box-shadow: 0 0 21.4px 0 #ffee64;
+  }
+
   input.ant-input::placeholder {
     color: ${COLORS.white60} !important; // TODO: please remove global css rules, eg MunkiContent.css
   }
@@ -101,11 +105,12 @@ const FloatingContainer = styled.div.attrs({
   className: "FloatingContainer",
 })`
   position: relative;
+  width: 95%;
+  margin: 0 auto;
 
   .MunkiTokenListStyled {
     position: absolute;
     width: 100%;
-    background: black;
     z-index: 10;
   }
 `;

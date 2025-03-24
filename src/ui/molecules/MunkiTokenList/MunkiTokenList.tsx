@@ -15,6 +15,22 @@ interface IMunkiTokenListProps extends ComponentProps<any> {
 const MunkiTokenListStyled = styled(List).attrs({
   className: "MunkiTokenListStyled",
 })`
+  box-shadow: 0 6px 16.4px 2px #ffee64,
+    /* right shadow */ 0 3px 21.4px -10px #ffee64,
+    /* left shadow */ 0 0 21.4px -10px #ffee64; /* bottom shadow */
+
+  background: linear-gradient(${COLORS.black} 0 0) padding-box,
+    /*this is your grey background*/ linear-gradient(to right, #fbe892, #ee1b84)
+      border-box;
+  border: 2px solid transparent;
+  border-top: none;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+
+  .ant-list {
+    border: none;
+  }
+
   .ant-list-item {
     transition: background-color 0.2s ease;
 
@@ -36,12 +52,16 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
         itemLayout="horizontal"
         // loadMore={loadMore}
         dataSource={tokens}
-        renderItem={(token) => (
+        renderItem={(token, index) => (
           <a href={`/token/${token.token_address}`} rel="noreferrer noopener">
-            <List.Item>
+            <List.Item
+              style={{
+                borderTop: index !== 0 ? `1px solid ${COLORS.white60}` : "",
+              }}
+            >
               <Skeleton avatar title={false} loading={false} active>
                 <AvatarWithText
-                  logoUrl={token.logo_uri}
+                  // logoUrl={token.logo_uri}
                   name={token.name}
                   symbol={token.symbol}
                 />
