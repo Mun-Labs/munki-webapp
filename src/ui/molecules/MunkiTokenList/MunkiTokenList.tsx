@@ -56,7 +56,7 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
         // loadMore={loadMore}
         dataSource={tokens}
         renderItem={(token, index) => (
-          <a href={`/token/${token.token_address}`} rel="noreferrer noopener">
+          <a href={`/token/${token.tokenAddress}`} rel="noreferrer noopener">
             <List.Item
               style={{
                 borderTop: index !== 0 ? `1px solid ${COLORS.white60}` : "",

@@ -3,7 +3,7 @@ import "./MunkiHeader.css";
 import { Styles } from "../../uiStyles";
 import styled from "styled-components";
 import { COLORS, UI_COLORS } from "../../colors";
-import { MockTokens } from "../../../api/MockData";
+import { MOCK_DATA_TOKEN_TRENDING, MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Token } from "../../atoms/Token/Token";
@@ -53,7 +53,8 @@ const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
 `;
 
 export const MunkiHeader = () => {
-  const tokens = MockTokens;
+  const tokens = MOCK_DATA_TOKEN_TRENDING.response;
+  // const tokens = MockTokens;
 
   const repeatedTokens = [...tokens, ...tokens];
   const [open, setOpen] = useState(false);
@@ -116,8 +117,8 @@ export const MunkiHeader = () => {
                 }}
               />
             }
-            left={<RoundIcon src={token.logoUrl} />}
-            right={<Percentage value={token.twentyFourHourPercentage} />}
+            left={<RoundIcon src={token.logoUri} />}
+            right={<Percentage value={0.5} />}
             style={{ padding: "12px" }}
           ></TextWithLabel>
         ))}
