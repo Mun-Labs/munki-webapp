@@ -11,6 +11,7 @@ const appStyles: React.CSSProperties = {
 
 const StyledMainContent = styled.section`
   margin: 0 auto;
+  max-width: 1440px;
 `;
 
 export const AppLayout: React.FC<PropsWithChildren> = ({ children }) => {
