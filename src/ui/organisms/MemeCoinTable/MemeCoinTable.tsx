@@ -1,7 +1,7 @@
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import React from "react";
-import { Avatar, Table } from "antd";
+import { Avatar, Flex, Table } from "antd";
 import type { TableColumnsType } from "antd";
 import { createStyles } from "antd-style";
 import { IToken } from "../../../domain/entities/Entities";
@@ -15,6 +15,8 @@ import { Percentage } from "../../atoms/Percentage/Percentage";
 import { AlphaMovesItem } from "../../../api/apiTypes";
 import { Currency } from "../../atoms/Currency/Currency";
 import { AvatarWithText } from "../../molecules/AvatarWithText/AvatarWithText";
+import { DateTime } from "luxon";
+import { Styles } from "../../uiStyles";
 
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
@@ -155,7 +157,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
         const asNum = Number(record.amount);
         return (
           <AvatarWithText
-            name={<span style={{color: COLORS.white}}>{record.coinName}</span>}
+            name={
+              <span style={{ color: COLORS.white }}>{record.coinName}</span>
+            }
             symbol={
               <Currency
                 value={asNum}
@@ -171,19 +175,29 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     },
     {
       title: <div className="head">Alpha</div>,
-      width: 100,
-      dataIndex: "mindshare",
-      key: "mindshare",
+      width: 80,
+      dataIndex: "alphaGroup",
+      key: "alphaGroup",
       fixed: isSmallScreen ? undefined : "left",
-      render: (_value) => <div className="head">🐳</div>,
+      render: (value: AlphaMovesItem["alphaGroup"]) => {
+        const mapping: Record<AlphaMovesItem["alphaGroup"], string> = {
+          WHALE: "🐳",
+          KOL: "🌟",
+          SMART: "🧠",
+        };
+        return <div className="head">{mapping[value]}</div>;
+      },
     },
     {
       title: <div className="head">Times</div>,
-      width: 80,
-      dataIndex: "mindshare",
-      key: "mindshare",
+      width: 120,
+      dataIndex: "time",
+      key: "time",
       fixed: isSmallScreen ? undefined : "left",
-      render: (_value) => <div className="head">1m</div>,
+      render: (_value) => {
+        const timeAgo = DateTime.fromMillis(_value * 1000).toRelative();
+        return <div className="head">{timeAgo}</div>;
+      },
     },
     {
       title: <div className="head">%hold</div>,
@@ -206,13 +220,32 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           Token
         </div>
       ),
-      dataIndex: "marketCap",
-      key: "marketCap",
+      dataIndex: "token",
+      key: "token",
       width: 200,
       fixed: isSmallScreen ? undefined : "left",
-      render: (_value) => (
-        <UITokenWhale name="Fartcoin" value={"200$"} src="/user4.png" />
-      ),
+      render: (_, record) => {
+        const asNum = Number(record.amount);
+        return (
+          <AvatarWithText
+            logoUrl="/user4.png"
+            name={
+              <span style={{ color: COLORS.white }}>{record.token_symbol}</span>
+            }
+            symbol={
+              <Flex style={{...Styles.fontSansSerif, color: COLORS.white60}}>
+                @ MC
+                <Currency
+                  value={asNum}
+                  actionType={record.actionType}
+                  style={{marginLeft: 6}}
+                />
+              </Flex>
+            }
+            shape="square"
+          />
+        );
+      },
     },
     {
       title: (
@@ -223,15 +256,15 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           Mun score
         </div>
       ),
-      dataIndex: "marketCap7D",
-      key: "marketCap7D",
+      dataIndex: "munScore",
+      key: "munScore",
       width: 120,
-      render: (_value) => (
+      render: (_, record) => (
         <div
           className="cl-mun-score"
           style={{ fontSize: "24px", textAlign: "center" }}
         >
-          4332
+          {record.token.mun_score}
         </div>
       ),
     },
@@ -244,15 +277,15 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           Risk score
         </div>
       ),
-      dataIndex: "marketCap7D",
-      key: "marketCap7D",
+      dataIndex: "riskScore",
+      key: "riskScore",
       width: 120,
-      render: (_value) => (
+      render: (_, record) => (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Percentage
             style={{ fontSize: "20px" }}
             noSigns
-            value={10}
+            value={record.token.risk_score}
           ></Percentage>
         </div>
       ),

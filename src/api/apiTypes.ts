@@ -55,7 +55,7 @@ export interface AlphaMovesItem {
   slot: number;
   coinName: string;
   token_symbol: string;
-  alphaGroup: "WHALE";
+  alphaGroup: "WHALE" | "KOL" | "SMART";
   name: string;
   token: {
     token_address: Address;
