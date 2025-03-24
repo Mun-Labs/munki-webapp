@@ -61,7 +61,7 @@ export const TokenCard: FC<TokenCardProps> = ({ style, token }) => {
 
         <Flex justify="space-between" style={{ marginBottom: 14 }}>
           <Token
-            token={token}
+            token={{ tokenAddress: token.address, name: token.name }}
             style={{ margin: "12px 0" }}
             textStyle={{ ...Styles.h1, color: COLORS.yellow }}
           />

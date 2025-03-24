@@ -23,16 +23,20 @@ export const Styles: RecursiveStyles = {
     border: `1px solid ${COLORS.white}`,
   },
   h1: {
-    fontWeight: 800,
+    fontWeight: 900,
     fontSize: "30px",
   },
   h2: {
-    fontWeight: 800,
+    fontWeight: 900,
     fontSize: "26.5px",
   },
   h3: {
-    fontWeight: 800,
+    fontWeight: 900,
     fontSize: "17.3px",
+  },
+  h4: {
+    fontWeight: 600,
+    fontSize: "16px",
   },
   textSm: {
     fontSize: "14px",
@@ -41,7 +45,7 @@ export const Styles: RecursiveStyles = {
     textShadow: "1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue",
   },
   fontSansSerif: {
-    fontFamily: "sans-serif",
+    fontFamily: "Arial, Helvetica, sans-serif"
   },
   ellipsis: {
     overflow: "hidden",
@@ -70,8 +74,17 @@ export const darkTheme: ThemeConfig = {
     fontFamily: "GROBOLD, sans serif",
   },
   components: {
+    Button: {
+      defaultActiveColor: COLORS.white,
+      defaultHoverColor: COLORS.white,
+      defaultHoverBg: 'red', // does not work. leaving it here for further investigation
+    },
     Card: {
       borderRadiusLG: 8,
+    },
+    Input: {
+      hoverBg: COLORS.white25,
+      // hoverBg: "red",
     },
     Segmented: {
       itemSelectedBg: COLORS.magenta,

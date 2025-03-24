@@ -1,17 +1,27 @@
 import { FearAndGreedClassification } from "../domain/types/BusinessLogicTypes";
-import { Address, UnixTime } from "../domain/types/Types";
+import { Address, BigDecimal, UnixTime } from "../domain/types/Types";
 
 export interface ApiResponse<T> {
   code: number;
   response: T;
   last_updated: UnixTime;
+  total?: number;
 }
 
 export interface Token {
-  token_address: Address;
+  tokenAddress: Address;
   name: string;
   symbol: string;
-  logo_uri: string;
+  mc: number;
+  logoUri: string;
+}
+
+export interface TokenTrending
+  extends Pick<Token, "tokenAddress" | "name" | "symbol" | "logoUri"> {
+  volume24h: BigDecimal;
+  volume24hChange?: number;
+  recordDate: UnixTime;
+  holderCount: number;
 }
 
 export interface MindshareItem {
@@ -20,6 +30,7 @@ export interface MindshareItem {
   logoUrl: string;
   name: string;
   symbol: string;
+  volume: BigDecimal;
 }
 
 export interface FearAndGreed {
@@ -32,6 +43,31 @@ export interface FearAndGreed {
 export interface FearAndGreedResponse extends FearAndGreed {
   fearAndGreed: FearAndGreed[];
   tokenPrices: TokenPrices;
+}
+
+export interface AlphaMovesItem {
+  signature: string;
+  tokenAddress: Address;
+  walletAddress: Address;
+  actionType: "sell" | "buy";
+  amount: BigDecimal;
+  time: UnixTime;
+  slot: number;
+  coinName: string;
+  tokenSymbol: string;
+  tokenLogo?: string; // newly added
+  totalSupply?: BigDecimal; // newly added
+  alphaGroup: "WHALE" | "KOL" | "SMART";
+  name: string;
+  token: {
+    tokenAddress: Address;
+    munScore: number;
+    riskScore: number;
+    topFreshWalletHolders: number;
+    topSmartWalletsHolders: number;
+    smartFollowers: number;
+  };
+  decimal: number;
 }
 
 export const defaultFearAndGreed: FearAndGreed = {
@@ -54,8 +90,11 @@ export type TokenPrices = {
   [tokenAddress: Address]: TokenPriceInfo;
 };
 
-export interface TokenQueryParams {
-  q: string;
+export interface PaginationQueryParams {
   limit?: number;
   offset?: number;
+}
+
+export interface TokenQueryParams extends PaginationQueryParams {
+  q: string;
 }

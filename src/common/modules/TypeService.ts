@@ -1,13 +1,25 @@
 import { AnyObject } from "../../domain/types/Types";
 
 export class TypeService {
-  public static mapKeys<FromType extends AnyObject, ToType extends AnyObject>(
+  public static mapKeys<
+    FromType extends AnyObject,
+    ToType extends AnyObject,
+    FromKey extends keyof FromType = keyof FromType,
+    ToKey extends keyof ToType = keyof ToType,
+  >(
     data: FromType,
-    mapping: [from: keyof FromType, to: keyof ToType][],
+    mapping: [
+      from: FromKey,
+      to: ToKey,
+      mapper?: (item: FromType[FromKey]) => ToType[ToKey],
+    ][],
   ): ToType {
     const mappedData: any = {};
-    for (const [from, to] of mapping) {
-      if (data[from] !== undefined) {
+    for (const [from, to, mapper] of mapping) {
+      if (data[from] === undefined) continue;
+      if (typeof mapper === "function") {
+        mappedData[to] = mapper(data[from]);
+      } else {
         mappedData[to] = data[from];
       }
     }
@@ -17,9 +29,15 @@ export class TypeService {
   public static mapKeysArray<
     FromType extends AnyObject,
     ToType extends AnyObject,
+    FromKey extends keyof FromType = keyof FromType,
+    ToKey extends keyof ToType = keyof ToType,
   >(
     data: FromType[],
-    mapping: [from: keyof FromType, to: keyof ToType][],
+    mapping: [
+      from: FromKey,
+      to: ToKey,
+      mapper?: (item: FromType[FromKey]) => ToType[ToKey],
+    ][],
   ): ToType[] {
     return data.map((item) => this.mapKeys(item, mapping));
   }

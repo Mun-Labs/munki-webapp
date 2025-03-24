@@ -1,7 +1,7 @@
 // Token
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
-import { IToken } from "../../../domain/entities/Entities";
+import type { TokenTrending } from "../../../api/apiTypes";
 import { Button } from "antd";
 import { UI_COLORS } from "../../colors";
 
@@ -27,7 +27,7 @@ const TokenStyled = styled.div.attrs({
 `;
 
 interface ITokenProps extends ComponentProps<any> {
-  token: IToken;
+  token: { tokenAddress: string; name: string };
   textStyle?: React.CSSProperties;
 }
 
@@ -35,7 +35,7 @@ export const Token: FC<ITokenProps> = (props) => {
   const { style, textStyle, token } = props;
   return (
     <TokenStyled style={{ ...style }}>
-      <a href={`/token/${token.address}`} rel="noreferrer noopener">
+      <a href={`/token/${token.tokenAddress}`} rel="noreferrer noopener">
         <Button type="link">
           <div style={{ textAlign: "start", ...textStyle }}>{token.name}</div>
         </Button>

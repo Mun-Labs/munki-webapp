@@ -3,12 +3,13 @@ import "./MunkiHeader.css";
 import { Styles } from "../../uiStyles";
 import styled from "styled-components";
 import { COLORS, UI_COLORS } from "../../colors";
-import { MockTokens } from "../../../api/MockData";
+import { MOCK_DATA_TOKEN_TRENDING, MockTokens } from "../../../api/MockData";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Token } from "../../atoms/Token/Token";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { useState } from "react";
+import { useTokenTrendingApi } from "../../../api/hooks/useTokenTrendingApi";
 
 const headerStyles: React.CSSProperties = {
   // ...debugStyles,
@@ -31,7 +32,7 @@ const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
   height: 62px;
   width: fit-content;
 
-  animation: ticker 40s linear infinite;
+  animation: ticker 60s linear infinite;
 
   @keyframes ticker {
     0% {
@@ -53,10 +54,12 @@ const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
 `;
 
 export const MunkiHeader = () => {
-  const tokens = MockTokens;
-
-  const repeatedTokens = [...tokens, ...tokens];
+  const { data } = useTokenTrendingApi(undefined, MOCK_DATA_TOKEN_TRENDING);
   const [open, setOpen] = useState(false);
+
+  if (!data) return;
+  const tokens = data.response;
+  const repeatedTokens = [...tokens, ...tokens];
 
   const showDrawer = () => {
     setOpen(!open);
@@ -116,8 +119,8 @@ export const MunkiHeader = () => {
                 }}
               />
             }
-            left={<RoundIcon src={token.logoUrl} />}
-            right={<Percentage value={token.twentyFourHourPercentage} />}
+            left={<RoundIcon src={token.logoUri} size={38} />}
+            right={<Percentage value={token.volume24hChange} />}
             style={{ padding: "12px" }}
           ></TextWithLabel>
         ))}

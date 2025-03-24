@@ -1,34 +1,39 @@
-import { MockTokens } from "../../../../api/MockData";
+import { Flex } from "antd";
+import styled from "styled-components";
+import { MindshareItem } from "../../../../api/apiTypes";
+import { useMindshareApi } from "../../../../api/hooks/useMindshareApi";
+import { MOCK_DATA_MINDSHARE } from "../../../../api/MockData";
 import { TypeService } from "../../../../common/modules/TypeService";
-import { IToken } from "../../../../domain/entities/Entities";
 import { ITreeChartNode } from "../../../../domain/types/Types";
-import { FilterByTime } from "../../../molecules/FilterByTime/FilterByTime";
 import { TreeChart } from "../../../molecules/TreeChart/TreeChart";
 import { Styles } from "../../../uiStyles";
 import FearAndGreedWidget from "../FearAndGreedy/FearAndGreedy";
-
-import styled from "styled-components";
-
-const data = TypeService.mapKeysArray<IToken, ITreeChartNode>(
-  MockTokens,
-  // MockTokens.slice(0, 3),
-  [
-    ["name", "name"],
-    ["volume", "size"],
-    ["logoUrl", "logoUrl"],
-    ["twentyFourHourPercentage", "twentyFourHourPercentage"],
-  ],
-);
+import { COLORS } from "../../../colors";
 
 export const MemecoinMindshare = () => {
+  const { data } = useMindshareApi(undefined, MOCK_DATA_MINDSHARE);
+  if (!data) return;
+
+  const tokens = TypeService.mapKeysArray<MindshareItem, ITreeChartNode>(
+    data.response,
+    [
+      ["name", "name"],
+      ["volume", "size", (item) => Number(item)],
+      ["logoUrl", "logoUrl"],
+      ["changePercentage", "twentyFourHourPercentage"],
+    ],
+  );
+
   return (
     <TopMemeStyled>
       <div className="section-mindshare">
         <div className="head">
           <p style={{ ...Styles.h2 }}>Memecoins Mindshare 🌑</p>
-          <FilterByTime style={{ fontSize: 14 }} />
+          <Flex style={{ ...Styles.fontSansSerif, color: COLORS.white60 }}>
+            Updates every 24h
+          </Flex>
         </div>
-        <TreeChart data={data} style={{ height: 490 }}></TreeChart>
+        <TreeChart data={tokens} style={{ height: 490 }}></TreeChart>
       </div>
       <div className="section-memeindex">
         <FearAndGreedWidget />

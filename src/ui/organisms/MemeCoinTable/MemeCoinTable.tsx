@@ -1,17 +1,22 @@
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import React from "react";
-import { Avatar, Table } from "antd";
-import type { TableColumnsType } from "antd";
+import { Avatar, Flex, Table } from "antd";
+import type { TableColumnsType, TablePaginationConfig } from "antd";
 import { createStyles } from "antd-style";
-import { IToken } from "../../../domain/entities/Entities";
-import { MockTokens } from "../../../api/MockData";
+import { MOCK_DATA_ALPHA_MOVES } from "../../../api/MockData";
 import { COLORS } from "../../colors";
-import { UITokenWhale } from "../../atoms/UITokenWhale/UITokenWhale";
 import { AntDesignOutlined } from "@ant-design/icons";
 import useSmallScreen from "../../../hooks/useSmallScreen";
 import { MunkiBadge } from "../../atoms/MunkiBadge/MunkiBadge";
 import { Percentage } from "../../atoms/Percentage/Percentage";
+import { AlphaMovesItem, PaginationQueryParams } from "../../../api/apiTypes";
+import { Currency } from "../../atoms/Currency/Currency";
+import { AvatarWithText } from "../../molecules/AvatarWithText/AvatarWithText";
+import { DateTime } from "luxon";
+import { Styles } from "../../uiStyles";
+import { useAlphaMovesApi } from "../../../api/hooks/useAlphaMovesApi";
+import { calculatePercentHold } from "../../../domain/businessLogic/percentHold";
 
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
@@ -115,23 +120,72 @@ const useStyle = createStyles(({ css, token }) => {
   };
 });
 
-interface DataType extends IToken {
+interface DataType extends AlphaMovesItem {
   key: React.Key;
 }
-
-const dataSource: DataType[] = MockTokens.map((token) => ({
-  ...token,
-  key: token.name,
-}));
 
 export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   const { style } = props;
   const { styles } = useStyle();
   const isSmallScreen = useSmallScreen(1265);
 
-  // console.log({ dataSource });
-  // console.log({ MockTokens });
-  // console.log({ styles });
+  // Add pagination state
+  const [tableParams, setTableParams] = useState<{
+    pagination: TablePaginationConfig;
+  }>({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+      total: 0,
+    },
+  });
+
+  // Convert antd pagination params to API pagination params
+  const paginationParams: PaginationQueryParams = {
+    limit: tableParams.pagination.pageSize,
+    offset:
+      ((tableParams.pagination.current || 1) - 1) *
+      (tableParams.pagination.pageSize || 10),
+  };
+
+  // Use the pagination params in the API call
+  const { data, isLoading } = useAlphaMovesApi(
+    paginationParams,
+    MOCK_DATA_ALPHA_MOVES,
+  );
+
+  // Update pagination total when data is received
+  useEffect(() => {
+    if (data && data.total !== undefined) {
+      setTableParams({
+        ...tableParams,
+        pagination: {
+          ...tableParams.pagination,
+          total: data.total,
+        },
+      });
+    }
+  }, [data]);
+
+  // Handle pagination changes
+  const handleTableChange = (pagination: TablePaginationConfig) => {
+    // Clear data if page size changes
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      // No need to explicitly clear data as it will be refetched due to pagination change
+      // Just note that old data might not be relevant when pageSize changes
+    }
+
+    setTableParams({
+      pagination,
+    });
+  };
+
+  if (!data) return null;
+
+  const dataSource: DataType[] = data.response.map((token) => ({
+    ...token,
+    key: token.time,
+  }));
 
   const columns: TableColumnsType<DataType> = [
     {
@@ -147,36 +201,69 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       dataIndex: "name",
       key: "name",
       fixed: isSmallScreen ? undefined : "left",
-      render: (_, _record) => (
-        <UITokenWhale name="Fartcoin" value={"200$"} src="/user4.png" />
-      ),
+      render: (_, record) => {
+        const asNum = Number(record.amount);
+        return (
+          <AvatarWithText
+            name={
+              <span style={{ color: COLORS.white }}>{record.coinName}</span>
+            }
+            symbol={
+              <Currency
+                value={asNum}
+                showColors
+                colors={[undefined, COLORS.magenta]}
+                prefixes={["Bought", "Sold"]}
+                actionType={record.actionType}
+              />
+            }
+            shape="square"
+          />
+        );
+      },
     },
     {
       title: <div className="head">Alpha</div>,
-      width: 100,
-      dataIndex: "mindshare",
-      key: "mindshare",
+      width: 80,
+      dataIndex: "alphaGroup",
+      key: "alphaGroup",
       fixed: isSmallScreen ? undefined : "left",
-      render: (_value) => <div className="head">🐳</div>,
+      render: (value: AlphaMovesItem["alphaGroup"]) => {
+        const mapping: Record<AlphaMovesItem["alphaGroup"], string> = {
+          WHALE: "🐳",
+          KOL: "🌟",
+          SMART: "🧠",
+        };
+        return <div className="head">{mapping[value]}</div>;
+      },
     },
     {
       title: <div className="head">Times</div>,
-      width: 80,
-      dataIndex: "mindshare",
-      key: "mindshare",
+      width: 120,
+      dataIndex: "time",
+      key: "time",
       fixed: isSmallScreen ? undefined : "left",
-      render: (_value) => <div className="head">1m</div>,
+      render: (_value) => {
+        const timeAgo = DateTime.fromMillis(_value * 1000).toRelative();
+        return <div className="head">{timeAgo}</div>;
+      },
     },
     {
       title: <div className="head">%hold</div>,
-      dataIndex: "mindshare7D",
-      key: "mindshare7D",
-      width: 120,
+      dataIndex: "hold",
+      key: "hold",
+      width: 80,
       fixed: isSmallScreen ? undefined : "left",
-      render: (_value) => (
-        <div className="head" style={{ color: "#C5BC95" }}>
-          10%
-        </div>
+      render: (_, record) => (
+        <Percentage
+          value={calculatePercentHold(
+            Number(record.amount),
+            Number(record.totalSupply),
+          )}
+          className="head"
+          style={{ color: "#C5BC95", justifyContent: "center" }}
+          noSigns
+        />
       ),
     },
     {
@@ -188,13 +275,32 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           Token
         </div>
       ),
-      dataIndex: "marketCap",
-      key: "marketCap",
+      dataIndex: "token",
+      key: "token",
       width: 200,
       fixed: isSmallScreen ? undefined : "left",
-      render: (_value) => (
-        <UITokenWhale name="Fartcoin" value={"200$"} src="/user4.png" />
-      ),
+      render: (_, record) => {
+        const asNum = Number(record.amount);
+        return (
+          <AvatarWithText
+            logoUrl={record.tokenLogo ?? "/user4.png"}
+            name={
+              <span style={{ color: COLORS.white }}>{record.tokenSymbol}</span>
+            }
+            symbol={
+              <Flex style={{ ...Styles.fontSansSerif, color: COLORS.white60 }}>
+                @ MC
+                <Currency
+                  value={asNum}
+                  actionType={record.actionType}
+                  style={{ marginLeft: 6 }}
+                />
+              </Flex>
+            }
+            shape="square"
+          />
+        );
+      },
     },
     {
       title: (
@@ -205,15 +311,15 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           Mun score
         </div>
       ),
-      dataIndex: "marketCap7D",
-      key: "marketCap7D",
+      dataIndex: "munScore",
+      key: "munScore",
       width: 120,
-      render: (_value) => (
+      render: (_, record) => (
         <div
           className="cl-mun-score"
           style={{ fontSize: "24px", textAlign: "center" }}
         >
-          4332
+          {record.token.munScore}
         </div>
       ),
     },
@@ -226,15 +332,15 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           Risk score
         </div>
       ),
-      dataIndex: "marketCap7D",
-      key: "marketCap7D",
+      dataIndex: "riskScore",
+      key: "riskScore",
       width: 120,
-      render: (_value) => (
+      render: (_, record) => (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Percentage
             style={{ fontSize: "20px" }}
             noSigns
-            value={10}
+            value={record.token.riskScore}
           ></Percentage>
         </div>
       ),
@@ -245,10 +351,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           # of smarts wallet in top holder
         </div>
       ),
-      dataIndex: "avgImpressions",
-      key: "avgImpressions",
+      dataIndex: "top_smart_wallets_holders",
+      key: "top_smart_wallets_holders",
       width: 180,
-      render: (_value) => <MunkiBadge>10/50</MunkiBadge>,
+      render: (_, record) => (
+        <MunkiBadge>{record.token.topSmartWalletsHolders}/50</MunkiBadge>
+      ),
     },
     {
       title: (
@@ -256,19 +364,23 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           # of fresh wallets in top holers
         </div>
       ),
-      dataIndex: "avgImpressions",
-      key: "avgImpressions",
+      dataIndex: "top_fresh_wallet_holders",
+      key: "top_fresh_wallet_holders",
       width: 180,
-      render: (_value) => (
-        <MunkiBadge color={COLORS.yellow30}>10/50</MunkiBadge>
+      render: (_, record) => (
+        <MunkiBadge color={COLORS.yellow30}>
+          {record.token.topFreshWalletHolders}/50
+        </MunkiBadge>
       ),
     },
     {
       title: <div className="head">Smart followers</div>,
-      dataIndex: "avgImpressions",
-      key: "avgImpressions",
+      dataIndex: "smart_followers",
+      key: "smart_followers",
       width: 150,
-      render: (_value) => <div className="content">433</div>,
+      render: (_, record) => (
+        <div className="content">{record.token.smartFollowers}</div>
+      ),
     },
     {
       title: <div className="head">Followers</div>,
@@ -340,10 +452,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
         className={styles.customTable}
         columns={columns}
         rowClassName={(record) => {
-          return record?.address === "0x6e6c3659" ? "active" : "";
+          return record?.tokenAddress === "0x6e6c3659" ? "active" : "";
         }}
         dataSource={dataSource}
-        pagination={{ position: ["none", "bottomCenter"] }}
+        pagination={{ position: ["bottomCenter"], ...tableParams.pagination }}
+        onChange={(pagination) => handleTableChange(pagination)}
+        loading={isLoading}
         size="middle"
         scroll={{ x: "max-content", y: 55 * 10 }}
       />

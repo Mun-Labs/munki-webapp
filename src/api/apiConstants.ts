@@ -7,10 +7,12 @@ export const BASE_URL =
 // mindshare
 
 export enum EndpointsEnum {
+  "alphamoves" = "alphamoves",
   "mindshare" = "mindshare",
   "fearandgreed" = "fearandgreed",
   "vibecheck" = "vibecheck",
   "token" = "token",
+  "token/trending" = "token/trending",
 }
 
 export const defaultSwrResponse: SWRResponse<any> = {

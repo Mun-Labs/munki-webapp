@@ -1,4 +1,4 @@
-import { ITopHolder } from "../../../domain/entities/Entities";
+import { ITopHolder } from "../../../../../domain/entities/Entities";
 
 export const dataSource: ITopHolder[] = [
   {

@@ -2,6 +2,8 @@ import { ComponentProps, FC, ReactNode } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
+import { Styles } from "../../uiStyles";
+import { Tooltip } from "antd";
 
 const PercentageStyled = styled.div.attrs({ className: "PercentageStyled" })`
   display: flex;
@@ -12,16 +14,33 @@ interface PercentageProps extends ComponentProps<any> {
   plusMinus?: boolean;
   noSigns?: boolean;
   neutralColor?: boolean;
+  colors?: [positive?: string, negative?: string];
   suffix?: ReactNode;
+  fontFamily?: "munki" | "sans-serif" | string;
 }
 
 export const Percentage: FC<PercentageProps> = (props) => {
-  const { style, neutralColor, plusMinus, noSigns, value, suffix } = props;
-  if (!value) return <>n/a</>;
+  const {
+    style,
+    neutralColor,
+    colors,
+    plusMinus,
+    noSigns,
+    value,
+    suffix,
+    fontFamily,
+  } = props;
+  if (value == null) return <>n/a</>;
 
   const ensurePercent = value < 1 ? value * 100 : value;
+  let finalPercent = ensurePercent.toFixed()
+  if (value === 0) finalPercent = "0"
+  else if (value < 0.01) finalPercent = "<0.01"
 
-  let color = ensurePercent > 0 ? COLORS.japanese_laurel : COLORS.red;
+  let color =
+    ensurePercent >= 0
+      ? (colors?.[0] ?? COLORS.japanese_laurel)
+      : (colors?.[1] ?? COLORS.red);
   if (neutralColor) {
     color = COLORS.white;
   }
@@ -33,10 +52,17 @@ export const Percentage: FC<PercentageProps> = (props) => {
     icon = ensurePercent > 0 ? <>+</> : <></>;
   }
 
+  let finalFontFamily = undefined;
+  if (fontFamily === "sans-serif")
+    finalFontFamily = Styles.fontSansSerif.fontFamily;
+  else if (fontFamily) finalFontFamily = fontFamily;
+
   return (
-    <PercentageStyled style={{ ...style, color }}>
-      {icon}
-      {ensurePercent.toFixed()}%{suffix}
+    <PercentageStyled style={{ color, fontFamily: finalFontFamily, ...style }}>
+      <Tooltip title={value + "%"}>
+        {icon}
+        {finalPercent}%{suffix}
+      </Tooltip>
     </PercentageStyled>
   );
 };
