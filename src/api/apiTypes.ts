@@ -5,6 +5,7 @@ export interface ApiResponse<T> {
   code: number;
   response: T;
   last_updated: UnixTime;
+  total?: number;
 }
 
 export interface Token {
@@ -42,6 +43,29 @@ export interface FearAndGreed {
 export interface FearAndGreedResponse extends FearAndGreed {
   fearAndGreed: FearAndGreed[];
   tokenPrices: TokenPrices;
+}
+
+export interface AlphaMovesItem {
+  signature: string;
+  token_address: Address;
+  wallet_address: Address;
+  actionType: "sell" | "buy";
+  amount: BigDecimal;
+  time: UnixTime;
+  slot: number;
+  coinName: string;
+  token_symbol: string;
+  alphaGroup: "WHALE";
+  name: string;
+  token: {
+    token_address: Address;
+    mun_score: number;
+    risk_score: number;
+    top_fresh_wallet_holders: number;
+    top_smart_wallets_holders: number;
+    smart_followers: number;
+  };
+  decimal: number;
 }
 
 export const defaultFearAndGreed: FearAndGreed = {
