@@ -6,7 +6,7 @@ export const TokenDemo = () => {
 
   return (
     <div style={{ width: 300, height: 100 }}>
-      <Token token={token}></Token>
+      <Token token={{ tokenAddress: token.address, name: token.name }}></Token>
     </div>
   );
 };

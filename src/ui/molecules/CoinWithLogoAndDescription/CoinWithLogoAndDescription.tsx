@@ -24,7 +24,10 @@ export const CoinWithLogoAndDescription: FC<CoinWithLogoAndDescriptionProps> = (
     <CoinWithLogoAndDescriptionStyled style={{ height: 45, ...style }}>
       <TextWithDescription
         text={
-          <Token token={token} textStyle={{ ...Styles.ellipsis, width: 81 }} />
+          <Token
+            token={{ tokenAddress: token.address, name: token.name }}
+            textStyle={{ ...Styles.ellipsis, width: 81 }}
+          />
         }
         left={<RoundIcon src={token.logoUrl} />}
         description={
