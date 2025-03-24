@@ -27,7 +27,7 @@ const TokenStyled = styled.div.attrs({
 `;
 
 interface ITokenProps extends ComponentProps<any> {
-  token: TokenTrending,
+  token: { tokenAddress: string; name: string };
   textStyle?: React.CSSProperties;
 }
 
