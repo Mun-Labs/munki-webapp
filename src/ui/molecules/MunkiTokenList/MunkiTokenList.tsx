@@ -6,6 +6,7 @@ import { AvatarWithText } from "../AvatarWithText/AvatarWithText";
 import { COLORS } from "../../colors";
 import { Currency } from "../../atoms/Currency/Currency";
 import { Percentage } from "../../atoms/Percentage/Percentage";
+import { Styles } from "../../uiStyles";
 
 interface IMunkiTokenListProps extends ComponentProps<any> {
   tokens: Token[];
@@ -15,11 +16,13 @@ interface IMunkiTokenListProps extends ComponentProps<any> {
 const MunkiTokenListStyled = styled(List).attrs({
   className: "MunkiTokenListStyled",
 })`
-  box-shadow: 0 6px 16.4px 2px #ffee64,
+  box-shadow:
+    0 6px 16.4px 2px #ffee64,
     /* right shadow */ 0 3px 21.4px -10px #ffee64,
     /* left shadow */ 0 0 21.4px -10px #ffee64; /* bottom shadow */
 
-  background: linear-gradient(${COLORS.black} 0 0) padding-box,
+  background:
+    linear-gradient(${COLORS.black} 0 0) padding-box,
     /*this is your grey background*/ linear-gradient(to right, #fbe892, #ee1b84)
       border-box;
   border: 2px solid transparent;
@@ -35,7 +38,7 @@ const MunkiTokenListStyled = styled(List).attrs({
     transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: ${COLORS.black10};
+      background-color: ${COLORS.white25};
     }
   }
 `;
@@ -66,15 +69,30 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
                   symbol={token.symbol}
                 />
                 <Flex justify="space-between" vertical>
-                  <Flex>
-                    <Currency value={1} style={{ marginRight: 6 }} />
-                    <Percentage value={0.5} plusMinus suffix="1D" />
+                  <Flex justify="end" align="center">
+                    <Currency
+                      value={1}
+                      style={{ marginRight: 16, ...Styles.h3 }}
+                    />
+                    <Percentage
+                      value={0.5}
+                      plusMinus
+                      suffix="1D"
+                      style={{ color: COLORS.green55 }}
+                    />
                   </Flex>
-                  <Currency
-                    value={1_000_000_000}
-                    style={{ marginRight: 6, color: COLORS.white60 }}
-                    prefixes={["MC:", "MC"]}
-                  />
+                  <Flex style={{ width: 180 }} justify="space-between">
+                    <Currency
+                      value={1_000_000_000}
+                      style={{ marginRight: 6, color: COLORS.blue80 }}
+                      prefixes={["Vol:", "Vol"]}
+                    />
+                    <Currency
+                      value={1_000_000_000}
+                      style={{ marginRight: 6, color: COLORS.blue80 }}
+                      prefixes={["MC:", "MC"]}
+                    />
+                  </Flex>
                 </Flex>
               </Skeleton>
             </List.Item>
