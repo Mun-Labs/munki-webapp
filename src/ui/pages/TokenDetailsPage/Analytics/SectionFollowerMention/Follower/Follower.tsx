@@ -6,7 +6,6 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  BarChart,
 } from "recharts";
 import { COLORS } from "../../../../../colors";
 
@@ -105,6 +104,10 @@ const CustomTooltip = ({ active, payload }: any) => {
 
 // Styled components
 const ChartContainer = styled.div`
+  .font-normal {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
   padding: 20px;
   background-color: #000;
   color: #fff;
@@ -127,10 +130,9 @@ const Metrics = styled.div`
   margin-bottom: 20px;
 `;
 
-
 const MetricTitle = styled.p`
   font-size: 21px;
-  color: ${COLORS.grey50}
+  color: ${COLORS.grey50};
 `;
 
 const MetricItem = styled.div`
@@ -156,6 +158,10 @@ const TooltipContainer = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   color: #fff;
   font-size: 12px;
+
+  .font-normal {
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
   p {
     margin: 2px 0;

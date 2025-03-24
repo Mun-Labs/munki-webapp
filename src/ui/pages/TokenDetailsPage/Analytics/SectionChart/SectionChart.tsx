@@ -8,7 +8,7 @@ import { COLORS } from "../../../../colors";
 
 interface SectionChartProps extends ComponentProps<any> {}
 
-export const SectionChart: FC<SectionChartProps> = (props) => {
+export const SectionChart: FC<SectionChartProps> = (_props) => {
   return (
     <SectionChartStyled>
       <div className="wrap-chart">

@@ -59,6 +59,9 @@ const HorizontalFilterStyled = styled.div.attrs({
   align-items: center;
   width: 100%;
 
+
+  /* @media (max-width: 821px) */
+
   @media (max-width: 821px) {
     align-items: center;
     display: flex;

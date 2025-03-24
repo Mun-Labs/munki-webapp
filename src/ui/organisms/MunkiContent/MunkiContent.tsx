@@ -5,6 +5,7 @@ import { MunkiHero } from "./MunkiHero/MunkiHero";
 
 const contentStyles: React.CSSProperties = {
   padding: "20px",
+  // width: "calc(100% - 15rem)",
   width: "100%",
 };
 

@@ -61,3 +61,21 @@ export interface IWhale {
   logoUrl?: string;
   timeAgo?: string;
 }
+
+interface ITopHolding {
+  image: string;
+  name: string;
+  volume: number;
+  percent: number;
+}
+
+export interface ITopHolder {
+  rank: number;
+  wallet: string;
+  netWorth: number;
+  holdingValue: number;
+  winRate: number;
+  holdingTime: number;
+  topHoldings: ITopHolding[];
+  scan: string;
+}

@@ -6,7 +6,7 @@ import { SectionFollowerMention } from "./SectionFollowerMention/SectionFollower
 
 interface AnalyticsProps extends ComponentProps<any> {}
 
-export const Analytics: FC<AnalyticsProps> = (props) => {
+export const Analytics: FC<AnalyticsProps> = (_props) => {
   return (
     <AnalyticsStyled>
       <h3 className="title">Analytics</h3>

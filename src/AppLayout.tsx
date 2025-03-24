@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { MunkiHeader } from "./ui/organisms/MunkiHeader/MunkiHeader";
 import { MunkiFooter } from "./ui/organisms/MunkiFooter/MunkiFooter";
 import styled from "styled-components";
+import { MunkiSidebar } from "./ui/organisms/MunkiSidebar/MunkiSidebar";
 
 const appStyles: React.CSSProperties = {
   // ...debugStyles,
@@ -9,16 +10,17 @@ const appStyles: React.CSSProperties = {
 };
 
 const StyledMainContent = styled.section`
-  max-width: 1440px;
   margin: 0 auto;
+  max-width: 1440px;
 `;
 
 export const AppLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div style={appStyles}>
       <MunkiHeader />
+
       <StyledMainContent className="container">
-        {/* <MunkiSidebar /> */}
+        <MunkiSidebar />
         {children}
       </StyledMainContent>
       <MunkiFooter />
