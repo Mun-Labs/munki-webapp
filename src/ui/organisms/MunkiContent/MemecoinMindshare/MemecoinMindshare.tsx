@@ -1,14 +1,14 @@
+import { Flex } from "antd";
+import styled from "styled-components";
 import { MindshareItem } from "../../../../api/apiTypes";
 import { useMindshareApi } from "../../../../api/hooks/useMindshareApi";
 import { MOCK_DATA_MINDSHARE } from "../../../../api/MockData";
 import { TypeService } from "../../../../common/modules/TypeService";
 import { ITreeChartNode } from "../../../../domain/types/Types";
-import { FilterByTime } from "../../../molecules/FilterByTime/FilterByTime";
 import { TreeChart } from "../../../molecules/TreeChart/TreeChart";
 import { Styles } from "../../../uiStyles";
 import FearAndGreedWidget from "../FearAndGreedy/FearAndGreedy";
-
-import styled from "styled-components";
+import { COLORS } from "../../../colors";
 
 export const MemecoinMindshare = () => {
   const { data } = useMindshareApi(undefined, MOCK_DATA_MINDSHARE);
@@ -29,7 +29,9 @@ export const MemecoinMindshare = () => {
       <div className="section-mindshare">
         <div className="head">
           <p style={{ ...Styles.h2 }}>Memecoins Mindshare 🌑</p>
-          <FilterByTime style={{ fontSize: 14 }} />
+          <Flex style={{ ...Styles.fontSansSerif, color: COLORS.white60 }}>
+            Updates every 24h
+          </Flex>
         </div>
         <TreeChart data={tokens} style={{ height: 490 }}></TreeChart>
       </div>
