@@ -1,4 +1,8 @@
-import { ApiResponse, AlphaMovesItem, PaginationQueryParams } from "../apiTypes";
+import {
+  ApiResponse,
+  AlphaMovesItem,
+  PaginationQueryParams,
+} from "../apiTypes";
 import { useApi } from "./useApi";
 
 export function useAlphaMovesApi(

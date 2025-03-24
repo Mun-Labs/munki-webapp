@@ -1,8 +1,8 @@
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import React from "react";
 import { Avatar, Flex, Table } from "antd";
-import type { TableColumnsType } from "antd";
+import type { TableColumnsType, TablePaginationConfig, TableProps } from "antd";
 import { createStyles } from "antd-style";
 import { IToken } from "../../../domain/entities/Entities";
 import { MOCK_DATA_ALPHA_MOVES, MockTokens } from "../../../api/MockData";
@@ -12,7 +12,7 @@ import { AntDesignOutlined } from "@ant-design/icons";
 import useSmallScreen from "../../../hooks/useSmallScreen";
 import { MunkiBadge } from "../../atoms/MunkiBadge/MunkiBadge";
 import { Percentage } from "../../atoms/Percentage/Percentage";
-import { AlphaMovesItem } from "../../../api/apiTypes";
+import { AlphaMovesItem, PaginationQueryParams } from "../../../api/apiTypes";
 import { Currency } from "../../atoms/Currency/Currency";
 import { AvatarWithText } from "../../molecules/AvatarWithText/AvatarWithText";
 import { DateTime } from "luxon";
@@ -126,24 +126,65 @@ interface DataType extends AlphaMovesItem {
   key: React.Key;
 }
 
-// const dataSource: DataType[] = MockTokens.map((token) => ({
-
 export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   const { style } = props;
   const { styles } = useStyle();
   const isSmallScreen = useSmallScreen(1265);
 
-  const { data } = useAlphaMovesApi({}, MOCK_DATA_ALPHA_MOVES);
+  // Add pagination state
+  const [tableParams, setTableParams] = useState<{
+    pagination: TablePaginationConfig;
+  }>({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+      total: 0,
+    },
+  });
+
+  // Convert antd pagination params to API pagination params
+  const paginationParams: PaginationQueryParams = {
+    limit: tableParams.pagination.pageSize,
+    offset:
+      ((tableParams.pagination.current || 1) - 1) *
+      (tableParams.pagination.pageSize || 10),
+  };
+
+  // Use the pagination params in the API call
+  const { data, isLoading } = useAlphaMovesApi(paginationParams);
+
+  // Update pagination total when data is received
+  useEffect(() => {
+    if (data && data.total !== undefined) {
+      setTableParams({
+        ...tableParams,
+        pagination: {
+          ...tableParams.pagination,
+          total: data.total,
+        },
+      });
+    }
+  }, [data]);
+
+  // Handle pagination changes
+  const handleTableChange = (pagination: TablePaginationConfig) => {
+    // Clear data if page size changes
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      // No need to explicitly clear data as it will be refetched due to pagination change
+      // Just note that old data might not be relevant when pageSize changes
+    }
+
+    setTableParams({
+      pagination,
+    });
+  };
+
   if (!data) return null;
 
   const dataSource: DataType[] = data.response.map((token) => ({
     ...token,
     key: token.time,
   }));
-
-  // console.log({ dataSource });
-  // console.log({ MockTokens });
-  // console.log({ styles });
 
   const columns: TableColumnsType<DataType> = [
     {
@@ -413,7 +454,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           return record?.tokenAddress === "0x6e6c3659" ? "active" : "";
         }}
         dataSource={dataSource}
-        pagination={{ position: ["none", "bottomCenter"] }}
+        pagination={tableParams.pagination}
+        onChange={(pagination) => handleTableChange(pagination)}
+        loading={isLoading}
         size="middle"
         scroll={{ x: "max-content", y: 55 * 10 }}
       />
