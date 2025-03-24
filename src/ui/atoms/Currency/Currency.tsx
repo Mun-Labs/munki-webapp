@@ -12,6 +12,7 @@ const CurrencyStyled = styled.div.attrs({
 interface CurrencyProps extends ComponentProps<any> {
   value: number | undefined;
   showColors?: boolean;
+  colors?: [positive?: string, negative?: string];
   prefixes?: [positive?: React.ReactNode, negative?: React.ReactNode];
   /**
    * Control the color (green/red) of the currency value
@@ -22,18 +23,20 @@ interface CurrencyProps extends ComponentProps<any> {
 const currencySymbol = "$";
 
 export const Currency: FC<CurrencyProps> = (props) => {
-  const { style, showColors, value, prefixes, actionType } = props;
+  const { style, showColors, colors, value, prefixes, actionType } = props;
   if (!value) return <>n/a</>;
 
   let color;
+  const greenColor = colors?.[0] ?? COLORS.green;
+  const redColor = colors?.[1] ?? COLORS.red;
   let prefix = null;
 
   if (showColors) {
-    color = value > 0 ? COLORS.green : COLORS.red;
+    color = value > 0 ? greenColor : redColor;
   }
   if (prefixes) {
     if (actionType) {
-      color = actionType === "buy" ? COLORS.green : COLORS.red;
+      color = actionType === "buy" ? greenColor : redColor;
       prefix =
         actionType === "buy"
           ? (prefixes[0] ?? "Bought")
