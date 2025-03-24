@@ -32,7 +32,7 @@ const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
   height: 62px;
   width: fit-content;
 
-  animation: ticker 40s linear infinite;
+  animation: ticker 60s linear infinite;
 
   @keyframes ticker {
     0% {
@@ -54,11 +54,11 @@ const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
 `;
 
 export const MunkiHeader = () => {
-  const {data } = useTokenTrendingApi(undefined, MOCK_DATA_TOKEN_TRENDING)
+  const { data } = useTokenTrendingApi(undefined, MOCK_DATA_TOKEN_TRENDING);
   const [open, setOpen] = useState(false);
 
-  if (!data) return
-  const tokens = data.response
+  if (!data) return;
+  const tokens = data.response;
   const repeatedTokens = [...tokens, ...tokens];
 
   const showDrawer = () => {
@@ -119,7 +119,7 @@ export const MunkiHeader = () => {
                 }}
               />
             }
-            left={<RoundIcon src={token.logoUri} />}
+            left={<RoundIcon src={token.logoUri} size={38} />}
             right={<Percentage value={token.volume24hChange} />}
             style={{ padding: "12px" }}
           ></TextWithLabel>
