@@ -15,6 +15,7 @@ export const MOCK_DATA_TOKEN: ApiResponse<Token[]> = {
       token_address: "8xPe3DMr52oYAkCBk57ZeQE1h5zBkWNk37eE4J8spump",
       name: "Ivanka Trump",
       symbol: "ITRUMP",
+      mc: 1_000_000_000,
       logo_uri:
         "https://file.dexlab.space/file/4553202ec4084e559c42191ae8673c55",
     },
@@ -22,6 +23,7 @@ export const MOCK_DATA_TOKEN: ApiResponse<Token[]> = {
       token_address: "BSubUBTHxECeAYUsAs9FmjbuECvMBfuvs1PA8EkKpump",
       name: "TRUMP SIDE EYE",
       symbol: "Side Eye",
+      mc: 1_000_000_000,
       logo_uri:
         "https://ipfs.io/ipfs/QmTHfZNLbaqTsn8sVdjpsTSHASZYDMXQy65fgkSSqFCsNh",
     },
@@ -29,6 +31,7 @@ export const MOCK_DATA_TOKEN: ApiResponse<Token[]> = {
       token_address: "7vjP44eR4RptCpnFnJwyFpDnKVZ2ZoJNdSixYscRpump",
       name: "Eric Trump",
       symbol: "ETRUMP",
+      mc: 1_000_000_000,
       logo_uri:
         "https://file.dexlab.space/file/d0b8576d55dc403eb5913ffbd783a442",
     },
@@ -36,6 +39,7 @@ export const MOCK_DATA_TOKEN: ApiResponse<Token[]> = {
       token_address: "BhYEYuq5rPmJsWCPfCdcqHtbcpWTuBE4a5UsFCKTpump",
       name: "Elon Trump",
       symbol: "ELONTRUMP",
+      mc: 1_000_000_000,
       logo_uri:
         "https://file.dexlab.space/file/f70a111ed3424e3a9abe35c5d928ee4f",
     },
@@ -43,6 +47,7 @@ export const MOCK_DATA_TOKEN: ApiResponse<Token[]> = {
       token_address: "AkXwfS9cwASWPUiP7rRaxj4R7jgQ6JyPX2KtxH8NmpKv",
       name: "OFFICIAL TRUMP",
       symbol: "TRUMP",
+      mc: 1_000_000_000,
       logo_uri:
         "https://i.degencdn.com/ipfs/bafkreihxyuypyalmkcnxtjmf5oifn6bgexw7omlgfxshrvikn2scw3z77u",
     },
@@ -247,7 +252,6 @@ export const MOCK_DATA_FEAR_AND_GREED: ApiResponse<FearAndGreedResponse> = {
 export const COIN_MAP = {
   chillGuy: MockService.generateToken({
     name: "CHILLGUY",
-    wallet: '0x123...321',
     logoUrl: "/chillguy.jpeg",
     volume: RandomService.generateRandomNumber(1000, 1000),
   }),
