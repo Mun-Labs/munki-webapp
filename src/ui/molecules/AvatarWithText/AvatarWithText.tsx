@@ -13,10 +13,12 @@ interface AvatarWithTextProps extends ComponentProps<any> {
   logoUrl?: string;
   name: string;
   symbol: string;
+  shape?: "circle" | "square";
 }
 
 export const AvatarWithText: FC<AvatarWithTextProps> = (props) => {
-  const { style, logoUrl, name, symbol } = props;
+  const { style, logoUrl, name, symbol, shape } = props;
+  /*prettier-ignore*/ console.log("[AvatarWithText.tsx,21] shape: ", shape);
   return (
     <AvatarWithTextStyled style={{ ...style }}>
       <Flex align="center">
@@ -24,6 +26,7 @@ export const AvatarWithText: FC<AvatarWithTextProps> = (props) => {
           <Avatar
             size={"large"}
             src={logoUrl}
+            shape={shape}
             style={{ border: `1px solid ${COLORS.blue75}` }}
           />
         ) : (

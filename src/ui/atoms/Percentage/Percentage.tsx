@@ -14,10 +14,12 @@ interface PercentageProps extends ComponentProps<any> {
   noSigns?: boolean;
   neutralColor?: boolean;
   suffix?: ReactNode;
+  fontFamily?: "munki" | "sans-serif" | string;
 }
 
 export const Percentage: FC<PercentageProps> = (props) => {
-  const { style, neutralColor, plusMinus, noSigns, value, suffix } = props;
+  const { style, neutralColor, plusMinus, noSigns, value, suffix, fontFamily } =
+    props;
   if (!value) return <>n/a</>;
 
   const ensurePercent = value < 1 ? value * 100 : value;
@@ -34,9 +36,13 @@ export const Percentage: FC<PercentageProps> = (props) => {
     icon = ensurePercent > 0 ? <>+</> : <></>;
   }
 
+  let finalFontFamily = undefined
+  if (fontFamily === 'sans-serif') finalFontFamily = Styles.fontSansSerif.fontFamily
+  else if (fontFamily) finalFontFamily = fontFamily
+
   return (
     <PercentageStyled
-      style={{ color, fontFamily: Styles.fontSansSerif.fontFamily, ...style }}
+      style={{ color, fontFamily: finalFontFamily, ...style }}
     >
       {icon}
       {ensurePercent.toFixed()}%{suffix}

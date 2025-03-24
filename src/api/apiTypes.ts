@@ -11,6 +11,7 @@ export interface Token {
   token_address: Address;
   name: string;
   symbol: string;
+  mc: number;
   logo_uri: string;
 }
 

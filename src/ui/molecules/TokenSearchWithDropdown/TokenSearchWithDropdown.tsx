@@ -1,5 +1,5 @@
 // TokenSearchWithDropdown
-import { SearchOutlined } from "@ant-design/icons";
+import { CloseCircleFilled, SearchOutlined } from "@ant-design/icons";
 import { Button, Input } from "antd";
 import { ComponentProps, FC, useCallback, useState } from "react";
 import styled from "styled-components";
@@ -55,6 +55,7 @@ export const TokenSearchWithDropdown: FC<
             LFG
           </Button>
         }
+        allowClear={{clearIcon: <CloseCircleFilled style={{color:COLORS.white, marginRight: 8}} />}}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onPressEnter={() => debouncedSearch(inputValue)}

@@ -67,6 +67,7 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
                   // logoUrl={token.logo_uri}
                   name={token.name}
                   symbol={token.symbol}
+                  shape="square"
                 />
                 <Flex justify="space-between" vertical>
                   <Flex justify="end" align="center">
@@ -79,6 +80,7 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
                       plusMinus
                       suffix="1D"
                       style={{ color: COLORS.green55 }}
+                      fontFamily="sans-serif"
                     />
                   </Flex>
                   <Flex style={{ width: 180 }} justify="space-between">
@@ -88,7 +90,7 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
                       prefixes={["Vol:", "Vol"]}
                     />
                     <Currency
-                      value={1_000_000_000}
+                      value={token.mc}
                       style={{ marginRight: 6, color: COLORS.blue80 }}
                       prefixes={["MC:", "MC"]}
                     />
