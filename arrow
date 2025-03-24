@@ -7,11 +7,14 @@ src/ui/organisms/MunkiContent/MunkiHero/MunkiHero.tsx
 src/ui/organisms/MunkiHeader/MunkiHeader.tsx
 src/ui/organisms/MunkiContent/MunkiContent.tsx
 src/ui/molecules/TokenSearchWithDropdown/TokenSearchWithDropdown.tsx
+src/ui/organisms/MemeCoinTable/MemeCoinTable.tsx
 
 src/ui/pages/TokenDetailsPage.tsx
+
 src/domain/entities/Entities.ts
 src/ui/pages/DemoPage.tsx
 src/ui/Template/Template.tsx
 src/ui/colors.ts
 src/ui/uiStyles.ts
 docs/links.md
+src/common/featureFlags.ts
