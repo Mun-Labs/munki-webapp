@@ -127,7 +127,7 @@ interface DataType extends AlphaMovesItem {
 // const dataSource: DataType[] = MockTokens.map((token) => ({
 const dataSource: DataType[] = MOCK_DATA_ALPHA_MOVES.response.map((token) => ({
   ...token,
-  key: token.name,
+  key: token.time,
 }));
 
 export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
@@ -233,12 +233,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
               <span style={{ color: COLORS.white }}>{record.token_symbol}</span>
             }
             symbol={
-              <Flex style={{...Styles.fontSansSerif, color: COLORS.white60}}>
+              <Flex style={{ ...Styles.fontSansSerif, color: COLORS.white60 }}>
                 @ MC
                 <Currency
                   value={asNum}
                   actionType={record.actionType}
-                  style={{marginLeft: 6}}
+                  style={{ marginLeft: 6 }}
                 />
               </Flex>
             }
@@ -296,10 +296,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           # of smarts wallet in top holder
         </div>
       ),
-      dataIndex: "avgImpressions",
-      key: "avgImpressions",
+      dataIndex: "top_smart_wallets_holders",
+      key: "top_smart_wallets_holders",
       width: 180,
-      render: (_value) => <MunkiBadge>10/50</MunkiBadge>,
+      render: (_, record) => (
+        <MunkiBadge>{record.token.top_smart_wallets_holders}/50</MunkiBadge>
+      ),
     },
     {
       title: (
@@ -307,19 +309,21 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           # of fresh wallets in top holers
         </div>
       ),
-      dataIndex: "avgImpressions",
-      key: "avgImpressions",
+      dataIndex: "top_fresh_wallet_holders",
+      key: "top_fresh_wallet_holders",
       width: 180,
-      render: (_value) => (
-        <MunkiBadge color={COLORS.yellow30}>10/50</MunkiBadge>
+      render: (_, record) => (
+        <MunkiBadge color={COLORS.yellow30}>
+          {record.token.top_fresh_wallet_holders}/50
+        </MunkiBadge>
       ),
     },
     {
       title: <div className="head">Smart followers</div>,
-      dataIndex: "avgImpressions",
-      key: "avgImpressions",
+      dataIndex: "smart_followers",
+      key: "smart_followers",
       width: 150,
-      render: (_value) => <div className="content">433</div>,
+      render: (_, record) => <div className="content">{record.token.smart_followers}</div>,
     },
     {
       title: <div className="head">Followers</div>,

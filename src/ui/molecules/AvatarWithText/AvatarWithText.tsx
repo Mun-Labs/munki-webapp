@@ -30,7 +30,6 @@ interface AvatarWithTextProps extends ComponentProps<any> {
 
 export const AvatarWithText: FC<AvatarWithTextProps> = (props) => {
   const { style, logoUrl, name, symbol, shape } = props;
-  /*prettier-ignore*/ console.log("[AvatarWithText.tsx,21] shape: ", shape);
   return (
     <AvatarWithTextStyled style={{ ...style }}>
       <Flex align="center">

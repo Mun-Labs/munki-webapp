@@ -20,11 +20,11 @@ interface PercentageProps extends ComponentProps<any> {
 export const Percentage: FC<PercentageProps> = (props) => {
   const { style, neutralColor, plusMinus, noSigns, value, suffix, fontFamily } =
     props;
-  if (!value) return <>n/a</>;
+  if (value == null) return <>n/a</>;
 
   const ensurePercent = value < 1 ? value * 100 : value;
 
-  let color = ensurePercent > 0 ? COLORS.japanese_laurel : COLORS.red;
+  let color = ensurePercent >= 0 ? COLORS.japanese_laurel : COLORS.red;
   if (neutralColor) {
     color = COLORS.white;
   }
