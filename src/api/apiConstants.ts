@@ -11,6 +11,7 @@ export enum EndpointsEnum {
   "fearandgreed" = "fearandgreed",
   "vibecheck" = "vibecheck",
   "token" = "token",
+  "token/trending" = "token/trending",
 }
 
 export const defaultSwrResponse: SWRResponse<any> = {

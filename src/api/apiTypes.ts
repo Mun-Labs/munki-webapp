@@ -18,6 +18,7 @@ export interface Token {
 export interface TokenTrending
   extends Pick<Token, "tokenAddress" | "name" | "symbol" | "logoUri"> {
   volume24h: BigNumber;
+  volume24hChange?: number;
   recordDate: UnixTime;
   holderCount: number;
 }
