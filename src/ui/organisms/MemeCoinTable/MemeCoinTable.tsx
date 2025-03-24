@@ -5,13 +5,16 @@ import { Avatar, Table } from "antd";
 import type { TableColumnsType } from "antd";
 import { createStyles } from "antd-style";
 import { IToken } from "../../../domain/entities/Entities";
-import { MockTokens } from "../../../api/MockData";
+import { MOCK_DATA_ALPHA_MOVES, MockTokens } from "../../../api/MockData";
 import { COLORS } from "../../colors";
 import { UITokenWhale } from "../../atoms/UITokenWhale/UITokenWhale";
 import { AntDesignOutlined } from "@ant-design/icons";
 import useSmallScreen from "../../../hooks/useSmallScreen";
 import { MunkiBadge } from "../../atoms/MunkiBadge/MunkiBadge";
 import { Percentage } from "../../atoms/Percentage/Percentage";
+import { AlphaMovesItem } from "../../../api/apiTypes";
+import { Currency } from "../../atoms/Currency/Currency";
+import { AvatarWithText } from "../../molecules/AvatarWithText/AvatarWithText";
 
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
@@ -115,11 +118,12 @@ const useStyle = createStyles(({ css, token }) => {
   };
 });
 
-interface DataType extends IToken {
+interface DataType extends AlphaMovesItem {
   key: React.Key;
 }
 
-const dataSource: DataType[] = MockTokens.map((token) => ({
+// const dataSource: DataType[] = MockTokens.map((token) => ({
+const dataSource: DataType[] = MOCK_DATA_ALPHA_MOVES.response.map((token) => ({
   ...token,
   key: token.name,
 }));
@@ -147,9 +151,23 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       dataIndex: "name",
       key: "name",
       fixed: isSmallScreen ? undefined : "left",
-      render: (_, _record) => (
-        <UITokenWhale name="Fartcoin" value={"200$"} src="/user4.png" />
-      ),
+      render: (_, record) => {
+        const asNum = Number(record.amount);
+        return (
+          <AvatarWithText
+            name={<span style={{color: COLORS.white}}>{record.coinName}</span>}
+            symbol={
+              <Currency
+                value={asNum}
+                showColors
+                prefixes={["Bought", "Sold"]}
+                actionType={record.actionType}
+              />
+            }
+            shape="square"
+          />
+        );
+      },
     },
     {
       title: <div className="head">Alpha</div>,
@@ -340,7 +358,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
         className={styles.customTable}
         columns={columns}
         rowClassName={(record) => {
-          return record?.address === "0x6e6c3659" ? "active" : "";
+          return record?.token_address === "0x6e6c3659" ? "active" : "";
         }}
         dataSource={dataSource}
         pagination={{ position: ["none", "bottomCenter"] }}
