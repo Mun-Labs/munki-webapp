@@ -16,13 +16,11 @@ interface IMunkiTokenListProps extends ComponentProps<any> {
 const MunkiTokenListStyled = styled(List).attrs({
   className: "MunkiTokenListStyled",
 })`
-  box-shadow:
-    0 6px 16.4px 2px #ffee64,
+  box-shadow: 0 6px 16.4px 2px #ffee64,
     /* right shadow */ 0 3px 21.4px -10px #ffee64,
     /* left shadow */ 0 0 21.4px -10px #ffee64; /* bottom shadow */
 
-  background:
-    linear-gradient(${COLORS.black} 0 0) padding-box,
+  background: linear-gradient(${COLORS.black} 0 0) padding-box,
     /*this is your grey background*/ linear-gradient(to right, #fbe892, #ee1b84)
       border-box;
   border: 2px solid transparent;

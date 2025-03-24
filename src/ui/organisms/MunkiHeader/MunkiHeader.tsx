@@ -120,7 +120,7 @@ export const MunkiHeader = () => {
               />
             }
             left={<RoundIcon src={token.logoUri} />}
-            right={<Percentage value={token.volume24hChange ?? 0.5} />}
+            right={<Percentage value={token.volume24hChange} />}
             style={{ padding: "12px" }}
           ></TextWithLabel>
         ))}
