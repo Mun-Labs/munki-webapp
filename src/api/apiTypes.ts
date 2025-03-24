@@ -1,5 +1,5 @@
 import { FearAndGreedClassification } from "../domain/types/BusinessLogicTypes";
-import { Address, BigNumber, UnixTime } from "../domain/types/Types";
+import { Address, BigDecimal, UnixTime } from "../domain/types/Types";
 
 export interface ApiResponse<T> {
   code: number;
@@ -17,7 +17,7 @@ export interface Token {
 
 export interface TokenTrending
   extends Pick<Token, "tokenAddress" | "name" | "symbol" | "logoUri"> {
-  volume24h: BigNumber;
+  volume24h: BigDecimal;
   volume24hChange?: number;
   recordDate: UnixTime;
   holderCount: number;
@@ -29,6 +29,7 @@ export interface MindshareItem {
   logoUrl: string;
   name: string;
   symbol: string;
+  volume: BigDecimal;
 }
 
 export interface FearAndGreed {

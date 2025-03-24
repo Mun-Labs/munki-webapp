@@ -29,4 +29,4 @@ export type IIconMap = Record<
 
 export type UnixTime = number;
 export type Address = string;
-export type BigNumber = string
+export type BigDecimal = string
