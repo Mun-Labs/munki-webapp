@@ -34,6 +34,10 @@ export const Styles: RecursiveStyles = {
     fontWeight: 900,
     fontSize: "17.3px",
   },
+  h4: {
+    fontWeight: 600,
+    fontSize: "16px",
+  },
   textSm: {
     fontSize: "14px",
   },

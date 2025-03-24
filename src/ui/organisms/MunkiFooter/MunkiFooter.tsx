@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
 import { SocialMedia } from "../../../domain/types/Types";
 import { COLORS } from "../../colors";
+import { Styles } from "../../uiStyles";
 
 const footerStyle: React.CSSProperties = {
   height: "84px",
@@ -21,6 +22,8 @@ const FooterButton = styled(Button)`
   font-size: 12px;
   p {
     color: ${COLORS.grey70};
+    font-family: ${Styles.fontSansSerif.fontFamily as string};
+    font-weight: 600;
   }
 `;
 
@@ -49,11 +52,8 @@ export const MunkiFooter = () => {
             marginBottom: -15,
           }}
         />
-        <Row>
+        <Row >
           {/* <FooterButton type="link">Privacy Policy</FooterButton> */}
-          <FooterButton type="link">
-            <p>Privacy policy</p>
-          </FooterButton>
           <FooterButton type="link">
             <p>Terms of Use</p>
           </FooterButton>
