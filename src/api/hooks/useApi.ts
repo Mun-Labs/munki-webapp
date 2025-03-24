@@ -12,7 +12,7 @@ interface ISwrOptions {
 }
 
 const swrOptions: ISwrOptions = {
-  revalidateOnMount: true,
+  revalidateOnMount: false,
   revalidateOnReconnect: false,
   revalidateIfStale: false,
   revalidateOnFocus: false,

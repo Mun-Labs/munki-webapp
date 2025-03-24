@@ -7,6 +7,7 @@ export const BASE_URL =
 // mindshare
 
 export enum EndpointsEnum {
+  "alphamoves" = "alphamoves",
   "mindshare" = "mindshare",
   "fearandgreed" = "fearandgreed",
   "vibecheck" = "vibecheck",

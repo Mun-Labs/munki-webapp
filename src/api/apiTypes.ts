@@ -47,23 +47,25 @@ export interface FearAndGreedResponse extends FearAndGreed {
 
 export interface AlphaMovesItem {
   signature: string;
-  token_address: Address;
-  wallet_address: Address;
+  tokenAddress: Address;
+  walletAddress: Address;
   actionType: "sell" | "buy";
   amount: BigDecimal;
   time: UnixTime;
   slot: number;
   coinName: string;
-  token_symbol: string;
+  tokenSymbol: string;
+  tokenLogo?: string; // newly added
+  totalSupply?: BigDecimal; // newly added
   alphaGroup: "WHALE" | "KOL" | "SMART";
   name: string;
   token: {
-    token_address: Address;
-    mun_score: number;
-    risk_score: number;
-    top_fresh_wallet_holders: number;
-    top_smart_wallets_holders: number;
-    smart_followers: number;
+    tokenAddress: Address;
+    munScore: number;
+    riskScore: number;
+    topFreshWalletHolders: number;
+    topSmartWalletsHolders: number;
+    smartFollowers: number;
   };
   decimal: number;
 }
@@ -88,8 +90,11 @@ export type TokenPrices = {
   [tokenAddress: Address]: TokenPriceInfo;
 };
 
-export interface TokenQueryParams {
-  q: string;
+export interface PaginationQueryParams {
   limit?: number;
   offset?: number;
+}
+
+export interface TokenQueryParams extends PaginationQueryParams {
+  q: string;
 }
