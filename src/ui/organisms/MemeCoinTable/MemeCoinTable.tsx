@@ -2,12 +2,10 @@ import { ComponentProps, FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import React from "react";
 import { Avatar, Flex, Table } from "antd";
-import type { TableColumnsType, TablePaginationConfig, TableProps } from "antd";
+import type { TableColumnsType, TablePaginationConfig } from "antd";
 import { createStyles } from "antd-style";
-import { IToken } from "../../../domain/entities/Entities";
-import { MOCK_DATA_ALPHA_MOVES, MockTokens } from "../../../api/MockData";
+import { MOCK_DATA_ALPHA_MOVES } from "../../../api/MockData";
 import { COLORS } from "../../colors";
-import { UITokenWhale } from "../../atoms/UITokenWhale/UITokenWhale";
 import { AntDesignOutlined } from "@ant-design/icons";
 import useSmallScreen from "../../../hooks/useSmallScreen";
 import { MunkiBadge } from "../../atoms/MunkiBadge/MunkiBadge";
@@ -151,7 +149,10 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   };
 
   // Use the pagination params in the API call
-  const { data, isLoading } = useAlphaMovesApi(paginationParams);
+  const { data, isLoading } = useAlphaMovesApi(
+    paginationParams,
+    MOCK_DATA_ALPHA_MOVES,
+  );
 
   // Update pagination total when data is received
   useEffect(() => {
@@ -454,7 +455,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           return record?.tokenAddress === "0x6e6c3659" ? "active" : "";
         }}
         dataSource={dataSource}
-        pagination={tableParams.pagination}
+        pagination={{ position: ["bottomCenter"], ...tableParams.pagination }}
         onChange={(pagination) => handleTableChange(pagination)}
         loading={isLoading}
         size="middle"

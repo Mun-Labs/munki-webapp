@@ -32,6 +32,8 @@ export const AlphaMove = () => {
 };
 
 const AlphaMoveStyled = styled.div.attrs({ className: "AlphaMoveStyled" })`
+  margin-bottom: 100px;
+
   .head {
     display: flex;
     justify-content: space-between;
