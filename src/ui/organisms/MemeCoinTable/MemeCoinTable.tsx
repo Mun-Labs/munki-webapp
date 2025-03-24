@@ -17,6 +17,8 @@ import { Currency } from "../../atoms/Currency/Currency";
 import { AvatarWithText } from "../../molecules/AvatarWithText/AvatarWithText";
 import { DateTime } from "luxon";
 import { Styles } from "../../uiStyles";
+import { useAlphaMovesApi } from "../../../api/hooks/useAlphaMovesApi";
+import { calculatePercentHold } from "../../../domain/businessLogic/percentHold";
 
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
@@ -125,15 +127,19 @@ interface DataType extends AlphaMovesItem {
 }
 
 // const dataSource: DataType[] = MockTokens.map((token) => ({
-const dataSource: DataType[] = MOCK_DATA_ALPHA_MOVES.response.map((token) => ({
-  ...token,
-  key: token.time,
-}));
 
 export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   const { style } = props;
   const { styles } = useStyle();
   const isSmallScreen = useSmallScreen(1265);
+
+  const { data } = useAlphaMovesApi({}, MOCK_DATA_ALPHA_MOVES);
+  if (!data) return null;
+
+  const dataSource: DataType[] = data.response.map((token) => ({
+    ...token,
+    key: token.time,
+  }));
 
   // console.log({ dataSource });
   // console.log({ MockTokens });
@@ -164,6 +170,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
               <Currency
                 value={asNum}
                 showColors
+                colors={[undefined, COLORS.magenta]}
                 prefixes={["Bought", "Sold"]}
                 actionType={record.actionType}
               />
@@ -201,14 +208,20 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     },
     {
       title: <div className="head">%hold</div>,
-      dataIndex: "mindshare7D",
-      key: "mindshare7D",
-      width: 120,
+      dataIndex: "hold",
+      key: "hold",
+      width: 80,
       fixed: isSmallScreen ? undefined : "left",
-      render: (_value) => (
-        <div className="head" style={{ color: "#C5BC95" }}>
-          10%
-        </div>
+      render: (_, record) => (
+        <Percentage
+          value={calculatePercentHold(
+            Number(record.amount),
+            Number(record.totalSupply),
+          )}
+          className="head"
+          style={{ color: "#C5BC95", justifyContent: "center" }}
+          noSigns
+        />
       ),
     },
     {
@@ -228,9 +241,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
         const asNum = Number(record.amount);
         return (
           <AvatarWithText
-            logoUrl="/user4.png"
+            logoUrl={record.tokenLogo ?? "/user4.png"}
             name={
-              <span style={{ color: COLORS.white }}>{record.token_symbol}</span>
+              <span style={{ color: COLORS.white }}>{record.tokenSymbol}</span>
             }
             symbol={
               <Flex style={{ ...Styles.fontSansSerif, color: COLORS.white60 }}>
@@ -264,7 +277,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           className="cl-mun-score"
           style={{ fontSize: "24px", textAlign: "center" }}
         >
-          {record.token.mun_score}
+          {record.token.munScore}
         </div>
       ),
     },
@@ -285,7 +298,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           <Percentage
             style={{ fontSize: "20px" }}
             noSigns
-            value={record.token.risk_score}
+            value={record.token.riskScore}
           ></Percentage>
         </div>
       ),
@@ -300,7 +313,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       key: "top_smart_wallets_holders",
       width: 180,
       render: (_, record) => (
-        <MunkiBadge>{record.token.top_smart_wallets_holders}/50</MunkiBadge>
+        <MunkiBadge>{record.token.topSmartWalletsHolders}/50</MunkiBadge>
       ),
     },
     {
@@ -314,7 +327,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       width: 180,
       render: (_, record) => (
         <MunkiBadge color={COLORS.yellow30}>
-          {record.token.top_fresh_wallet_holders}/50
+          {record.token.topFreshWalletHolders}/50
         </MunkiBadge>
       ),
     },
@@ -323,7 +336,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       dataIndex: "smart_followers",
       key: "smart_followers",
       width: 150,
-      render: (_, record) => <div className="content">{record.token.smart_followers}</div>,
+      render: (_, record) => (
+        <div className="content">{record.token.smartFollowers}</div>
+      ),
     },
     {
       title: <div className="head">Followers</div>,
@@ -395,7 +410,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
         className={styles.customTable}
         columns={columns}
         rowClassName={(record) => {
-          return record?.token_address === "0x6e6c3659" ? "active" : "";
+          return record?.tokenAddress === "0x6e6c3659" ? "active" : "";
         }}
         dataSource={dataSource}
         pagination={{ position: ["none", "bottomCenter"] }}
