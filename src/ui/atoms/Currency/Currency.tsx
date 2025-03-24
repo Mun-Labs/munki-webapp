@@ -2,6 +2,7 @@ import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import { NumbersService } from "../../../common/modules/numbers";
 import { COLORS } from "../../colors";
+import { Styles } from "../../uiStyles";
 
 const CurrencyStyled = styled.div.attrs({
   className: "CurrencyStyled",
@@ -31,7 +32,7 @@ export const Currency: FC<CurrencyProps> = (props) => {
   const asValueString = NumbersService.numberToNumberString(value);
 
   return (
-    <CurrencyStyled style={{ color, ...style }}>
+    <CurrencyStyled style={{ color, ...style, fontFamily: Styles.fontSansSerif.fontFamily }}>
       {prefix} {currencySymbol}
       {asValueString}
     </CurrencyStyled>

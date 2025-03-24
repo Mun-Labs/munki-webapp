@@ -31,7 +31,15 @@ export const AvatarWithText: FC<AvatarWithTextProps> = (props) => {
         )}
         <div style={{ marginLeft: 12 }}>
           <div style={{ color: COLORS.magenta, ...Styles.h3 }}>{name}</div>
-          <div style={{ color: COLORS.yellow }}>${symbol}</div>
+          <div
+            style={{
+              // @ts-ignore - Type 'CSSProperties' is not assignable to type 'FontFamily | undefined'. [2322]
+              fontFamily: Styles.fontSansSerif.fontFamily,
+              color: COLORS.yellow,
+            }}
+          >
+            ${symbol}
+          </div>
         </div>
       </Flex>
     </AvatarWithTextStyled>

@@ -2,6 +2,7 @@ import { ComponentProps, FC, ReactNode } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
+import { Styles } from "../../uiStyles";
 
 const PercentageStyled = styled.div.attrs({ className: "PercentageStyled" })`
   display: flex;
@@ -34,7 +35,9 @@ export const Percentage: FC<PercentageProps> = (props) => {
   }
 
   return (
-    <PercentageStyled style={{ ...style, color }}>
+    <PercentageStyled
+      style={{ color, fontFamily: Styles.fontSansSerif.fontFamily, ...style }}
+    >
       {icon}
       {ensurePercent.toFixed()}%{suffix}
     </PercentageStyled>
