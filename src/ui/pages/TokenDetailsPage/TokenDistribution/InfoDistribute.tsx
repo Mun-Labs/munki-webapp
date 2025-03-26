@@ -56,12 +56,22 @@ const InfoDistribute = () => {
             {Array(item.weight)
               .fill("")
               .map((_item, idx) => (
-                <div key={idx} className="rectangle"></div>
+                <div
+                  key={idx}
+                  className="rectangle"
+                  style={{ marginLeft: 2 }}
+                ></div>
               ))}
           </div>
-          <div className="percent cl-gray">{item.percent}%</div>
-          <div className="limit cl-gray">{item.limit}</div>
-          <div className="value cl-green">{item.value}</div>
+          <div className="percent cl-gray" style={{ marginLeft: 20 }}>
+            {item.percent}%
+          </div>
+          <div className="limit cl-gray" style={{ marginLeft: 40, width: 150 }}>
+            {item.limit}
+          </div>
+          <div className="value cl-green" style={{ marginLeft: 50 }}>
+            {item.value}
+          </div>
         </div>
       ))}
     </InfoDistributeStyled>
@@ -74,13 +84,18 @@ const InfoDistributeStyled = styled.div.attrs({
   className: "InfoDistributeStyled",
 })`
   margin-top: 24px;
+
+  * {
+    font-size: 20px;
+  }
+
   .item {
     display: grid;
     grid-template-columns: 1.5rem 10.75rem 3.125rem 9.125rem 4.375rem;
 
     align-items: center;
     gap: 8px;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
   }
 
   .cl-gray {

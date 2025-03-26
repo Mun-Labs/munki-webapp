@@ -48,6 +48,6 @@ const DistributeChartStyled = styled.div.attrs({
   width: 100%;
 
   & > div {
-    height: 12px;
+    height: 20px;
   }
 `;
