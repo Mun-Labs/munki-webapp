@@ -1,95 +1,58 @@
-import { Flex } from "antd";
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
-import { Percentage } from "../../../../atoms/Percentage/Percentage";
+import { COLORS } from "../../../../colors";
+import { ChartItem } from "./ChartItem";
 import { LineChartDemo } from "../../../../demos/LineChartDemo";
 import { BarChartDemo } from "../../../../demos/BarChartDemo";
-import { COLORS } from "../../../../colors";
 
 interface SectionChartProps extends ComponentProps<any> {}
 
 export const SectionChart: FC<SectionChartProps> = (_props) => {
   return (
     <SectionChartStyled>
-      <div className="wrap-chart">
-        <div style={{ marginBottom: "8px" }}>
-          <h4>Market Cap</h4>
-          <Flex gap={4}>
-            <p>$439,41M</p>{" "}
-            <span>
-              <Percentage value={10}></Percentage>
-            </span>
-            <span>7D</span>
-          </Flex>
-        </div>
-        <div style={{ height: 150 }}>
-          <LineChartDemo />
-        </div>
-        <p className="desc">
-          <span className="cl-ex-greed">+11.34%</span> market cap vs tokens with
-          a similar mindshare
-        </p>
-      </div>
+      <ChartItem
+        title="Market Cap"
+        value="$439,41M"
+        percentageValue={10}
+        timeFrame="7D"
+        description="market cap vs tokens with a similar mindshare"
+        descriptionPercentage="+11.34%"
+      >
+        <LineChartDemo />
+      </ChartItem>
 
-      <div className="wrap-chart">
-        <div style={{ marginBottom: "8px" }}>
-          <h4>Market Cap</h4>
-          <Flex gap={4}>
-            <p>$439,41M</p>{" "}
-            <span>
-              <Percentage value={10}></Percentage>
-            </span>
-            <span>7D</span>
-          </Flex>
-        </div>
-        <div style={{ height: 150 }}>
-          <LineChartDemo />
-        </div>
-        <p className="desc">
-          <span className="cl-ex-greed">+11.34%</span> market cap vs tokens with
-          a similar mindshare
-        </p>
-      </div>
+      <ChartItem
+        title="24h Volume"
+        value="$439,41M"
+        percentageValue={10}
+        timeFrame="7D"
+        description="volume vs tokens with a similar mindshare"
+        descriptionPercentage="+11.34%"
+      >
+        <LineChartDemo />
+      </ChartItem>
 
-      <div className="wrap-chart">
-        <div style={{ marginBottom: "8px" }}>
-          <h4>Market Cap</h4>
-          <Flex gap={4}>
-            <p>$439,41M</p>{" "}
-            <span>
-              <Percentage value={10}></Percentage>
-            </span>
-            <span>7D</span>
-          </Flex>
-        </div>
-        <div style={{ height: 150 }}>
-          <BarChartDemo />
-        </div>
-        <p className="desc">
-          <span className="cl-ex-greed">+19.34%</span> liquidity vs tokens with
-          a similar MC
-        </p>
-      </div>
+      <ChartItem
+        title="Liquidity"
+        value="$439,41M"
+        percentageValue={10}
+        timeFrame="7D"
+        description="liquidity vs tokens with a similar MC"
+        descriptionPercentage="+19.34%"
+      >
+        <BarChartDemo />
+      </ChartItem>
 
-      <div className="wrap-chart">
-        <div style={{ marginBottom: "8px" }}>
-          <h4>Market Cap</h4>
-          <Flex gap={4}>
-            <p>$439,41M</p>{" "}
-            <span>
-              <Percentage value={10}></Percentage>
-            </span>
-            <span>7D</span>
-          </Flex>
-        </div>
-        <div style={{ height: 150 }}>
-          <BarChartDemo />
-        </div>
-        <p className="desc">
-          <span className="cl-ex-greed">+19.34%</span> liquidity vs tokens with
-          a similar MC
-        </p>
-      </div>
+      <ChartItem
+        title="Holders"
+        value="$439,41M"
+        percentageValue={10}
+        timeFrame="7D"
+        description="holders vs tokens with a similar MC"
+        descriptionPercentage="+19.34%"
+      >
+        <BarChartDemo />
+      </ChartItem>
     </SectionChartStyled>
   );
 };

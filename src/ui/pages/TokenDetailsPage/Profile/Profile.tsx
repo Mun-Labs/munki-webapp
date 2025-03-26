@@ -80,32 +80,25 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
             />
           </Flex>
           <Flex gap={12} style={{ marginTop: "24px" }}>
-            <p
-              style={{
-                padding: "8px 20px",
-                background: "#fff",
-                color: COLORS.black,
-                borderRadius: "18px",
-                lineHeight: "normal",
-                fontSize: "28px",
-                cursor: "pointer",
-              }}
-            >
-              X.COM
-            </p>
-            <p
-              style={{
-                padding: "8px 20px",
-                background: "#fff",
-                color: COLORS.black,
-                borderRadius: "18px",
-                lineHeight: "normal",
-                fontSize: "28px",
-                cursor: "pointer",
-              }}
-            >
-              Dexscreeners
-            </p>
+            {<LinkChip name="X" />}
+            {
+              <LinkChip
+                name="Birdeye"
+                uri={`https://www.birdeye.so/token/${tokenData.tokenAddress}?chain=solana`}
+              />
+            }
+            {
+              <LinkChip
+                name="Dexscreener"
+                uri={`https://dexscreener.com/solana/${tokenData.tokenAddress}`}
+              />
+            }
+            {
+              <LinkChip
+                name="Dexstools"
+                uri={`https://www.dextools.io/app/en/solana/pair-explorer/${tokenData.tokenAddress}`}
+              />
+            }
           </Flex>
         </div>
       </InfoStyled>
@@ -148,3 +141,23 @@ const InfoStyled = styled(Flex).attrs({ className: "InfoStyled" })`
     gap: 44px;
   }
 `;
+
+function LinkChip({ uri, name }: { uri?: string; name?: string }) {
+  return (
+    <a href={uri} rel="noreferrer noopener">
+      <p
+        style={{
+          padding: "8px 20px",
+          background: "#fff",
+          color: COLORS.black,
+          borderRadius: "18px",
+          lineHeight: "normal",
+          fontSize: "28px",
+          cursor: "pointer",
+        }}
+      >
+        {name}
+      </p>
+    </a>
+  );
+}

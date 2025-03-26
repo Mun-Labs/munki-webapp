@@ -5,8 +5,16 @@ import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 import { Styles } from "../../uiStyles";
 import { Tooltip } from "antd";
 
-const PercentageStyled = styled.div.attrs({ className: "PercentageStyled" })`
+const PercentageStyled = styled.div.attrs<{
+  $fontFamily: PercentageProps["$fontFamily"];
+}>({
+  className: "PercentageStyled",
+})`
   display: flex;
+
+  * {
+    font-family: ${(props) => props.$fontFamily};
+  }
 `;
 
 interface PercentageProps extends ComponentProps<any> {
@@ -16,7 +24,7 @@ interface PercentageProps extends ComponentProps<any> {
   neutralColor?: boolean;
   colors?: [positive?: string, negative?: string];
   suffix?: ReactNode;
-  fontFamily?: "munki" | "sans-serif" | string;
+  $fontFamily?: "munki" | "sans-serif" | string;
 }
 
 export const Percentage: FC<PercentageProps> = (props) => {
@@ -28,19 +36,19 @@ export const Percentage: FC<PercentageProps> = (props) => {
     noSigns,
     value,
     suffix,
-    fontFamily,
+    $fontFamily: fontFamily,
   } = props;
   if (value == null) return <>n/a</>;
 
   const ensurePercent = value < 1 ? value * 100 : value;
-  let finalPercent = ensurePercent.toFixed()
-  if (value === 0) finalPercent = "0"
-  else if (value < 0.01) finalPercent = "<0.01"
+  let finalPercent = ensurePercent.toFixed();
+  if (value === 0) finalPercent = "0";
+  else if (value < 0.01) finalPercent = "<0.01";
 
   let color =
     ensurePercent >= 0
-      ? (colors?.[0] ?? COLORS.japanese_laurel)
-      : (colors?.[1] ?? COLORS.red);
+      ? colors?.[0] ?? COLORS.japanese_laurel
+      : colors?.[1] ?? COLORS.red;
   if (neutralColor) {
     color = COLORS.white;
   }
@@ -58,7 +66,10 @@ export const Percentage: FC<PercentageProps> = (props) => {
   else if (fontFamily) finalFontFamily = fontFamily;
 
   return (
-    <PercentageStyled style={{ color, fontFamily: finalFontFamily, ...style }}>
+    <PercentageStyled
+      style={{ color, fontFamily: finalFontFamily, ...style }}
+      $fontFamily={fontFamily}
+    >
       <Tooltip title={value + "%"}>
         {icon}
         {finalPercent}%{suffix}
