@@ -204,7 +204,7 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
     },
     {
       title: <div className="head">Wallet</div>,
-      width: 170,
+      width: 100,
       dataIndex: "wallet",
       key: "wallet",
       render: (_value) => {
@@ -224,7 +224,7 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       title: <div className="head">Holding Value</div>,
       dataIndex: "holdingValue",
       key: "holdingValue",
-      width: 240,
+      width: 200,
       render: (_value) => (
         <div className="head tac cl-green-custom fwb">
           $133,000,000 (12,22%)
@@ -251,7 +251,7 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       title: <div className="head tal">Top Holdings</div>,
       dataIndex: "topHoldings",
       key: "topHoldings",
-      width: 350,
+      width: 420,
       render: (_value) => {
         console.log(_value);
         return (
