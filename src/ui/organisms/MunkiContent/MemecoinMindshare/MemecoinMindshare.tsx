@@ -1,5 +1,6 @@
 import { Flex } from "antd";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 import { MindshareItem } from "../../../../api/apiTypes";
 import { useMindshareApi } from "../../../../api/hooks/useMindshareApi";
 import { MOCK_DATA_MINDSHARE } from "../../../../api/MockData";
@@ -12,17 +13,22 @@ import { COLORS } from "../../../colors";
 
 export const MemecoinMindshare = () => {
   const { data } = useMindshareApi(undefined, MOCK_DATA_MINDSHARE);
-  if (!data) return;
+  const [tokens, setTokens] = useState<ITreeChartNode[]>([]);
 
-  const tokens = TypeService.mapKeysArray<MindshareItem, ITreeChartNode>(
-    data.response,
-    [
-      ["name", "name"],
-      ["volume", "size", (item) => Number(item)],
-      ["logoUrl", "logoUrl"],
-      ["changePercentage", "twentyFourHourPercentage"],
-    ],
-  );
+  useEffect(() => {
+    if (data && data.response) {
+      const mappedTokens = TypeService.mapKeysArray<
+        MindshareItem,
+        ITreeChartNode
+      >(data.response, [
+        ["name", "name"],
+        ["volume", "size", (item) => Number(item)],
+        ["logoUrl", "logoUrl"],
+        ["changePercentage", "twentyFourHourPercentage"],
+      ]);
+      setTokens(mappedTokens);
+    }
+  }, [data]);
 
   return (
     <TopMemeStyled>
