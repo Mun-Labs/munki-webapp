@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { COLORS } from "../../../colors";
 import { MunkiBadge } from "../../../atoms/MunkiBadge/MunkiBadge";
 import { TopHolderTable } from "./TopHolderTable/TopHolderTable";
+import { FreshWalletTable } from "../../FreshWalletPage/FreshWalletTable/FreshWalletTable";
+import { HoldersTable } from "../../HoldersPage/HoldersTable/HoldersTable";
 
 const TopHolder = () => {
   return (
@@ -33,6 +35,8 @@ const TopHolder = () => {
         </div>
       </div>
       <TopHolderTable />
+      <FreshWalletTable />
+      <HoldersTable />
     </TopHolderStyled>
   );
 };
@@ -49,6 +53,7 @@ const TopHolderStyled = styled.div.attrs({ className: "TopHolderStyled" })`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    font-size: 30px;
   }
 
   .title {
