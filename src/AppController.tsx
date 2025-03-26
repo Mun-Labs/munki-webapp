@@ -5,6 +5,7 @@ import { DemoPage } from "./ui/pages/DemoPage.tsx";
 import { Route, Routes } from "react-router";
 import { AppLayout } from "./AppLayout.tsx";
 import { TokenDetailsPage } from "./ui/pages/TokenDetailsPage/TokenDetailsPage.tsx";
+import { TermsOfUsePage } from "./ui/pages/TermsOfUsePage.tsx";
 
 interface AppControllerProps extends ComponentProps<any> {}
 
@@ -62,6 +63,7 @@ export const AppController: FC<AppControllerProps> = (props) => {
             </AppLayout>
           }
         />
+        <Route path="/terms-of-use" element={<TermsOfUsePage />} />
       </Routes>
     </AppControllerStyled>
   );

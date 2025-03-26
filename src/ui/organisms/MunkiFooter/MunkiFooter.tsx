@@ -5,6 +5,7 @@ import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMed
 import { SocialMedia } from "../../../domain/types/Types";
 import { COLORS } from "../../colors";
 import { Styles } from "../../uiStyles";
+import { Link } from "react-router";
 
 const footerStyle: React.CSSProperties = {
   height: "84px",
@@ -52,10 +53,12 @@ export const MunkiFooter = () => {
             marginBottom: -15,
           }}
         />
-        <Row >
+        <Row>
           {/* <FooterButton type="link">Privacy Policy</FooterButton> */}
           <FooterButton type="link">
-            <p>Terms of Use</p>
+            <Link to="/terms-of-use">
+              <p>Terms of Use</p>
+            </Link>
           </FooterButton>
           {/* <FooterButton type="link">Terms of Sale</FooterButton> */}
           <FooterButton type="link">
