@@ -11,7 +11,7 @@ export const Head: FC<TokenDetailsPageProps> = (_props) => {
   const { tokenName } = params;
 
   return (
-    <Flex style={{ fontSize: "40px" }} gap={12} wrap>
+    <Flex style={{ fontSize: "34px" }} gap={12} wrap>
       <div
         style={{
           borderRadius: "50%",

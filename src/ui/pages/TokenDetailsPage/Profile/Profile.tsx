@@ -1,44 +1,60 @@
-import { Flex } from "antd";
-import { ComponentProps, FC } from "react";
+import { Flex, Spin } from "antd";
+import { ComponentProps, FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { QRCode } from "react-qrcode-logo";
 import { useCopyText } from "../../../../domain/hooks/useCopyText";
 import { COLORS } from "../../../colors";
 import { MunkiBadge } from "../../../atoms/MunkiBadge/MunkiBadge";
+import { useParams } from "react-router";
+import { useTokenDetailApi } from "../../../../api/hooks/useTokenDetailApi";
+import { TokenDetail } from "../../../../api/apiTypes";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
 export const Profile: FC<TokenDetailsPageProps> = (_props) => {
   // const { style } = props;
-  // const params = useParams<{ tokenName: string }>();
-  // const { tokenName } = params;
+  const params = useParams<{ tokenName: string }>();
+  const { tokenName } = params;
+
+  const [tokenData, setTokenData] = useState<TokenDetail | null>(null);
+  const { data, isLoading } = useTokenDetailApi(tokenName!); // on details page, should have param
+
+  useEffect(() => {
+    if (data && !isLoading) {
+      setTokenData(data.response);
+    }
+  }, [data, isLoading]);
 
   const { onCopyText, isCopy } = useCopyText();
 
+  if (!tokenData) {
+    return (
+      <ProfileStyled>
+        <Spin size="large" />
+      </ProfileStyled>
+    );
+  }
+
   return (
-    <ProfileStyled
-      align="center"
-      justify="space-between"
-      style={{ padding: "24px 0 24px" }}
-    >
+    <ProfileStyled>
       <InfoStyled gap={44} align="start" wrap>
         <div>
           <img
             style={{ borderRadius: "12px", overflow: "hidden" }}
-            src="/user4.png"
+            src={tokenData.logoUri}
             width={300}
             height={300}
           />
         </div>
         <div>
           <p style={{ color: COLORS.yellow, fontSize: "48px" }}>
-            Internosaurus
+            ${tokenData?.name}
           </p>
-          <Flex align="center" flex={1} style={{ fontSize: "30px" }}>
-            <p>@INTERN_AI</p>
+          <Flex style={{ fontSize: "30px" }}>
             <MunkiBadge>
-              <span style={{ color: "#9EFF70" }}>$INTERN</span>
+              <span style={{ color: "#9EFF70" }}>${tokenData?.symbol}</span>
             </MunkiBadge>
+            {/* <p>@INTERN_AI</p> */}
           </Flex>
           <Flex
             justify="space-between"
@@ -51,7 +67,7 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
           >
             <Flex align="center" gap={12}>
               <img src="/icon-solana.png" width={30} height={30} />
-              <p>0xh2d.......i75d</p>
+              <p>${tokenData.tokenAddress}</p>
             </Flex>
             <img
               style={{
@@ -95,10 +111,9 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
       </InfoStyled>
 
       <QRCode
-        value={"0xh2d.......i75d"}
+        value={tokenData.tokenAddress}
         bgColor="#ffffff"
         fgColor="#070709"
-        logoImage="/assets/icon-sol-pixel.png"
         logoPaddingStyle="square"
         logoPadding={3}
         removeQrCodeBehindLogo
@@ -112,7 +127,11 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
   );
 };
 
-const ProfileStyled = styled(Flex).attrs({ className: "ProfileStyled" })`
+const ProfileStyled = styled(Flex).attrs({
+  align: "center",
+  justify: "space-between",
+  className: "ProfileStyled",
+})`
   padding: 24px 0 24px;
 
   @media (max-width: 1010px) {

@@ -7,6 +7,7 @@ import {
   FearAndGreedResponse,
   MindshareItem,
   Token,
+  TokenDetail,
   TokenTrending,
 } from "./apiTypes";
 
@@ -259,6 +260,26 @@ export const MOCK_DATA_TOKEN_TRENDING: ApiResponse<TokenTrending[]> = {
     },
   ],
   last_updated: 1742817449,
+};
+
+export const MOCK_DATA_TOKEN_DETAIL: ApiResponse<TokenDetail> = {
+  code: 200,
+  response: {
+    tokenAddress: "FeR8VBqNRSUD5NtXAj2n3j1dAHkZHfyDktKuLXD4pump",
+    name: "jelly-my-jelly",
+    symbol: "jellyjelly",
+    decimals: 6,
+    logoUri:
+      "https://ipfs.io/ipfs/QmWT4jA2ipuevUfBi1a2LW2gfnPJyvHn1JayAe2qz5kRQJ",
+    websiteUrl: null,
+    metadata: null,
+    currentPrice: "0.024895069200",
+    totalSupply: "0",
+    marketcap: "0",
+    history24hPrice: null,
+    priceChange24hPercent: null,
+  },
+  last_updated: 1743006245,
 };
 
 export const MOCK_DATA_MINDSHARE: ApiResponse<MindshareItem[]> = {

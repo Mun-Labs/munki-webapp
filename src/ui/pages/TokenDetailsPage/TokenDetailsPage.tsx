@@ -1,14 +1,5 @@
-import { Card, Flex, Typography } from "antd";
-import { Col, Row } from "antd";
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
-import { BarChartDemo } from "../../demos/BarChartDemo";
-import { LineChartDemo } from "../../demos/LineChartDemo";
-import { FilterByTime } from "../../molecules/FilterByTime/FilterByTime";
-import { ComposedChartDemo } from "../../demos/ComposedChartDemo";
-import { AreaChartDemo } from "../../demos/AreaChartDemo";
-import { AnalyticsCard } from "../../molecules/AnalyticsCard/AnalyticsCard";
-import { AvatarWithText } from "../../molecules/AvatarWithText/AvatarWithText";
 import { BioInfo } from "./BioInfo/BioInfo";
 import { Profile } from "./Profile/Profile";
 import { Head } from "./Head/Head";

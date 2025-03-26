@@ -16,6 +16,21 @@ export interface Token {
   logoUri: string;
 }
 
+export interface TokenDetail {
+  tokenAddress: Address;
+  name: string;
+  symbol: string;
+  decimals: 6;
+  logoUri: string;
+  websiteUrl: null;
+  metadata: null;
+  currentPrice: "0.024895069200";
+  totalSupply: "0";
+  marketcap: "0";
+  history24hPrice: null;
+  priceChange24hPercent: null;
+}
+
 export interface TokenTrending
   extends Pick<Token, "tokenAddress" | "name" | "symbol" | "logoUri"> {
   volume24h: BigDecimal;
