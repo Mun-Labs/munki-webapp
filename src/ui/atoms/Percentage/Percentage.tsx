@@ -5,13 +5,11 @@ import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 import { Styles } from "../../uiStyles";
 import { Tooltip } from "antd";
 
-const PercentageStyled = styled.div.attrs<{
+const PercentageStyled = styled.span.attrs<{
   $fontFamily: PercentageProps["$fontFamily"];
 }>({
   className: "PercentageStyled",
 })`
-  display: flex;
-
   * {
     font-family: ${(props) => props.$fontFamily};
   }
@@ -47,7 +45,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
 
   let color =
     ensurePercent >= 0
-      ? colors?.[0] ?? COLORS.japanese_laurel
+      ? colors?.[0] ?? COLORS.green60
       : colors?.[1] ?? COLORS.red;
   if (neutralColor) {
     color = COLORS.white;
