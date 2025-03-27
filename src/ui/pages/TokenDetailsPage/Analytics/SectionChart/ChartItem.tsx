@@ -12,7 +12,7 @@ interface LineChartSectionProps {
   percentageValue: number;
   timeFrame: string;
   description: string;
-  descriptionPercentage: string;
+  descriptionPercentage: number;
 }
 
 export const ChartItem: FC<LineChartSectionProps> = ({
@@ -48,7 +48,14 @@ export const ChartItem: FC<LineChartSectionProps> = ({
       </div>
       <div style={{ height: 150 }}>{children}</div>
       <p className="desc">
-        <span className="cl-ex-greed">{descriptionPercentage}</span>{" "}
+        <span className="cl-ex-greed">
+          <Percentage
+            value={descriptionPercentage}
+            style={{ display: "inline" }}
+            plusMinus
+            colors={[COLORS.green70]}
+          />
+        </span>{" "}
         {description}
       </p>
     </div>

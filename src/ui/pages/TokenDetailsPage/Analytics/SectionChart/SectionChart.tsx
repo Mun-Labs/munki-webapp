@@ -4,52 +4,62 @@ import { COLORS } from "../../../../colors";
 import { ChartItem } from "./ChartItem";
 import { LineChartDemo } from "../../../../demos/LineChartDemo";
 import { BarChartDemo } from "../../../../demos/BarChartDemo";
+import { useTokenAnalytics } from "../../hooks/useTokenAnalytics";
+import { Currency } from "../../../../atoms/Currency/Currency";
+import { TokenAnalytics } from "../../../../../api/apiTypes";
+import { Percentage } from "../../../../atoms/Percentage/Percentage";
 
 interface SectionChartProps extends ComponentProps<any> {}
 
 export const SectionChart: FC<SectionChartProps> = (_props) => {
+  let { tokenAnalyticsData } = useTokenAnalytics();
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ SectionChart.tsx:13 ~ tokenAnalyticsData:', tokenAnalyticsData)
+  if (!tokenAnalyticsData) {
+    tokenAnalyticsData = {} as TokenAnalytics;
+  }
+
   return (
     <SectionChartStyled>
       <ChartItem
         title="Market Cap"
-        value="$439,41M"
-        percentageValue={10}
         timeFrame="7D"
         description="market cap vs tokens with a similar mindshare"
-        descriptionPercentage="+11.34%"
+        value={<Currency value={tokenAnalyticsData.marketCap} />}
+        percentageValue={tokenAnalyticsData.marketCapChange7d}
+        descriptionPercentage={tokenAnalyticsData.marketCapChange7d}
       >
         <LineChartDemo />
       </ChartItem>
 
       <ChartItem
         title="24h Volume"
-        value="$439,41M"
-        percentageValue={10}
         timeFrame="7D"
         description="volume vs tokens with a similar mindshare"
-        descriptionPercentage="+11.34%"
+        value={<Currency value={tokenAnalyticsData?.volume24h} />}
+        percentageValue={tokenAnalyticsData.volume24hChange7d}
+        descriptionPercentage={tokenAnalyticsData.volume24hChange7d}
       >
         <LineChartDemo />
       </ChartItem>
 
       <ChartItem
         title="Liquidity"
-        value="$439,41M"
-        percentageValue={10}
         timeFrame="7D"
         description="liquidity vs tokens with a similar MC"
-        descriptionPercentage="+19.34%"
+        value={<Currency value={tokenAnalyticsData?.liquidity} />}
+        percentageValue={tokenAnalyticsData.liquidityChange}
+        descriptionPercentage={tokenAnalyticsData.liquidityChange}
       >
         <BarChartDemo />
       </ChartItem>
 
       <ChartItem
         title="Holders"
-        value="$439,41M"
-        percentageValue={10}
         timeFrame="7D"
         description="holders vs tokens with a similar MC"
-        descriptionPercentage="+19.34%"
+        value={<Currency value={tokenAnalyticsData?.holders} />}
+        percentageValue={tokenAnalyticsData.holdersChange7d}
+        descriptionPercentage={tokenAnalyticsData.holdersChange7d}
       >
         <BarChartDemo />
       </ChartItem>
