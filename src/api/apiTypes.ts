@@ -122,3 +122,53 @@ export interface PaginationQueryParams {
 export interface TokenQueryParams extends PaginationQueryParams {
   q: string;
 }
+
+export interface HistoricalValue {
+  value: number;
+  time: UnixTime;
+  label: string | null;
+}
+
+export interface TopFollower {
+  profileUrl: string;
+  tag: string;
+  name: string;
+  followers: number;
+}
+
+export interface FollowersData {
+  followerNumber: number;
+  followerNumberChange7d: number;
+  smarts: number;
+  smartsChange: number;
+  followerNumbersHistorical: HistoricalValue[];
+}
+
+export interface MentionsData {
+  mentionNumber: number;
+  mentionNumberChange7d: number;
+  smarts: number;
+  smartsChange: number;
+  mentionNumbersHistorical: HistoricalValue[];
+}
+
+export interface TokenAnalytics {
+  marketCap: number;
+  marketCapChange7d: number;
+  marketCap7dHistoricalValues: HistoricalValue[];
+  volume24h: number;
+  volume24hChange7d: number;
+  volumeHistorical: HistoricalValue[];
+  liquidity: number;
+  liquidityChange: number;
+  liquidityHistorical: HistoricalValue[];
+  holders: number;
+  holdersChange7d: number;
+  holdersHistorical: HistoricalValue[];
+  moonScore: number;
+  level: string;
+  riskScore: number;
+  topFollowers: TopFollower[];
+  followers: FollowersData;
+  mentions: MentionsData;
+}

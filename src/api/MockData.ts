@@ -7,6 +7,7 @@ import {
   FearAndGreedResponse,
   MindshareItem,
   Token,
+  TokenAnalytics,
   TokenDetail,
   TokenDistributionItem,
   TokenTrending,
@@ -1053,6 +1054,215 @@ export const MOCK_DATA_TOKEN_DISTRIBUTION: ApiResponse<
     },
   ],
   last_updated: 1743092213,
+};
+
+export const MOCK_DATA_TOKEN_ANALYTICS: ApiResponse<TokenAnalytics> = {
+  code: 200,
+  response: {
+    marketCap: 1234567.89,
+    marketCapChange7d: -5.43,
+    marketCap7dHistoricalValues: [
+      {
+        value: 1230000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 1234567.89,
+        time: 1711586400,
+        label: null,
+      },
+      {
+        value: 1434567.89,
+        time: 1711586400,
+        label: null,
+      },
+      {
+        value: 1134567.89,
+        time: 1711586400,
+        label: null,
+      },
+      {
+        value: 1734567.89,
+        time: 1711586400,
+        label: null,
+      },
+    ],
+    volume24h: 98765.43,
+    volume24hChange7d: 2.1,
+    volumeHistorical: [
+      {
+        value: 95000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 95000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 98000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 100000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 195000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 185000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+    ],
+    liquidity: 45678.9,
+    liquidityChange: 1.5,
+    liquidityHistorical: [
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+    ],
+    holders: 5000,
+    holdersChange7d: -200,
+    holdersHistorical: [
+      {
+        value: 5200.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+    ],
+    moonScore: 960,
+    level: "ALPHA",
+    riskScore: 10.96,
+    topFollowers: [
+      {
+        profileUrl: "https://x.com/user1",
+        tag: "@user1",
+        name: "User One",
+        followers: 10000,
+      },
+      {
+        profileUrl: "https://x.com/user2",
+        tag: "@user2",
+        name: "User Two",
+        followers: 5000,
+      },
+      {
+        profileUrl: "https://x.com/user2",
+        tag: "@user2",
+        name: "User Two",
+        followers: 5000,
+      },
+      {
+        profileUrl: "https://x.com/user2",
+        tag: "@user2",
+        name: "User Two",
+        followers: 5000,
+      },
+      {
+        profileUrl: "https://x.com/user2",
+        tag: "@user2",
+        name: "User Two",
+        followers: 5000,
+      },
+    ],
+    followers: {
+      followerNumber: 25000,
+      followerNumberChange7d: 500,
+      smarts: 3000,
+      smartsChange: -50,
+      followerNumbersHistorical: [
+        {
+          value: 24500.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 24500.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 24500.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 24500.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 24500.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+      ],
+    },
+    mentions: {
+      mentionNumber: 1200,
+      mentionNumberChange7d: 100,
+      smarts: 150,
+      smartsChange: 10,
+      mentionNumbersHistorical: [
+        {
+          value: 1100.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 1100.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 1100.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 1100.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 1100.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+      ],
+    },
+  },
+  last_updated: 1743092176,
 };
 
 export const COIN_MAP = {
