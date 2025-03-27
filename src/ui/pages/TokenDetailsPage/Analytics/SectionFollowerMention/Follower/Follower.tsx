@@ -8,6 +8,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { COLORS } from "../../../../../colors";
+import { useTokenAnalytics } from "../../../hooks/useTokenAnalytics";
+import { NumbersService } from "../../../../../../common/modules/numbers";
+import { Percentage } from "../../../../../atoms/Percentage/Percentage";
+import { FollowersData } from "../../../../../../api/apiTypes";
+import { DateTime } from "luxon";
+import { unixToDate } from "../../../../../../common/modules/dateAndTime";
 
 const data = [
   { date: "1/23/25", mentions: 1000, smartMentions: 400 },
@@ -20,6 +26,30 @@ const data = [
 ];
 
 const Follower = () => {
+  const { tokenAnalyticsData } = useTokenAnalytics();
+  const followerNum = NumbersService.numberToNumberString(
+    tokenAnalyticsData.followers?.followerNumber,
+  );
+  const smartNum = NumbersService.numberToNumberString(
+    tokenAnalyticsData.followers?.smarts,
+  );
+
+  const followers = tokenAnalyticsData.followers ?? ({} as FollowersData);
+  const followerHistoryWithFormattedDate =
+    followers.followerNumbersHistorical?.map((item) => ({
+      ...item,
+      time: unixToDate(item.time, "short"),
+    }));
+
+  const calcYDomain = (data: any[]) => {
+    const maxValue = Math.max(...data.map((item) => item.value));
+    const minValue = Math.min(...data.map((item) => item.value));
+    const range = maxValue - minValue;
+    const padding = range * 0.1; // 10% padding
+    return [minValue - padding, maxValue + padding];
+  };
+  const yDomain = calcYDomain(followerHistoryWithFormattedDate);
+
   return (
     <ChartContainer>
       <Title>Followers</Title>
@@ -28,19 +58,27 @@ const Follower = () => {
           <MetricItem>
             <MetricTitle className="font-normal">Followers</MetricTitle>
             <MetricValue>
-              47.23K <MetricChange> ▲ 12% 7D</MetricChange>
+              {followerNum}{" "}
+              <Percentage
+                value={followers.followerNumberChange7d}
+                suffix="7D"
+              />
             </MetricValue>
           </MetricItem>
         </Metrics>
         <MetricItem>
           <MetricTitle className="font-normal">Smart</MetricTitle>
           <MetricValue>
-            14.32K <MetricChange> ▲ 12% 7D</MetricChange>
+            {smartNum} <Percentage value={followers.smartsChange} suffix="7D" />
           </MetricValue>
         </MetricItem>
       </Metrics>
-      <ResponsiveContainer width="100%" height={300}>
-        <AreaChart data={data}>
+      <ResponsiveContainer
+        width="105%"
+        height={300}
+        style={{ marginLeft: -35 }}
+      >
+        <AreaChart data={followerHistoryWithFormattedDate}>
           <defs>
             <linearGradient id="colorMentions" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#cd327f" stopOpacity={1} />
@@ -51,18 +89,18 @@ const Follower = () => {
           <XAxis
             minTickGap={20}
             stroke="#84124d"
-            dataKey="date"
+            dataKey="time"
             tick={{ fill: "#fff" }}
           />
           <YAxis
             tick={{ fill: "transparent" }}
             stroke="transparent"
-            domain={[0, 50000]}
+            domain={yDomain}
           />
           <Tooltip content={<CustomTooltip />} />
           <Area
             type="monotone"
-            dataKey="mentions"
+            dataKey="value"
             stroke="#ed1c84"
             strokeWidth={3}
             fillOpacity={1}
@@ -91,9 +129,9 @@ const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     return (
       <TooltipContainer>
-        <p className="text-sm font-bold font-normal">Date: {data?.date}</p>
-        <p className="font-normal">Mentions: {data?.mentions}</p>
-        <p className="font-normal">Smart Mentions: {data?.smartMentions}</p>
+        <p className="text-sm font-bold font-normal">Date: {data.time}</p>
+        <p className="font-normal">Mentions: {data?.value}</p>
+        {/* <p className="font-normal">Smart Mentions: {data?.smartMentions}</p> */}
       </TooltipContainer>
     );
   }
