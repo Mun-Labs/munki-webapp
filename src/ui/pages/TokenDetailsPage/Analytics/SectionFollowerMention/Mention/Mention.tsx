@@ -30,7 +30,7 @@ const Mention = () => {
       time: unixToDate(item.time, "short"),
     }));
 
-  const calcYDomain = (data: any[]) => {
+  const calcYDomain = (data: any[] = []) => {
     const maxValue = Math.max(...data.map((item) => item.value));
     const minValue = Math.min(...data.map((item) => item.value));
     const range = maxValue - minValue;
