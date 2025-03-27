@@ -43,7 +43,7 @@ export const SectionScore: FC<SectionScoreProps> = () => {
         </h4>
 
         <div style={{ width: "98%" }}>
-          <Slider marks={marks} />
+          <Slider marks={marks} value={tokenAnalyticsData.moonScore} />
         </div>
       </div>
       <div className="risk-score wrap-score">
