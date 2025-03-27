@@ -14,10 +14,6 @@ const data = [
 ];
 
 const TotalHoldersChart = () => {
-  useEffect(() => {
-    console.log("window?.innerWidth");
-  }, []);
-
   return (
     <WrapChartStyled>
       <LineChart
@@ -39,7 +35,7 @@ const TotalHoldersChart = () => {
         {/* <Line
             type="monotone"
             dataKey="value2"
-            stroke="#0000FF" 
+            stroke="#0000FF"
             name="193.15K"
             dot={false}
           /> */}
@@ -52,8 +48,6 @@ export default TotalHoldersChart;
 
 // Custom Tooltip (same as your original)
 const CustomTooltip = ({ active, payload }: any) => {
-  console.log({ payload });
-
   const data = payload[0]?.payload;
 
   if (active && payload && payload.length) {

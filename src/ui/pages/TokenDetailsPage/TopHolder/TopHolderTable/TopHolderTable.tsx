@@ -253,7 +253,6 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       key: "topHoldings",
       width: 420,
       render: (_value) => {
-        console.log(_value);
         return (
           <div className="topHolding">
             <TopHoldingItem />

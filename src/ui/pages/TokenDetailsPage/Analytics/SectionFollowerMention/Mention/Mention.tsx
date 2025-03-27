@@ -86,8 +86,6 @@ export default Mention;
 
 // Custom Tooltip (same as your original)
 const CustomTooltip = ({ active, payload }: any) => {
-  console.log({ payload });
-
   const data = payload[0]?.payload;
 
   if (active && payload && payload.length) {
