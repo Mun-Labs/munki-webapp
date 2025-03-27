@@ -8,6 +8,7 @@ import {
   MindshareItem,
   Token,
   TokenDetail,
+  TokenDistributionItem,
   TokenTrending,
 } from "./apiTypes";
 
@@ -1018,6 +1019,40 @@ export const MOCK_DATA_ALPHA_MOVES: ApiResponse<AlphaMovesItem[]> = {
   ],
   last_updated: 1742827601,
   total: 97,
+};
+
+export const MOCK_DATA_TOKEN_DISTRIBUTION: ApiResponse<
+  TokenDistributionItem[]
+> = {
+  code: 200,
+  response: [
+    {
+      category: "shrimp",
+      percentage: 0.18,
+      amount: 4212,
+    },
+    {
+      category: "fish",
+      percentage: 5.0,
+      amount: 800,
+    },
+    {
+      category: "dolphin",
+      percentage: 12.75,
+      amount: 300,
+    },
+    {
+      category: "shark",
+      percentage: 20.0,
+      amount: 50,
+    },
+    {
+      category: "whale",
+      percentage: 25.5,
+      amount: 15,
+    },
+  ],
+  last_updated: 1743092213,
 };
 
 export const COIN_MAP = {

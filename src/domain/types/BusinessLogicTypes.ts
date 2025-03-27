@@ -10,3 +10,16 @@ export enum VolumeLabels {
   "Medium" = "Medium",
   "High" = "High",
 }
+
+export type TokenDistributionItemCategories =
+  | "bubble"
+  | "shrimp"
+  | "fish"
+  | "dolphin"
+  | "shark"
+  | "whale";
+
+export type TokenDistributionLabelMapping = Record<
+  TokenDistributionItemCategories,
+  { icon: string; limit: string }
+>;

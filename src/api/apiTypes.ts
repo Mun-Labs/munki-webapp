@@ -1,4 +1,7 @@
-import { FearAndGreedClassification } from "../domain/types/BusinessLogicTypes";
+import {
+  FearAndGreedClassification,
+  TokenDistributionItemCategories,
+} from "../domain/types/BusinessLogicTypes";
 import { Address, BigDecimal, UnixTime } from "../domain/types/Types";
 
 export interface ApiResponse<T> {
@@ -104,6 +107,12 @@ export interface TokenPriceInfo {
 export type TokenPrices = {
   [tokenAddress: Address]: TokenPriceInfo;
 };
+
+export interface TokenDistributionItem {
+  category: TokenDistributionItemCategories;
+  percentage: number;
+  amount: number;
+}
 
 export interface PaginationQueryParams {
   limit?: number;

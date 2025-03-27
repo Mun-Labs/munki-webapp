@@ -1,7 +1,19 @@
 import styled from "styled-components";
 import { COLORS } from "../../../colors";
+import { useTokenDistributionApi } from "../../../../api/hooks/useTokenDistributionApi";
+import { useParams } from "react-router";
+import { useState, useEffect } from "react";
+import { TokenDistributionItem } from "../../../../api/apiTypes";
 
-const DATA = [
+export type TokenDistributionItemOld = {
+  type: string;
+  weight: number;
+  percent: number;
+  limit: string;
+  value: number;
+};
+
+const DATA: TokenDistributionItemOld[] = [
   {
     type: "🫧",
     weight: 3,
@@ -47,6 +59,20 @@ const DATA = [
 ];
 
 const InfoDistribute = () => {
+  const params = useParams<{ tokenName: string }>();
+  const { tokenName } = params;
+
+  const [tokenItems, setTokenItems] = useState<TokenDistributionItem[] | null>(
+    null,
+  );
+  const { data, isLoading } = useTokenDistributionApi(tokenName!); // on details page, should have param
+
+  useEffect(() => {
+    if (data && !isLoading) {
+      setTokenItems(data.response);
+    }
+  }, [data, isLoading]);
+
   return (
     <InfoDistributeStyled>
       {DATA.map((item) => (
