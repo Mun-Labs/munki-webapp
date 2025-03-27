@@ -19,9 +19,9 @@ const TopHolder = () => {
           onClick={() => setActiveTab("topHolders")}
         >
           <h3>Noteworthy Top Holders</h3>
-          <p>
+          <div>
             <MunkiBadge>10/50</MunkiBadge>
-          </p>
+          </div>
         </div>
         <div
           className={`title ${
@@ -30,18 +30,18 @@ const TopHolder = () => {
           onClick={() => setActiveTab("freshWallets")}
         >
           <h3>Fresh Wallet List</h3>
-          <p>
+          <div>
             <MunkiBadge>10/50</MunkiBadge>
-          </p>
+          </div>
         </div>
         <div
           className={`title ${activeTab === "holders" ? "active" : "disable"}`}
           onClick={() => setActiveTab("holders")}
         >
           <h3>Holders List</h3>
-          <p>
+          <div>
             <MunkiBadge>399K</MunkiBadge>
-          </p>
+          </div>
         </div>
       </div>
       <div className="updated">

@@ -276,6 +276,11 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
     },
   ];
 
+  const withKeys = dataSource.map((item, index) => ({
+    ...item,
+    key: index,
+  }));
+
   return (
     <TopHolderTableStyled style={{ ...style }}>
       <Table<ITopHolder>
@@ -284,7 +289,7 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
         // rowClassName={(record) => {
         //   return record?.rank === 1 ? "active" : "";
         // }}
-        dataSource={dataSource}
+        dataSource={withKeys}
         pagination={{ position: ["none", "bottomCenter"] }}
         size="middle"
         scroll={{ x: "max-content", y: 55 * 10 }}
