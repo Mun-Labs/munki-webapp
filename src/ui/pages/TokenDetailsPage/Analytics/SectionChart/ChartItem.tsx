@@ -37,7 +37,7 @@ export const ChartItem: FC<LineChartSectionProps> = ({
           {title}
         </h4>
         <Flex gap={4}>
-          <p>{value}</p>{" "}
+          <div>{value}</div>{" "}
           <Percentage
             colors={[COLORS.green70]}
             value={percentageValue}
@@ -47,7 +47,7 @@ export const ChartItem: FC<LineChartSectionProps> = ({
         </Flex>
       </div>
       <div style={{ height: 150 }}>{children}</div>
-      <p className="desc">
+      <div className="desc">
         <span className="cl-ex-greed">
           <Percentage
             value={descriptionPercentage}
@@ -57,7 +57,7 @@ export const ChartItem: FC<LineChartSectionProps> = ({
           />
         </span>{" "}
         {description}
-      </p>
+      </div>
     </div>
   );
 };
