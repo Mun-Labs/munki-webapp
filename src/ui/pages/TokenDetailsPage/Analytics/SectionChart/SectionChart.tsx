@@ -6,17 +6,11 @@ import { LineChartDemo } from "../../../../demos/LineChartDemo";
 import { BarChartDemo } from "../../../../demos/BarChartDemo";
 import { useTokenAnalytics } from "../../hooks/useTokenAnalytics";
 import { Currency } from "../../../../atoms/Currency/Currency";
-import { TokenAnalytics } from "../../../../../api/apiTypes";
-import { Percentage } from "../../../../atoms/Percentage/Percentage";
 
 interface SectionChartProps extends ComponentProps<any> {}
 
 export const SectionChart: FC<SectionChartProps> = (_props) => {
-  let { tokenAnalyticsData } = useTokenAnalytics();
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ SectionChart.tsx:13 ~ tokenAnalyticsData:', tokenAnalyticsData)
-  if (!tokenAnalyticsData) {
-    tokenAnalyticsData = {} as TokenAnalytics;
-  }
+  const { tokenAnalyticsData } = useTokenAnalytics();
 
   return (
     <SectionChartStyled>

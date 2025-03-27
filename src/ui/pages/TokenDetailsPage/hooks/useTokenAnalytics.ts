@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext } from "react";
 import { TokenAnalytics } from "../../../../api/apiTypes";
 
 export interface TokenAnalyticsContextType {
-  tokenAnalyticsData: TokenAnalytics | null;
+  tokenAnalyticsData: TokenAnalytics;
   isLoading: boolean;
 }
 

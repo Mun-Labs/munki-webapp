@@ -25,8 +25,12 @@ export const TokenAnalyticsProvider: FC<TokenAnalyticsProviderProps> = ({
     }
   }, [data, isLoading]);
 
+  const final = tokenAnalyticsData
+    ? tokenAnalyticsData
+    : ({} as TokenAnalytics);
+
   const value = {
-    tokenAnalyticsData,
+    tokenAnalyticsData: final,
     isLoading,
   };
 
