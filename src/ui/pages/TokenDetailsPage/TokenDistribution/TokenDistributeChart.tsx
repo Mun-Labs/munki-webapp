@@ -26,8 +26,9 @@ const DISTRIBUTE = [
 const TokenDistributeChart = () => {
   return (
     <DistributeChartStyled>
-      {DISTRIBUTE.map((dist) => (
+      {DISTRIBUTE.map((dist, index) => (
         <div
+          key={index}
           style={{ width: `${dist.percent}%`, background: dist.color }}
         ></div>
       ))}

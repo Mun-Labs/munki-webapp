@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { BioInfo } from "./BioInfo/BioInfo";
 import { Profile } from "./Profile/Profile";
@@ -9,13 +9,27 @@ import TopHolder from "./TopHolder/TopHolder";
 import TokenDistribution from "./TokenDistribution/TokenDistribution";
 import { COLORS } from "../../colors";
 import TotalHolders from "./TotalHolders/TotalHolders";
+import { useParams } from "react-router";
+import { TokenAnalytics } from "../../../api/apiTypes";
+import { useTokenDetailApi } from "../../../api/hooks/useTokenDetailApi";
+import { useTokenAnalyticsApi } from "../../../api/hooks/useTokenAnalyticsApi";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
 export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
   const { style } = props;
-  // const params = useParams<{ tokenName: string }>();
-  // const { tokenName } = params;
+  const params = useParams<{ tokenName: string }>();
+  const { tokenName } = params;
+
+  const [tokenAnalyticsData, setTokenAnalyticsData] =
+    useState<TokenAnalytics | null>(null);
+  const { data, isLoading } = useTokenAnalyticsApi(tokenName!); // on details page, should have param
+
+  useEffect(() => {
+    if (data && !isLoading) {
+      setTokenAnalyticsData(data.response);
+    }
+  }, [data, isLoading]);
 
   return (
     <TokenDetailsPageStyled style={{ ...style }}>

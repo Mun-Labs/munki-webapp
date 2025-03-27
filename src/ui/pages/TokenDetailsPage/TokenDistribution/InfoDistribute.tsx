@@ -75,8 +75,8 @@ const InfoDistribute = () => {
 
   return (
     <InfoDistributeStyled>
-      {DATA.map((item) => (
-        <div className="item">
+      {DATA.map((item, index) => (
+        <div className="item" key={index}>
           <div className="type">{item.type}</div>
           <div className="weight wrap-rectangle">
             {Array(item.weight)

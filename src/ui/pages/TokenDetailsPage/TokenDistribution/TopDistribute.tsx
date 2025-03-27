@@ -26,8 +26,8 @@ const DISTRIBUTE = [
 const TopDistribute = () => {
   return (
     <TopDistributeStyled>
-      {DISTRIBUTE.map((item) => (
-        <div className={`${item.disable ? "disable" : ""}`}>
+      {DISTRIBUTE.map((item, index) => (
+        <div key={index} className={`${item.disable ? "disable" : ""}`}>
           <p style={{ background: item.color }} className="circle" />
           <p>{item.title}</p>
         </div>
