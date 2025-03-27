@@ -1,14 +1,14 @@
 import { Flex } from "antd";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Percentage } from "../../../../atoms/Percentage/Percentage";
 import { LineChartDemo } from "../../../../demos/LineChartDemo";
 import { Styles } from "../../../../uiStyles";
 import { COLORS } from "../../../../colors";
 
 interface LineChartSectionProps {
-  children: React.ReactNode;
+  children: ReactNode;
   title: string;
-  value: string;
+  value: ReactNode;
   percentageValue: number;
   timeFrame: string;
   description: string;

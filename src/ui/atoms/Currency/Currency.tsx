@@ -18,12 +18,14 @@ interface CurrencyProps extends ComponentProps<any> {
    * Control the color (green/red) of the currency value
    */
   actionType?: AlphaMovesItem["actionType"];
+  fontFamily?: "munki" | "sans-serif" | string;
 }
 
 const currencySymbol = "$";
 
 export const Currency: FC<CurrencyProps> = (props) => {
-  const { style, showColors, colors, value, prefixes, actionType } = props;
+  const { style, showColors, colors, value, prefixes, actionType, fontFamily } =
+    props;
   if (!value) return <>n/a</>;
 
   let color;
@@ -38,19 +40,20 @@ export const Currency: FC<CurrencyProps> = (props) => {
     if (actionType) {
       color = actionType === "buy" ? greenColor : redColor;
       prefix =
-        actionType === "buy"
-          ? (prefixes[0] ?? "Bought")
-          : (prefixes[1] ?? "Sold");
+        actionType === "buy" ? prefixes[0] ?? "Bought" : prefixes[1] ?? "Sold";
     } else {
-      prefix = value > 0 ? (prefixes[0] ?? "Bought") : (prefixes[1] ?? "Sold");
+      prefix = value > 0 ? prefixes[0] ?? "Bought" : prefixes[1] ?? "Sold";
     }
   }
   const asValueString = NumbersService.numberToNumberString(value);
 
+  let finalFontFamily = undefined;
+  if (fontFamily === "sans-serif")
+    finalFontFamily = Styles.fontSansSerif.fontFamily;
+  else if (fontFamily) finalFontFamily = fontFamily;
+
   return (
-    <CurrencyStyled
-      style={{ color, ...style, fontFamily: Styles.fontSansSerif.fontFamily }}
-    >
+    <CurrencyStyled style={{ color, fontFamily: finalFontFamily, ...style }}>
       {prefix} {currencySymbol}
       {asValueString}
     </CurrencyStyled>
