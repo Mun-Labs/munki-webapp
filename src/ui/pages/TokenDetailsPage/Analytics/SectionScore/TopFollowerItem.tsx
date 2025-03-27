@@ -1,21 +1,32 @@
-import { SliderSingleProps } from "antd";
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../../../colors";
+import { TopFollower } from "../../../../../api/apiTypes";
+import { NumbersService } from "../../../../../common/modules/numbers";
 
-interface TopFollowerItemProps extends ComponentProps<any> {}
+interface TopFollowerItemProps extends ComponentProps<any>, TopFollower {}
 
-export const TopFollowerItem: FC<TopFollowerItemProps> = () => {
+export const TopFollowerItem: FC<TopFollowerItemProps> = (props) => {
+  const follower = NumbersService.numberToNumberString(props.followers);
+
   return (
     <TopFollowerItemStyled>
-      <div className="profile">
+      <a
+        href={props.profileUrl}
+        rel="noreferrer noopener"
+        className="profile"
+        style={{
+          color: COLORS.white,
+          textDecoration: "none",
+        }}
+      >
         <img className="profile-img" src="/user4.png" width={44} height={44} />
         <div className="profile-info">
-          <p className="profile-info--xname font-normal">@meowjupiter</p>
-          <p className="profile-info--name font-normal">Meow Jupiter</p>
+          <p className="profile-info--xname font-normal">{props.tag}</p>
+          <p className="profile-info--name font-normal">{props.name}</p>
         </div>
-      </div>
-      <div className="follower font-normal">233.33k</div>
+      </a>
+      <div className="follower font-normal">{follower}</div>
     </TopFollowerItemStyled>
   );
 };
