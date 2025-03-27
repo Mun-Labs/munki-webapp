@@ -1,4 +1,4 @@
-import { ComponentProps, FC, useEffect, useState } from "react";
+import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import { BioInfo } from "./BioInfo/BioInfo";
 import { Profile } from "./Profile/Profile";
@@ -10,9 +10,7 @@ import TokenDistribution from "./TokenDistribution/TokenDistribution";
 import { COLORS } from "../../colors";
 import TotalHolders from "./TotalHolders/TotalHolders";
 import { useParams } from "react-router";
-import { TokenAnalytics } from "../../../api/apiTypes";
-import { useTokenDetailApi } from "../../../api/hooks/useTokenDetailApi";
-import { useTokenAnalyticsApi } from "../../../api/hooks/useTokenAnalyticsApi";
+import { TokenAnalyticsProvider } from "./TokenAnalyticsContext";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
@@ -21,31 +19,23 @@ export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
   const params = useParams<{ tokenName: string }>();
   const { tokenName } = params;
 
-  const [tokenAnalyticsData, setTokenAnalyticsData] =
-    useState<TokenAnalytics | null>(null);
-  const { data, isLoading } = useTokenAnalyticsApi(tokenName!); // on details page, should have param
-
-  useEffect(() => {
-    if (data && !isLoading) {
-      setTokenAnalyticsData(data.response);
-    }
-  }, [data, isLoading]);
-
   return (
-    <TokenDetailsPageStyled style={{ ...style }}>
-      <Head />
-      <Profile />
-      <BioInfo />
-      <br />
-      <Analytics />
+    <TokenAnalyticsProvider tokenName={tokenName!}>
+      <TokenDetailsPageStyled style={{ ...style }}>
+        <Head />
+        <Profile />
+        <BioInfo />
+        <br />
+        <Analytics />
 
-      <TopHolder />
+        <TopHolder />
 
-      <div className="info-holder">
-        <TokenDistribution />
-        <TotalHolders />
-      </div>
-    </TokenDetailsPageStyled>
+        <div className="info-holder">
+          <TokenDistribution />
+          <TotalHolders />
+        </div>
+      </TokenDetailsPageStyled>
+    </TokenAnalyticsProvider>
   );
 };
 
