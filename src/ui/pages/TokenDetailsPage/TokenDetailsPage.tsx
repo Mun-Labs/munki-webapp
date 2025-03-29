@@ -9,33 +9,27 @@ import TopHolder from "./TopHolder/TopHolder";
 import TokenDistribution from "./TokenDistribution/TokenDistribution";
 import { COLORS } from "../../colors";
 import TotalHolders from "./TotalHolders/TotalHolders";
-import { useParams } from "react-router";
-import { TokenAnalyticsProvider } from "./TokenAnalyticsContext";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
 export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
   const { style } = props;
-  const params = useParams<{ tokenName: string }>();
-  const { tokenName } = params;
 
   return (
-    <TokenAnalyticsProvider tokenName={tokenName!}>
-      <TokenDetailsPageStyled style={{ ...style }}>
-        <Head />
-        <Profile />
-        <BioInfo />
-        <br />
-        <Analytics />
+    <TokenDetailsPageStyled style={{ ...style }}>
+      <Head />
+      <Profile />
+      <BioInfo />
+      <br />
+      <Analytics />
 
-        <TopHolder />
+      <TopHolder />
 
-        <div className="info-holder">
-          <TokenDistribution />
-          <TotalHolders />
-        </div>
-      </TokenDetailsPageStyled>
-    </TokenAnalyticsProvider>
+      <div className="info-holder">
+        <TokenDistribution />
+        <TotalHolders />
+      </div>
+    </TokenDetailsPageStyled>
   );
 };
 

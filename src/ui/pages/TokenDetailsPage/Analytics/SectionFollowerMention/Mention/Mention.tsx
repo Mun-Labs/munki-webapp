@@ -8,22 +8,22 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { COLORS } from "../../../../../colors";
-import { useTokenAnalytics } from "../../../hooks/useTokenAnalytics";
 import { NumbersService } from "../../../../../../common/modules/numbers";
 import { Percentage } from "../../../../../atoms/Percentage/Percentage";
 import { MentionsData } from "../../../../../../api/apiTypes";
 import { unixToDate } from "../../../../../../common/modules/dateAndTime";
+import { useTokenAnalyticsStore } from "../../../../../../store/tokenAnalytics/useTokenAnalytics";
 
 const Mention = () => {
-  const { tokenAnalyticsData } = useTokenAnalytics();
+  const { data: tokenAnalyticsData } = useTokenAnalyticsStore();
   const mentionNum = NumbersService.numberToNumberString(
-    tokenAnalyticsData.mentions?.mentionNumber,
+    tokenAnalyticsData?.mentions?.mentionNumber,
   );
   const smartNum = NumbersService.numberToNumberString(
-    tokenAnalyticsData.mentions?.smarts,
+    tokenAnalyticsData?.mentions?.smarts,
   );
 
-  const mentions = tokenAnalyticsData.mentions ?? ({} as MentionsData);
+  const mentions = tokenAnalyticsData?.mentions ?? ({} as MentionsData);
   const mentionHistoryWithFormattedDate =
     mentions.mentionNumbersHistorical?.map((item) => ({
       ...item,
