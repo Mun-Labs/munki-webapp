@@ -78,7 +78,7 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
                       plusMinus
                       suffix="1D"
                       style={{ color: COLORS.green55 }}
-                      fontFamily="sans-serif"
+                      $fontFamily="sans-serif"
                     />
                   </Flex>
                   <Flex style={{ width: 180 }} justify="space-between">

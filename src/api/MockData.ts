@@ -7,6 +7,9 @@ import {
   FearAndGreedResponse,
   MindshareItem,
   Token,
+  TokenAnalytics,
+  TokenDetail,
+  TokenDistributionItem,
   TokenTrending,
 } from "./apiTypes";
 
@@ -259,6 +262,26 @@ export const MOCK_DATA_TOKEN_TRENDING: ApiResponse<TokenTrending[]> = {
     },
   ],
   last_updated: 1742817449,
+};
+
+export const MOCK_DATA_TOKEN_DETAIL: ApiResponse<TokenDetail> = {
+  code: 200,
+  response: {
+    tokenAddress: "FeR8VBqNRSUD5NtXAj2n3j1dAHkZHfyDktKuLXD4pump",
+    name: "jelly-my-jelly",
+    symbol: "jellyjelly",
+    decimals: 6,
+    logoUri:
+      "https://ipfs.io/ipfs/QmWT4jA2ipuevUfBi1a2LW2gfnPJyvHn1JayAe2qz5kRQJ",
+    websiteUrl: null,
+    metadata: null,
+    currentPrice: "0.024895069200",
+    totalSupply: "0",
+    marketcap: "0",
+    history24hPrice: null,
+    priceChange24hPercent: null,
+  },
+  last_updated: 1743006245,
 };
 
 export const MOCK_DATA_MINDSHARE: ApiResponse<MindshareItem[]> = {
@@ -997,6 +1020,249 @@ export const MOCK_DATA_ALPHA_MOVES: ApiResponse<AlphaMovesItem[]> = {
   ],
   last_updated: 1742827601,
   total: 97,
+};
+
+export const MOCK_DATA_TOKEN_DISTRIBUTION: ApiResponse<
+  TokenDistributionItem[]
+> = {
+  code: 200,
+  response: [
+    {
+      category: "shrimp",
+      percentage: 0.18,
+      amount: 4212,
+    },
+    {
+      category: "fish",
+      percentage: 5.0,
+      amount: 800,
+    },
+    {
+      category: "dolphin",
+      percentage: 12.75,
+      amount: 300,
+    },
+    {
+      category: "shark",
+      percentage: 20.0,
+      amount: 50,
+    },
+    {
+      category: "whale",
+      percentage: 25.5,
+      amount: 15,
+    },
+  ],
+  last_updated: 1743092213,
+};
+
+export const MOCK_DATA_TOKEN_ANALYTICS: ApiResponse<TokenAnalytics> = {
+  code: 200,
+  response: {
+    marketCap: 1234567.89,
+    marketCapChange7d: -5.43,
+    marketCap7dHistoricalValues: [
+      {
+        value: 1230000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 1234567.89,
+        time: 1711586400,
+        label: null,
+      },
+      {
+        value: 1434567.89,
+        time: 1711586400,
+        label: null,
+      },
+      {
+        value: 1134567.89,
+        time: 1711586400,
+        label: null,
+      },
+      {
+        value: 1734567.89,
+        time: 1711586400,
+        label: null,
+      },
+    ],
+    volume24h: 98765.43,
+    volume24hChange7d: 2.1,
+    volumeHistorical: [
+      {
+        value: 95000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 95000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 98000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 100000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 195000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+      {
+        value: 185000.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+    ],
+    liquidity: 45678.9,
+    liquidityChange: 1.5,
+    liquidityHistorical: [
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+      {
+        value: 45000.0,
+        time: 1711500000,
+        label: null,
+      },
+    ],
+    holders: 5000,
+    holdersChange7d: -200,
+    holdersHistorical: [
+      {
+        value: 5200.0,
+        time: 1711500000,
+        label: "Day 1",
+      },
+    ],
+    moonScore: 960,
+    level: "ALPHA",
+    riskScore: 10.96,
+    topFollowers: [
+      {
+        profileUrl: "https://x.com/user1",
+        tag: "@user1",
+        name: "User One",
+        followers: 10000,
+      },
+      {
+        profileUrl: "https://x.com/user2",
+        tag: "@user2",
+        name: "User Two",
+        followers: 5000,
+      },
+      {
+        profileUrl: "https://x.com/user2",
+        tag: "@user2",
+        name: "User Two",
+        followers: 5000,
+      },
+      {
+        profileUrl: "https://x.com/user2",
+        tag: "@user2",
+        name: "User Two",
+        followers: 5000,
+      },
+      {
+        profileUrl: "https://x.com/user2",
+        tag: "@user2",
+        name: "User Two",
+        followers: 5000,
+      },
+    ],
+    followers: {
+      followerNumber: 25000,
+      followerNumberChange7d: 500,
+      smarts: 3000,
+      smartsChange: -50,
+      followerNumbersHistorical: [
+        {
+          value: 24500.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 34500.0,
+          time: 1711600000,
+          label: "Day 1",
+        },
+        {
+          value: 44500.0,
+          time: 1711700000,
+          label: "Day 1",
+        },
+        {
+          value: 54500.0,
+          time: 1711800000,
+          label: "Day 1",
+        },
+        {
+          value: 24500.0,
+          time: 1711900000,
+          label: "Day 1",
+        },
+      ],
+    },
+    mentions: {
+      mentionNumber: 1200,
+      mentionNumberChange7d: 100,
+      smarts: 150,
+      smartsChange: 10,
+      mentionNumbersHistorical: [
+        {
+          value: 1100.0,
+          time: 1711500000,
+          label: "Day 1",
+        },
+        {
+          value: 1200.0,
+          time: 1711600000,
+          label: "Day 1",
+        },
+        {
+          value: 1300.0,
+          time: 1711700000,
+          label: "Day 1",
+        },
+        {
+          value: 1100.0,
+          time: 1711800000,
+          label: "Day 1",
+        },
+        {
+          value: 1500.0,
+          time: 1711900000,
+          label: "Day 1",
+        },
+      ],
+    },
+  },
+  last_updated: 1743092176,
 };
 
 export const COIN_MAP = {

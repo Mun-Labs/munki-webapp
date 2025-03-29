@@ -1,95 +1,62 @@
-import { Flex } from "antd";
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
-import { Percentage } from "../../../../atoms/Percentage/Percentage";
+import { COLORS } from "../../../../colors";
+import { ChartItem } from "./ChartItem";
 import { LineChartDemo } from "../../../../demos/LineChartDemo";
 import { BarChartDemo } from "../../../../demos/BarChartDemo";
-import { COLORS } from "../../../../colors";
+import { useTokenAnalytics } from "../../hooks/useTokenAnalytics";
+import { Currency } from "../../../../atoms/Currency/Currency";
 
 interface SectionChartProps extends ComponentProps<any> {}
 
 export const SectionChart: FC<SectionChartProps> = (_props) => {
+  const { tokenAnalyticsData } = useTokenAnalytics();
+
   return (
     <SectionChartStyled>
-      <div className="wrap-chart">
-        <div style={{ marginBottom: "8px" }}>
-          <h4>Market Cap</h4>
-          <Flex gap={4}>
-            <p>$439,41M</p>{" "}
-            <span>
-              <Percentage value={10}></Percentage>
-            </span>
-            <span>7D</span>
-          </Flex>
-        </div>
-        <div style={{ height: 150 }}>
-          <LineChartDemo />
-        </div>
-        <p className="desc">
-          <span className="cl-ex-greed">+11.34%</span> market cap vs tokens with
-          a similar mindshare
-        </p>
-      </div>
+      <ChartItem
+        title="Market Cap"
+        timeFrame="7D"
+        description="market cap vs tokens with a similar mindshare"
+        value={<Currency value={tokenAnalyticsData.marketCap} />}
+        percentageValue={tokenAnalyticsData.marketCapChange7d}
+        descriptionPercentage={tokenAnalyticsData.marketCapChange7d}
+      >
+        <LineChartDemo />
+      </ChartItem>
 
-      <div className="wrap-chart">
-        <div style={{ marginBottom: "8px" }}>
-          <h4>Market Cap</h4>
-          <Flex gap={4}>
-            <p>$439,41M</p>{" "}
-            <span>
-              <Percentage value={10}></Percentage>
-            </span>
-            <span>7D</span>
-          </Flex>
-        </div>
-        <div style={{ height: 150 }}>
-          <LineChartDemo />
-        </div>
-        <p className="desc">
-          <span className="cl-ex-greed">+11.34%</span> market cap vs tokens with
-          a similar mindshare
-        </p>
-      </div>
+      <ChartItem
+        title="24h Volume"
+        timeFrame="7D"
+        description="volume vs tokens with a similar mindshare"
+        value={<Currency value={tokenAnalyticsData?.volume24h} />}
+        percentageValue={tokenAnalyticsData.volume24hChange7d}
+        descriptionPercentage={tokenAnalyticsData.volume24hChange7d}
+      >
+        <LineChartDemo />
+      </ChartItem>
 
-      <div className="wrap-chart">
-        <div style={{ marginBottom: "8px" }}>
-          <h4>Market Cap</h4>
-          <Flex gap={4}>
-            <p>$439,41M</p>{" "}
-            <span>
-              <Percentage value={10}></Percentage>
-            </span>
-            <span>7D</span>
-          </Flex>
-        </div>
-        <div style={{ height: 150 }}>
-          <BarChartDemo />
-        </div>
-        <p className="desc">
-          <span className="cl-ex-greed">+19.34%</span> liquidity vs tokens with
-          a similar MC
-        </p>
-      </div>
+      <ChartItem
+        title="Liquidity"
+        timeFrame="7D"
+        description="liquidity vs tokens with a similar MC"
+        value={<Currency value={tokenAnalyticsData?.liquidity} />}
+        percentageValue={tokenAnalyticsData.liquidityChange}
+        descriptionPercentage={tokenAnalyticsData.liquidityChange}
+      >
+        <BarChartDemo />
+      </ChartItem>
 
-      <div className="wrap-chart">
-        <div style={{ marginBottom: "8px" }}>
-          <h4>Market Cap</h4>
-          <Flex gap={4}>
-            <p>$439,41M</p>{" "}
-            <span>
-              <Percentage value={10}></Percentage>
-            </span>
-            <span>7D</span>
-          </Flex>
-        </div>
-        <div style={{ height: 150 }}>
-          <BarChartDemo />
-        </div>
-        <p className="desc">
-          <span className="cl-ex-greed">+19.34%</span> liquidity vs tokens with
-          a similar MC
-        </p>
-      </div>
+      <ChartItem
+        title="Holders"
+        timeFrame="7D"
+        description="holders vs tokens with a similar MC"
+        value={<Currency value={tokenAnalyticsData?.holders} />}
+        percentageValue={tokenAnalyticsData.holdersChange7d}
+        descriptionPercentage={tokenAnalyticsData.holdersChange7d}
+      >
+        <BarChartDemo />
+      </ChartItem>
     </SectionChartStyled>
   );
 };

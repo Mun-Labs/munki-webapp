@@ -17,6 +17,7 @@ export const COLORS = {
   green: "hsl(115,66%,63%)",
   green23: "hsl(101, 100%, 23%)",
   green55: "hsl(154, 56%, 55%)",
+  green60: "hsl(115, 66%, 63%)",
   green70: "hsl(101, 100%, 72%)",
   blue90: "hsla(226, 57%, 91%, 1)",
   blue80: "hsla(217, 45%, 83%, 1)",

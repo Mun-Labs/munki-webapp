@@ -23,7 +23,7 @@ export default TokenDistribution;
 const TokenDistributionStyled = styled.div.attrs({
   className: "TokenDistributionStyled",
 })`
-  padding: 12px 24px 24px;
+  padding: 12px 24px;
   .txt {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import FearAndGreedyChart from "../../../../organisms/FearAndGreedyChart/FearAndGreedyChart";
 import { COLORS } from "../../../../colors";
 import { TopFollowerItem } from "./TopFollowerItem";
+import { useTokenAnalytics } from "../../hooks/useTokenAnalytics";
 
 const marks: SliderSingleProps["marks"] = {
   0: "0",
@@ -16,6 +17,8 @@ const marks: SliderSingleProps["marks"] = {
 interface SectionScoreProps extends ComponentProps<any> {}
 
 export const SectionScore: FC<SectionScoreProps> = () => {
+  const { tokenAnalyticsData } = useTokenAnalytics();
+
   return (
     <SectionScoreStyled>
       <div className="mun-score wrap-score">
@@ -28,7 +31,7 @@ export const SectionScore: FC<SectionScoreProps> = () => {
             fontSize: "34px",
           }}
         >
-          Level 7: Alpha
+          Level 7: {tokenAnalyticsData.level}
         </h4>
         <h4
           style={{
@@ -36,11 +39,11 @@ export const SectionScore: FC<SectionScoreProps> = () => {
             fontSize: "78px",
           }}
         >
-          960 PTS
+          {tokenAnalyticsData.moonScore} PTS
         </h4>
 
         <div style={{ width: "98%" }}>
-          <Slider marks={marks} />
+          <Slider marks={marks} value={tokenAnalyticsData.moonScore} />
         </div>
       </div>
       <div className="risk-score wrap-score">
@@ -54,11 +57,11 @@ export const SectionScore: FC<SectionScoreProps> = () => {
           <FearAndGreedyChart
             isReverse={true}
             isShowNumber={false}
-            value={90}
+            value={tokenAnalyticsData.riskScore}
           />
         </div>
         <h4 className="safe">Safe</h4>
-        <h4 className="safe-value">10.96%</h4>
+        <h4 className="safe-value">{tokenAnalyticsData.riskScore}</h4>
       </div>
 
       <div className="top-followers wrap-score">
@@ -68,10 +71,9 @@ export const SectionScore: FC<SectionScoreProps> = () => {
           <p>Profile</p>
           <p>Followers</p>
         </div>
-        <TopFollowerItem />
-        <TopFollowerItem />
-        <TopFollowerItem />
-        <TopFollowerItem />
+        {tokenAnalyticsData.topFollowers?.slice(0, 5).map((follower, index) => {
+          return <TopFollowerItem key={follower.tag + index} {...follower} />;
+        })}
       </div>
     </SectionScoreStyled>
   );

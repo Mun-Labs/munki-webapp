@@ -3,39 +3,63 @@ import styled from "styled-components";
 import { Table } from "antd";
 import type { TableColumnsType } from "antd";
 import { createStyles } from "antd-style";
-import { dataSource } from "./fakeData";
-import TopHoldingItem from "./TopHoldingItem/TopHoldingItem";
-import { COLORS } from "../../../../colors";
-import { ITopHolder } from "../../../../../domain/entities/Entities";
-import { IconShare } from "../../../../../assets/IconShare";
+import { IconShare } from "../../../../assets/IconShare";
+import { COLORS } from "../../../colors";
 
-const TopHolderTableStyled = styled.div.attrs({
-  className: "TopHolderTableStyled",
+// Interface for fresh wallet data
+interface IFreshWallet {
+  key: string;
+  rank: number;
+  wallet: string;
+  address: string;
+  percentage: number;
+  amount: number;
+  date: string;
+}
+
+// Sample data for demonstration
+const dataSource: IFreshWallet[] = [
+  {
+    key: "1",
+    rank: 1,
+    wallet: "Wallet 1",
+    address: "0x1234...5678",
+    percentage: 12.5,
+    amount: 25000,
+    date: "2023-09-01",
+  },
+  {
+    key: "2",
+    rank: 2,
+    wallet: "Wallet 2",
+    address: "0x8765...4321",
+    percentage: 8.3,
+    amount: 16500,
+    date: "2023-08-28",
+  },
+  {
+    key: "3",
+    rank: 3,
+    wallet: "Wallet 3",
+    address: "0xabcd...efgh",
+    percentage: 6.7,
+    amount: 13400,
+    date: "2023-08-25",
+  },
+  {
+    key: "4",
+    rank: 4,
+    wallet: "Wallet 4",
+    address: "0xijkl...mnop",
+    percentage: 5.2,
+    amount: 10400,
+    date: "2023-08-22",
+  },
+];
+
+const FreshWalletTableStyled = styled.div.attrs({
+  className: "FreshWalletTableStyled",
 })`
-  /* this one prepare for add class that rowitem has new data */
-  /* .active.ant-table-row-level-0 {
-    .ant-table-cell {
-      background-color: #000;
-      animation: rowActive 3s infinite;
-    }
-  }
-
-  @keyframes rowActive {
-    0% {
-      background: #403b19;
-    }
-
-    100% {
-      background: #000;
-    }
-  } */
-
-  .ant-table-row {
-    border-bottom: 1px solid red;
-  }
-
-  /* border-top: 1px solid ${COLORS.white60}; */
-
   border-radius: 12px;
   overflow: hidden;
   .head {
@@ -78,13 +102,6 @@ const TopHolderTableStyled = styled.div.attrs({
     font-weight: bold;
   }
 
-  .topHolding {
-    gap: 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
   .ant-table-header {
     th.ant-table-cell {
       padding: 18px 10px !important;
@@ -101,8 +118,6 @@ const TopHolderTableStyled = styled.div.attrs({
 
     thead {
       tr {
-        th:first-child {
-        }
         th.ant-table-cell-fix-left-last {
           border-right: 1px solid ${COLORS.white60};
         }
@@ -136,8 +151,6 @@ const TopHolderTableStyled = styled.div.attrs({
       background: #13151a;
     }
     tr {
-      td:first-child {
-      }
       td.ant-table-cell-fix-left-last {
         border-right: 1px solid ${COLORS.white60};
       }
@@ -152,7 +165,7 @@ const TopHolderTableStyled = styled.div.attrs({
   }
 `;
 
-interface TopHolderTableProps extends ComponentProps<any> {}
+interface FreshWalletTableProps extends ComponentProps<any> {}
 
 const useStyle = createStyles(({ css, token }) => {
   const { antCls } = token as any;
@@ -172,15 +185,11 @@ const useStyle = createStyles(({ css, token }) => {
   };
 });
 
-export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
+export const FreshWalletTable: FC<FreshWalletTableProps> = (props) => {
   const { style } = props;
   const { styles } = useStyle();
 
-  // console.log({ dataSource });
-  // console.log({ MockTokens });
-  // console.log({ styles });
-
-  const columns: TableColumnsType<ITopHolder> = [
+  const columns: TableColumnsType<IFreshWallet> = [
     {
       title: (
         <div
@@ -193,81 +202,62 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       width: 70,
       dataIndex: "rank",
       key: "rank",
-      render: (value, _record) => {
+      render: (value) => {
         return (
           <p>
             <span className="fwb">{value}</span>{" "}
-            <span className="cl-green-custom fz-10">+12%</span>
+            <span className="cl-green-custom fz-10">+{value * 2}%</span>
           </p>
         );
       },
     },
     {
       title: <div className="head">Wallet</div>,
-      width: 100,
+      width: 120,
       dataIndex: "wallet",
       key: "wallet",
-      render: (_value) => {
-        return <div className="head fwb">{_value}</div>;
+      render: (value) => {
+        return <div className="head fwb">{value}</div>;
       },
     },
     {
-      title: <div className="head">Net Worth</div>,
-      width: 170,
-      dataIndex: "netWorth",
-      key: "netWorth",
-      render: (_value) => (
-        <div className="head cl-green-custom fwb">$99,133,000,000</div>
+      title: <div className="head">Address</div>,
+      width: 180,
+      dataIndex: "address",
+      key: "address",
+      render: (value) => <div className="head fwb">{value}</div>,
+    },
+    {
+      title: <div className="head">Percentage</div>,
+      dataIndex: "percentage",
+      key: "percentage",
+      width: 120,
+      render: (value) => (
+        <div className="head tac cl-green-custom fwb">{value}%</div>
       ),
     },
     {
-      title: <div className="head">Holding Value</div>,
-      dataIndex: "holdingValue",
-      key: "holdingValue",
-      width: 200,
-      render: (_value) => (
-        <div className="head tac cl-green-custom fwb">
-          $133,000,000 (12,22%)
-        </div>
-      ),
-    },
-    {
-      title: <div className="head">Avg. Win Rate</div>,
-      dataIndex: "winRate",
-      key: "winRate",
+      title: <div className="head">Amount</div>,
+      dataIndex: "amount",
+      key: "amount",
       width: 140,
-      render: (_value) => <p className="tac cl-green-custom">{_value}%</p>,
-    },
-    {
-      title: <div className="head">Avg. Holding Time</div>,
-      dataIndex: "holdingTime",
-      key: "holdingTime",
-      width: 170,
-      render: (_value) => (
-        <p className="head cl-green-custom tac fwb">150hours</p>
+      render: (value) => (
+        <p className="tac cl-green-custom">${value.toLocaleString()}</p>
       ),
     },
     {
-      title: <div className="head tal">Top Holdings</div>,
-      dataIndex: "topHoldings",
-      key: "topHoldings",
-      width: 420,
-      render: (_value) => {
-        return (
-          <div className="topHolding">
-            <TopHoldingItem />
-            <TopHoldingItem />
-            <TopHoldingItem />
-          </div>
-        );
-      },
+      title: <div className="head">Date</div>,
+      dataIndex: "date",
+      key: "date",
+      width: 120,
+      render: (value) => <p className="head tac fwb">{value}</p>,
     },
     {
       title: <div className="head">Scan</div>,
       dataIndex: "scan",
       key: "scan",
-      width: 100,
-      render: (_value) => (
+      width: 80,
+      render: () => (
         <p className="tac">
           <IconShare />
         </p>
@@ -275,24 +265,16 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
     },
   ];
 
-  const withKeys = dataSource.map((item, index) => ({
-    ...item,
-    key: index,
-  }));
-
   return (
-    <TopHolderTableStyled style={{ ...style }}>
-      <Table<ITopHolder>
+    <FreshWalletTableStyled style={{ ...style }}>
+      <Table<IFreshWallet>
         className={styles.customTable}
         columns={columns}
-        // rowClassName={(record) => {
-        //   return record?.rank === 1 ? "active" : "";
-        // }}
-        dataSource={withKeys}
+        dataSource={dataSource}
         pagination={{ position: ["none", "bottomCenter"] }}
         size="middle"
         scroll={{ x: "max-content", y: 55 * 10 }}
       />
-    </TopHolderTableStyled>
+    </FreshWalletTableStyled>
   );
 };

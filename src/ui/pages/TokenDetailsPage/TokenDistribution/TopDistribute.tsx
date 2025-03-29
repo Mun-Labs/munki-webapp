@@ -26,8 +26,8 @@ const DISTRIBUTE = [
 const TopDistribute = () => {
   return (
     <TopDistributeStyled>
-      {DISTRIBUTE.map((item) => (
-        <div className={`${item.disable ? "disable" : ""}`}>
+      {DISTRIBUTE.map((item, index) => (
+        <div key={index} className={`${item.disable ? "disable" : ""}`}>
           <p style={{ background: item.color }} className="circle" />
           <p>{item.title}</p>
         </div>
@@ -41,7 +41,7 @@ export default TopDistribute;
 const TopDistributeStyled = styled.div.attrs({
   className: "TopDistributeStyled",
 })`
-  margin-top: 24px;
+  margin-top: 30px;
   display: inline-block;
   padding: 2px 8px;
   width: auto;
@@ -51,7 +51,7 @@ const TopDistributeStyled = styled.div.attrs({
     opacity: 0.4;
   }
   & > div {
-    margin: 0 8px;
+    margin: 0 30px;
     font-size: 18px;
     display: inline-block;
     font-family: sans-serif;

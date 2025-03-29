@@ -20,7 +20,7 @@ const MunkiBadgeStyled = styled.div.attrs<IPropStyled>({
   className: "MunkiBadgeStyled",
 })`
   display: inline-block;
-  margin: auto;
+  // margin: auto;
   padding: 12px;
   border-radius: 12px;
   background: ${(props) => props?.color || COLORS.japanese_laurel};

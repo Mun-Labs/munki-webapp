@@ -1,4 +1,7 @@
-import { FearAndGreedClassification } from "../domain/types/BusinessLogicTypes";
+import {
+  FearAndGreedClassification,
+  TokenDistributionItemCategories,
+} from "../domain/types/BusinessLogicTypes";
 import { Address, BigDecimal, UnixTime } from "../domain/types/Types";
 
 export interface ApiResponse<T> {
@@ -14,6 +17,21 @@ export interface Token {
   symbol: string;
   mc: number;
   logoUri: string;
+}
+
+export interface TokenDetail {
+  tokenAddress: Address;
+  name: string;
+  symbol: string;
+  decimals: 6;
+  logoUri: string;
+  websiteUrl: null;
+  metadata: null;
+  currentPrice: "0.024895069200";
+  totalSupply: "0";
+  marketcap: "0";
+  history24hPrice: null;
+  priceChange24hPercent: null;
 }
 
 export interface TokenTrending
@@ -90,6 +108,12 @@ export type TokenPrices = {
   [tokenAddress: Address]: TokenPriceInfo;
 };
 
+export interface TokenDistributionItem {
+  category: TokenDistributionItemCategories;
+  percentage: number;
+  amount: number;
+}
+
 export interface PaginationQueryParams {
   limit?: number;
   offset?: number;
@@ -97,4 +121,54 @@ export interface PaginationQueryParams {
 
 export interface TokenQueryParams extends PaginationQueryParams {
   q: string;
+}
+
+export interface HistoricalValue {
+  value: number;
+  time: UnixTime;
+  label: string | null;
+}
+
+export interface TopFollower {
+  profileUrl: string;
+  tag: string;
+  name: string;
+  followers: number;
+}
+
+export interface FollowersData {
+  followerNumber: number;
+  followerNumberChange7d: number;
+  smarts: number;
+  smartsChange: number;
+  followerNumbersHistorical: HistoricalValue[];
+}
+
+export interface MentionsData {
+  mentionNumber: number;
+  mentionNumberChange7d: number;
+  smarts: number;
+  smartsChange: number;
+  mentionNumbersHistorical: HistoricalValue[];
+}
+
+export interface TokenAnalytics {
+  marketCap: number;
+  marketCapChange7d: number;
+  marketCap7dHistoricalValues: HistoricalValue[];
+  volume24h: number;
+  volume24hChange7d: number;
+  volumeHistorical: HistoricalValue[];
+  liquidity: number;
+  liquidityChange: number;
+  liquidityHistorical: HistoricalValue[];
+  holders: number;
+  holdersChange7d: number;
+  holdersHistorical: HistoricalValue[];
+  moonScore: number;
+  level: string;
+  riskScore: number;
+  topFollowers: TopFollower[];
+  followers: FollowersData;
+  mentions: MentionsData;
 }

@@ -62,7 +62,7 @@ export default TotalHolders;
 const TotalHolderStyled = styled.div.attrs({
   className: "TotalHolderStyled",
 })`
-  padding: 0 24px 24px;
+  padding: 0 24px;
   border-left: 1px solid ${COLORS.magenta};
   .txt {
     font-family: Arial, Helvetica, sans-serif;
@@ -77,6 +77,7 @@ const TotalHolderStyled = styled.div.attrs({
     background-color: #141619;
     border: 1px solid ${COLORS.magenta};
     border-radius: 12px;
+    margin-bottom: 22px;
   }
 
   .more-info {
@@ -88,6 +89,7 @@ const TotalHolderStyled = styled.div.attrs({
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 6px;
 
       .left {
         color: ${COLORS.grey50};

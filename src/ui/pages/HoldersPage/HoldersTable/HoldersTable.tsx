@@ -3,39 +3,58 @@ import styled from "styled-components";
 import { Table } from "antd";
 import type { TableColumnsType } from "antd";
 import { createStyles } from "antd-style";
-import { dataSource } from "./fakeData";
-import TopHoldingItem from "./TopHoldingItem/TopHoldingItem";
-import { COLORS } from "../../../../colors";
-import { ITopHolder } from "../../../../../domain/entities/Entities";
-import { IconShare } from "../../../../../assets/IconShare";
+import { IconShare } from "../../../../assets/IconShare";
+import { COLORS } from "../../../colors";
 
-const TopHolderTableStyled = styled.div.attrs({
-  className: "TopHolderTableStyled",
+// Interface for holders data
+interface IHolder {
+  key: string;
+  rank: number;
+  wallet: string;
+  percentage: number;
+  quantity: number;
+  value: number;
+}
+
+// Sample data for demonstration
+const dataSource: IHolder[] = [
+  {
+    key: "1",
+    rank: 1,
+    wallet: "Wallet Alpha",
+    percentage: 15.7,
+    quantity: 2500000,
+    value: 375000,
+  },
+  {
+    key: "2",
+    rank: 2,
+    wallet: "Wallet Beta",
+    percentage: 12.3,
+    quantity: 1950000,
+    value: 292500,
+  },
+  {
+    key: "3",
+    rank: 3,
+    wallet: "Wallet Gamma",
+    percentage: 8.9,
+    quantity: 1420000,
+    value: 213000,
+  },
+  {
+    key: "4",
+    rank: 4,
+    wallet: "Wallet Delta",
+    percentage: 6.2,
+    quantity: 980000,
+    value: 147000,
+  },
+];
+
+const HoldersTableStyled = styled.div.attrs({
+  className: "HoldersTableStyled",
 })`
-  /* this one prepare for add class that rowitem has new data */
-  /* .active.ant-table-row-level-0 {
-    .ant-table-cell {
-      background-color: #000;
-      animation: rowActive 3s infinite;
-    }
-  }
-
-  @keyframes rowActive {
-    0% {
-      background: #403b19;
-    }
-
-    100% {
-      background: #000;
-    }
-  } */
-
-  .ant-table-row {
-    border-bottom: 1px solid red;
-  }
-
-  /* border-top: 1px solid ${COLORS.white60}; */
-
   border-radius: 12px;
   overflow: hidden;
   .head {
@@ -78,13 +97,6 @@ const TopHolderTableStyled = styled.div.attrs({
     font-weight: bold;
   }
 
-  .topHolding {
-    gap: 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
   .ant-table-header {
     th.ant-table-cell {
       padding: 18px 10px !important;
@@ -101,8 +113,6 @@ const TopHolderTableStyled = styled.div.attrs({
 
     thead {
       tr {
-        th:first-child {
-        }
         th.ant-table-cell-fix-left-last {
           border-right: 1px solid ${COLORS.white60};
         }
@@ -136,8 +146,6 @@ const TopHolderTableStyled = styled.div.attrs({
       background: #13151a;
     }
     tr {
-      td:first-child {
-      }
       td.ant-table-cell-fix-left-last {
         border-right: 1px solid ${COLORS.white60};
       }
@@ -152,7 +160,7 @@ const TopHolderTableStyled = styled.div.attrs({
   }
 `;
 
-interface TopHolderTableProps extends ComponentProps<any> {}
+interface HoldersTableProps extends ComponentProps<any> {}
 
 const useStyle = createStyles(({ css, token }) => {
   const { antCls } = token as any;
@@ -172,15 +180,11 @@ const useStyle = createStyles(({ css, token }) => {
   };
 });
 
-export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
+export const HoldersTable: FC<HoldersTableProps> = (props) => {
   const { style } = props;
   const { styles } = useStyle();
 
-  // console.log({ dataSource });
-  // console.log({ MockTokens });
-  // console.log({ styles });
-
-  const columns: TableColumnsType<ITopHolder> = [
+  const columns: TableColumnsType<IHolder> = [
     {
       title: (
         <div
@@ -193,81 +197,57 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       width: 70,
       dataIndex: "rank",
       key: "rank",
-      render: (value, _record) => {
+      render: (value) => {
         return (
           <p>
             <span className="fwb">{value}</span>{" "}
-            <span className="cl-green-custom fz-10">+12%</span>
+            <span className="cl-green-custom fz-10">+{value}%</span>
           </p>
         );
       },
     },
     {
       title: <div className="head">Wallet</div>,
-      width: 100,
+      width: 150,
       dataIndex: "wallet",
       key: "wallet",
-      render: (_value) => {
-        return <div className="head fwb">{_value}</div>;
+      render: (value) => {
+        return <div className="head fwb">{value}</div>;
       },
     },
     {
-      title: <div className="head">Net Worth</div>,
-      width: 170,
-      dataIndex: "netWorth",
-      key: "netWorth",
-      render: (_value) => (
-        <div className="head cl-green-custom fwb">$99,133,000,000</div>
+      title: <div className="head">Percentage</div>,
+      dataIndex: "percentage",
+      key: "percentage",
+      width: 120,
+      render: (value) => (
+        <div className="head tac cl-green-custom fwb">{value}%</div>
       ),
     },
     {
-      title: <div className="head">Holding Value</div>,
-      dataIndex: "holdingValue",
-      key: "holdingValue",
-      width: 200,
-      render: (_value) => (
-        <div className="head tac cl-green-custom fwb">
-          $133,000,000 (12,22%)
-        </div>
+      title: <div className="head">Quantity</div>,
+      dataIndex: "quantity",
+      key: "quantity",
+      width: 150,
+      render: (value) => (
+        <p className="head tac fwb">{value.toLocaleString()}</p>
       ),
     },
     {
-      title: <div className="head">Avg. Win Rate</div>,
-      dataIndex: "winRate",
-      key: "winRate",
-      width: 140,
-      render: (_value) => <p className="tac cl-green-custom">{_value}%</p>,
-    },
-    {
-      title: <div className="head">Avg. Holding Time</div>,
-      dataIndex: "holdingTime",
-      key: "holdingTime",
-      width: 170,
-      render: (_value) => (
-        <p className="head cl-green-custom tac fwb">150hours</p>
+      title: <div className="head">Value</div>,
+      dataIndex: "value",
+      key: "value",
+      width: 150,
+      render: (value) => (
+        <p className="tac cl-green-custom">${value.toLocaleString()}</p>
       ),
-    },
-    {
-      title: <div className="head tal">Top Holdings</div>,
-      dataIndex: "topHoldings",
-      key: "topHoldings",
-      width: 420,
-      render: (_value) => {
-        return (
-          <div className="topHolding">
-            <TopHoldingItem />
-            <TopHoldingItem />
-            <TopHoldingItem />
-          </div>
-        );
-      },
     },
     {
       title: <div className="head">Scan</div>,
       dataIndex: "scan",
       key: "scan",
-      width: 100,
-      render: (_value) => (
+      width: 80,
+      render: () => (
         <p className="tac">
           <IconShare />
         </p>
@@ -275,24 +255,16 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
     },
   ];
 
-  const withKeys = dataSource.map((item, index) => ({
-    ...item,
-    key: index,
-  }));
-
   return (
-    <TopHolderTableStyled style={{ ...style }}>
-      <Table<ITopHolder>
+    <HoldersTableStyled style={{ ...style }}>
+      <Table<IHolder>
         className={styles.customTable}
         columns={columns}
-        // rowClassName={(record) => {
-        //   return record?.rank === 1 ? "active" : "";
-        // }}
-        dataSource={withKeys}
+        dataSource={dataSource}
         pagination={{ position: ["none", "bottomCenter"] }}
         size="middle"
         scroll={{ x: "max-content", y: 55 * 10 }}
       />
-    </TopHolderTableStyled>
+    </HoldersTableStyled>
   );
 };

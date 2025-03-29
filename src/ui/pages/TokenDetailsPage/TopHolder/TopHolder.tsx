@@ -1,29 +1,47 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../../colors";
 import { MunkiBadge } from "../../../atoms/MunkiBadge/MunkiBadge";
 import { TopHolderTable } from "./TopHolderTable/TopHolderTable";
+import { FreshWalletTable } from "../../FreshWalletPage/FreshWalletTable/FreshWalletTable";
+import { HoldersTable } from "../../HoldersPage/HoldersTable/HoldersTable";
 
 const TopHolder = () => {
+  const [activeTab, setActiveTab] = useState("topHolders");
+
   return (
     <TopHolderStyled>
       <div className="header">
-        <div className="title">
+        <div
+          className={`title ${
+            activeTab === "topHolders" ? "active" : "disable"
+          }`}
+          onClick={() => setActiveTab("topHolders")}
+        >
           <h3>Noteworthy Top Holders</h3>
-          <p>
+          <div>
             <MunkiBadge>10/50</MunkiBadge>
-          </p>
+          </div>
         </div>
-        <div className="title disable">
+        <div
+          className={`title ${
+            activeTab === "freshWallets" ? "active" : "disable"
+          }`}
+          onClick={() => setActiveTab("freshWallets")}
+        >
           <h3>Fresh Wallet List</h3>
-          <p>
+          <div>
             <MunkiBadge>10/50</MunkiBadge>
-          </p>
+          </div>
         </div>
-        <div className="title disable">
+        <div
+          className={`title ${activeTab === "holders" ? "active" : "disable"}`}
+          onClick={() => setActiveTab("holders")}
+        >
           <h3>Holders List</h3>
-          <p>
+          <div>
             <MunkiBadge>399K</MunkiBadge>
-          </p>
+          </div>
         </div>
       </div>
       <div className="updated">
@@ -32,7 +50,9 @@ const TopHolder = () => {
           <p>$gon was created on 06/12/24 2:43 AM</p>
         </div>
       </div>
-      <TopHolderTable />
+      {activeTab === "topHolders" && <TopHolderTable />}
+      {activeTab === "freshWallets" && <FreshWalletTable />}
+      {activeTab === "holders" && <HoldersTable />}
     </TopHolderStyled>
   );
 };
@@ -49,6 +69,7 @@ const TopHolderStyled = styled.div.attrs({ className: "TopHolderStyled" })`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    font-size: 30px;
   }
 
   .title {
@@ -58,6 +79,12 @@ const TopHolderStyled = styled.div.attrs({ className: "TopHolderStyled" })`
     gap: 8px;
     justify-content: flex-start;
     align-items: center;
+    transition: opacity 0.2s ease;
+  }
+
+  .title.active {
+    opacity: 1;
+    color: ${COLORS.white};
   }
 
   .updated {
