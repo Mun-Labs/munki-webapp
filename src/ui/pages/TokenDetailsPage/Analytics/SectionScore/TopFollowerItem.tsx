@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { COLORS } from "../../../../colors";
 import { TopFollower } from "../../../../../api/apiTypes";
 import { NumbersService } from "../../../../../common/modules/numbers";
+import { useTokenAnalyticsStore } from "../../../../../store/tokenAnalytics/useTokenAnalytics";
 
 interface TopFollowerItemProps extends ComponentProps<any>, TopFollower {}
 

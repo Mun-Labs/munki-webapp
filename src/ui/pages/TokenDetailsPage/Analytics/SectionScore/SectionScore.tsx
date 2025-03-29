@@ -4,7 +4,7 @@ import styled from "styled-components";
 import FearAndGreedyChart from "../../../../organisms/FearAndGreedyChart/FearAndGreedyChart";
 import { COLORS } from "../../../../colors";
 import { TopFollowerItem } from "./TopFollowerItem";
-import { useTokenAnalytics } from "../../hooks/useTokenAnalytics";
+import { useTokenAnalyticsStore } from "../../../../../store/tokenAnalytics/useTokenAnalytics";
 
 const marks: SliderSingleProps["marks"] = {
   0: "0",
@@ -17,7 +17,7 @@ const marks: SliderSingleProps["marks"] = {
 interface SectionScoreProps extends ComponentProps<any> {}
 
 export const SectionScore: FC<SectionScoreProps> = () => {
-  const { tokenAnalyticsData } = useTokenAnalytics();
+  const { data: tokenAnalyticsData } = useTokenAnalyticsStore();
 
   return (
     <SectionScoreStyled>
@@ -31,7 +31,7 @@ export const SectionScore: FC<SectionScoreProps> = () => {
             fontSize: "34px",
           }}
         >
-          Level 7: {tokenAnalyticsData.level}
+          Level 7: Alpha
         </h4>
         <h4
           style={{
@@ -39,11 +39,11 @@ export const SectionScore: FC<SectionScoreProps> = () => {
             fontSize: "78px",
           }}
         >
-          {tokenAnalyticsData.moonScore} PTS
+          {103} PTS
         </h4>
 
         <div style={{ width: "98%" }}>
-          <Slider marks={marks} value={tokenAnalyticsData.moonScore} />
+          <Slider marks={marks} value={103} />
         </div>
       </div>
       <div className="risk-score wrap-score">
@@ -57,11 +57,11 @@ export const SectionScore: FC<SectionScoreProps> = () => {
           <FearAndGreedyChart
             isReverse={true}
             isShowNumber={false}
-            value={tokenAnalyticsData.riskScore}
+            value={103}
           />
         </div>
         <h4 className="safe">Safe</h4>
-        <h4 className="safe-value">{tokenAnalyticsData.riskScore}</h4>
+        <h4 className="safe-value">{103}</h4>
       </div>
 
       <div className="top-followers wrap-score">
@@ -71,7 +71,7 @@ export const SectionScore: FC<SectionScoreProps> = () => {
           <p>Profile</p>
           <p>Followers</p>
         </div>
-        {tokenAnalyticsData.topFollowers?.slice(0, 5).map((follower, index) => {
+        {tokenAnalyticsData?.topFollowers?.slice(0, 5).map((follower, index) => {
           return <TopFollowerItem key={follower.tag + index} {...follower} />;
         })}
       </div>

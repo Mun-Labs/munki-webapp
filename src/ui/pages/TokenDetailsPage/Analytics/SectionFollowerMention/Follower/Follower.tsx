@@ -8,33 +8,32 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { COLORS } from "../../../../../colors";
-import { useTokenAnalytics } from "../../../hooks/useTokenAnalytics";
 import { NumbersService } from "../../../../../../common/modules/numbers";
 import { Percentage } from "../../../../../atoms/Percentage/Percentage";
 import { FollowersData } from "../../../../../../api/apiTypes";
-import { DateTime } from "luxon";
 import { unixToDate } from "../../../../../../common/modules/dateAndTime";
+import { useTokenAnalyticsStore } from "../../../../../../store/tokenAnalytics/useTokenAnalytics";
 
-const data = [
-  { date: "1/23/25", mentions: 1000, smartMentions: 400 },
-  { date: "1/23/25", mentions: 10000, smartMentions: 400 },
-  { date: "1/23/25", mentions: 20000, smartMentions: 400 },
-  { date: "1/24/25", mentions: 5000, smartMentions: 2500 },
-  { date: "1/25/25", mentions: 20000, smartMentions: 8000 },
-  { date: "1/26/25", mentions: 30000, smartMentions: 12000 },
-  { date: "1/27/25", mentions: 47000, smartMentions: 14320 },
-];
+// const data = [
+//   { date: "1/23/25", mentions: 1000, smartMentions: 400 },
+//   { date: "1/23/25", mentions: 10000, smartMentions: 400 },
+//   { date: "1/23/25", mentions: 20000, smartMentions: 400 },
+//   { date: "1/24/25", mentions: 5000, smartMentions: 2500 },
+//   { date: "1/25/25", mentions: 20000, smartMentions: 8000 },
+//   { date: "1/26/25", mentions: 30000, smartMentions: 12000 },
+//   { date: "1/27/25", mentions: 47000, smartMentions: 14320 },
+// ];
 
 const Follower = () => {
-  const { tokenAnalyticsData } = useTokenAnalytics();
+  const { data: tokenAnalyticsData } = useTokenAnalyticsStore();
   const followerNum = NumbersService.numberToNumberString(
-    tokenAnalyticsData.followers?.followerNumber,
+    tokenAnalyticsData?.followers?.followerNumber,
   );
   const smartNum = NumbersService.numberToNumberString(
-    tokenAnalyticsData.followers?.smarts,
+    tokenAnalyticsData?.followers?.smarts,
   );
 
-  const followers = tokenAnalyticsData.followers ?? ({} as FollowersData);
+  const followers = tokenAnalyticsData?.followers ?? ({} as FollowersData);
   const followerHistoryWithFormattedDate =
     followers.followerNumbersHistorical?.map((item) => ({
       ...item,
@@ -49,6 +48,8 @@ const Follower = () => {
     return [minValue - padding, maxValue + padding];
   };
   const yDomain = calcYDomain(followerHistoryWithFormattedDate);
+
+  console.log({followerHistoryWithFormattedDate})
 
   return (
     <ChartContainer>

@@ -1160,9 +1160,6 @@ export const MOCK_DATA_TOKEN_ANALYTICS: ApiResponse<TokenAnalytics> = {
         label: "Day 1",
       },
     ],
-    moonScore: 960,
-    level: "ALPHA",
-    riskScore: 10.96,
     topFollowers: [
       {
         profileUrl: "https://x.com/user1",
