@@ -9,7 +9,10 @@ import { DownOutlined } from "@ant-design/icons";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Token } from "../../atoms/Token/Token";
-import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
+import {
+  SkeletonTextWithLabel,
+  TextWithLabel,
+} from "../../molecules/TextWithLabel/TextWithLabel";
 import { Styles } from "../../uiStyles";
 import { MunkiNavigation } from "./MunkiNavigation";
 
@@ -107,23 +110,26 @@ export const NavigationDropdown: FC<ComponentProps<any>> = ({
 
 export const MunkiHeader = () => {
   const { data } = useTokenTrendingApi(undefined, MOCK_DATA_TOKEN_TRENDING);
+  // const data = undefined;
 
   return (
     <section className="header" style={headerStyles}>
       <MunkiNavigation style={{ padding: "12px 52px" }} />
       <div className="tickerBackground" style={{ background: COLORS.jonquil }}>
         {!data ? (
-          <div style={{ height: 62, position: "relative" }}>
-            <Skeleton.Input
-              active
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100vw",
-                height: "100%",
-              }}
-            />
+          <div
+            style={{
+              height: 62,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 42,
+            }}
+          >
+            <SkeletonTextWithLabel />
+            <SkeletonTextWithLabel />
+            <SkeletonTextWithLabel />
+            <SkeletonTextWithLabel />
           </div>
         ) : (
           <TickerStyled>

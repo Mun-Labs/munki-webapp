@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLORS } from "../../colors";
-import { Flex } from "antd";
+import { Flex, Skeleton } from "antd";
 import { Styles } from "../../uiStyles";
 import { ComponentProps, ReactNode } from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
@@ -61,5 +61,15 @@ export const TextWithLabel = (props: ITextWithLabelProps) => {
         </Flex>
       </Flex>
     </TextWithLabelContainer>
+  );
+};
+
+export const SkeletonTextWithLabel = () => {
+  return (
+    <TextWithLabel
+      style={{ alignContent: "center" }}
+      text={<Skeleton.Input active style={{ marginTop: -12 }} />}
+      left={<Skeleton.Avatar active size={38} />}
+    />
   );
 };
