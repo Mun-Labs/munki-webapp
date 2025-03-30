@@ -165,9 +165,6 @@ export interface TokenAnalytics {
   holders: number;
   holdersChange7d: number;
   holdersHistorical: HistoricalValue[];
-  moonScore: number;
-  level: string;
-  riskScore: number;
   topFollowers: TopFollower[];
   followers: FollowersData;
   mentions: MentionsData;

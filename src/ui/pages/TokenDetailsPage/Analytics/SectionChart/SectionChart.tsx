@@ -4,13 +4,13 @@ import { COLORS } from "../../../../colors";
 import { ChartItem } from "./ChartItem";
 import { LineChartDemo } from "../../../../demos/LineChartDemo";
 import { BarChartDemo } from "../../../../demos/BarChartDemo";
-import { useTokenAnalytics } from "../../hooks/useTokenAnalytics";
 import { Currency } from "../../../../atoms/Currency/Currency";
+import { useTokenAnalyticsStore } from "../../../../../store/tokenAnalytics/useTokenAnalytics";
 
 interface SectionChartProps extends ComponentProps<any> {}
 
 export const SectionChart: FC<SectionChartProps> = (_props) => {
-  const { tokenAnalyticsData } = useTokenAnalytics();
+  const { data: tokenAnalyticsData } = useTokenAnalyticsStore();
 
   return (
     <SectionChartStyled>
@@ -18,9 +18,9 @@ export const SectionChart: FC<SectionChartProps> = (_props) => {
         title="Market Cap"
         timeFrame="7D"
         description="market cap vs tokens with a similar mindshare"
-        value={<Currency value={tokenAnalyticsData.marketCap} />}
-        percentageValue={tokenAnalyticsData.marketCapChange7d}
-        descriptionPercentage={tokenAnalyticsData.marketCapChange7d}
+        value={<Currency value={tokenAnalyticsData?.marketCap} />}
+        percentageValue={tokenAnalyticsData?.marketCapChange7d ?? 0}
+        descriptionPercentage={tokenAnalyticsData?.marketCapChange7d ?? 0}
       >
         <LineChartDemo />
       </ChartItem>
@@ -30,8 +30,8 @@ export const SectionChart: FC<SectionChartProps> = (_props) => {
         timeFrame="7D"
         description="volume vs tokens with a similar mindshare"
         value={<Currency value={tokenAnalyticsData?.volume24h} />}
-        percentageValue={tokenAnalyticsData.volume24hChange7d}
-        descriptionPercentage={tokenAnalyticsData.volume24hChange7d}
+        percentageValue={tokenAnalyticsData?.volume24hChange7d || 0}
+        descriptionPercentage={tokenAnalyticsData?.volume24hChange7d || 0}
       >
         <LineChartDemo />
       </ChartItem>
@@ -41,8 +41,8 @@ export const SectionChart: FC<SectionChartProps> = (_props) => {
         timeFrame="7D"
         description="liquidity vs tokens with a similar MC"
         value={<Currency value={tokenAnalyticsData?.liquidity} />}
-        percentageValue={tokenAnalyticsData.liquidityChange}
-        descriptionPercentage={tokenAnalyticsData.liquidityChange}
+        percentageValue={tokenAnalyticsData?.liquidityChange || 0}
+        descriptionPercentage={tokenAnalyticsData?.liquidityChange || 0}
       >
         <BarChartDemo />
       </ChartItem>
@@ -52,8 +52,8 @@ export const SectionChart: FC<SectionChartProps> = (_props) => {
         timeFrame="7D"
         description="holders vs tokens with a similar MC"
         value={<Currency value={tokenAnalyticsData?.holders} />}
-        percentageValue={tokenAnalyticsData.holdersChange7d}
-        descriptionPercentage={tokenAnalyticsData.holdersChange7d}
+        percentageValue={tokenAnalyticsData?.holdersChange7d || 0}
+        descriptionPercentage={tokenAnalyticsData?.holdersChange7d || 0}
       >
         <BarChartDemo />
       </ChartItem>
