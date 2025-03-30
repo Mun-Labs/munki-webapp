@@ -22,7 +22,6 @@ const swrOptions: ISwrOptions = {
 const fetcher = async (url: string) => {
   // Introduce a 600ms delay to simulate network latency
   if (DEBUG_FLAGS.useMockApi) {
-    /* prettier-ignore */ console.log('%c------------------------------------------------------------------------------------------', `background: ${'darkblue'}`);
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 
@@ -40,7 +39,7 @@ export function useApi<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
   mockResponse?: ApiResponse<Response>,
-  debugDelay: number = 1000,
+  debugDelay: number = 0,
 ): SWRResponse<ApiResponse<Response>> {
   const [delayedData, setDelayedData] = useState<
     ApiResponse<Response> | undefined
