@@ -24,6 +24,7 @@ import { CoinWithLogoAndDescriptionDemo } from "../molecules/CoinWithLogoAndDesc
 import { TokenDemo } from "../atoms/Token/TokenDemo";
 import { DebounceSelectDemo } from "../molecules/DebounceSelect/DebounceSelectDemo";
 import { MunkiTokenListDemo } from "../molecules/MunkiTokenList/MunkiTokenListDemo";
+import { MunkiSkeletonDemo } from "../atoms/MunkiSkeleton/MunkiSkeletonDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -70,8 +71,13 @@ const data = MockTokens.map((token) => ({ ...token, key: token.name }));
 
 export const DemoPage = () => {
   return (
-    <>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "end" }}
+    >
       <h1>DemoPage</h1>
+      <h2>MunkiSkeletonDemo</h2>
+      <MunkiSkeletonDemo />
+      <br /> <hr />
       <h2>MunkiTokenListDemo</h2>
       <MunkiTokenListDemo />
       <br /> <hr />
@@ -142,6 +148,6 @@ export const DemoPage = () => {
       <br /> <hr />
       <h2>TokenCardDemo</h2>
       <TokenCardDemo />
-    </>
+    </div>
   );
 };
