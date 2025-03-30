@@ -7,7 +7,7 @@ import { useTokenTrendingApi } from "../../../api/hooks/useTokenTrendingApi";
 import { ComponentProps, FC } from "react";
 import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
 import { SocialMedia } from "../../../domain/types/Types";
-import Icon, { SmileOutlined, DownOutlined } from "@ant-design/icons";
+import { DownOutlined } from "@ant-design/icons";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Token } from "../../atoms/Token/Token";
@@ -23,19 +23,20 @@ const headerStyles: React.CSSProperties = {
   fontSize: "1.5em",
   zIndex: 10,
   overflowX: "hidden",
-  padding: "12px",
+  padding: "12px 0",
 };
 
 const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
   display: flex;
   color: ${COLORS.black};
-  background: ${COLORS.jonquil};
   white-space: nowrap;
   overflow-x: hidden;
   height: 62px;
   width: fit-content;
 
-  animation: ticker 60s linear infinite;
+  animation: ticker 120s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 
   @keyframes ticker {
     0% {
@@ -215,26 +216,27 @@ export const MunkiHeader = () => {
   return (
     <section className="header" style={headerStyles}>
       <MunkiNavigation />
-
-      <TickerStyled style={{ height: 62 }}>
-        {repeatedTokens.map((token, index) => (
-          <TextWithLabel
-            key={`${token.name}-${index}`}
-            text={
-              <Token
-                token={token}
-                textStyle={{
-                  color: UI_COLORS.reversePrimaryText,
-                  ...Styles.h2,
-                }}
-              />
-            }
-            left={<RoundIcon src={token.logoUri} size={38} />}
-            right={<Percentage value={token.volume24hChange} />}
-            style={{ padding: "12px" }}
-          ></TextWithLabel>
-        ))}
-      </TickerStyled>
+      <div className="tickerBackground" style={{ background: COLORS.jonquil }}>
+        <TickerStyled style={{ height: 62 }}>
+          {repeatedTokens.map((token, index) => (
+            <TextWithLabel
+              key={`${token.name}-${index}`}
+              text={
+                <Token
+                  token={token}
+                  textStyle={{
+                    color: UI_COLORS.reversePrimaryText,
+                    ...Styles.h2,
+                  }}
+                />
+              }
+              left={<RoundIcon src={token.logoUri} size={38} />}
+              right={<Percentage value={token.volume24hChange} />}
+              style={{ padding: "12px" }}
+            ></TextWithLabel>
+          ))}
+        </TickerStyled>
+      </div>
     </section>
   );
 };
