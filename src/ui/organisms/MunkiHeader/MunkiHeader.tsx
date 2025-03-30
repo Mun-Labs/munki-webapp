@@ -111,14 +111,14 @@ export const NavigationDropdown: FC<ComponentProps<any>> = ({
   );
 };
 
-export const MunkiNavigation: FC = (props) => {
+export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
   // Homepage Trending Meme Radar Changelogs | X Telegram Log In Sol Eng
 
   return (
     <Flex
       justify="space-between"
       align="center"
-      style={{ height: 88 }}
+      style={{ height: 88, ...style }}
       wrap={true}
     >
       <Flex className="left">
@@ -215,7 +215,7 @@ export const MunkiHeader = () => {
 
   return (
     <section className="header" style={headerStyles}>
-      <MunkiNavigation />
+      <MunkiNavigation style={{ padding: "12px 52px" }} />
       <div className="tickerBackground" style={{ background: COLORS.jonquil }}>
         <TickerStyled style={{ height: 62 }}>
           {repeatedTokens.map((token, index) => (
