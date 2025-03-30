@@ -7,8 +7,8 @@ import { COL_DS } from "../../colors";
 const MunkiSkeletonStyled = styled.div.attrs({
   className: "MunkiSkeletonStyled",
 })`
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
 
   .ant-skeleton {
     --ant-skeleton-color-gradient-end: rgba(0, 0, 0, 0.35);

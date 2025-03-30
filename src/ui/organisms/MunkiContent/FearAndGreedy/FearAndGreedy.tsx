@@ -18,6 +18,7 @@ import {
 } from "../../../../domain/businessLogic/volumeLogic";
 import { Percentage } from "../../../atoms/Percentage/Percentage";
 import { MOCK_DATA_FEAR_AND_GREED } from "../../../../api/MockData";
+import { MunkiSkeleton } from "../../../atoms/MunkiSkeleton/MunkiSkeleton";
 
 export const style = {
   paddingFlex: {
@@ -65,18 +66,11 @@ export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
 };
 
 function FearAndGreedWidget() {
-  const { data, isLoading } = useFearAndGreedApi(
+  let { data, isLoading } = useFearAndGreedApi(
     undefined,
     MOCK_DATA_FEAR_AND_GREED,
   );
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!data?.response) {
-    return <div>No Response...</div>;
-  }
+  isLoading = true;
 
   // @ts-expect-error
   let fearAndGreed: FearAndGreed[] = [{}, {}];
@@ -87,8 +81,8 @@ function FearAndGreedWidget() {
     tokens = Object.values(data.response.tokenPrices);
   }
 
-  const current = data.response;
-  const history = current.fearAndGreed; // TODO: remove "!"
+  const current = data?.response;
+  const history = current?.fearAndGreed ?? [];
   const tokenInfo = tokens[0] ?? {};
 
   const volumeLabel = volumeMapping(tokenInfo.volumeUSD);
@@ -101,28 +95,33 @@ function FearAndGreedWidget() {
         </Flex>
       </FlexStyled>
       <IndexStyled>
-        <WrapInfoStyled>
-          <div>
-            <h2>Status:</h2>
-            <h1
-              style={{
-                paddingBottom: "52px",
-                color: fearAndGreedColorMapping[current.valueClassification],
-              }}
-            >
-              {current.valueClassification}
-            </h1>
-            <FearAndGreedyChart value={current.value} />
-            <p className="desc">
-              The index ranges from 0 (Extreme Fear) to 100 (Extreme Greed),
-              reflecting crypto market sentiment.
-            </p>
-            <p className="desc">Last Update: {unixToDate(current.timestamp)}</p>
-          </div>
-          <div>
-            <FearAndGreedHistory values={history} />
-          </div>
-        </WrapInfoStyled>
+        {current && (
+          <WrapInfoStyled>
+            <div>
+              <h2>Status:</h2>
+              <h1
+                style={{
+                  paddingBottom: "52px",
+                  color: fearAndGreedColorMapping[current.valueClassification],
+                }}
+              >
+                {current.valueClassification}
+              </h1>
+              <FearAndGreedyChart value={current.value} />
+              <p className="desc">
+                The index ranges from 0 (Extreme Fear) to 100 (Extreme Greed),
+                reflecting crypto market sentiment.
+              </p>
+              <p className="desc">
+                Last Update: {unixToDate(current.timestamp)}
+              </p>
+            </div>
+            <div>
+              <FearAndGreedHistory values={history} />
+            </div>
+          </WrapInfoStyled>
+        )}
+
         <div
           style={{
             marginTop: "14px",
@@ -133,28 +132,46 @@ function FearAndGreedWidget() {
           }}
         >
           <GroupInfoStyled>
-            <p style={{ fontSize: "16px" }}>Solana (SOL)</p>
-            <img
-              width={22}
-              height={22}
-              alt="icon-solana"
-              src="/icon-solana.png"
-            />
-            <Currency
-              style={{ fontSize: "18px" }}
-              value={tokenInfo.price}
-            ></Currency>
-            <span className="percentage-change" style={{ fontSize: "14px" }}>
-              <Percentage value={tokenInfo.priceChangePercent} suffix=" (1d)" />
-            </span>
+            {isLoading ? (
+              <MunkiSkeleton style={{ width: 200 }} />
+            ) : (
+              <>
+                <p style={{ fontSize: "16px" }}>Solana (SOL)</p>
+                <img
+                  width={22}
+                  height={22}
+                  alt="icon-solana"
+                  src="/icon-solana.png"
+                />
+                <Currency
+                  style={{ fontSize: "18px" }}
+                  value={tokenInfo.price}
+                ></Currency>
+                <span
+                  className="percentage-change"
+                  style={{ fontSize: "14px" }}
+                >
+                  <Percentage
+                    value={tokenInfo.priceChangePercent}
+                    suffix=" (1d)"
+                  />
+                </span>
+              </>
+            )}
           </GroupInfoStyled>
 
           <GroupInfoStyled>
-            <p>24h volume:</p>
-            <Currency value={tokenInfo.volumeUSD} />
-            <p style={{ color: volumeColorMapping[volumeLabel] }}>
-              ({volumeLabel})
-            </p>
+            {isLoading ? (
+              <MunkiSkeleton style={{ width: 200 }} />
+            ) : (
+              <>
+                <p>24h volume:</p>
+                <Currency value={tokenInfo.volumeUSD} />
+                <p style={{ color: volumeColorMapping[volumeLabel] }}>
+                  ({volumeLabel})
+                </p>
+              </>
+            )}
           </GroupInfoStyled>
         </div>
       </IndexStyled>
