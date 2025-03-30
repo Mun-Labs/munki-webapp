@@ -1,13 +1,13 @@
-import { Button, Dropdown, Flex, MenuProps, Space } from "antd";
+import { Button, Dropdown, Flex, MenuProps, Space, Drawer } from "antd";
 import "./MunkiHeader.css";
 import styled from "styled-components";
 import { COLORS, COL_DS, UI_COLORS } from "../../colors";
 import { MOCK_DATA_TOKEN_TRENDING } from "../../../api/MockData";
 import { useTokenTrendingApi } from "../../../api/hooks/useTokenTrendingApi";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useState } from "react";
 import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
 import { SocialMedia } from "../../../domain/types/Types";
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Token } from "../../atoms/Token/Token";
@@ -93,6 +93,39 @@ const items: MenuProps["items"] = [
   },
 ];
 
+const breakpoint = 1500;
+
+const MobileMenuButton = styled.div`
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: ${COL_DS.text300};
+
+  @media (max-width: ${breakpoint}px) {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+  }
+`;
+
+const DesktopNavigation = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-left: 60px;
+
+  @media (max-width: ${breakpoint}px) {
+    display: none;
+  }
+`;
+
+const MobileMenuContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+`;
+
 export const NavigationDropdown: FC<ComponentProps<any>> = ({
   text,
   style,
@@ -112,6 +145,8 @@ export const NavigationDropdown: FC<ComponentProps<any>> = ({
 };
 
 export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   // Homepage Trending Meme Radar Changelogs | X Telegram Log In Sol Eng
 
   return (
@@ -121,24 +156,22 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
       style={{ height: 88, ...style }}
       wrap={true}
     >
-      <Flex className="left">
+      <Flex className="left" align="center">
         <img
           width="60"
           height="60"
           src="/munki-header.png"
-          // onClick={showDrawer}
+          onClick={() => window.location.replace("/")}
           alt="munki"
+          style={{ cursor: "pointer" }}
         />
-        <div
-          className="navigation"
-          style={{
-            marginLeft: 60,
-            display: "flex",
-            alignItems: "center",
-            gap: 50,
-          }}
-        >
-          <a href="#" style={{ color: COL_DS.text300 }}>
+
+        <MobileMenuButton onClick={() => setMobileMenuOpen(true)}>
+          <MenuOutlined />
+        </MobileMenuButton>
+
+        <DesktopNavigation className="navigation">
+          <a href="/#" style={{ color: COL_DS.text300 }}>
             Home
           </a>
           <a
@@ -162,7 +195,39 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
           <a href="#changelogs" style={{ color: COL_DS.text300 }}>
             Changelogs
           </a>
-        </div>
+        </DesktopNavigation>
+
+        <Drawer
+          title="Menu"
+          placement="left"
+          onClose={() => setMobileMenuOpen(false)}
+          open={mobileMenuOpen}
+          width={280}
+          styles={{
+            body: { padding: 0 },
+          }}
+        >
+          <MobileMenuContent>
+            <a href="/#" style={{ color: COL_DS.text300 }}>
+              Home
+            </a>
+            <a style={{ color: COL_DS.text300 }}>
+              Trending <ComingSoonButton style={{ marginLeft: 10 }} />
+            </a>
+            <a style={{ color: COL_DS.text300 }}>
+              Meme Radar <ComingSoonButton style={{ marginLeft: 10 }} />
+            </a>
+            <a href="#changelogs" style={{ color: COL_DS.text300 }}>
+              Changelogs
+            </a>
+            <div style={{ marginTop: 20 }}>
+              <SocialMediaSegment
+                socials={socials}
+                style={{ gap: 20, color: COL_DS.baseWhite }}
+              />
+            </div>
+          </MobileMenuContent>
+        </Drawer>
       </Flex>
 
       <Flex className="right" align="center">
@@ -208,6 +273,7 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
 
 export const MunkiHeader = () => {
   const { data } = useTokenTrendingApi(undefined, MOCK_DATA_TOKEN_TRENDING);
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ MunkiHeader.tsx:274 ~ MunkiHeader ~ data:', data)
 
   if (!data) return;
   const tokens = data.response;
