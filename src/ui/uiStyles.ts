@@ -93,6 +93,10 @@ export const darkTheme: ThemeConfig = {
       fontWeightStrong: Styles.h3.fontWeight as number,
       borderRadiusSM: 4,
     },
+    Skeleton: {
+      gradientFromColor: COL_DS.primary600,
+      gradientToColor: "rgba(0,0,0,0.35)",
+    },
     Table: {
       headerBg: COL_DS.card800,
       borderColor: COL_DS.card,

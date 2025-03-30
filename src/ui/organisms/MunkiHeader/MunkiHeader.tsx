@@ -1,4 +1,4 @@
-import { Button, Dropdown, MenuProps, Space } from "antd";
+import { Button, Dropdown, MenuProps, Space, Skeleton } from "antd";
 import "./MunkiHeader.css";
 import styled from "styled-components";
 import { COLORS, COL_DS, UI_COLORS } from "../../colors";
@@ -107,35 +107,60 @@ export const NavigationDropdown: FC<ComponentProps<any>> = ({
 
 export const MunkiHeader = () => {
   const { data } = useTokenTrendingApi(undefined, MOCK_DATA_TOKEN_TRENDING);
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ MunkiHeader.tsx:274 ~ MunkiHeader ~ data:', data)
-
-  if (!data) return;
-  const tokens = data.response;
-  const repeatedTokens = [...tokens, ...tokens];
 
   return (
     <section className="header" style={headerStyles}>
       <MunkiNavigation style={{ padding: "12px 52px" }} />
       <div className="tickerBackground" style={{ background: COLORS.jonquil }}>
-        <TickerStyled style={{ height: 62 }}>
-          {repeatedTokens.map((token, index) => (
-            <TextWithLabel
-              key={`${token.name}-${index}`}
-              text={
-                <Token
-                  token={token}
-                  textStyle={{
-                    color: UI_COLORS.reversePrimaryText,
-                    ...Styles.h2,
-                  }}
-                />
-              }
-              left={<RoundIcon src={token.logoUri} size={38} />}
-              right={<Percentage value={token.volume24hChange} />}
-              style={{ padding: "12px" }}
-            ></TextWithLabel>
-          ))}
-        </TickerStyled>
+        {!data ? (
+          <div style={{ height: 62, position: "relative" }}>
+            <Skeleton.Input
+              active
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100%",
+              }}
+            />
+          </div>
+        ) : (
+          <TickerStyled>
+            {data.response.flatMap((token, index) => [
+              <TextWithLabel
+                key={`${token.name}-${index}`}
+                text={
+                  <Token
+                    token={token}
+                    textStyle={{
+                      color: UI_COLORS.reversePrimaryText,
+                      ...Styles.h2,
+                    }}
+                  />
+                }
+                left={<RoundIcon src={token.logoUri} size={38} />}
+                right={<Percentage value={token.volume24hChange} />}
+                style={{ padding: "12px" }}
+              ></TextWithLabel>,
+              <TextWithLabel
+                key={`${token.name}-${index}-dup`}
+                text={
+                  <Token
+                    token={token}
+                    textStyle={{
+                      color: UI_COLORS.reversePrimaryText,
+                      ...Styles.h2,
+                    }}
+                  />
+                }
+                left={<RoundIcon src={token.logoUri} size={38} />}
+                right={<Percentage value={token.volume24hChange} />}
+                style={{ padding: "12px" }}
+              ></TextWithLabel>,
+            ])}
+          </TickerStyled>
+        )}
       </div>
     </section>
   );
