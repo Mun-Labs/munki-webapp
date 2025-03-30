@@ -1,14 +1,18 @@
-import { Flex } from "antd";
+import { Button, Dropdown, Flex, MenuProps, Space } from "antd";
 import "./MunkiHeader.css";
-import { Styles } from "../../uiStyles";
 import styled from "styled-components";
-import { COLORS, UI_COLORS } from "../../colors";
+import { COLORS, COL_DS, UI_COLORS } from "../../colors";
 import { MOCK_DATA_TOKEN_TRENDING } from "../../../api/MockData";
-import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
+import { useTokenTrendingApi } from "../../../api/hooks/useTokenTrendingApi";
+import { ComponentProps, FC } from "react";
+import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
+import { SocialMedia } from "../../../domain/types/Types";
+import Icon, { SmileOutlined, DownOutlined } from "@ant-design/icons";
+import { RoundIcon } from "../../atoms/RoundIcon";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Token } from "../../atoms/Token/Token";
-import { RoundIcon } from "../../atoms/RoundIcon";
-import { useTokenTrendingApi } from "../../../api/hooks/useTokenTrendingApi";
+import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
+import { Styles } from "../../uiStyles";
 
 const headerStyles: React.CSSProperties = {
   // ...debugStyles,
@@ -52,6 +56,155 @@ const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
   }
 `;
 
+const socials: SocialMedia[] = [
+  { name: "Telegram", type: "telegram", url: "https://t.me/elmunkibot" },
+  { name: "X", type: "x", url: "https://x.com/munki_ai" },
+];
+
+export const ComingSoonButton: FC<ComponentProps<any>> = ({ style }) => {
+  return (
+    <Button
+      style={{
+        background: COL_DS.secondary,
+        border: "none",
+        borderRadius: 10,
+        padding: "8px 10px",
+        ...style,
+      }}
+    >
+      Coming Soon
+    </Button>
+  );
+};
+
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.antgroup.com"
+      >
+        Coming Soon
+      </a>
+    ),
+  },
+];
+
+export const NavigationDropdown: FC<ComponentProps<any>> = ({
+  text,
+  style,
+}) => {
+  return (
+    <div style={{ marginLeft: 40, ...style }}>
+      <Dropdown menu={{ items }}>
+        <a onClick={(e) => e.preventDefault()}>
+          <Space>
+            {text}
+            <DownOutlined />
+          </Space>
+        </a>
+      </Dropdown>
+    </div>
+  );
+};
+
+export const MunkiNavigation: FC = (props) => {
+  // Homepage Trending Meme Radar Changelogs | X Telegram Log In Sol Eng
+
+  return (
+    <Flex
+      justify="space-between"
+      align="center"
+      style={{ height: 88 }}
+      wrap={true}
+    >
+      <Flex className="left">
+        <img
+          width="60"
+          height="60"
+          src="/munki-header.png"
+          // onClick={showDrawer}
+          alt="munki"
+        />
+        <div
+          className="navigation"
+          style={{
+            marginLeft: 60,
+            display: "flex",
+            alignItems: "center",
+            gap: 50,
+          }}
+        >
+          <a href="#" style={{ color: COL_DS.text300 }}>
+            Home
+          </a>
+          <a
+            style={{
+              display: "flex",
+              alignItems: "center",
+              color: COL_DS.text300,
+            }}
+          >
+            Trending <ComingSoonButton style={{ marginLeft: 10 }} />
+          </a>
+          <a
+            style={{
+              display: "flex",
+              alignItems: "center",
+              color: COL_DS.text300,
+            }}
+          >
+            Meme Radar <ComingSoonButton style={{ marginLeft: 10 }} />
+          </a>
+          <a href="#changelogs" style={{ color: COL_DS.text300 }}>
+            Changelogs
+          </a>
+        </div>
+      </Flex>
+
+      <Flex className="right" align="center">
+        <div
+          className="socials"
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <SocialMediaSegment
+            socials={socials}
+            style={{ gap: 20, color: COL_DS.baseWhite }}
+          />
+        </div>
+
+        <Button
+          style={{
+            marginLeft: 20,
+            padding: "8px 23px",
+            border: `2px solid ${COL_DS.secondary}`,
+            borderRadius: 16,
+            background: COL_DS.primary400,
+            color: COL_DS.secondary,
+          }}
+        >
+          Log In
+        </Button>
+
+        <NavigationDropdown
+          text={
+            <div>
+              <RoundIcon src="/solana.png" style={{ marginRight: 12 }} />
+              Sol
+            </div>
+          }
+        />
+        <NavigationDropdown text={<div>Eng</div>} />
+      </Flex>
+    </Flex>
+  );
+};
+
 export const MunkiHeader = () => {
   const { data } = useTokenTrendingApi(undefined, MOCK_DATA_TOKEN_TRENDING);
 
@@ -61,20 +214,7 @@ export const MunkiHeader = () => {
 
   return (
     <section className="header" style={headerStyles}>
-      <Flex
-        justify="space-between"
-        align="center"
-        style={{ height: 64 }}
-        wrap={true}
-      >
-        <img
-          width="60"
-          height="60"
-          src="/munki-header.png"
-          // onClick={showDrawer}
-          alt="munki"
-        />
-      </Flex>
+      <MunkiNavigation />
 
       <TickerStyled style={{ height: 62 }}>
         {repeatedTokens.map((token, index) => (

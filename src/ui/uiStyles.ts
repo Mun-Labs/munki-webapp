@@ -1,5 +1,5 @@
 import { ThemeConfig } from "antd";
-import { COLORS, COLORS_DESIGN_SYSTEM } from "./colors";
+import { COLORS, COL_DS } from "./colors";
 
 type RecursiveStyles = {
   [key: string]: React.CSSProperties | RecursiveStyles;
@@ -61,45 +61,45 @@ export const debugStyles: React.CSSProperties = {
 export const darkTheme: ThemeConfig = {
   token: {
     // Seed Token
-    colorText: COLORS_DESIGN_SYSTEM.text100,
-    colorTextSecondary: COLORS_DESIGN_SYSTEM.subtext500,
-    colorBgBase: COLORS_DESIGN_SYSTEM.background,
-    colorPrimary: COLORS_DESIGN_SYSTEM.primary500,
+    colorText: COL_DS.text100,
+    colorTextSecondary: COL_DS.subtext500,
+    colorBgBase: COL_DS.background,
+    colorPrimary: COL_DS.primary500,
     borderRadius: 2,
-    colorBorder: COLORS_DESIGN_SYSTEM.neutral500,
-    colorBorderSecondary: COLORS_DESIGN_SYSTEM.neutral400,
-    colorLink: COLORS_DESIGN_SYSTEM.text100,
-    colorLinkHover: COLORS_DESIGN_SYSTEM.text500,
+    colorBorder: COL_DS.neutral500,
+    colorBorderSecondary: COL_DS.neutral400,
+    colorLink: COL_DS.text100,
+    colorLinkHover: COL_DS.text500,
 
     // Alias Token
-    colorBgContainer: COLORS_DESIGN_SYSTEM.card,
+    colorBgContainer: COL_DS.card,
     fontFamily: "GROBOLD, sans serif",
   },
   components: {
     Button: {
-      defaultActiveColor: COLORS_DESIGN_SYSTEM.text100,
-      defaultHoverColor: COLORS_DESIGN_SYSTEM.text200,
-      defaultHoverBg: COLORS_DESIGN_SYSTEM.primary600,
+      defaultActiveColor: COL_DS.text100,
+      defaultHoverColor: COL_DS.text200,
+      defaultHoverBg: COL_DS.primary600,
     },
     Card: {
       borderRadiusLG: 8,
     },
     Input: {
-      hoverBg: COLORS_DESIGN_SYSTEM.card800,
+      hoverBg: COL_DS.card800,
     },
     Segmented: {
-      itemSelectedBg: COLORS_DESIGN_SYSTEM.secondary500,
+      itemSelectedBg: COL_DS.secondary500,
       fontSize: Styles.h3.fontSize as number,
       fontWeightStrong: Styles.h3.fontWeight as number,
       borderRadiusSM: 4,
     },
     Table: {
-      headerBg: COLORS_DESIGN_SYSTEM.card800,
-      borderColor: COLORS_DESIGN_SYSTEM.card,
-      colorIcon: COLORS_DESIGN_SYSTEM.text100,
-      colorBorder: COLORS_DESIGN_SYSTEM.neutral500,
-      headerSortActiveBg: COLORS_DESIGN_SYSTEM.card700,
-      headerSplitColor: COLORS_DESIGN_SYSTEM.neutral500,
+      headerBg: COL_DS.card800,
+      borderColor: COL_DS.card,
+      colorIcon: COL_DS.text100,
+      colorBorder: COL_DS.neutral500,
+      headerSortActiveBg: COL_DS.card700,
+      headerSplitColor: COL_DS.neutral500,
     },
   },
 };
