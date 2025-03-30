@@ -3,6 +3,7 @@ import type { SWRResponse } from "swr";
 import { BASE_URL, EndpointsEnum } from "../apiConstants";
 import { DEBUG_FLAGS } from "../../common/featureFlags";
 import { ApiResponse } from "../apiTypes";
+import { useState, useEffect } from "react";
 
 interface ISwrOptions {
   revalidateOnMount?: boolean;
@@ -19,6 +20,13 @@ const swrOptions: ISwrOptions = {
 };
 
 const fetcher = async (url: string) => {
+  // Introduce a 600ms delay to simulate network latency
+  if (DEBUG_FLAGS.useMockApi) {
+    /* prettier-ignore */ console.log('%c------------------------------------------------------------------------------------------', `background: ${'darkblue'}`);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+
+  console.log("2");
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -32,14 +40,29 @@ export function useApi<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
   mockResponse?: ApiResponse<Response>,
+  debugDelay: number = 1000,
 ): SWRResponse<ApiResponse<Response>> {
+  const [delayedData, setDelayedData] = useState<
+    ApiResponse<Response> | undefined
+  >(undefined);
+  const [isDelaying, setIsDelaying] = useState<boolean>(false);
+
   if (DEBUG_FLAGS.useMockApi && mockResponse) {
-    useSWR(null, fetcher, swrOptions);
+    useEffect(() => {
+      setIsDelaying(true);
+      const timer = setTimeout(() => {
+        setDelayedData(mockResponse);
+        setIsDelaying(false);
+      }, debugDelay);
+
+      return () => clearTimeout(timer);
+    }, [mockResponse, debugDelay]);
+
     return {
-      data: mockResponse,
+      data: delayedData,
       error: null,
       isValidating: false,
-      isLoading: false,
+      isLoading: isDelaying,
       mutate: () => Promise.resolve(mockResponse),
     };
   }
