@@ -3,12 +3,13 @@ import { CloseCircleFilled, SearchOutlined } from "@ant-design/icons";
 import { Button, Input } from "antd";
 import { ComponentProps, FC, useCallback, useState } from "react";
 import styled from "styled-components";
-import { COLORS } from "../../colors";
+import { COL_DS, COLORS } from "../../colors";
 import { useTokenApi } from "../../../api/hooks/useTokenApi";
 import { MunkiTokenList } from "../MunkiTokenList/MunkiTokenList";
 import { debounce } from "../../../common/modules/debounce";
 import { MOCK_DATA_TOKEN } from "../../../api/MockData";
 import { Token } from "../../../api/apiTypes";
+import { isSolanaAddress } from "../../../common/modules/validators";
 
 interface ITokenSearchWithDropdownProps extends ComponentProps<any> {}
 
@@ -17,6 +18,7 @@ export const TokenSearchWithDropdown: FC<
 > = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [isValid, setIsValid] = useState(true);
 
   const shouldFetch = Boolean(searchTerm && inputValue);
   const { data, isLoading } = useTokenApi(
@@ -26,12 +28,25 @@ export const TokenSearchWithDropdown: FC<
 
   let tokens: Token[] = [];
   if (data) {
-    tokens = data.response;
+    // tokens = data.response;
   }
+
+  const clearInput = useCallback(() => {
+    setIsValid(true);
+    setInputValue("");
+    setSearchTerm("");
+  }, []);
 
   const debouncedSearch = useCallback(
     debounce((value: string) => {
-      setSearchTerm(value);
+      const is = isSolanaAddress(value);
+      /*prettier-ignore*/ console.log('>>>> _ >>>> ~ TokenSearchWithDropdown.tsx:37 ~ debounce ~ is:', is)
+      if (is) {
+        setIsValid(true);
+        setSearchTerm(value);
+      } else {
+        setIsValid(false);
+      }
     }, 0),
     [],
   );
@@ -55,13 +70,28 @@ export const TokenSearchWithDropdown: FC<
             LFG
           </Button>
         }
-        allowClear={{clearIcon: <CloseCircleFilled style={{color:COLORS.white, marginRight: 8}} />}}
+        allowClear={{
+          clearIcon: (
+            <CloseCircleFilled
+              style={{ color: COLORS.white, marginRight: 8 }}
+            />
+          ),
+        }}
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={(e) => {
+          clearInput();
+          setInputValue(e.target.value);
+        }}
         onPressEnter={() => debouncedSearch(inputValue)}
+        onClear={() => clearInput()}
         autoFocus={true}
       />
+
       <FloatingContainer>
+        {!isValid && <Warning>⚠️ Not a valid SOL address.</Warning>}
+        {tokens.length === 0 && searchTerm && isValid && (
+          <Warning>⚠️ No tokens found</Warning>
+        )}
         {tokens && tokens.length > 0 && (
           <MunkiTokenList tokens={tokens!} loading={isLoading}></MunkiTokenList>
         )}
@@ -93,8 +123,7 @@ const TokenInputStyled = styled(Input).attrs({
 
   background-color: #242424;
   box-shadow: 0 0 21.4px 0 #ffee64;
-  background:
-    linear-gradient(${COLORS.raisin_black} 0 0) padding-box,
+  background: linear-gradient(${COLORS.raisin_black} 0 0) padding-box,
     /*this is your grey background*/ linear-gradient(to right, #fbe892, #ee1b84)
       border-box;
 
@@ -132,4 +161,20 @@ const FloatingContainer = styled.div.attrs({
     width: 100%;
     z-index: 10;
   }
+`;
+
+const Warning = styled.div.attrs({
+  className: "Warning",
+})`
+  top: 20px;
+  left: 0;
+  width: 100%;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 8px;
+  padding: 5px 12px;
+  color: ${COL_DS.baseWhite};
+  border: 2px solid ${COL_DS.warning};
+  border-radius: 8px;
+  z-index: 20;
 `;

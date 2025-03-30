@@ -35,6 +35,7 @@ export const COL_DS = {
   success200: "#9cea96",
   success300: "#31b825",
   warning: "#FF9519",
+  warning100: "#ffdcb2",
   error: "#FF5656",
 
   // Text colors
