@@ -262,6 +262,52 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     navigate(`/token/${address}`);
   };
 
+  // Function to handle horizontal scroll
+  const handleScroll = () => {
+    if (!tableRef.current) return;
+
+    const tableBody = tableRef.current.querySelector(".ant-table-body");
+    if (!tableBody) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } =
+      tableBody as HTMLDivElement;
+
+    // Check if can scroll left or right
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth);
+  };
+
+  // Function to scroll table horizontally
+  const scrollTable = (direction: "left" | "right") => {
+    if (!tableRef.current) return;
+
+    const tableBody = tableRef.current.querySelector(".ant-table-body");
+    if (!tableBody) return;
+
+    const scrollAmount = 300; // Pixels to scroll
+    const currentScroll = (tableBody as HTMLDivElement).scrollLeft;
+
+    (tableBody as HTMLDivElement).scrollLeft =
+      direction === "left"
+        ? currentScroll - scrollAmount
+        : currentScroll + scrollAmount;
+  };
+
+  // Add event listener for scroll
+  useEffect(() => {
+    const tableBody = tableRef.current?.querySelector(".ant-table-body");
+    if (!tableBody) return;
+
+    tableBody.addEventListener("scroll", handleScroll);
+
+    // Initial check
+    handleScroll();
+
+    return () => {
+      tableBody.removeEventListener("scroll", handleScroll);
+    };
+  }, [data]); // Re-run when data changes
+
   if (!data)
     return (
       <div style={{ width: 1400, height: 600 }}>
@@ -536,52 +582,6 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       render: (_value) => <div className="content">52k</div>,
     },
   ];
-
-  // Function to handle horizontal scroll
-  const handleScroll = () => {
-    if (!tableRef.current) return;
-
-    const tableBody = tableRef.current.querySelector(".ant-table-body");
-    if (!tableBody) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } =
-      tableBody as HTMLDivElement;
-
-    // Check if can scroll left or right
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft + clientWidth < scrollWidth);
-  };
-
-  // Function to scroll table horizontally
-  const scrollTable = (direction: "left" | "right") => {
-    if (!tableRef.current) return;
-
-    const tableBody = tableRef.current.querySelector(".ant-table-body");
-    if (!tableBody) return;
-
-    const scrollAmount = 300; // Pixels to scroll
-    const currentScroll = (tableBody as HTMLDivElement).scrollLeft;
-
-    (tableBody as HTMLDivElement).scrollLeft =
-      direction === "left"
-        ? currentScroll - scrollAmount
-        : currentScroll + scrollAmount;
-  };
-
-  // Add event listener for scroll
-  useEffect(() => {
-    const tableBody = tableRef.current?.querySelector(".ant-table-body");
-    if (!tableBody) return;
-
-    tableBody.addEventListener("scroll", handleScroll);
-
-    // Initial check
-    handleScroll();
-
-    return () => {
-      tableBody.removeEventListener("scroll", handleScroll);
-    };
-  }, [data]); // Re-run when data changes
 
   return (
     <MemeCoinTableStyled style={{ ...style, height: 850 }}>
