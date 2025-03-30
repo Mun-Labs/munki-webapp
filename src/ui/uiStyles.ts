@@ -1,5 +1,5 @@
 import { ThemeConfig } from "antd";
-import { COLORS } from "./colors";
+import { COLORS, COLORS_DESIGN_SYSTEM } from "./colors";
 
 type RecursiveStyles = {
   [key: string]: React.CSSProperties | RecursiveStyles;
@@ -45,7 +45,7 @@ export const Styles: RecursiveStyles = {
     textShadow: "1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue",
   },
   fontSansSerif: {
-    fontFamily: "Arial, Helvetica, sans-serif"
+    fontFamily: "Arial, Helvetica, sans-serif",
   },
   ellipsis: {
     overflow: "hidden",
@@ -61,44 +61,45 @@ export const debugStyles: React.CSSProperties = {
 export const darkTheme: ThemeConfig = {
   token: {
     // Seed Token
-    colorText: COLORS.white,
-    colorTextSecondary: COLORS.grey70,
-    colorBgBase: COLORS.black10,
-    colorPrimary: "#00b96b",
+    colorText: COLORS_DESIGN_SYSTEM.text100,
+    colorTextSecondary: COLORS_DESIGN_SYSTEM.subtext500,
+    colorBgBase: COLORS_DESIGN_SYSTEM.background,
+    colorPrimary: COLORS_DESIGN_SYSTEM.primary500,
     borderRadius: 2,
-    colorBorder: COLORS.grey50,
-    colorBorderSecondary: COLORS.grey50,
+    colorBorder: COLORS_DESIGN_SYSTEM.neutral500,
+    colorBorderSecondary: COLORS_DESIGN_SYSTEM.neutral400,
+    colorLink: COLORS_DESIGN_SYSTEM.text100,
+    colorLinkHover: COLORS_DESIGN_SYSTEM.text500,
 
     // Alias Token
-    colorBgContainer: COLORS.black,
+    colorBgContainer: COLORS_DESIGN_SYSTEM.card,
     fontFamily: "GROBOLD, sans serif",
   },
   components: {
     Button: {
-      defaultActiveColor: COLORS.white,
-      defaultHoverColor: COLORS.white,
-      defaultHoverBg: 'red', // does not work. leaving it here for further investigation
+      defaultActiveColor: COLORS_DESIGN_SYSTEM.text100,
+      defaultHoverColor: COLORS_DESIGN_SYSTEM.text200,
+      defaultHoverBg: COLORS_DESIGN_SYSTEM.primary600,
     },
     Card: {
       borderRadiusLG: 8,
     },
     Input: {
-      hoverBg: COLORS.white25,
-      // hoverBg: "red",
+      hoverBg: COLORS_DESIGN_SYSTEM.card800,
     },
     Segmented: {
-      itemSelectedBg: COLORS.magenta,
+      itemSelectedBg: COLORS_DESIGN_SYSTEM.secondary500,
       fontSize: Styles.h3.fontSize as number,
       fontWeightStrong: Styles.h3.fontWeight as number,
       borderRadiusSM: 4,
     },
     Table: {
-      headerBg: COLORS.white25,
-      borderColor: COLORS.black,
-      colorIcon: COLORS.white,
-      colorBorder: COLORS.grey70,
-      headerSortActiveBg: COLORS.white25,
-      headerSplitColor: COLORS.grey70,
+      headerBg: COLORS_DESIGN_SYSTEM.card800,
+      borderColor: COLORS_DESIGN_SYSTEM.card,
+      colorIcon: COLORS_DESIGN_SYSTEM.text100,
+      colorBorder: COLORS_DESIGN_SYSTEM.neutral500,
+      headerSortActiveBg: COLORS_DESIGN_SYSTEM.card700,
+      headerSplitColor: COLORS_DESIGN_SYSTEM.neutral500,
     },
   },
 };
