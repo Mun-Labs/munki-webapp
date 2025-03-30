@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Treemap, ResponsiveContainer } from "recharts";
 import { ITreeChartNode } from "../../../domain/types/Types";
 import { TokenImageCard } from "../../organisms/TokenImageCard/TokenImageCard";
+import { MunkiSkeleton } from "../../atoms/MunkiSkeleton/MunkiSkeleton";
 
 interface TreeChartProps extends ComponentProps<any> {
   data: ITreeChartNode[];
@@ -112,18 +113,22 @@ export const TreeChart: FC<TreeChartProps> = (props) => {
   return (
     <TreeChartStyled style={{ width: "100%", height: "100%", ...style }}>
       <ResponsiveContainer width="100%" height="100%">
-        <Treemap
-          aspectRatio={4 / 3}
-          onClick={handleClick as any}
-          isAnimationActive={false}
-          width={400}
-          height={200}
-          data={dataSortedBySize.slice(0, 10)}
-          dataKey="size"
-          stroke="#fff"
-          fill="#8884d8"
-          content={<CustomizedContent colors={COLORS} />}
-        />
+        {dataSortedBySize.length ? (
+          <Treemap
+            aspectRatio={4 / 3}
+            onClick={handleClick as any}
+            isAnimationActive={false}
+            width={400}
+            height={200}
+            data={dataSortedBySize.slice(0, 10)}
+            dataKey="size"
+            stroke="#fff"
+            fill="#8884d8"
+            content={<CustomizedContent colors={COLORS} />}
+          />
+        ) : (
+          <MunkiSkeleton />
+        )}
       </ResponsiveContainer>
     </TreeChartStyled>
   );
