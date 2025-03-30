@@ -231,22 +231,22 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
         </div>
       ),
     },
-    {
-      title: <div className="head">Avg. Win Rate</div>,
-      dataIndex: "winRate",
-      key: "winRate",
-      width: 140,
-      render: (_value) => <p className="tac cl-green-custom">{_value}%</p>,
-    },
-    {
-      title: <div className="head">Avg. Holding Time</div>,
-      dataIndex: "holdingTime",
-      key: "holdingTime",
-      width: 170,
-      render: (_value) => (
-        <p className="head cl-green-custom tac fwb">150hours</p>
-      ),
-    },
+    // {
+    //   title: <div className="head">Avg. Win Rate</div>,
+    //   dataIndex: "winRate",
+    //   key: "winRate",
+    //   width: 140,
+    //   render: (_value) => <p className="tac cl-green-custom">{_value}%</p>,
+    // },
+    // {
+    //   title: <div className="head">Avg. Holding Time</div>,
+    //   dataIndex: "holdingTime",
+    //   key: "holdingTime",
+    //   width: 170,
+    //   render: (_value) => (
+    //     <p className="head cl-green-custom tac fwb">150hours</p>
+    //   ),
+    // },
     {
       title: <div className="head tal">Top Holdings</div>,
       dataIndex: "topHoldings",

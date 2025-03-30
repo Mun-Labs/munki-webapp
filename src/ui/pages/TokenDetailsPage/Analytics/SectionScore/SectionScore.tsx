@@ -19,6 +19,8 @@ interface SectionScoreProps extends ComponentProps<any> {}
 export const SectionScore: FC<SectionScoreProps> = () => {
   const { data: tokenAnalyticsData } = useTokenAnalyticsStore();
 
+  const munScore = 103;
+
   return (
     <SectionScoreStyled>
       <div className="mun-score wrap-score">
@@ -39,7 +41,7 @@ export const SectionScore: FC<SectionScoreProps> = () => {
             fontSize: "78px",
           }}
         >
-          {103} PTS
+          {munScore ?? "n/a"} PTS
         </h4>
 
         <div style={{ width: "98%" }}>
@@ -71,9 +73,11 @@ export const SectionScore: FC<SectionScoreProps> = () => {
           <p>Profile</p>
           <p>Followers</p>
         </div>
-        {tokenAnalyticsData?.topFollowers?.slice(0, 5).map((follower, index) => {
-          return <TopFollowerItem key={follower.tag + index} {...follower} />;
-        })}
+        {tokenAnalyticsData?.topFollowers
+          ?.slice(0, 5)
+          .map((follower, index) => {
+            return <TopFollowerItem key={follower.tag + index} {...follower} />;
+          })}
       </div>
     </SectionScoreStyled>
   );

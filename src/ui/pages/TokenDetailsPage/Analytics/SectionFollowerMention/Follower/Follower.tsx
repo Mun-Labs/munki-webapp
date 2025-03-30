@@ -49,8 +49,6 @@ const Follower = () => {
   };
   const yDomain = calcYDomain(followerHistoryWithFormattedDate);
 
-  console.log({followerHistoryWithFormattedDate})
-
   return (
     <ChartContainer>
       <Title>Followers</Title>

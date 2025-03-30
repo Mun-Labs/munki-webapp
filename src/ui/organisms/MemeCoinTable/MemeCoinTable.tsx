@@ -1,11 +1,12 @@
 import { ComponentProps, FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import React from "react";
+import { useNavigate } from "react-router";
 import { Avatar, Flex, Table } from "antd";
 import type { TableColumnsType, TablePaginationConfig } from "antd";
 import { createStyles } from "antd-style";
 import { MOCK_DATA_ALPHA_MOVES } from "../../../api/MockData";
-import { COLORS } from "../../colors";
+import { COL_DS, COLORS } from "../../colors";
 import { AntDesignOutlined } from "@ant-design/icons";
 import useSmallScreen from "../../../hooks/useSmallScreen";
 import { MunkiBadge } from "../../atoms/MunkiBadge/MunkiBadge";
@@ -37,6 +38,33 @@ const MemeCoinTableStyled = styled.div.attrs({
 
     100% {
       background: #000;
+    }
+  }
+
+  /* Add alternating row styles for better readability */
+  .ant-table-tbody {
+    tr.ant-table-row:nth-child(odd) {
+      td.ant-table-cell {
+        background-color: ${COLORS.black};
+      }
+    }
+    tr.ant-table-row:nth-child(even) {
+      td.ant-table-cell {
+        background-color: #1f1f1f; /* Slightly lighter than black for contrast */
+      }
+    }
+
+    /* Preserve hover styles */
+    tr.ant-table-row:hover > td.ant-table-cell {
+      background-color: ${COL_DS.card900} !important; /* Even lighter for hover state */
+    }
+
+    /* Make sure active row style takes precedence */
+    tr.active.ant-table-row-level-0 {
+      td.ant-table-cell {
+        background-color: #000;
+        animation: rowActive 3s infinite;
+      }
     }
   }
 
@@ -129,6 +157,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   const { style } = props;
   const { styles } = useStyle();
   const isSmallScreen = useSmallScreen(1265);
+  const navigate = useNavigate();
 
   // Add pagination state
   const [tableParams, setTableParams] = useState<{
@@ -181,6 +210,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     });
   };
 
+  // Function to handle row click navigation
+  const handleRowClick = (record: DataType) => {
+    const address = record.token.tokenAddress;
+    navigate(`/token/${address}`);
+  };
+
   if (!data)
     return (
       <div style={{ width: 1400, height: 600 }}>
@@ -212,7 +247,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
         return (
           <AvatarWithText
             name={
-              <span style={{ color: COLORS.white }}>{record.coinName}</span>
+              <div style={{ color: COLORS.white, maxWidth: 114 }}>
+                {record.coinName}
+              </div>
             }
             symbol={
               <Currency
@@ -453,19 +490,23 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   ];
 
   return (
-    <MemeCoinTableStyled style={{ ...style }}>
+    <MemeCoinTableStyled style={{ ...style, height: 850 }}>
       <Table<DataType>
         className={styles.customTable}
         columns={columns}
-        rowClassName={(record) => {
-          return record?.tokenAddress === "0x6e6c3659" ? "active" : "";
-        }}
+        // rowClassName={(_record, index) => { // should only highlight when new update comes in
+        //   return index === 0 ? "active" : "";
+        // }}
         dataSource={dataSource}
         pagination={{ position: ["bottomCenter"], ...tableParams.pagination }}
         onChange={(pagination) => handleTableChange(pagination)}
         loading={isLoading}
         size="middle"
-        scroll={{ x: "max-content", y: 55 * 10 }}
+        scroll={{ x: "max-content", y: 150 * 10 }}
+        onRow={(record) => ({
+          onClick: () => handleRowClick(record),
+          style: { cursor: "pointer" }, // Add pointer cursor to indicate clickable rows
+        })}
       />
     </MemeCoinTableStyled>
   );

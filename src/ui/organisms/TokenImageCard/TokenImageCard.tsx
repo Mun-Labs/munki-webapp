@@ -51,7 +51,8 @@ export const TokenImageCard: FC<TokenImageCardProps> = (props) => {
 
   const fontSize = useMemo(() => {
     if (!fontSizeByWidth || !fontSizeByHeight) return;
-    return Math.min(fontSizeByWidth, fontSizeByHeight);
+    const size = Math.min(fontSizeByWidth, fontSizeByHeight);
+    return size;
   }, [fontSizeByWidth, fontSizeByHeight]);
 
   const padding = useMemo(() => {
@@ -85,7 +86,7 @@ export const TokenImageCard: FC<TokenImageCardProps> = (props) => {
       >
         <Token
           token={token as any}
-          textStyle={{ ...Styles.textShadowRedBlue }}
+          textStyle={{ ...Styles.textShadowRedBlue, fontSize, width }}
         />
 
         <Percentage

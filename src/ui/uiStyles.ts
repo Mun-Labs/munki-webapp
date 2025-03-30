@@ -100,6 +100,7 @@ export const darkTheme: ThemeConfig = {
     },
     Table: {
       headerBg: COL_DS.card800,
+      rowHoverBg: COL_DS.card900,
       borderColor: COL_DS.card,
       colorIcon: COL_DS.text100,
       colorBorder: COL_DS.neutral500,

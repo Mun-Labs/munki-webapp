@@ -42,7 +42,18 @@ export const Token: FC<ITokenProps> = (props) => {
         target="_blank"
       >
         <Button type="link">
-          <div style={{ textAlign: "start", ...textStyle }}>{token.name}</div>
+          <div
+            style={{
+              textAlign: "start",
+              wordWrap: "break-word",
+              overflowWrap: "break-word",
+              whiteSpace: "normal",
+              lineHeight: "1.4",
+              ...textStyle,
+            }}
+          >
+            {token.name}
+          </div>
         </Button>
       </a>
     </TokenStyled>
