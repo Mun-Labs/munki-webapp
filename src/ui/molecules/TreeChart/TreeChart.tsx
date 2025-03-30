@@ -1,7 +1,7 @@
 import { ComponentProps, FC, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Treemap, ResponsiveContainer } from "recharts";
-import { ITreeChartNode } from "../../../domain/types/Types";
+import { Address, ITreeChartNode } from "../../../domain/types/Types";
 import { TokenImageCard } from "../../organisms/TokenImageCard/TokenImageCard";
 import { MunkiSkeleton } from "../../atoms/MunkiSkeleton/MunkiSkeleton";
 
@@ -24,6 +24,7 @@ export interface CustomizedContentProps {
   // Define your prop types here
   // For example:
   root?: any;
+  address?: Address;
   depth?: number;
   x?: number;
   y?: number;
@@ -44,6 +45,7 @@ const CustomizedContent: React.FC<CustomizedContentProps> = (
 ) => {
   const {
     root,
+    address,
     depth,
     x,
     y,
@@ -87,6 +89,7 @@ const CustomizedContent: React.FC<CustomizedContentProps> = (
                 name,
                 twentyFourHourPercentage,
                 logoUrl,
+                address,
               }}
               width={width}
               height={height}

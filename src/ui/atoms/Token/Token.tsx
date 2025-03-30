@@ -4,6 +4,7 @@ import styled from "styled-components";
 import type { TokenTrending } from "../../../api/apiTypes";
 import { Button } from "antd";
 import { UI_COLORS } from "../../colors";
+import { Address } from "../../../domain/types/Types";
 
 const TokenStyled = styled.div.attrs({
   className: "TokenStyled",
@@ -27,7 +28,7 @@ const TokenStyled = styled.div.attrs({
 `;
 
 interface ITokenProps extends ComponentProps<any> {
-  token: { tokenAddress: string; name: string };
+  token: { tokenAddress: string; address?: Address; name: string };
   textStyle?: React.CSSProperties;
 }
 
@@ -35,7 +36,11 @@ export const Token: FC<ITokenProps> = (props) => {
   const { style, textStyle, token } = props;
   return (
     <TokenStyled style={{ ...style }}>
-      <a href={`/token/${token.tokenAddress}`} rel="noreferrer noopener">
+      <a
+        href={`/token/${token.tokenAddress ?? token.address}`}
+        rel="noreferrer noopener"
+        target="_blank"
+      >
         <Button type="link">
           <div style={{ textAlign: "start", ...textStyle }}>{token.name}</div>
         </Button>

@@ -112,7 +112,7 @@ function FearAndGreedWidget() {
                 reflecting crypto market sentiment.
               </p>
               <p className="desc">
-                Last Update: {unixToDate(current.timestamp)}
+                Last Updated: {unixToDate(current.timestamp, "short")}
               </p>
             </div>
             <div>

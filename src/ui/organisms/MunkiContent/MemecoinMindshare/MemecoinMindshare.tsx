@@ -21,6 +21,7 @@ export const MemecoinMindshare = () => {
         MindshareItem,
         ITreeChartNode
       >(data.response, [
+        ["tokenAddress", "address"],
         ["name", "name"],
         ["volume", "size", (item) => Number(item)],
         ["logoUrl", "logoUrl"],

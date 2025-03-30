@@ -19,7 +19,7 @@ export const AlphaMove = () => {
             <p>Token (30)</p>
           </ButtonFilter>
           <ButtonFilter>
-            <p>Aplpha Group (3/3)</p>
+            <p>Alpha Group (3/3)</p>
           </ButtonFilter>
         </div>
         <div>

@@ -7,6 +7,7 @@ import { COL_DS } from "../../colors";
 import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
 import { ComingSoonButton, NavigationDropdown } from "./MunkiHeader";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 const breakpoint = 1500;
 
@@ -48,6 +49,7 @@ const socials: SocialMedia[] = [
 
 export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Homepage Trending Meme Radar Changelogs | X Telegram Log In Sol Eng
 
@@ -63,7 +65,7 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
           width="60"
           height="60"
           src="/munki-header.png"
-          onClick={() => window.location.replace("/")}
+          onClick={() => navigate("/")}
           alt="munki"
           style={{ cursor: "pointer" }}
         />

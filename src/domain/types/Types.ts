@@ -3,6 +3,7 @@ import React from "react";
 export type AnyObject = Record<PropertyKey, any>;
 
 export interface ITreeChartNode {
+  address: Address;
   size: number;
   twentyFourHourPercentage?: number;
   logoUrl?: string;
@@ -29,4 +30,4 @@ export type IIconMap = Record<
 
 export type UnixTime = number;
 export type Address = string;
-export type BigDecimal = string
+export type BigDecimal = string;
