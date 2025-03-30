@@ -19,10 +19,7 @@ export const AppLayout: React.FC<PropsWithChildren> = ({ children }) => {
     <div style={appStyles}>
       <MunkiHeader />
 
-      <StyledMainContent className="container">
-        <MunkiSidebar />
-        {children}
-      </StyledMainContent>
+      <StyledMainContent className="container">{children}</StyledMainContent>
       <MunkiFooter />
     </div>
   );
