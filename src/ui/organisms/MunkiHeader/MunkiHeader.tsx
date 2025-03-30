@@ -1,18 +1,17 @@
-import { Button, Dropdown, Flex, MenuProps, Space, Drawer } from "antd";
+import { Button, Dropdown, MenuProps, Space } from "antd";
 import "./MunkiHeader.css";
 import styled from "styled-components";
 import { COLORS, COL_DS, UI_COLORS } from "../../colors";
 import { MOCK_DATA_TOKEN_TRENDING } from "../../../api/MockData";
 import { useTokenTrendingApi } from "../../../api/hooks/useTokenTrendingApi";
-import { ComponentProps, FC, useState } from "react";
-import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMediaSegment";
-import { SocialMedia } from "../../../domain/types/Types";
-import { DownOutlined, MenuOutlined } from "@ant-design/icons";
+import { ComponentProps, FC } from "react";
+import { DownOutlined } from "@ant-design/icons";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Token } from "../../atoms/Token/Token";
 import { TextWithLabel } from "../../molecules/TextWithLabel/TextWithLabel";
 import { Styles } from "../../uiStyles";
+import { MunkiNavigation } from "./MunkiNavigation";
 
 const headerStyles: React.CSSProperties = {
   // ...debugStyles,
@@ -57,11 +56,6 @@ const TickerStyled = styled.div.attrs({ className: "TickerStyled" })`
   }
 `;
 
-const socials: SocialMedia[] = [
-  { name: "Telegram", type: "telegram", url: "https://t.me/elmunkibot" },
-  { name: "X", type: "x", url: "https://x.com/munki_ai" },
-];
-
 export const ComingSoonButton: FC<ComponentProps<any>> = ({ style }) => {
   return (
     <Button
@@ -93,39 +87,6 @@ const items: MenuProps["items"] = [
   },
 ];
 
-const breakpoint = 1500;
-
-const MobileMenuButton = styled.div`
-  display: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: ${COL_DS.text300};
-
-  @media (max-width: ${breakpoint}px) {
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
-  }
-`;
-
-const DesktopNavigation = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  margin-left: 60px;
-
-  @media (max-width: ${breakpoint}px) {
-    display: none;
-  }
-`;
-
-const MobileMenuContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-`;
-
 export const NavigationDropdown: FC<ComponentProps<any>> = ({
   text,
   style,
@@ -141,133 +102,6 @@ export const NavigationDropdown: FC<ComponentProps<any>> = ({
         </a>
       </Dropdown>
     </div>
-  );
-};
-
-export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Homepage Trending Meme Radar Changelogs | X Telegram Log In Sol Eng
-
-  return (
-    <Flex
-      justify="space-between"
-      align="center"
-      style={{ height: 88, ...style }}
-      wrap={true}
-    >
-      <Flex className="left" align="center">
-        <img
-          width="60"
-          height="60"
-          src="/munki-header.png"
-          onClick={() => window.location.replace("/")}
-          alt="munki"
-          style={{ cursor: "pointer" }}
-        />
-
-        <MobileMenuButton onClick={() => setMobileMenuOpen(true)}>
-          <MenuOutlined />
-        </MobileMenuButton>
-
-        <DesktopNavigation className="navigation">
-          <a href="/#" style={{ color: COL_DS.text300 }}>
-            Home
-          </a>
-          <a
-            style={{
-              display: "flex",
-              alignItems: "center",
-              color: COL_DS.text300,
-            }}
-          >
-            Trending <ComingSoonButton style={{ marginLeft: 10 }} />
-          </a>
-          <a
-            style={{
-              display: "flex",
-              alignItems: "center",
-              color: COL_DS.text300,
-            }}
-          >
-            Meme Radar <ComingSoonButton style={{ marginLeft: 10 }} />
-          </a>
-          <a href="#changelogs" style={{ color: COL_DS.text300 }}>
-            Changelogs
-          </a>
-        </DesktopNavigation>
-
-        <Drawer
-          title="Menu"
-          placement="left"
-          onClose={() => setMobileMenuOpen(false)}
-          open={mobileMenuOpen}
-          width={280}
-          styles={{
-            body: { padding: 0 },
-          }}
-        >
-          <MobileMenuContent>
-            <a href="/#" style={{ color: COL_DS.text300 }}>
-              Home
-            </a>
-            <a style={{ color: COL_DS.text300 }}>
-              Trending <ComingSoonButton style={{ marginLeft: 10 }} />
-            </a>
-            <a style={{ color: COL_DS.text300 }}>
-              Meme Radar <ComingSoonButton style={{ marginLeft: 10 }} />
-            </a>
-            <a href="#changelogs" style={{ color: COL_DS.text300 }}>
-              Changelogs
-            </a>
-            <div style={{ marginTop: 20 }}>
-              <SocialMediaSegment
-                socials={socials}
-                style={{ gap: 20, color: COL_DS.baseWhite }}
-              />
-            </div>
-          </MobileMenuContent>
-        </Drawer>
-      </Flex>
-
-      <Flex className="right" align="center">
-        <div
-          className="socials"
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <SocialMediaSegment
-            socials={socials}
-            style={{ gap: 20, color: COL_DS.baseWhite }}
-          />
-        </div>
-
-        <Button
-          style={{
-            marginLeft: 20,
-            padding: "8px 23px",
-            border: `2px solid ${COL_DS.secondary}`,
-            borderRadius: 16,
-            background: COL_DS.primary400,
-            color: COL_DS.secondary,
-          }}
-        >
-          Log In
-        </Button>
-
-        <NavigationDropdown
-          text={
-            <div>
-              <RoundIcon src="/solana.png" style={{ marginRight: 12 }} />
-              Sol
-            </div>
-          }
-        />
-        <NavigationDropdown text={<div>Eng</div>} />
-      </Flex>
-    </Flex>
   );
 };
 
