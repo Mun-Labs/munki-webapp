@@ -1,13 +1,14 @@
-import { ComponentProps, FC, useState, useEffect } from "react";
+import { ComponentProps, FC, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import React from "react";
 import { useNavigate } from "react-router";
-import { Avatar, Flex, Table } from "antd";
+import { Avatar, Flex, Table, Button } from "antd";
 import type { TableColumnsType, TablePaginationConfig } from "antd";
 import { createStyles } from "antd-style";
 import { MOCK_DATA_ALPHA_MOVES } from "../../../api/MockData";
 import { COL_DS, COLORS } from "../../colors";
 import { AntDesignOutlined } from "@ant-design/icons";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import useSmallScreen from "../../../hooks/useSmallScreen";
 import { MunkiBadge } from "../../atoms/MunkiBadge/MunkiBadge";
 import { Percentage } from "../../atoms/Percentage/Percentage";
@@ -127,6 +128,46 @@ const MemeCoinTableStyled = styled.div.attrs({
       }
     }
   }
+
+  /* Scroll button styles */
+  .table-scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid ${COLORS.white60};
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.left-button {
+      left: 0;
+    }
+
+    &.right-button {
+      right: 0;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  /* Ensure table container has position relative for absolute positioning of buttons */
+  .ant-table-wrapper {
+    position: relative;
+  }
 `;
 
 interface MemeCoinTableProps extends ComponentProps<any> {}
@@ -158,6 +199,11 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   const { styles } = useStyle();
   const isSmallScreen = useSmallScreen(1265);
   const navigate = useNavigate();
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  // Scroll state
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   // Add pagination state
   const [tableParams, setTableParams] = useState<{
@@ -412,7 +458,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       width: 180,
       render: (_, record) => (
         <MunkiBadge color={COLORS.yellow30}>
-          {record.token.topFreshWalletHolders}/50
+          <span style={{ color: COL_DS.baseBlack }}>
+            {record.token.topFreshWalletHolders}/50
+          </span>
         </MunkiBadge>
       ),
     },
@@ -489,25 +537,88 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     },
   ];
 
+  // Function to handle horizontal scroll
+  const handleScroll = () => {
+    if (!tableRef.current) return;
+
+    const tableBody = tableRef.current.querySelector(".ant-table-body");
+    if (!tableBody) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } =
+      tableBody as HTMLDivElement;
+
+    // Check if can scroll left or right
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth);
+  };
+
+  // Function to scroll table horizontally
+  const scrollTable = (direction: "left" | "right") => {
+    if (!tableRef.current) return;
+
+    const tableBody = tableRef.current.querySelector(".ant-table-body");
+    if (!tableBody) return;
+
+    const scrollAmount = 300; // Pixels to scroll
+    const currentScroll = (tableBody as HTMLDivElement).scrollLeft;
+
+    (tableBody as HTMLDivElement).scrollLeft =
+      direction === "left"
+        ? currentScroll - scrollAmount
+        : currentScroll + scrollAmount;
+  };
+
+  // Add event listener for scroll
+  useEffect(() => {
+    const tableBody = tableRef.current?.querySelector(".ant-table-body");
+    if (!tableBody) return;
+
+    tableBody.addEventListener("scroll", handleScroll);
+
+    // Initial check
+    handleScroll();
+
+    return () => {
+      tableBody.removeEventListener("scroll", handleScroll);
+    };
+  }, [data]); // Re-run when data changes
+
   return (
     <MemeCoinTableStyled style={{ ...style, height: 850 }}>
-      <Table<DataType>
-        className={styles.customTable}
-        columns={columns}
-        // rowClassName={(_record, index) => { // should only highlight when new update comes in
-        //   return index === 0 ? "active" : "";
-        // }}
-        dataSource={dataSource}
-        pagination={{ position: ["bottomCenter"], ...tableParams.pagination }}
-        onChange={(pagination) => handleTableChange(pagination)}
-        loading={isLoading}
-        size="middle"
-        scroll={{ x: "max-content", y: 150 * 10 }}
-        onRow={(record) => ({
-          onClick: () => handleRowClick(record),
-          style: { cursor: "pointer" }, // Add pointer cursor to indicate clickable rows
-        })}
-      />
+      <div ref={tableRef} style={{ position: "relative" }}>
+        {/* <Button
+          className={`table-scroll-button left-button ${
+            !canScrollLeft ? "hidden" : ""
+          }`}
+          icon={<LeftOutlined />}
+          onClick={() => scrollTable("left")}
+          type="text"
+        />
+
+        <Button
+          className={`table-scroll-button right-button ${
+            !canScrollRight ? "hidden" : ""
+          }`}
+          icon={<RightOutlined />}
+          onClick={() => scrollTable("right")}
+          type="text"
+        /> */}
+
+        <Table<DataType>
+          className={styles.customTable}
+          columns={columns}
+          dataSource={dataSource}
+          pagination={{ position: ["bottomCenter"], ...tableParams.pagination }}
+          onChange={(pagination) => handleTableChange(pagination)}
+          loading={isLoading}
+          size="middle"
+          scroll={{ x: "max-content", y: 150 * 10 }}
+          onRow={(record) => ({
+            onClick: () => handleRowClick(record),
+            style: { cursor: "pointer" },
+          })}
+        />
+      </div>
     </MemeCoinTableStyled>
   );
 };
