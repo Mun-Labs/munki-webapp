@@ -17,6 +17,7 @@ import { DateTime } from "luxon";
 import { Styles } from "../../uiStyles";
 import { useAlphaMovesApi } from "../../../api/hooks/useAlphaMovesApi";
 import { calculatePercentHold } from "../../../domain/businessLogic/percentHold";
+import { MunkiSkeleton } from "../../atoms/MunkiSkeleton/MunkiSkeleton";
 
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
@@ -149,7 +150,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   };
 
   // Use the pagination params in the API call
-  const { data, isLoading } = useAlphaMovesApi(
+  let { data, isLoading } = useAlphaMovesApi(
     paginationParams,
     MOCK_DATA_ALPHA_MOVES,
   );
@@ -180,7 +181,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     });
   };
 
-  if (!data) return null;
+  if (!data)
+    return (
+      <div style={{ width: 1400, height: 600 }}>
+        <MunkiSkeleton />
+      </div>
+    );
 
   const dataSource: DataType[] = data.response.map((token) => ({
     ...token,

@@ -70,7 +70,6 @@ function FearAndGreedWidget() {
     undefined,
     MOCK_DATA_FEAR_AND_GREED,
   );
-  isLoading = true;
 
   // @ts-expect-error
   let fearAndGreed: FearAndGreed[] = [{}, {}];

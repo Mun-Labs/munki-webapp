@@ -96,7 +96,7 @@ export const darkTheme: ThemeConfig = {
     Skeleton: {
       gradientFromColor: COL_DS.primary600,
       gradientToColor: "rgba(0,0,0,0.35)",
-      colorGradientEnd: "rgba(0,0,0,0.35)",
+      // colorGradientEnd: "rgba(0,0,0,0.35)",
     },
     Table: {
       headerBg: COL_DS.card800,
