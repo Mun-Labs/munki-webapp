@@ -28,7 +28,7 @@ export const TokenSearchWithDropdown: FC<
 
   let tokens: Token[] = [];
   if (data) {
-    // tokens = data.response;
+    tokens = data.response;
   }
 
   const clearInput = useCallback(() => {
@@ -40,7 +40,6 @@ export const TokenSearchWithDropdown: FC<
   const debouncedSearch = useCallback(
     debounce((value: string) => {
       const is = isSolanaAddress(value);
-      /*prettier-ignore*/ console.log('>>>> _ >>>> ~ TokenSearchWithDropdown.tsx:37 ~ debounce ~ is:', is)
       if (is) {
         setIsValid(true);
         setSearchTerm(value);
