@@ -35,8 +35,20 @@ export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
 }) => {
   while (values.length < 4) {
     values.push(defaultFearAndGreed);
-  }
 
+    values.slice(0, 2);
+    const lastWeek: FearAndGreed = {
+      ...defaultFearAndGreed,
+      value: 27,
+      valueClassification: "Fear",
+    };
+    const lastMonth: FearAndGreed = {
+      ...defaultFearAndGreed,
+      value: 25,
+      valueClassification: "Fear",
+    };
+    values.push(lastWeek, lastMonth);
+  }
   return (
     <>
       <h2 style={{ marginBottom: "12px" }}>History value</h2>
