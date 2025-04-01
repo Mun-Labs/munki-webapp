@@ -2,13 +2,11 @@ import { ComponentProps, FC, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import React from "react";
 import { useNavigate } from "react-router";
-import { Avatar, Flex, Table, Button } from "antd";
+import { Flex, Table } from "antd";
 import type { TableColumnsType, TablePaginationConfig } from "antd";
 import { createStyles } from "antd-style";
 import { MOCK_DATA_ALPHA_MOVES } from "../../../api/MockData";
 import { COL_DS, COLORS } from "../../colors";
-import { AntDesignOutlined } from "@ant-design/icons";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import useSmallScreen from "../../../hooks/useSmallScreen";
 import { MunkiBadge } from "../../atoms/MunkiBadge/MunkiBadge";
 import { Percentage } from "../../atoms/Percentage/Percentage";
@@ -259,8 +257,10 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
 
   // Function to handle row click navigation
   const handleRowClick = (record: DataType) => {
-    const address = record.token.tokenAddress;
-    navigate(`/token/${address}`);
+    const address = record.token?.tokenAddress;
+    if (address) {
+      navigate(`/token/${address}`);
+    }
   };
 
   // Function to handle horizontal scroll
@@ -318,7 +318,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
 
   const dataSource: DataType[] = data.response.map((token) => ({
     ...token,
-    key: token.time,
+    key: token?.time,
   }));
 
   const columns: TableColumnsType<DataType> = [
@@ -461,7 +461,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           className="cl-mun-score"
           style={{ fontSize: "24px", textAlign: "center" }}
         >
-          {record.token.munScore || "n/a"}
+          {record.token?.munScore || "n/a"}
         </div>
       ),
     },
@@ -482,7 +482,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           <Percentage
             style={{ fontSize: "20px" }}
             noSigns
-            value={record.token.riskScore}
+            value={record.token?.riskScore}
           ></Percentage>
         </div>
       ),
@@ -497,7 +497,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       key: "top_smart_wallets_holders",
       width: 180,
       render: (_, record) => (
-        <MunkiBadge>{record.token.topSmartWalletsHolders}/50</MunkiBadge>
+        <MunkiBadge>{record.token?.topSmartWalletsHolders}/50</MunkiBadge>
       ),
     },
     {
@@ -512,7 +512,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       render: (_, record) => (
         <MunkiBadge color={COLORS.yellow30}>
           <span style={{ color: COL_DS.baseBlack }}>
-            {record.token.topFreshWalletHolders}/50
+            {record.token?.topFreshWalletHolders}/50
           </span>
         </MunkiBadge>
       ),
@@ -523,7 +523,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       key: "smart_followers",
       width: 150,
       render: (_, record) => (
-        <div className="content">{record.token.smartFollowers}</div>
+        <div className="content">{record.token?.smartFollowers}</div>
       ),
     },
     // {
