@@ -23,7 +23,7 @@ export const TokenSearchWithDropdown: FC<
   const shouldFetch = Boolean(searchTerm && inputValue);
   const { data, isLoading } = useTokenApi(
     shouldFetch ? { q: searchTerm } : null,
-    shouldFetch ? MOCK_DATA_TOKEN : ({ response: [] } as any),
+    MOCK_DATA_TOKEN,
   );
 
   let tokens: Token[] = [];
