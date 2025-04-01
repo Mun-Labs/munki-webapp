@@ -15,7 +15,7 @@ interface TokenDetailsPageProps extends ComponentProps<any> {}
 
 export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
   const { style } = props;
-  const [isPremiumUser] = useState(false); // This would typically come from a user context
+  const [isPremiumUser] = useState(false);
 
   const handleUpgradeClick = () => {
     console.log("Upgrade clicked");

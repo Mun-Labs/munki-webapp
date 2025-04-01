@@ -1,22 +1,32 @@
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useState } from "react";
 import styled from "styled-components";
 import Follower from "./Follower/Follower";
 import Mention from "./Mention/Mention";
 import { COLORS } from "../../../../colors";
+import { PremiumFeatureOverlay } from "../../../../molecules/PremiumFeatureOverlay/PremiumFeatureOverlay";
 
 interface FollowerMentionProps extends ComponentProps<any> {}
 
 export const SectionFollowerMention: FC<FollowerMentionProps> = (_props) => {
+  const [isPremiumUser] = useState(false);
+
   return (
     <SectionFollowerMentionStyled>
-      <div className="grid">
-        <div className="follower">
-          <Follower />
+      <PremiumFeatureOverlay
+        isVisible={!isPremiumUser}
+        label="Followers"
+        onButtonClick={() => {}}
+        description=""
+      >
+        <div className="grid">
+          <div className="follower">
+            <Follower />
+          </div>
+          <div className="mention">
+            <Mention />
+          </div>
         </div>
-        <div className="mention">
-          <Mention />
-        </div>
-      </div>
+      </PremiumFeatureOverlay>
     </SectionFollowerMentionStyled>
   );
 };

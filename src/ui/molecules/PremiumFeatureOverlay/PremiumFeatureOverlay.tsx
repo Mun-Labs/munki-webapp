@@ -56,8 +56,8 @@ export const PremiumFeatureOverlay: FC<PremiumFeatureOverlayProps> = ({
   isVisible,
   label,
   title = "Premium Feature",
-  description = "Upgrade to unlock detailed holder analytics",
-  buttonText = "Upgrade Now",
+  description,
+  buttonText = "Go Premium",
   children,
   onButtonClick = () => {},
 }) => {
@@ -85,9 +85,11 @@ export const PremiumFeatureOverlay: FC<PremiumFeatureOverlayProps> = ({
                 ...Styles.h1,
               }}
             >
-              <Icon src="/premium.svg" width={48} height={53} />{" "}
+              <Icon src="/premium.svg" width={48} height={53}>
+                .
+              </Icon>{" "}
               <span style={{ margin: "0 14px" }}>{buttonText}</span>{" "}
-              <Icon src="/premium.svg" width={48} height={53} />
+              <Icon src="/premium.svg" width={48} height={53}></Icon>
             </Button>
           </div>
         </StyledPremiumFeatureOverlay>
