@@ -149,21 +149,6 @@ export const MunkiHeader = () => {
                 right={<Percentage value={token.volume24hChange} />}
                 style={{ padding: "12px" }}
               ></TextWithLabel>,
-              <TextWithLabel
-                key={`${token.name}-${index}-dup`}
-                text={
-                  <Token
-                    token={token}
-                    textStyle={{
-                      color: UI_COLORS.reversePrimaryText,
-                      ...Styles.h2,
-                    }}
-                  />
-                }
-                left={<RoundIcon src={token.logoUri} size={38} />}
-                right={<Percentage value={token.volume24hChange} />}
-                style={{ padding: "12px" }}
-              ></TextWithLabel>,
             ])}
           </TickerStyled>
         )}
