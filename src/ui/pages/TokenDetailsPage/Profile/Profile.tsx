@@ -1,13 +1,12 @@
 import { Flex, Spin } from "antd";
-import { ComponentProps, FC, useEffect, useState } from "react";
+import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import { QRCode } from "react-qrcode-logo";
 import { useCopyText } from "../../../../domain/hooks/useCopyText";
 import { COLORS } from "../../../colors";
 import { MunkiBadge } from "../../../atoms/MunkiBadge/MunkiBadge";
 import { useParams } from "react-router";
-import { useTokenDetailApi } from "../../../../api/hooks/useTokenDetailApi";
-import { TokenDetail } from "../../../../api/apiTypes";
+import { useTokenDetailsStore } from "../../../../store/details/useTokenDetailsStore";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
@@ -16,14 +15,7 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
   const params = useParams<{ tokenName: string }>();
   const { tokenName } = params;
 
-  const [tokenData, setTokenData] = useState<TokenDetail | null>(null);
-  const { data, isLoading } = useTokenDetailApi(tokenName!); // on details page, should have param
-
-  useEffect(() => {
-    if (data && !isLoading) {
-      setTokenData(data.response);
-    }
-  }, [data, isLoading]);
+  const { tokenData } = useTokenDetailsStore(tokenName!); // on details page, should have param
 
   const { onCopyText, isCopy } = useCopyText();
 

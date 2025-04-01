@@ -14,7 +14,7 @@ export class BarChartDemo extends PureComponent {
   render() {
     return (
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart width={150} height={40} data={this.data}>
+        <BarChart width={150} height={20} data={this.data}>
           <Bar dataKey="value" fill={COLORS.green} />
         </BarChart>
       </ResponsiveContainer>

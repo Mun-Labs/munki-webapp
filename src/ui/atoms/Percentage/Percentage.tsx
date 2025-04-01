@@ -1,4 +1,10 @@
-import { ComponentProps, FC, HTMLAttributes, ReactNode } from "react";
+import React, {
+  ComponentProps,
+  CSSProperties,
+  FC,
+  HTMLAttributes,
+  ReactNode,
+} from "react";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
@@ -24,6 +30,9 @@ interface PercentageProps
   neutralColor?: boolean;
   colors?: [positive?: string, negative?: string];
   suffix?: ReactNode;
+  styles?: {
+    value?: CSSProperties;
+  };
   $fontFamily?: "munki" | "sans-serif" | string;
 }
 
@@ -36,6 +45,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
     noSigns,
     value,
     suffix,
+    styles,
     $fontFamily: fontFamily,
   } = props;
   if (value == null) return <>n/a</>;
@@ -72,7 +82,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
     >
       <Tooltip title={value + "%"}>
         {icon}
-        {finalPercent}%{suffix}
+        {<span style={styles?.value}>{finalPercent}</span>}%{suffix}
       </Tooltip>
     </PercentageStyled>
   );

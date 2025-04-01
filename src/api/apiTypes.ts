@@ -27,11 +27,15 @@ export interface TokenDetail {
   logoUri: string;
   websiteUrl: null;
   metadata: null;
-  currentPrice: "0.024895069200";
-  totalSupply: "0";
-  marketcap: "0";
+  currentPrice: BigDecimal;
+  totalSupply: BigDecimal;
   history24hPrice: null;
   priceChange24hPercent: null;
+  marketcap: BigDecimal;
+  holders: number;
+  liquidity: BigDecimal;
+  volume24h: BigDecimal;
+  volume24hChange: BigDecimal;
 }
 
 export interface TokenTrending

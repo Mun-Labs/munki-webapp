@@ -1,5 +1,5 @@
 import { Flex } from "antd";
-import { FC, ReactNode } from "react";
+import { CSSProperties, FC, ReactNode } from "react";
 import { Percentage } from "../../../../atoms/Percentage/Percentage";
 import { LineChartDemo } from "../../../../demos/LineChartDemo";
 import { Styles } from "../../../../uiStyles";
@@ -12,7 +12,10 @@ interface LineChartSectionProps {
   percentageValue: number;
   timeFrame: string;
   description: string;
-  descriptionPercentage: number;
+  styles?: {
+    children?: CSSProperties;
+  };
+  descriptionPercentage?: number;
 }
 
 export const ChartItem: FC<LineChartSectionProps> = ({
@@ -20,12 +23,13 @@ export const ChartItem: FC<LineChartSectionProps> = ({
   value,
   percentageValue,
   timeFrame,
-  description,
-  descriptionPercentage,
+  // description,
+  // descriptionPercentage,
   children,
+  styles,
 }) => {
   return (
-    <div className="wrap-chart">
+    <div className="wrap-chart" style={{ height: 220 }}>
       <div style={{ marginBottom: "8px" }}>
         <h4
           style={{
@@ -36,28 +40,29 @@ export const ChartItem: FC<LineChartSectionProps> = ({
         >
           {title}
         </h4>
-        <Flex gap={4}>
-          <div>{value}</div>{" "}
+        <Flex gap={4} align="center">
+          <div style={{ ...Styles.h2 }}>{value}</div>{" "}
           <Percentage
-            colors={[COLORS.green70]}
+            colors={[COLORS.green]}
             value={percentageValue}
             suffix={<span> {timeFrame}</span>}
+            style={{ marginLeft: 4 }}
             $fontFamily="sans-serif"
           ></Percentage>
         </Flex>
       </div>
-      <div style={{ height: 150 }}>{children}</div>
-      <div className="desc">
+      <div style={{ height: styles?.children?.height ?? 150 }}>{children}</div>
+      {/* <div className="desc">
         <span className="cl-ex-greed">
           <Percentage
             value={descriptionPercentage}
             style={{ display: "inline" }}
             plusMinus
-            colors={[COLORS.green70]}
+            colors={[COLORS.green55]}
           />
         </span>{" "}
         {description}
-      </div>
+      </div> */}
     </div>
   );
 };
