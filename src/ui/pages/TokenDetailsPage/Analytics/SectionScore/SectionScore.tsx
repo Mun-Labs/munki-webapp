@@ -1,10 +1,11 @@
 import { Slider, SliderSingleProps } from "antd";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useState } from "react";
 import styled from "styled-components";
 import FearAndGreedyChart from "../../../../organisms/FearAndGreedyChart/FearAndGreedyChart";
 import { COLORS } from "../../../../colors";
 import { TopFollowerItem } from "./TopFollowerItem";
 import { useTokenAnalyticsStore } from "../../../../../store/tokenAnalytics/useTokenAnalytics";
+import { PremiumFeatureOverlay } from "../../../../molecules/PremiumFeatureOverlay/PremiumFeatureOverlay";
 
 const marks: SliderSingleProps["marks"] = {
   0: "0",
@@ -18,6 +19,7 @@ interface SectionScoreProps extends ComponentProps<any> {}
 
 export const SectionScore: FC<SectionScoreProps> = () => {
   const { data: tokenAnalyticsData } = useTokenAnalyticsStore();
+  const [isPremiumUser] = useState(false);
 
   const munScore = 103;
 
@@ -85,19 +87,28 @@ export const SectionScore: FC<SectionScoreProps> = () => {
         </div>
       </section>
 
-      <section className="top-followers wrap-score">
-        <h3>Top Followers</h3>
+      <PremiumFeatureOverlay
+        isVisible={!isPremiumUser}
+        label="Followers"
+        onButtonClick={() => {}}
+        description=""
+      >
+        <section className="top-followers wrap-score">
+          <h3>Top Followers</h3>
 
-        <div className="header">
-          <p>Profile</p>
-          <p>Followers</p>
-        </div>
-        {tokenAnalyticsData?.topFollowers
-          ?.slice(0, 5)
-          .map((follower, index) => {
-            return <TopFollowerItem key={follower.tag + index} {...follower} />;
-          })}
-      </section>
+          <div className="header">
+            <p>Profile</p>
+            <p>Followers</p>
+          </div>
+          {tokenAnalyticsData?.topFollowers
+            ?.slice(0, 5)
+            .map((follower, index) => {
+              return (
+                <TopFollowerItem key={follower.tag + index} {...follower} />
+              );
+            })}
+        </section>
+      </PremiumFeatureOverlay>
     </SectionScoreStyled>
   );
 };
