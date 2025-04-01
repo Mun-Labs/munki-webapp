@@ -353,6 +353,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
                 colors={[undefined, COLORS.magenta]}
                 prefixes={["Bought", "Sold"]}
                 actionType={record.actionType}
+                currency={false}
               />
             }
             shape="square"
@@ -394,10 +395,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       fixed: isSmallScreen ? undefined : "left",
       render: (_, record) => (
         <Percentage
-          value={calculatePercentHold(
-            Number(record.amount),
-            Number(record.totalSupply),
-          )}
+          value={
+            calculatePercentHold(
+              Number(record.amount),
+              Number(record.totalSupply),
+            ) / 100
+          }
           className="head"
           style={{ color: "#C5BC95", display: "flex", justifyContent: "right" }}
           noSigns

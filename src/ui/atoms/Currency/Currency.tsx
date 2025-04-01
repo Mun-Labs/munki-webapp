@@ -12,6 +12,7 @@ const CurrencyStyled = styled.div.attrs({
 interface CurrencyProps extends ComponentProps<any> {
   value: number | undefined;
   showColors?: boolean;
+  currency?: boolean;
   colors?: [positive?: string, negative?: string];
   prefixes?: [positive?: React.ReactNode, negative?: React.ReactNode];
   /**
@@ -24,8 +25,16 @@ interface CurrencyProps extends ComponentProps<any> {
 const currencySymbol = "$";
 
 export const Currency: FC<CurrencyProps> = (props) => {
-  const { style, showColors, colors, value, prefixes, actionType, fontFamily } =
-    props;
+  const {
+    style,
+    showColors,
+    colors,
+    value,
+    prefixes,
+    actionType,
+    fontFamily,
+    currency,
+  } = props;
   if (!value) return <>n/a</>;
 
   let color;
@@ -54,7 +63,7 @@ export const Currency: FC<CurrencyProps> = (props) => {
 
   return (
     <CurrencyStyled style={{ color, fontFamily: finalFontFamily, ...style }}>
-      {prefix} {currencySymbol}
+      {prefix} {currency && currencySymbol}
       {asValueString}
     </CurrencyStyled>
   );
