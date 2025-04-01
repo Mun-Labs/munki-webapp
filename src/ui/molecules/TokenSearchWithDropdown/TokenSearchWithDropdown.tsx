@@ -1,6 +1,6 @@
 // TokenSearchWithDropdown
 import { CloseCircleFilled, SearchOutlined } from "@ant-design/icons";
-import { Button, Input } from "antd";
+import { Button, Input, Spin } from "antd";
 import { ComponentProps, FC, useCallback, useState } from "react";
 import styled from "styled-components";
 import { COL_DS, COLORS } from "../../colors";
@@ -23,11 +23,11 @@ export const TokenSearchWithDropdown: FC<
   const shouldFetch = Boolean(searchTerm && inputValue);
   const { data, isLoading } = useTokenApi(
     shouldFetch ? { q: searchTerm } : null,
-    shouldFetch ? MOCK_DATA_TOKEN : ({ data: [] } as any),
+    shouldFetch ? MOCK_DATA_TOKEN : ({ response: [] } as any),
   );
 
   let tokens: Token[] = [];
-  if (data) {
+  if (data && !isLoading) {
     tokens = data.response;
   }
 
@@ -54,7 +54,7 @@ export const TokenSearchWithDropdown: FC<
     <TokenSearchWithDropdownStyled>
       <TokenInputStyled
         size="large"
-        placeholder="Search ticker, name, ca..."
+        placeholder="Search address..."
         prefix={<SearchOutlined style={{ marginRight: 6 }} />}
         suffix={
           <Button
@@ -66,7 +66,7 @@ export const TokenSearchWithDropdown: FC<
             }}
             onClick={() => debouncedSearch(inputValue)}
           >
-            LFG
+            {isLoading && shouldFetch ? <Spin></Spin> : <>LFG</>}
           </Button>
         }
         allowClear={{
@@ -87,8 +87,10 @@ export const TokenSearchWithDropdown: FC<
       />
 
       <FloatingContainer>
-        {!isValid && <Warning>⚠️ Not a valid SOL address.</Warning>}
-        {tokens.length === 0 && searchTerm && isValid && (
+        {!isLoading && !isValid && (
+          <Warning>⚠️ Not a valid SOL address.</Warning>
+        )}
+        {!isLoading && tokens.length === 0 && searchTerm && isValid && (
           <Warning>⚠️ No tokens found</Warning>
         )}
         {tokens && tokens.length > 0 && (
