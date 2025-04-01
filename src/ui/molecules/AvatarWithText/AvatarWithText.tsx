@@ -1,4 +1,4 @@
-import { Avatar, Flex } from "antd";
+import { Avatar, Flex, Tooltip } from "antd";
 import { ComponentProps, FC, ReactNode } from "react";
 import styled from "styled-components";
 import { AvatarDemo } from "../../demos/IconDemo";
@@ -25,11 +25,12 @@ interface AvatarWithTextProps extends ComponentProps<any> {
   logoUrl?: string;
   name: ReactNode;
   symbol: ReactNode;
+  tooltip?: ReactNode;
   shape?: "circle" | "square";
 }
 
 export const AvatarWithText: FC<AvatarWithTextProps> = (props) => {
-  const { style, logoUrl, name, symbol, shape } = props;
+  const { style, logoUrl, name, symbol, shape, tooltip } = props;
   return (
     <AvatarWithTextStyled style={{ ...style }}>
       <Flex align="center">
@@ -45,7 +46,7 @@ export const AvatarWithText: FC<AvatarWithTextProps> = (props) => {
         )}
         <div style={{ marginLeft: 12 }}>
           <div className="name" style={{ color: COLORS.magenta, ...Styles.h3 }}>
-            {name}
+            <Tooltip title={tooltip}>{name}</Tooltip>
           </div>
           <div
             className="symbol"

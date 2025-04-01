@@ -23,3 +23,10 @@ export type TokenDistributionLabelMapping = Record<
   TokenDistributionItemCategories,
   { icon: string; limit: string }
 >;
+
+export interface KolMapping {
+  url: string;
+  name: string;
+  wallet: string;
+  logoUrl: string;
+}

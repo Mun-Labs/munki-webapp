@@ -20,6 +20,7 @@ import { Styles } from "../../uiStyles";
 import { useAlphaMovesApi } from "../../../api/hooks/useAlphaMovesApi";
 import { calculatePercentHold } from "../../../domain/businessLogic/percentHold";
 import { MunkiSkeleton } from "../../atoms/MunkiSkeleton/MunkiSkeleton";
+import { kolMappingByWallet } from "../../../domain/businessLogic/kolMapping";
 
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
@@ -336,13 +337,15 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       fixed: isSmallScreen ? undefined : "left",
       render: (_, record) => {
         const asNum = Number(record.amount);
+        const mappedWallet = kolMappingByWallet[record.walletAddress];
         return (
           <AvatarWithText
             name={
               <div style={{ color: COLORS.white, maxWidth: 114 }}>
-                {record.coinName}
+                {mappedWallet.name}
               </div>
             }
+            logoUrl={`/${mappedWallet.name}.jpeg`}
             symbol={
               <Currency
                 value={asNum}
@@ -373,8 +376,8 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       },
     },
     {
-      title: <div className="head">Times</div>,
-      width: 120,
+      title: <div className="head">Time</div>,
+      width: 140,
       dataIndex: "time",
       key: "time",
       fixed: isSmallScreen ? undefined : "left",
@@ -396,7 +399,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
             Number(record.totalSupply),
           )}
           className="head"
-          style={{ color: "#C5BC95", justifyContent: "center" }}
+          style={{ color: "#C5BC95", display: "flex", justifyContent: "right" }}
           noSigns
         />
       ),
@@ -432,6 +435,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
                 />
               </Flex>
             }
+            tooltip={record.coinName}
             shape="square"
           />
         );
@@ -519,31 +523,31 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
         <div className="content">{record.token.smartFollowers}</div>
       ),
     },
-    {
-      title: <div className="head">Followers</div>,
-      dataIndex: "avgImpressions",
-      key: "avgImpressions",
-      width: 150,
-      render: (_value) => <div className="content">52k</div>,
-    },
-    {
-      title: <div className="head">Top.Followers</div>,
-      dataIndex: "avgImpressions",
-      key: "avgImpressions",
-      width: 150,
-      render: (_value) => (
-        <Avatar.Group>
-          <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
-          <a href="https://ant.design">
-            <Avatar style={{ backgroundColor: "#f56a00" }}>K</Avatar>
-          </a>
-          <Avatar
-            style={{ backgroundColor: "#1677ff" }}
-            icon={<AntDesignOutlined />}
-          />
-        </Avatar.Group>
-      ),
-    },
+    // {
+    //   title: <div className="head">Followers</div>,
+    //   dataIndex: "avgImpressions",
+    //   key: "avgImpressions",
+    //   width: 150,
+    //   render: (_value) => <div className="content">52k</div>,
+    // },
+    // {
+    //   title: <div className="head">Top.Followers</div>,
+    //   dataIndex: "avgImpressions",
+    //   key: "avgImpressions",
+    //   width: 150,
+    //   render: (_value) => (
+    //     <Avatar.Group>
+    //       <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+    //       <a href="https://ant.design">
+    //         <Avatar style={{ backgroundColor: "#f56a00" }}>K</Avatar>
+    //       </a>
+    //       <Avatar
+    //         style={{ backgroundColor: "#1677ff" }}
+    //         icon={<AntDesignOutlined />}
+    //       />
+    //     </Avatar.Group>
+    //   ),
+    // },
     {
       title: <div className="head">Volume</div>,
       dataIndex: "avgImpressions",
