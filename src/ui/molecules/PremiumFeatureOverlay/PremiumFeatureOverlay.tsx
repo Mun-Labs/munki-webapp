@@ -1,9 +1,9 @@
-import Icon from "@ant-design/icons";
 import { Button } from "antd";
 import { ComponentProps, FC, HTMLAttributes } from "react";
 import { COL_DS, COLORS } from "../../colors";
 import { Styles } from "../../uiStyles";
 import styled from "styled-components";
+import { Icon } from "../../atoms/Icon/Icon";
 
 interface PremiumFeatureOverlayProps
   extends ComponentProps<any>,
@@ -85,9 +85,7 @@ export const PremiumFeatureOverlay: FC<PremiumFeatureOverlayProps> = ({
                 ...Styles.h1,
               }}
             >
-              <Icon src="/premium.svg" width={48} height={53}>
-                .
-              </Icon>{" "}
+              <Icon src="/premium.svg" width={48} height={53}></Icon>
               <span style={{ margin: "0 14px" }}>{buttonText}</span>{" "}
               <Icon src="/premium.svg" width={48} height={53}></Icon>
             </Button>
