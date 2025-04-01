@@ -23,7 +23,7 @@ const headerStyles: React.CSSProperties = {
   top: 0,
   textAlign: "center",
   fontSize: "1.5em",
-  zIndex: 10,
+  zIndex: 100,
   overflowX: "hidden",
   padding: "12px 0",
 };
