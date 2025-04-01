@@ -458,7 +458,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           className="cl-mun-score"
           style={{ fontSize: "24px", textAlign: "center" }}
         >
-          {record.token.munScore}
+          {record.token.munScore || "n/a"}
         </div>
       ),
     },
