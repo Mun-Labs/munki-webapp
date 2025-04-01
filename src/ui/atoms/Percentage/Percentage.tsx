@@ -1,4 +1,4 @@
-import { ComponentProps, FC, ReactNode } from "react";
+import { ComponentProps, FC, HTMLAttributes, ReactNode } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../colors";
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
@@ -15,7 +15,9 @@ const PercentageStyled = styled.span.attrs<{
   }
 `;
 
-interface PercentageProps extends ComponentProps<any> {
+interface PercentageProps
+  extends ComponentProps<any>,
+    HTMLAttributes<HTMLElement> {
   value: number | undefined;
   plusMinus?: boolean;
   noSigns?: boolean;
@@ -65,7 +67,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
 
   return (
     <PercentageStyled
-      style={{ color, fontFamily: finalFontFamily, ...style }}
+      style={{ color, fontFamily: finalFontFamily as any, ...style }}
       $fontFamily={fontFamily}
     >
       <Tooltip title={value + "%"}>
