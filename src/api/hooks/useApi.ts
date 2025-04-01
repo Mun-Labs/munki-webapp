@@ -20,12 +20,6 @@ const swrOptions: ISwrOptions = {
 };
 
 const fetcher = async (url: string) => {
-  // Introduce a 600ms delay to simulate network latency
-  if (DEBUG_FLAGS.useMockApi) {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  }
-
-  console.log("2");
   const response = await fetch(url);
 
   if (!response.ok) {
