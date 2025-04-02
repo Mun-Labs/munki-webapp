@@ -1,5 +1,5 @@
 import { MenuOutlined } from "@ant-design/icons";
-import { Flex, Drawer, Button } from "antd";
+import { Flex, Drawer } from "antd";
 import { FC, ComponentProps, useState } from "react";
 import { SocialMedia } from "../../../domain/types/Types";
 import { RoundIcon } from "../../atoms/RoundIcon";
@@ -8,6 +8,7 @@ import { SocialMediaSegment } from "../../molecules/SocialMediaSegment/SocialMed
 import { ComingSoonButton, NavigationDropdown } from "./MunkiHeader";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
+import { MunkiLogin } from "./MunkiLogin";
 
 const breakpoint = 1500;
 
@@ -148,18 +149,7 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
           />
         </div>
 
-        <Button
-          style={{
-            marginLeft: 20,
-            padding: "8px 23px",
-            border: `2px solid ${COL_DS.secondary}`,
-            borderRadius: 16,
-            background: COL_DS.primary400,
-            color: COL_DS.secondary,
-          }}
-        >
-          Log In
-        </Button>
+        <MunkiLogin />
 
         <NavigationDropdown
           text={

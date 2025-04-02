@@ -29,6 +29,12 @@ html {
   height: 100%;
 }
 
+[data-floating-ui-portal] {
+  [role="dialog"] {
+    z-index: 1000;
+  }
+}
+
 .container {
   display: flex;
   min-height: 100vh;

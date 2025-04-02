@@ -10,12 +10,20 @@ import TokenDistribution from "./TokenDistribution/TokenDistribution";
 import { COLORS } from "../../colors";
 import TotalHolders from "./TotalHolders/TotalHolders";
 import { PremiumFeatureOverlay } from "../../molecules/PremiumFeatureOverlay/PremiumFeatureOverlay";
+import { usePrivy } from "@privy-io/react-auth";
+import { LoginOverflow } from "../../molecules/PremiumFeatureOverlay/LoginOverflow";
+import { MunkiLogin } from "../../organisms/MunkiHeader/MunkiLogin";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
 export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
   const { style } = props;
   const [isPremiumUser] = useState(false);
+  const { ready, authenticated } = usePrivy();
+
+  if (!ready) {
+    return <div>Loading...</div>;
+  }
 
   const handleUpgradeClick = () => {
     console.log("Upgrade clicked");
@@ -23,30 +31,40 @@ export const TokenDetailsPage: FC<TokenDetailsPageProps> = (props) => {
   };
 
   return (
-    <TokenDetailsPageStyled style={{ ...style }}>
-      <Head />
-      <Profile />
-      <BioInfo />
-      <br />
-      <Analytics />
+    <LoginOverflow
+      isVisible={!authenticated}
+      description={
+        <div style={{ marginTop: 50 }}>
+          <span style={{ fontSize: 22 }}>Interested in finding out more?</span>
+          <MunkiLogin />
+        </div>
+      }
+    >
+      <TokenDetailsPageStyled style={{ ...style }}>
+        <Head />
+        <Profile />
+        <BioInfo />
+        <br />
+        <Analytics />
 
-      <TopHolder />
+        <TopHolder />
 
-      <div className="info-holder-container">
-        <PremiumFeatureOverlay
-          isVisible={!isPremiumUser}
-          label="Token Distribution"
-          onButtonClick={handleUpgradeClick}
-          description=""
-          buttonText="Go Premium"
-        >
-          <div className="info-holder">
-            <TokenDistribution />
-            <TotalHolders />
-          </div>
-        </PremiumFeatureOverlay>
-      </div>
-    </TokenDetailsPageStyled>
+        <div className="info-holder-container">
+          <PremiumFeatureOverlay
+            isVisible={!isPremiumUser}
+            label="Token Distribution"
+            onButtonClick={handleUpgradeClick}
+            description=""
+            buttonText="Go Premium"
+          >
+            <div className="info-holder">
+              <TokenDistribution />
+              <TotalHolders />
+            </div>
+          </PremiumFeatureOverlay>
+        </div>
+      </TokenDetailsPageStyled>
+    </LoginOverflow>
   );
 };
 

@@ -136,3 +136,28 @@ export const UI_COLORS = {
   reversePrimaryText: COLORS.black,
   secondaryText: COLORS.grey70,
 };
+
+/**
+body {
+  --privy-border-radius-sm: 'your-custom-value';
+  --privy-border-radius-md: 'your-custom-value';
+  --privy-border-radius-lg: 'your-custom-value';
+  --privy-border-radius-full: 'your-custom-value';
+  --privy-color-background: 'your-custom-value';
+  --privy-color-background-2: 'your-custom-value';
+  --privy-color-background-3: 'your-custom-value';
+  --privy-color-foreground: 'your-custom-value';
+  --privy-color-foreground-2: 'your-custom-value';
+  --privy-color-foreground-3: 'your-custom-value';
+  --privy-color-foreground-4: 'your-custom-value';
+  --privy-color-foreground-accent: 'your-custom-value';
+  --privy-color-accent: 'your-custom-value';
+  --privy-color-accent-light: 'your-custom-value';
+  --privy-color-accent-lightest: 'your-custom-value';
+  --privy-color-accent-dark: 'your-custom-value';
+  --privy-color-accent-darkest: 'your-custom-value';
+  --privy-color-success: 'your-custom-value';
+  --privy-color-error: 'your-custom-value';
+  --privy-color-error-light: 'your-custom-value';
+}
+ */
