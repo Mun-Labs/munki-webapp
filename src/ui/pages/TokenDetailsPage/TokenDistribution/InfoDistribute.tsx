@@ -63,23 +63,21 @@ const DATA: TokenDistributionItemOld[] = [
 const InfoDistribute = () => {
   const params = useParams<{ tokenName: string }>();
   const { tokenName } = params;
-  const { authenticated } = usePrivy();
 
-  const [tokenItems, setTokenItems] = useState<TokenDistributionItem[] | null>(
-    null,
-  );
-  const { data, isLoading } = useTokenDistributionApi(
-    tokenName!,
-    {},
-    MOCK_DATA_TOKEN_DISTRIBUTION,
-    { forceMock: !authenticated },
-  ); // on details page, should have param
+  // const [tokenItems, setTokenItems] = useState<TokenDistributionItem[] | null>(
+  //   null,
+  // );
+  // const { data, isLoading } = useTokenDistributionApi(
+  //   tokenName!,
+  //   {},
+  //   MOCK_DATA_TOKEN_DISTRIBUTION,
+  // ); // on details page, should have param
 
-  useEffect(() => {
-    if (data && !isLoading) {
-      setTokenItems(data.response);
-    }
-  }, [data, isLoading]);
+  // useEffect(() => {
+  //   if (data && !isLoading) {
+  //     setTokenItems(data.response);
+  //   }
+  // }, [data, isLoading]);
 
   return (
     <InfoDistributeStyled>
