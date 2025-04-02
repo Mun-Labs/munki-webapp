@@ -1,9 +1,9 @@
 import { ApiResponse, TokenTrending } from "../apiTypes";
-import { useApi } from "./useApi";
+import { useApiV1 } from "./useApi";
 
 export function useTokenTrendingApi(
   query?: Record<string, string>,
   mockResponse?: ApiResponse<TokenTrending[]>,
 ) {
-  return useApi<TokenTrending[]>("token/trending", query, mockResponse);
+  return useApiV1<TokenTrending[]>("token/trending", query, mockResponse);
 }

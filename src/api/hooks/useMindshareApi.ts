@@ -1,9 +1,9 @@
 import { ApiResponse, MindshareItem } from "../apiTypes";
-import { useApi } from "./useApi";
+import { useApiV1 } from "./useApi";
 
 export function useMindshareApi(
   query?: Record<string, string>,
   mockResponse?: ApiResponse<MindshareItem[]>,
 ) {
-  return useApi<MindshareItem[]>("mindshare", query, mockResponse);
+  return useApiV1<MindshareItem[]>("mindshare", query, mockResponse);
 }

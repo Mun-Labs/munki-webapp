@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import type { SWRResponse } from "swr";
-import { BASE_URL, EndpointsEnum } from "../apiConstants";
+import { BASE_URL, BASE_URL_V2, EndpointsEnum } from "../apiConstants";
 import { DEBUG_FLAGS } from "../../common/featureFlags";
 import { ApiResponse } from "../apiTypes";
 import { useState, useEffect } from "react";
@@ -33,6 +33,7 @@ export function useApi<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
   mockResponse?: ApiResponse<Response>,
+  baseUrl: string = BASE_URL,
   debugDelay: number = 0,
 ): SWRResponse<ApiResponse<Response>> {
   const [delayedData, setDelayedData] = useState<
@@ -60,7 +61,7 @@ export function useApi<Response, Query extends Record<string, string> = any>(
     };
   }
 
-  let url = endpoint === null ? null : `${BASE_URL}/${endpoint}`;
+  let url = endpoint === null ? null : `${baseUrl}/${endpoint}`;
   if (query) {
     url += `?${new URLSearchParams(query)}`;
   }
@@ -70,3 +71,33 @@ export function useApi<Response, Query extends Record<string, string> = any>(
 }
 
 // useApi("fearandgreed", { test: "ok", to: "oi" });
+
+export function useApiV1<Response, Query extends Record<string, string> = any>(
+  endpoint: keyof typeof EndpointsEnum | null,
+  query?: Query,
+  mockResponse?: ApiResponse<Response>,
+  debugDelay: number = 0,
+): SWRResponse<ApiResponse<Response>> {
+  return useApi<Response, Query>(
+    endpoint,
+    query,
+    mockResponse,
+    BASE_URL,
+    debugDelay,
+  );
+}
+
+export function useApiV2<Response, Query extends Record<string, string> = any>(
+  endpoint: keyof typeof EndpointsEnum | null,
+  query?: Query,
+  mockResponse?: ApiResponse<Response>,
+  debugDelay: number = 0,
+): SWRResponse<ApiResponse<Response>> {
+  return useApi<Response, Query>(
+    endpoint,
+    query,
+    mockResponse,
+    BASE_URL_V2,
+    debugDelay,
+  );
+}

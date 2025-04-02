@@ -1,6 +1,6 @@
 import { Address } from "../../domain/types/Types";
 import { ApiResponse, TokenDetail } from "../apiTypes";
-import { useApi } from "./useApi";
+import { useApiV1 } from "./useApi";
 
 export function useTokenDetailApi(
   tokenAddress: Address,
@@ -8,5 +8,5 @@ export function useTokenDetailApi(
   mockResponse?: ApiResponse<TokenDetail>,
 ) {
   const path = `token/${tokenAddress}/details`;
-  return useApi<TokenDetail>(path as any, query, mockResponse);
+  return useApiV1<TokenDetail>(path as any, query, mockResponse);
 }

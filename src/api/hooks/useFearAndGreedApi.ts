@@ -1,9 +1,9 @@
 import { ApiResponse, FearAndGreedResponse } from "../apiTypes";
-import { useApi } from "./useApi";
+import { useApiV1 } from "./useApi";
 
 export function useFearAndGreedApi(
   query?: Record<string, string>,
   mockResponse?: ApiResponse<FearAndGreedResponse>,
 ) {
-  return useApi<FearAndGreedResponse>("vibecheck", query, mockResponse);
+  return useApiV1<FearAndGreedResponse>("vibecheck", query, mockResponse);
 }

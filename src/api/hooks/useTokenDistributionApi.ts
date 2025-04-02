@@ -1,6 +1,6 @@
 import { Address } from "../../domain/types/Types";
 import { ApiResponse, TokenDistributionItem } from "../apiTypes";
-import { useApi } from "./useApi";
+import { useApiV1 } from "./useApi";
 
 export function useTokenDistributionApi(
   tokenAddress: Address,
@@ -8,5 +8,5 @@ export function useTokenDistributionApi(
   mockResponse?: ApiResponse<TokenDistributionItem[]>,
 ) {
   const path = `token/${tokenAddress}/details/distributions`;
-  return useApi<TokenDistributionItem[]>(path as any, query, mockResponse);
+  return useApiV1<TokenDistributionItem[]>(path as any, query, mockResponse);
 }

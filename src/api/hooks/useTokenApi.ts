@@ -1,5 +1,5 @@
 import { ApiResponse, Token, TokenQueryParams } from "../apiTypes";
-import { useApi } from "./useApi";
+import { useApiV1 } from "./useApi";
 
 export function useTokenApi(
   query?: TokenQueryParams | null,
@@ -14,5 +14,5 @@ export function useTokenApi(
     };
   }
   const url = finalQuery === null ? null : "token";
-  return useApi<Token[]>(url, finalQuery, mockResponse);
+  return useApiV1<Token[]>(url, finalQuery, mockResponse);
 }

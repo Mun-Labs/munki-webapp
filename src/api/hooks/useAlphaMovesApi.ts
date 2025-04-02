@@ -3,7 +3,7 @@ import {
   AlphaMovesItem,
   PaginationQueryParams,
 } from "../apiTypes";
-import { useApi } from "./useApi";
+import { useApiV1 } from "./useApi";
 
 export function useAlphaMovesApi(
   query?: PaginationQueryParams | null,
@@ -18,5 +18,5 @@ export function useAlphaMovesApi(
     };
   }
   const url = finalQuery === null ? null : "alphamoves";
-  return useApi<AlphaMovesItem[]>(url, finalQuery, mockResponse);
+  return useApiV1<AlphaMovesItem[]>(url, finalQuery, mockResponse);
 }
