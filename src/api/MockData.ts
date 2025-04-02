@@ -17,47 +17,18 @@ export const MOCK_DATA_TOKEN: ApiResponse<Token[]> = {
   code: 200,
   response: [
     {
-      tokenAddress: "8xPe3DMr52oYAkCBk57ZeQE1h5zBkWNk37eE4J8spump",
-      name: "Ivanka Trump",
-      symbol: "ITRUMP",
-      mc: 1_000_000_000,
+      tokenAddress: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+      name: "Bonk",
+      symbol: "Bonk",
       logoUri:
-        "https://file.dexlab.space/file/4553202ec4084e559c42191ae8673c55",
-    },
-    {
-      tokenAddress: "BSubUBTHxECeAYUsAs9FmjbuECvMBfuvs1PA8EkKpump",
-      name: "TRUMP SIDE EYE",
-      symbol: "Side Eye",
-      mc: 1_000_000_000,
-      logoUri:
-        "https://ipfs.io/ipfs/QmTHfZNLbaqTsn8sVdjpsTSHASZYDMXQy65fgkSSqFCsNh",
-    },
-    {
-      tokenAddress: "7vjP44eR4RptCpnFnJwyFpDnKVZ2ZoJNdSixYscRpump",
-      name: "Eric Trump",
-      symbol: "ETRUMP",
-      mc: 1_000_000_000,
-      logoUri:
-        "https://file.dexlab.space/file/d0b8576d55dc403eb5913ffbd783a442",
-    },
-    {
-      tokenAddress: "BhYEYuq5rPmJsWCPfCdcqHtbcpWTuBE4a5UsFCKTpump",
-      name: "Elon Trump",
-      symbol: "ELONTRUMP",
-      mc: 1_000_000_000,
-      logoUri:
-        "https://file.dexlab.space/file/f70a111ed3424e3a9abe35c5d928ee4f",
-    },
-    {
-      tokenAddress: "AkXwfS9cwASWPUiP7rRaxj4R7jgQ6JyPX2KtxH8NmpKv",
-      name: "OFFICIAL TRUMP",
-      symbol: "TRUMP",
-      mc: 1_000_000_000,
-      logoUri:
-        "https://i.degencdn.com/ipfs/bafkreihxyuypyalmkcnxtjmf5oifn6bgexw7omlgfxshrvikn2scw3z77u",
+        "https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I",
+      mc: 1094431744.11965,
+      price24hchange: 2.7761868206,
+      current_price: 0.0000123182,
+      volume24h: 17702936.2378904,
     },
   ],
-  last_updated: 1742377636,
+  last_updated: 1743615069,
 };
 
 export const MOCK_DATA_TOKEN_TRENDING: ApiResponse<TokenTrending[]> = {

@@ -21,6 +21,9 @@ export interface Token {
   symbol: string;
   mc: number;
   logoUri: string;
+  price24hchange: number;
+  current_price: number;
+  volume24h: number;
 }
 
 export interface TokenDetail {
