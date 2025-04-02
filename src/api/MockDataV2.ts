@@ -674,3 +674,99 @@ export const MOCK_DATA_AVG_ENTRY: ApiResponseV2<AverageEntryData> = {
     ],
   },
 };
+
+//  https://api.discover.getmoni.io/api/v2/twitters/{username}/info/meta/
+export const MOCK_DATA_SOCIAL_ACCOUNT_META: ApiResponseV2<AverageEntryData> = {
+  // @ts-ignore
+  meta: {
+    twitterUserId: "1026753750038470658",
+    name: "Moni 🧙‍♂️",
+    username: "getmoni_io",
+    description:
+      "Social analytics AI platform and data layer for traders, degens, and builders.\n\nTrack attention and be early.",
+    twitterCreatedAt: 1533632144,
+    tweetCount: 11392,
+    followersCount: 30387,
+    profileImageUrl:
+      "https://pbs.twimg.com/profile_images/1866869461610893312/qM_rxFdq_normal.jpg",
+    profileBannerUrl:
+      "https://pbs.twimg.com/profile_banners/1026753750038470658/1740576234",
+    links: [
+      {
+        url: "https://discord.gg/snxcTmrs",
+        logoUrl:
+          "https://storage.googleapis.com/moni-twitter-bot/statics/images/discord_logo.png",
+        type: "DISCORD",
+        name: "Discord",
+      },
+    ],
+  },
+};
+
+// https://api.discover.getmoni.io/api/v2/twitters/{username}/info/full/
+export const MOCK_DATA_SOCIAL_ACCOUNT_FULL_INFO: ApiResponseV2<AverageEntryData> =
+  {
+    // @ts-ignore
+    meta: {
+      twitterUserId: "1026753750038470658",
+      name: "Moni 🧙‍♂️",
+      username: "getmoni_io",
+      description:
+        "Social analytics AI platform and data layer for traders, degens, and builders.\n\nTrack attention and be early.",
+      twitterCreatedAt: 1533632144,
+      tweetCount: 11392,
+      followersCount: 30387,
+      profileImageUrl:
+        "https://pbs.twimg.com/profile_images/1866869461610893312/qM_rxFdq_normal.jpg",
+      profileBannerUrl:
+        "https://pbs.twimg.com/profile_banners/1026753750038470658/1740576234",
+      links: [
+        {
+          url: "https://discord.gg/snxcTmrs",
+          logoUrl:
+            "https://storage.googleapis.com/moni-twitter-bot/statics/images/discord_logo.png",
+          type: "DISCORD",
+          name: "Discord",
+        },
+      ],
+    },
+    smartEngagement: {
+      smartFollowersCount: 494,
+      followersScore: 3718,
+      mentionsCount: 2779,
+      smartMentionsCount: 1761,
+    },
+    smartProfile: {
+      smartTier: {
+        tier: 1,
+        logoUrl:
+          "https://storage.googleapis.com/moni-twitter-bot/statics/images/score_1.png",
+      },
+      smartTags: [
+        {
+          slug: "alpha-hunter",
+          name: "Alpha Hunter",
+          totalCount: 3,
+        },
+      ],
+      smartTagCategories: [
+        {
+          slug: "vc/fund-team",
+          name: "VC/Fund team",
+        },
+      ],
+      projectTags: [
+        {
+          slug: "other",
+          name: "Other",
+        },
+      ],
+      chains: [
+        {
+          slug: "ethereum",
+          name: "Ethereum",
+        },
+      ],
+      bioChangesCount: 0,
+    },
+  };
