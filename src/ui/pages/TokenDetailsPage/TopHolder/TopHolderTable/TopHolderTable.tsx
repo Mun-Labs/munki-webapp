@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Table } from "antd";
 import type { TableColumnsType } from "antd";
 import { createStyles } from "antd-style";
-import { dataSource } from "./fakeData";
 import TopHoldingItem from "./TopHoldingItem/TopHoldingItem";
 import { COL_DS, COLORS } from "../../../../colors";
 import {
@@ -390,10 +389,7 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
   ];
 
   // Use topHolders state if available, otherwise fall back to dataSource
-  const tableData =
-    topHolders.length > 0
-      ? topHolders.map((item, index) => ({ ...item, key: index }))
-      : dataSource.map((item, index) => ({ ...item, key: index }));
+  const tableData = topHolders.map((item, index) => ({ ...item, key: index }));
 
   return (
     <TopHolderTableStyled style={{ ...style }}>
