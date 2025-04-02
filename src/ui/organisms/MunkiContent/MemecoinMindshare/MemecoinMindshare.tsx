@@ -1,6 +1,6 @@
 import { Flex } from "antd";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { MindshareItem } from "../../../../api/apiTypes";
 import { useMindshareApi } from "../../../../api/hooks/useMindshareApi";
 import { MOCK_DATA_MINDSHARE } from "../../../../api/MockData";
@@ -10,10 +10,16 @@ import { TreeChart } from "../../../molecules/TreeChart/TreeChart";
 import { Styles } from "../../../uiStyles";
 import FearAndGreedWidget from "../FearAndGreedy/FearAndGreedy";
 import { COLORS } from "../../../colors";
+import { filterDenyListTokens } from "../../../../domain/businessLogic/denyListTokens";
 
 export const MemecoinMindshare = () => {
   const { data } = useMindshareApi(undefined, MOCK_DATA_MINDSHARE);
   const [tokens, setTokens] = useState<ITreeChartNode[]>([]);
+
+  const filteredTokens = useMemo(() => {
+    const filtered = filterDenyListTokens(tokens);
+    return filtered;
+  }, [tokens]);
 
   useEffect(() => {
     if (data && data.response) {
@@ -40,7 +46,7 @@ export const MemecoinMindshare = () => {
             Updates every 24h
           </Flex>
         </div>
-        <TreeChart data={tokens} style={{ height: 490 }}></TreeChart>
+        <TreeChart data={filteredTokens} style={{ height: 490 }}></TreeChart>
       </div>
       <div className="section-memeindex">
         <FearAndGreedWidget />

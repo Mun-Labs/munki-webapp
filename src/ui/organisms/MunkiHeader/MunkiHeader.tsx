@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { COLORS, COL_DS, UI_COLORS } from "../../colors";
 import { MOCK_DATA_TOKEN_TRENDING } from "../../../api/MockData";
 import { useTokenTrendingApi } from "../../../api/hooks/useTokenTrendingApi";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useMemo } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { RoundIcon } from "../../atoms/RoundIcon";
 import { Percentage } from "../../atoms/Percentage/Percentage";
@@ -15,6 +15,7 @@ import {
 } from "../../molecules/TextWithLabel/TextWithLabel";
 import { Styles } from "../../uiStyles";
 import { MunkiNavigation } from "./MunkiNavigation";
+import { filterDenyListTokens } from "../../../domain/businessLogic/denyListTokens";
 
 const headerStyles: React.CSSProperties = {
   // ...debugStyles,
@@ -112,6 +113,11 @@ export const MunkiHeader = () => {
   const { data } = useTokenTrendingApi(undefined, MOCK_DATA_TOKEN_TRENDING);
   // const data = undefined;
 
+  const filteredTokens = useMemo(() => {
+    const filtered = filterDenyListTokens(data?.response);
+    return filtered;
+  }, [data?.response]);
+
   return (
     <section className="header" style={headerStyles}>
       <MunkiNavigation style={{ padding: "12px 52px" }} />
@@ -133,7 +139,7 @@ export const MunkiHeader = () => {
           </div>
         ) : (
           <TickerStyled>
-            {data.response.flatMap((token, index) => [
+            {filteredTokens.flatMap((token, index) => [
               <TextWithLabel
                 key={`${token.name}-${index}`}
                 text={
