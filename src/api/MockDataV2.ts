@@ -1,4 +1,4 @@
-import { ApiResponseV2, TopHolders } from "./apiTypes";
+import { ApiResponseV2, TopHolders, AverageEntryData } from "./apiTypes";
 
 export const MOCK_DATA_TOP_HOLDERS: ApiResponseV2<TopHolders> = {
   success: true,
@@ -500,6 +500,176 @@ export const MOCK_DATA_TOP_HOLDERS: ApiResponseV2<TopHolders> = {
           priceUsd: 0.18456897286846158,
           valueUsd: 19196.030304079315,
         },
+      },
+    ],
+  },
+};
+
+export const MOCK_DATA_AVG_ENTRY: ApiResponseV2<AverageEntryData> = {
+  success: true,
+  data: {
+    token_info: {
+      price: 0.012128529128526895,
+      symbol: "Ghibli",
+      name: "Ghiblification",
+      logoURI:
+        "https://ipfs.io/ipfs/QmT7pkJ1aTLRqWEVY8jY33k2YxacHYeiMb76iUGf6F6PuX",
+      liquidity: 1041107.8459187807,
+      market_cap: 12127426.14413978,
+      supply: 999909057.610679,
+      circulatingSupply: 999909058.68507,
+      fdv: 12127426.131108997,
+      holder: 20250,
+      extensions: {
+        twitter: "https://x.com/search?q=ghibli",
+        description: "Ghiblify everyone",
+      },
+      priceChange1hPercent: 1.2191552231609188,
+      creationTime: 1742982326,
+    },
+    agg_avg: 19048470.34054495,
+    items: [
+      {
+        count: 1,
+        holder: "A77HErqtfN1hLLpvZ9pCtu66FEtM8BveoaKbbMoZ4RiR",
+        holding: 87545500.52573,
+        label: "No Trades/Funded",
+        avg_raw_entry_price: null,
+        avg_raw_exit_price: null,
+        avg_actual_holding_price: null,
+      },
+      {
+        count: 2,
+        holder: "ASTyfSima4LLAdDgoFGkgqoKowG1LZFDr9fAQrg7iaJZ",
+        holding: 38766428.093181,
+        label: "No Trades/Funded",
+        avg_raw_entry_price: null,
+        avg_raw_exit_price: null,
+        avg_actual_holding_price: null,
+      },
+      {
+        count: 3,
+        holder: "FWznbcNXWQuHTawe9RxvQ2LdCENssh12dsznf4RiouN5",
+        holding: 35338143.646654,
+        label: "No Trades/Funded",
+        avg_raw_entry_price: null,
+        avg_raw_exit_price: null,
+        avg_actual_holding_price: null,
+      },
+      {
+        count: 4,
+        holder: "u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w",
+        holding: 28002504.088541,
+        label: "No Trades/Funded",
+        avg_raw_entry_price: null,
+        avg_raw_exit_price: null,
+        avg_actual_holding_price: null,
+      },
+      {
+        count: 5,
+        holder: "H9d3XHfvMGfoohydEpqh4w3mopnvjCRzE9VqaiHKdqs7",
+        holding: 27502059.942898,
+        label: "No Trades/Funded",
+        avg_raw_entry_price: null,
+        avg_raw_exit_price: null,
+        avg_actual_holding_price: null,
+      },
+      {
+        count: 6,
+        holder: "9ZPsRWGkukYeWg2Z7eZ8NaTBZ1DSuBUVzLcGQWZgE4Y4",
+        holding: 22436776.611507,
+        label: "No Trades/Funded",
+        avg_raw_entry_price: null,
+        avg_raw_exit_price: null,
+        avg_actual_holding_price: null,
+      },
+      {
+        count: 7,
+        holder: "CtDAdfuagH7hLfotVPokFLG4GKTcpanm1WHQDauZb9aB",
+        holding: 17554090.521718,
+        label: null,
+        avg_raw_entry_price: {
+          avg_entry_price: 4572128.067245695,
+          total_amount: 17554090.521718,
+          sniped_pfun: false,
+          oldest_trade_time: 1742991851,
+          oldest_tx_hash:
+            "4hU3YKNFGRhEfgntuT3bAhCSxFPp4EgSc1acALEyZ2sgx9F7UwkX62ANuYn78MVB7UdXbYpY2wT7dkKoezJJfLNw",
+        },
+        avg_raw_exit_price: {
+          avg_exit_price: 0.0,
+          total_amount: 0,
+          oldest_trade_time: 1743574404,
+          oldest_tx_hash: "",
+        },
+        avg_actual_holding_price: {
+          avg_holding_price: 4572128.067245695,
+          current_holding_amount: 17554090.521718,
+          rebuy_detected: false,
+          label: null,
+        },
+      },
+      {
+        count: 8,
+        holder: "ZBrbp9G8hkX1AiGq665nqcf1rCKp3SQubbJempg9P7i",
+        holding: 15589265.66471,
+        label: "Normal",
+        avg_raw_entry_price: {
+          avg_entry_price: 18924894.164086103,
+          total_amount: 15985935.947927997,
+          sniped_pfun: false,
+          oldest_trade_time: 1743052740,
+          oldest_tx_hash:
+            "Y3Ea2T3kSm1xs9pcVifR85ZV9cELPzt4oGFxU2kXrJnbXw6QiZMxZEmiKzLU5KhKutAq3pQ7ChkrqE2bDRGBVex",
+        },
+        avg_raw_exit_price: {
+          avg_exit_price: 14018647.897528358,
+          total_amount: 392753.59397700004,
+          oldest_trade_time: 1743053759,
+          oldest_tx_hash:
+            "e8p75zDS4zjAnYmQAjxL869rUmXymQ66xi3DTPb1eoc1cfkncEcHpKaCcARpJVGK7wnojA2yKzqoMYwMBs9DMJy",
+        },
+        avg_actual_holding_price: {
+          avg_holding_price: 19048470.34054495,
+          current_holding_amount: 15593182.353950996,
+          rebuy_detected: false,
+          label: "Normal",
+        },
+      },
+      {
+        count: 9,
+        holder: "CJnprtiUJbopxenjx8e9Dc98Gy4yc3yMsGXZV1sP2R7Y",
+        holding: 15000189.107028,
+        label: null,
+        avg_raw_entry_price: {
+          avg_entry_price: 9057745.837425912,
+          total_amount: 15000189.107028,
+          sniped_pfun: false,
+          oldest_trade_time: 1743266797,
+          oldest_tx_hash:
+            "2QojoTZ7jRRynJbzc2DnDgwRWqbMBK4ejmBUZE62Ssnk584PpjBkipnHgTg6BudEqdC6jkMeTQhhxd598WGW4keq",
+        },
+        avg_raw_exit_price: {
+          avg_exit_price: 0.0,
+          total_amount: 0,
+          oldest_trade_time: 1743574406,
+          oldest_tx_hash: "",
+        },
+        avg_actual_holding_price: {
+          avg_holding_price: 9057745.837425912,
+          current_holding_amount: 15000189.107028,
+          rebuy_detected: false,
+          label: null,
+        },
+      },
+      {
+        count: 10,
+        holder: "3MnDSRjsYbYJFASJyzWNCNTnZ9JyibGyeH2JTcExtzB8",
+        holding: 11746949,
+        label: "No Trades/Funded",
+        avg_raw_entry_price: null,
+        avg_raw_exit_price: null,
+        avg_actual_holding_price: null,
       },
     ],
   },

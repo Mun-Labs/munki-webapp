@@ -179,22 +179,22 @@ export interface TokenAnalytics {
 }
 
 export interface TopHoldersTokenInfo {
-  price: 0.007916065713611295;
-  symbol: "Ghibli";
-  name: "Ghiblification";
-  logoURI: "https://ipfs.io/ipfs/QmT7pkJ1aTLRqWEVY8jY33k2YxacHYeiMb76iUGf6F6PuX";
-  liquidity: 958985.5350549937;
-  market_cap: 7915356.1194189675;
-  supply: 999910360.244849;
-  circulatingSupply: 999910360.244849;
-  fdv: 7915356.1194189675;
-  holder: 19569;
+  price: number; // BigDecimal;
+  symbol: string;
+  name: string;
+  logoURI: string;
+  liquidity: number; // BigDecimal;
+  market_cap: number; // BigDecimal;
+  supply: number; // BigDecimal;
+  circulatingSupply: number; // BigDecimal;
+  fdv: number; // BigDecimal;
+  holder: number;
   extensions: {
-    twitter: "https://x.com/search?q=ghibli";
-    description: "Ghiblify everyone";
+    twitter: string;
+    description: string;
   };
-  priceChange1hPercent: 12.502595720348792;
-  creationTime: 1742982326;
+  priceChange1hPercent: number; // BigDecimal;
+  creationTime: UnixTime;
 }
 
 export interface TokenHolding {
@@ -227,4 +227,42 @@ export interface TopHoldersTokenItem {
 export interface TopHolders {
   token_info: TopHoldersTokenInfo;
   items: TopHoldersTokenItem[];
+}
+
+export interface AverageEntryPrice {
+  avg_entry_price: number;
+  total_amount: number;
+  sniped_pfun: boolean;
+  oldest_trade_time: number;
+  oldest_tx_hash: string;
+}
+
+export interface AverageExitPrice {
+  avg_exit_price: number;
+  total_amount: number;
+  oldest_trade_time: number;
+  oldest_tx_hash: string;
+}
+
+export interface AverageHoldingPrice {
+  avg_holding_price: number;
+  current_holding_amount: number;
+  rebuy_detected: boolean;
+  label: string | null;
+}
+
+export interface AverageEntryHolder {
+  count: number;
+  holder: string;
+  holding: number;
+  label: string | null;
+  avg_raw_entry_price: AverageEntryPrice | null;
+  avg_raw_exit_price: AverageExitPrice | null;
+  avg_actual_holding_price: AverageHoldingPrice | null;
+}
+
+export interface AverageEntryData {
+  token_info: TopHoldersTokenInfo;
+  agg_avg: number;
+  items: AverageEntryHolder[];
 }
