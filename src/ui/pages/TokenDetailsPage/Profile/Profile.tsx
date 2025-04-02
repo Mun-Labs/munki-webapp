@@ -34,7 +34,6 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
           <img
             style={{ borderRadius: "12px", overflow: "hidden" }}
             src={tokenData.logoUri}
-            width={300}
             height={300}
           />
         </div>
