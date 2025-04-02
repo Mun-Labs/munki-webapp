@@ -34,8 +34,6 @@ export const FearAndGreedHistory: FC<FearAndGreedHistoryProps> = ({
   values,
 }) => {
   while (values.length < 4) {
-    values.push(defaultFearAndGreed);
-
     values.slice(0, 2);
     const lastWeek: FearAndGreed = {
       ...defaultFearAndGreed,
