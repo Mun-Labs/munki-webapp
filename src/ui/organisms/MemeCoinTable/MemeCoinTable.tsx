@@ -490,7 +490,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     {
       title: (
         <div className="head" style={{ textAlign: "left" }}>
-          # of smarts wallet in top holder
+          # of smarts wallet in top holders
         </div>
       ),
       dataIndex: "top_smart_wallets_holders",
@@ -503,7 +503,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     {
       title: (
         <div className="head" style={{ textAlign: "left" }}>
-          # of fresh wallets in top holers
+          # of fresh wallets in top holders
         </div>
       ),
       dataIndex: "top_fresh_wallet_holders",

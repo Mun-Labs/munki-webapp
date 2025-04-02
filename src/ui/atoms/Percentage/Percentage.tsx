@@ -86,7 +86,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
       <Tooltip title={value + "%"}>
         {icon}
         {<span style={styles?.value}>{finalPercent}</span>}
-        {suffix}
+        <span style={{ marginLeft: 5 }}>{suffix}</span>
       </Tooltip>
     </PercentageStyled>
   );

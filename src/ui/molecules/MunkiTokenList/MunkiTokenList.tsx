@@ -70,11 +70,14 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
                 <Flex justify="space-between" vertical>
                   <Flex justify="end" align="center">
                     <Currency
-                      value={1}
+                      value={token.current_price}
+                      showRawValue
+                      fixed={10}
+                      currency
                       style={{ marginRight: 16, ...Styles.h3 }}
                     />
                     <Percentage
-                      value={0.5}
+                      value={token.price24hchange}
                       plusMinus
                       suffix="1D"
                       style={{ color: COLORS.green55 }}
@@ -83,7 +86,7 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
                   </Flex>
                   <Flex style={{ width: 180 }} justify="space-between">
                     <Currency
-                      value={1_000_000_000}
+                      value={token.volume24h}
                       style={{ marginRight: 6, color: COLORS.blue80 }}
                       prefixes={["Vol:", "Vol"]}
                     />
