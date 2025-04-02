@@ -39,7 +39,6 @@ export const Token: FC<ITokenProps> = (props) => {
       <a
         href={`/token/${token.tokenAddress ?? token.address}`}
         rel="noreferrer noopener"
-        target="_blank"
       >
         <Button type="link">
           <div
