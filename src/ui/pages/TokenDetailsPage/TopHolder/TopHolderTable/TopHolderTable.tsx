@@ -1,13 +1,20 @@
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Table } from "antd";
 import type { TableColumnsType } from "antd";
 import { createStyles } from "antd-style";
 import { dataSource } from "./fakeData";
 import TopHoldingItem from "./TopHoldingItem/TopHoldingItem";
-import { COLORS } from "../../../../colors";
+import { COL_DS, COLORS } from "../../../../colors";
 import { ITopHolder } from "../../../../../domain/entities/Entities";
 import { IconShare } from "../../../../../assets/IconShare";
+import { useTopHoldersApi } from "../../../../../api/hooks/v2/useV2Api";
+import { useParams } from "react-router";
+import { TypeService } from "../../../../../common/modules/TypeService";
+import { TopHoldersTokenItem } from "../../../../../api/apiTypes";
+import { SimpleAddress } from "../../../../atoms/Address/Address";
+import { Currency } from "../../../../atoms/Currency/Currency";
+import { Percentage } from "../../../../atoms/Percentage/Percentage";
 
 const TopHolderTableStyled = styled.div.attrs({
   className: "TopHolderTableStyled",
@@ -175,10 +182,30 @@ const useStyle = createStyles(({ css, token }) => {
 export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
   const { style } = props;
   const { styles } = useStyle();
+  const params = useParams<{ tokenName: string }>();
+  const { tokenName } = params;
+  const { data: apiData, isLoading } = useTopHoldersApi(tokenName!);
+  const [topHolders, setTopHolders] = useState<ITopHolder[]>([]);
 
-  // console.log({ dataSource });
-  // console.log({ MockTokens });
-  // console.log({ styles });
+  useEffect(() => {
+    if (apiData?.data?.items) {
+      const items = apiData.data.items;
+      const mapping = TypeService.mapKeysArray<TopHoldersTokenItem, ITopHolder>(
+        items,
+        [
+          ["count", "rank"],
+          ["wallet", "wallet"],
+          ["net_worth", "netWorth"],
+          ["amount", "holdingValue"],
+          ["share_in_percent", "holdingPercent"],
+        ],
+      );
+
+      setTopHolders(mapping);
+    }
+  }, [apiData]);
+
+  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ TopHolderTable.tsx:183 ~ topHolders:', topHolders)
 
   const columns: TableColumnsType<ITopHolder> = [
     {
@@ -195,9 +222,9 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       key: "rank",
       render: (value, _record) => {
         return (
-          <p>
+          <p style={{ paddingLeft: 16 }}>
             <span className="fwb">{value}</span>{" "}
-            <span className="cl-green-custom fz-10">+12%</span>
+            {/* <span className="cl-green-custom fz-10">+12%</span> */}
           </p>
         );
       },
@@ -208,7 +235,8 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       dataIndex: "wallet",
       key: "wallet",
       render: (_value) => {
-        return <div className="head fwb">{_value}</div>;
+        // return <div className="head fwb">{_value}</div>;
+        return <SimpleAddress address={_value} />;
       },
     },
     {
@@ -217,7 +245,19 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       dataIndex: "netWorth",
       key: "netWorth",
       render: (_value) => (
-        <div className="head cl-green-custom fwb">$99,133,000,000</div>
+        <Currency
+          className="head cl-green-custom fwb"
+          value={_value}
+          showRawValue
+          fontFamily="sans-serif"
+          currency
+          style={{
+            textAlign: "center",
+            fontWeight: 600,
+            color: COL_DS.green,
+            fontSize: 16,
+          }}
+        ></Currency>
       ),
     },
     {
@@ -225,9 +265,34 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       dataIndex: "holdingValue",
       key: "holdingValue",
       width: 200,
-      render: (_value) => (
-        <div className="head tac cl-green-custom fwb">
-          $133,000,000 (12,22%)
+      render: (value, record) => (
+        <div
+          className="head tac cl-green-custom fwb"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <Currency
+            className="head cl-green-custom fwb"
+            value={value}
+            showRawValue
+            fontFamily="sans-serif"
+            currency
+            style={{
+              textAlign: "center",
+              fontWeight: 600,
+              color: COL_DS.green,
+              fontSize: 16,
+              marginRight: 8,
+            }}
+          ></Currency>{" "}
+          (
+          <Percentage
+            value={record.holdingPercent}
+            $fontFamily="sans-serif"
+            fractionDigits={2}
+            noSigns
+            colors={[COL_DS.green]}
+          />
+          )
         </div>
       ),
     },
@@ -275,10 +340,11 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
     },
   ];
 
-  const withKeys = dataSource.map((item, index) => ({
-    ...item,
-    key: index,
-  }));
+  // Use topHolders state if available, otherwise fall back to dataSource
+  const tableData =
+    topHolders.length > 0
+      ? topHolders.map((item, index) => ({ ...item, key: index }))
+      : dataSource.map((item, index) => ({ ...item, key: index }));
 
   return (
     <TopHolderTableStyled style={{ ...style }}>
@@ -288,7 +354,8 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
         // rowClassName={(record) => {
         //   return record?.rank === 1 ? "active" : "";
         // }}
-        dataSource={withKeys}
+        loading={isLoading}
+        dataSource={tableData}
         pagination={{ position: ["none", "bottomCenter"] }}
         size="middle"
         scroll={{ x: "max-content", y: 55 * 10 }}
