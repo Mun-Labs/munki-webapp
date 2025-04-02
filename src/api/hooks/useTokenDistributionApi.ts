@@ -6,7 +6,16 @@ export function useTokenDistributionApi(
   tokenAddress: Address,
   query?: Record<string, string>,
   mockResponse?: ApiResponse<TokenDistributionItem[]>,
+  debugOptions?: {
+    debugDelay?: number;
+    forceMock?: boolean;
+  },
 ) {
   const path = `token/${tokenAddress}/details/distributions`;
-  return useApiV1<TokenDistributionItem[]>(path as any, query, mockResponse);
+  return useApiV1<TokenDistributionItem[]>(
+    path as any,
+    query,
+    mockResponse,
+    debugOptions,
+  );
 }

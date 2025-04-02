@@ -34,23 +34,26 @@ export function useApi<Response, Query extends Record<string, string> = any>(
   query?: Query,
   mockResponse?: Response,
   baseUrl: string = BASE_URL,
-  debugDelay: number = 0,
+  debugOptions?: {
+    debugDelay?: number;
+    forceMock?: boolean;
+  },
 ): SWRResponse<Response> {
   const [delayedData, setDelayedData] = useState<Response | undefined>(
     undefined,
   );
   const [isDelaying, setIsDelaying] = useState<boolean>(false);
 
-  if (DEBUG_FLAGS.useMockApi && mockResponse) {
+  if ((DEBUG_FLAGS.useMockApi && mockResponse) || debugOptions?.forceMock) {
     useEffect(() => {
       setIsDelaying(true);
       const timer = setTimeout(() => {
         setDelayedData(mockResponse);
         setIsDelaying(false);
-      }, debugDelay);
+      }, debugOptions?.debugDelay);
 
       return () => clearTimeout(timer);
-    }, [mockResponse, debugDelay]);
+    }, [mockResponse, debugOptions?.debugDelay]);
 
     return {
       data: delayedData,
@@ -76,14 +79,17 @@ export function useApiV1<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
   mockResponse?: ApiResponse<Response>,
-  debugDelay: number = 0,
+  debugOptions?: {
+    debugDelay?: number;
+    forceMock?: boolean;
+  },
 ): SWRResponse<ApiResponse<Response>> {
   return useApi<ApiResponse<Response>, Query>(
     endpoint,
     query,
     mockResponse,
     BASE_URL,
-    debugDelay,
+    debugOptions,
   );
 }
 
@@ -91,13 +97,16 @@ export function useApiV2<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
   mockResponse?: ApiResponseV2<Response>,
-  debugDelay: number = 0,
+  debugOptions?: {
+    debugDelay?: number;
+    forceMock?: boolean;
+  },
 ): SWRResponse<ApiResponseV2<Response>> {
   return useApi<ApiResponseV2<Response>, Query>(
     endpoint,
     query,
     mockResponse,
     BASE_URL_V2,
-    debugDelay,
+    debugOptions,
   );
 }
