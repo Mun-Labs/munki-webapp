@@ -7,6 +7,8 @@ import { COLORS } from "../../../colors";
 import { MunkiBadge } from "../../../atoms/MunkiBadge/MunkiBadge";
 import { useParams } from "react-router";
 import { useTokenDetailsStore } from "../../../../store/details/useTokenDetailsStore";
+import { Currency } from "../../../atoms/Currency/Currency";
+import { Percentage } from "../../../atoms/Percentage/Percentage";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
@@ -38,8 +40,24 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
           />
         </div>
         <div>
-          <p style={{ color: COLORS.yellow, fontSize: "48px" }}>
-            {tokenData?.name}
+          <p>
+            <span style={{ color: COLORS.yellow, fontSize: "48px" }}>
+              {tokenData?.name}
+            </span>{" "}
+            (
+            <Currency
+              value={Number(tokenData?.currentPrice)}
+              showRawValue
+              currency
+              fixed={10}
+              style={{ display: "inline", marginLeft: -5, marginRight: 2 }}
+            />
+            <Percentage
+              value={Number(tokenData?.priceChange24hPercent)}
+              showRawValue
+              fixed={2}
+            />
+            )
           </p>
           <Flex style={{ fontSize: "30px" }}>
             <MunkiBadge>
