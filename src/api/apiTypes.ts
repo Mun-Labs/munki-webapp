@@ -92,6 +92,13 @@ export interface AlphaMovesItem {
     topFreshWalletHolders: number;
     topSmartWalletsHolders: number;
     smartFollowers: number;
+    marketcap: BigDecimal;
+    history24hPrice: BigDecimal;
+    priceChange24hPercent: BigDecimal;
+    holders: number;
+    liquidity: BigDecimal;
+    volume24h: BigDecimal;
+    volume24hChange: null;
   };
   decimal: number;
 }
