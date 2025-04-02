@@ -34,7 +34,7 @@ const TopHolder = () => {
             <MunkiBadge>10/50</MunkiBadge>
           </div>
         </div>
-        <div
+        {/* <div
           className={`title ${activeTab === "holders" ? "active" : "disable"}`}
           onClick={() => setActiveTab("holders")}
         >
@@ -42,7 +42,7 @@ const TopHolder = () => {
           <div>
             <MunkiBadge>399K</MunkiBadge>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="updated">
         <p className="text">Updated 3h ago</p>
@@ -52,7 +52,7 @@ const TopHolder = () => {
       </div>
       {activeTab === "topHolders" && <TopHolderTable />}
       {activeTab === "freshWallets" && <FreshWalletTable />}
-      {activeTab === "holders" && <HoldersTable />}
+      {/* {activeTab === "holders" && <HoldersTable />} */}
     </TopHolderStyled>
   );
 };
@@ -66,7 +66,7 @@ const TopHolderStyled = styled.div.attrs({ className: "TopHolderStyled" })`
   .header {
     margin-top: 12px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 12px;
     font-size: 30px;
