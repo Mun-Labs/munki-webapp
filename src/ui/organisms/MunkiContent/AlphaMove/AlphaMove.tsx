@@ -39,6 +39,7 @@ const AlphaMoveStyled = styled.div.attrs({ className: "AlphaMoveStyled" })`
     justify-content: space-between;
     align-items: center;
     gap: 18px;
+    margin-bottom: 20px;
   }
 
   .title {

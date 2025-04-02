@@ -421,7 +421,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       width: 200,
       fixed: isSmallScreen ? undefined : "left",
       render: (_, record) => {
-        const asNum = Number(record.amount);
+        const asNum = Number(record.token.marketcap);
         return (
           <AvatarWithText
             logoUrl={record.tokenLogo ?? "/user4.png"}
@@ -556,37 +556,71 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       dataIndex: "avgImpressions",
       key: "avgImpressions",
       width: 150,
-      render: (_value) => <div className="content">52k</div>,
+      render: (_, record) => (
+        <div className="content">
+          <Currency
+            currency
+            value={Number(record.token.volume24h)}
+            fontFamily="sans-serif"
+          />
+        </div>
+      ),
     },
     {
       title: <div className="head">Price</div>,
       dataIndex: "price",
       key: "price",
       width: 120,
-      render: (_value) => {
-        return <div className="content">52k</div>;
-      },
+      render: (_, record) => (
+        <div className="content">
+          <Currency
+            currency
+            value={Number(record.token.history24hPrice)}
+            showRawValue
+            fixed={10}
+            fontFamily="sans-serif"
+          />
+        </div>
+      ),
     },
     {
       title: <div className="head">M.Cap</div>,
       dataIndex: "price7D",
       key: "price7D",
       width: 120,
-      render: (_value) => <div className="content">52k</div>,
+      render: (_, record) => (
+        <div className="content">
+          <Currency
+            currency
+            value={Number(record.token.marketcap)}
+            fontFamily="sans-serif"
+          />
+        </div>
+      ),
     },
     {
       title: <div className="head">△%24hrs</div>,
       dataIndex: "price7D",
       key: "price7D",
       width: 120,
-      render: (_value) => <div className="content">52k</div>,
+      render: (_, record) => (
+        <div className="content">
+          <Currency
+            currency
+            value={Number(record.token.history24hPrice)}
+            fontFamily="sans-serif"
+          />
+        </div>
+      ),
     },
     {
       title: <div className="head">Holders</div>,
       dataIndex: "price7D",
       key: "price7D",
       width: 120,
-      render: (_value) => <div className="content">52k</div>,
+      render: (_, record) => (
+        <div className="content">{record.token.holders}</div>
+      ),
     },
   ];
 
