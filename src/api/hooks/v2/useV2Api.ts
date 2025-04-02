@@ -17,6 +17,10 @@ export function useTopHoldersApi(
   tokenAddress: Address,
   query: PaginationQueryParams | null = {},
   mockResponse?: ApiResponseV2<TopHolders>,
+  debugOptions?: {
+    debugDelay?: number;
+    forceMock?: boolean;
+  },
 ) {
   let finalQuery = query;
   if (query) {
@@ -28,7 +32,12 @@ export function useTopHoldersApi(
   }
   const canLoad = tokenAddress && finalQuery;
   const url = canLoad ? `top-holders/${tokenAddress}` : null;
-  return useApiV2<TopHolders>(url as any, finalQuery, mockResponse);
+  return useApiV2<TopHolders>(
+    url as any,
+    finalQuery,
+    mockResponse,
+    debugOptions,
+  );
 }
 
 export function useFreshHoldersApi(

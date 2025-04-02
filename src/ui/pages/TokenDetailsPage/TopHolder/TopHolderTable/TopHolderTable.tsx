@@ -17,6 +17,7 @@ import { TopHoldersTokenItem } from "../../../../../api/apiTypes";
 import { SimpleAddress } from "../../../../atoms/Address/Address";
 import { Currency } from "../../../../atoms/Currency/Currency";
 import { Percentage } from "../../../../atoms/Percentage/Percentage";
+import { MOCK_DATA_TOP_HOLDERS } from "../../../../../api/MockDataV2";
 
 const TopHolderTableStyled = styled.div.attrs({
   className: "TopHolderTableStyled",
@@ -186,7 +187,12 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
   const { styles } = useStyle();
   const params = useParams<{ tokenName: string }>();
   const { tokenName } = params;
-  const { data: apiData, isLoading } = useTopHoldersApi(tokenName!);
+  const { data: apiData, isLoading } = useTopHoldersApi(
+    tokenName!,
+    {},
+    MOCK_DATA_TOP_HOLDERS,
+    { forceMock: true },
+  );
   const [topHolders, setTopHolders] = useState<ITopHolder[]>([]);
 
   useEffect(() => {
