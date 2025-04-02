@@ -79,7 +79,7 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
           <a href="/#" style={{ color: COL_DS.text300 }}>
             Home
           </a>
-          <a
+          {/* <a
             style={{
               display: "flex",
               alignItems: "center",
@@ -96,7 +96,7 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
             }}
           >
             Meme Radar <ComingSoonButton style={{ marginLeft: 10 }} />
-          </a>
+          </a> */}
           <a href="#changelogs" style={{ color: COL_DS.text300 }}>
             Changelogs
           </a>
@@ -116,12 +116,7 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
             <a href="/#" style={{ color: COL_DS.text300 }}>
               Home
             </a>
-            <a style={{ color: COL_DS.text300 }}>
-              Trending <ComingSoonButton style={{ marginLeft: 10 }} />
-            </a>
-            <a style={{ color: COL_DS.text300 }}>
-              Meme Radar <ComingSoonButton style={{ marginLeft: 10 }} />
-            </a>
+
             <a href="#changelogs" style={{ color: COL_DS.text300 }}>
               Changelogs
             </a>
@@ -151,15 +146,12 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
 
         <MunkiLogin />
 
-        <NavigationDropdown
-          text={
-            <div>
-              <RoundIcon src="/solana.png" style={{ marginRight: 12 }} />
-              Sol
-            </div>
-          }
-        />
-        <NavigationDropdown text={<div>Eng</div>} />
+        <div style={{ marginLeft: 30 }}>
+          <RoundIcon src="/solana.png" style={{ marginRight: 12 }} />
+          Sol
+        </div>
+
+        <div style={{ marginLeft: 30 }}>Eng</div>
       </Flex>
     </Flex>
   );
