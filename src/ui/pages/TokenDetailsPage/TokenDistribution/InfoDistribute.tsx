@@ -4,6 +4,8 @@ import { useTokenDistributionApi } from "../../../../api/hooks/useTokenDistribut
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import { TokenDistributionItem } from "../../../../api/apiTypes";
+import { MOCK_DATA_TOKEN_DISTRIBUTION } from "../../../../api/MockData";
+import { usePrivy } from "@privy-io/react-auth";
 
 export type TokenDistributionItemOld = {
   type: string;
@@ -61,11 +63,17 @@ const DATA: TokenDistributionItemOld[] = [
 const InfoDistribute = () => {
   const params = useParams<{ tokenName: string }>();
   const { tokenName } = params;
+  const { authenticated } = usePrivy();
 
   const [tokenItems, setTokenItems] = useState<TokenDistributionItem[] | null>(
     null,
   );
-  const { data, isLoading } = useTokenDistributionApi(tokenName!); // on details page, should have param
+  const { data, isLoading } = useTokenDistributionApi(
+    tokenName!,
+    {},
+    MOCK_DATA_TOKEN_DISTRIBUTION,
+    { forceMock: !authenticated },
+  ); // on details page, should have param
 
   useEffect(() => {
     if (data && !isLoading) {
