@@ -1,7 +1,6 @@
 import { Flex } from "antd";
 import { CSSProperties, FC, ReactNode } from "react";
 import { Percentage } from "../../../../atoms/Percentage/Percentage";
-import { LineChartDemo } from "../../../../demos/LineChartDemo";
 import { Styles } from "../../../../uiStyles";
 import { COLORS } from "../../../../colors";
 
@@ -9,7 +8,7 @@ interface LineChartSectionProps {
   children: ReactNode;
   title: string;
   value: ReactNode;
-  percentageValue: number;
+  percentageValue?: number;
   timeFrame: string;
   description: string;
   styles?: {
@@ -42,13 +41,15 @@ export const ChartItem: FC<LineChartSectionProps> = ({
         </h4>
         <Flex gap={4} align="center">
           <div style={{ ...Styles.h2 }}>{value}</div>{" "}
-          <Percentage
-            colors={[COLORS.green]}
-            value={percentageValue}
-            suffix={<span> {timeFrame}</span>}
-            style={{ marginLeft: 4 }}
-            $fontFamily="sans-serif"
-          ></Percentage>
+          {percentageValue == null ? null : (
+            <Percentage
+              colors={[COLORS.green]}
+              value={percentageValue}
+              suffix={<span> {timeFrame}</span>}
+              style={{ marginLeft: 4 }}
+              $fontFamily="sans-serif"
+            ></Percentage>
+          )}
         </Flex>
       </div>
       <div style={{ height: styles?.children?.height ?? 150 }}>{children}</div>

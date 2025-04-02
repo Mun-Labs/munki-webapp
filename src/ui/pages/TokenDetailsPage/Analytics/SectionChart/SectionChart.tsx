@@ -43,7 +43,6 @@ export const SectionChart: FC<SectionChartProps> = (_props) => {
         timeFrame="24h"
         description="liquidity vs tokens with a similar MC"
         value={<Currency value={Number(tokenData?.liquidity)} />}
-        percentageValue={Number(0)}
         // descriptionPercentage={tokenAnalyticsData?.liquidityChange || 0}
         styles={{
           children: {
@@ -59,7 +58,6 @@ export const SectionChart: FC<SectionChartProps> = (_props) => {
         timeFrame="24h"
         description="holders vs tokens with a similar MC"
         value={<Currency value={Number(tokenData?.holders)} />}
-        percentageValue={Number(0)}
         // descriptionPercentage={tokenAnalyticsData?.holdersChange7d || 0}
         styles={{
           children: {

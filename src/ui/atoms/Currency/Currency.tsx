@@ -4,6 +4,7 @@ import { NumbersService } from "../../../common/modules/numbers";
 import { COLORS } from "../../colors";
 import { Styles } from "../../uiStyles";
 import { AlphaMovesItem } from "../../../api/apiTypes";
+import { Tooltip } from "antd";
 
 const CurrencyStyled = styled.div.attrs({
   className: "CurrencyStyled",
@@ -14,6 +15,7 @@ interface CurrencyProps
     HTMLAttributes<HTMLElement> {
   value: number | undefined;
   showRawValue?: boolean;
+  fixed?: number;
   showColors?: boolean;
   currency?: boolean;
   colors?: [positive?: string, negative?: string];
@@ -34,6 +36,7 @@ export const Currency: FC<CurrencyProps> = (props) => {
     showRawValue,
     colors,
     value,
+    fixed,
     prefixes,
     actionType,
     fontFamily,
@@ -61,7 +64,9 @@ export const Currency: FC<CurrencyProps> = (props) => {
 
   let asValueString = NumbersService.numberToNumberString(value);
   if (showRawValue) {
-    asValueString = NumbersService.formatNumberWithCommas(value, { fixed: 2 });
+    asValueString = NumbersService.formatNumberWithCommas(value, {
+      fixed: fixed ?? 2,
+    });
   }
 
   let finalFontFamily = undefined;
@@ -74,7 +79,7 @@ export const Currency: FC<CurrencyProps> = (props) => {
       style={{ color, fontFamily: finalFontFamily as any, ...style }}
     >
       {prefix} {currency && currencySymbol}
-      {asValueString}
+      <Tooltip title={value}>{asValueString}</Tooltip>
     </CurrencyStyled>
   );
 };
