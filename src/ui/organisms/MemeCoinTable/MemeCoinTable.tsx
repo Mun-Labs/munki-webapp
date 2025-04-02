@@ -324,10 +324,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   const columns: TableColumnsType<DataType> = [
     {
       title: (
-        <div
-          className="head"
-          style={{ textAlign: "left", color: COLORS.white }}
-        >
+        <div className="head" style={{ color: COLORS.white }}>
           Buyers
         </div>
       ),
@@ -378,7 +375,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     },
     {
       title: <div className="head">Time</div>,
-      width: 140,
+      width: 160,
       dataIndex: "time",
       key: "time",
       fixed: isSmallScreen ? undefined : "left",
@@ -409,10 +406,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     },
     {
       title: (
-        <div
-          className="head"
-          style={{ textAlign: "left", color: COLORS.white }}
-        >
+        <div className="head" style={{ color: COLORS.white }}>
           Token
         </div>
       ),
