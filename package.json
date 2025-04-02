@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
+    "@privy-io/react-auth": "^2.8.0",
     "@solana/web3.js": "^1.98.0",
     "antd": "^5.22.4",
     "antd-style": "^3.7.1",
