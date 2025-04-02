@@ -2,7 +2,7 @@ import { ComponentProps, FC, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import React from "react";
 import { useNavigate } from "react-router";
-import { Flex, Table } from "antd";
+import { Button, Flex, Table } from "antd";
 import type { TableColumnsType, TablePaginationConfig } from "antd";
 import { createStyles } from "antd-style";
 import { MOCK_DATA_ALPHA_MOVES } from "../../../api/MockData";
@@ -19,6 +19,7 @@ import { useAlphaMovesApi } from "../../../api/hooks/useAlphaMovesApi";
 import { calculatePercentHold } from "../../../domain/businessLogic/percentHold";
 import { MunkiSkeleton } from "../../atoms/MunkiSkeleton/MunkiSkeleton";
 import { kolMappingByWallet } from "../../../domain/businessLogic/kolMapping";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const MemeCoinTableStyled = styled.div.attrs({
   className: "MemeCoinTableStyled",
@@ -131,27 +132,24 @@ const MemeCoinTableStyled = styled.div.attrs({
   /* Scroll button styles */
   .table-scroll-button {
     position: absolute;
-    top: 50%;
     transform: translateY(-50%);
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 80px;
+    width: 62px;
+    height: 30px;
     background-color: rgba(0, 0, 0, 0.7);
     border: 1px solid ${COLORS.white60};
     border-radius: 4px;
     cursor: pointer;
-    opacity: 0.8;
-    transition: opacity 0.3s;
 
     &:hover {
-      opacity: 1;
+      background-color: ${COLORS.black14};
     }
 
     &.left-button {
-      left: 0;
+      left: 50%;
     }
 
     &.right-button {
@@ -621,7 +619,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   return (
     <MemeCoinTableStyled style={{ ...style, height: 850 }}>
       <div ref={tableRef} style={{ position: "relative" }}>
-        {/* <Button
+        <Button
           className={`table-scroll-button left-button ${
             !canScrollLeft ? "hidden" : ""
           }`}
@@ -637,7 +635,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           icon={<RightOutlined />}
           onClick={() => scrollTable("right")}
           type="text"
-        /> */}
+        />
 
         <Table<DataType>
           className={styles.customTable}
