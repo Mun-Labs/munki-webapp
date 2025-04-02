@@ -40,7 +40,7 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
           />
         </div>
         <div>
-          <p>
+          <div>
             <span style={{ color: COLORS.yellow, fontSize: "48px" }}>
               {tokenData?.name}
             </span>{" "}
@@ -58,7 +58,7 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
               fixed={2}
             />
             )
-          </p>
+          </div>
           <Flex style={{ fontSize: "30px" }}>
             <MunkiBadge>
               <span style={{ color: "#9EFF70" }}>
@@ -156,7 +156,7 @@ const InfoStyled = styled(Flex).attrs({ className: "InfoStyled" })`
 function LinkChip({ uri, name }: { uri?: string; name?: string }) {
   return (
     <a href={uri} rel="noreferrer noopener" target="_blank">
-      <p
+      <div
         style={{
           padding: "8px 20px",
           background: "#fff",
@@ -168,7 +168,7 @@ function LinkChip({ uri, name }: { uri?: string; name?: string }) {
         }}
       >
         {name}
-      </p>
+      </div>
     </a>
   );
 }
