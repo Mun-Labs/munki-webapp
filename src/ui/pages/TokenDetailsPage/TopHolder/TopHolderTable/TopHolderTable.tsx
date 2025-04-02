@@ -6,7 +6,10 @@ import { createStyles } from "antd-style";
 import { dataSource } from "./fakeData";
 import TopHoldingItem from "./TopHoldingItem/TopHoldingItem";
 import { COL_DS, COLORS } from "../../../../colors";
-import { ITopHolder } from "../../../../../domain/entities/Entities";
+import {
+  ITopHolder,
+  ITopHolding,
+} from "../../../../../domain/entities/Entities";
 import { IconShare } from "../../../../../assets/IconShare";
 import { useTopHoldersApi } from "../../../../../api/hooks/v2/useV2Api";
 import { useParams } from "react-router";
@@ -201,11 +204,38 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
         ],
       );
 
-      setTopHolders(mapping);
+      const topHolders = items.map<ITopHolding[]>((item, index) => {
+        const aggr = [
+          item.first_top_holding,
+          item.second_top_holding,
+          item.third_top_holding,
+        ];
+        const mappedAggr: ITopHolding[] = [];
+        aggr.forEach((item) => {
+          if (typeof item === "number") return;
+          const mapped = {
+            name: item.name,
+            address: item.address,
+            image: item.logoURI,
+            volume: item.uiAmount,
+            percent: 0,
+          };
+          mappedAggr.push(mapped as any);
+        });
+        return mappedAggr;
+      });
+
+      const mappingWithTopHoldings = mapping.map((item, index) => {
+        const topHoldings = topHolders[index];
+        return {
+          ...item,
+          topHoldings,
+        };
+      });
+
+      setTopHolders(mappingWithTopHoldings);
     }
   }, [apiData]);
-
-  /*prettier-ignore*/ console.log('>>>> _ >>>> ~ TopHolderTable.tsx:183 ~ topHolders:', topHolders)
 
   const columns: TableColumnsType<ITopHolder> = [
     {
@@ -303,26 +333,38 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
     //   width: 140,
     //   render: (_value) => <p className="tac cl-green-custom">{_value}%</p>,
     // },
-    // {
-    //   title: <div className="head">Avg. Holding Time</div>,
-    //   dataIndex: "holdingTime",
-    //   key: "holdingTime",
-    //   width: 170,
-    //   render: (_value) => (
-    //     <p className="head cl-green-custom tac fwb">150hours</p>
-    //   ),
-    // },
+    {
+      title: <div className="head">Avg. Holding Time</div>,
+      dataIndex: "holdingTime",
+      key: "holdingTime",
+      width: 170,
+      render: (_value) => (
+        <p className="head cl-green-custom tac fwb">150hours</p>
+      ),
+    },
     {
       title: <div className="head tal">Top Holdings</div>,
       dataIndex: "topHoldings",
       key: "topHoldings",
       width: 420,
-      render: (_value) => {
+      render: (_, record) => {
         return (
           <div className="topHolding">
+            {record.topHoldings.map((item, index) => {
+              return (
+                <TopHoldingItem
+                  key={index}
+                  image={item.image}
+                  address={item.address}
+                  name={item.name}
+                  volume={item.volume}
+                  percent={item.percent}
+                />
+              );
+            })}
+            {/* <TopHoldingItem />
             <TopHoldingItem />
-            <TopHoldingItem />
-            <TopHoldingItem />
+            <TopHoldingItem /> */}
           </div>
         );
       },
@@ -332,9 +374,16 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
       dataIndex: "scan",
       key: "scan",
       width: 100,
-      render: (_value) => (
+      render: (_, record) => (
         <p className="tac">
-          <IconShare />
+          <a
+            href={`https://solscan.io/account/${record.wallet}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: COLORS.white }}
+          >
+            <IconShare />
+          </a>
         </p>
       ),
     },

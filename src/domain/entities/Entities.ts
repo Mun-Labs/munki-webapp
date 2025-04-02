@@ -1,4 +1,4 @@
-import { SocialKeys } from "../types/Types";
+import { Address, SocialKeys } from "../types/Types";
 
 export interface ITicker {}
 
@@ -62,8 +62,9 @@ export interface IWhale {
   timeAgo?: string;
 }
 
-interface ITopHolding {
+export interface ITopHolding {
   image: string;
+  address: Address;
   name: string;
   volume: number;
   percent: number;

@@ -1,20 +1,31 @@
 import styled from "styled-components";
-import { Percentage } from "../../../../../atoms/Percentage/Percentage";
+import { FC, HTMLAttributes } from "react";
+import { ITopHolding } from "../../../../../../domain/entities/Entities";
+import { Currency } from "../../../../../atoms/Currency/Currency";
+import { FileImageOutlined } from "@ant-design/icons";
 
-const TopHoldingItem = () => {
+interface TopHolderTableProps
+  extends ITopHolding,
+    HTMLAttributes<HTMLElement> {}
+
+export const TopHoldingItem: FC<TopHolderTableProps> = (props) => {
   return (
-    <TopHoldingItemStyled>
-      <p className="img">
-        <img src="/user4.png" width={35} height={35} alt="name token" />
-      </p>
+    <TopHoldingItemStyled href={props.address} target="_blank" rel="noreferrer">
+      {props.image ? (
+        <p className="img">
+          <img src={props.image} width={35} height={35} alt="name token" />
+        </p>
+      ) : (
+        <FileImageOutlined />
+      )}
       <div className="info">
-        <p className="tokenName">$FWOG</p>
+        <p className="tokenName">{props.name ? `$${props.name}` : "n/a"}</p>
         <div className="value">
-          <p className="vol">$42.54K</p>
-          <Percentage
+          <Currency value={props.volume} />
+          {/* <Percentage
             style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
             value={12}
-          />
+          /> */}
         </div>
       </div>
     </TopHoldingItemStyled>
@@ -23,13 +34,13 @@ const TopHoldingItem = () => {
 
 export default TopHoldingItem;
 
-const TopHoldingItemStyled = styled.div.attrs({
+const TopHoldingItemStyled = styled.a.attrs({
   className: "TopHoldingItemStyled",
 })`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 
   .img {
     width: 35px;
