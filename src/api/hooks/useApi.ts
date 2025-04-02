@@ -2,7 +2,7 @@ import useSWR from "swr";
 import type { SWRResponse } from "swr";
 import { BASE_URL, BASE_URL_V2, EndpointsEnum } from "../apiConstants";
 import { DEBUG_FLAGS } from "../../common/featureFlags";
-import { ApiResponse } from "../apiTypes";
+import { ApiResponse, ApiResponseV2 } from "../apiTypes";
 import { useState, useEffect } from "react";
 
 interface ISwrOptions {
@@ -32,13 +32,13 @@ const fetcher = async (url: string) => {
 export function useApi<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
-  mockResponse?: ApiResponse<Response>,
+  mockResponse?: Response,
   baseUrl: string = BASE_URL,
   debugDelay: number = 0,
-): SWRResponse<ApiResponse<Response>> {
-  const [delayedData, setDelayedData] = useState<
-    ApiResponse<Response> | undefined
-  >(undefined);
+): SWRResponse<Response> {
+  const [delayedData, setDelayedData] = useState<Response | undefined>(
+    undefined,
+  );
   const [isDelaying, setIsDelaying] = useState<boolean>(false);
 
   if (DEBUG_FLAGS.useMockApi && mockResponse) {
@@ -78,7 +78,7 @@ export function useApiV1<Response, Query extends Record<string, string> = any>(
   mockResponse?: ApiResponse<Response>,
   debugDelay: number = 0,
 ): SWRResponse<ApiResponse<Response>> {
-  return useApi<Response, Query>(
+  return useApi<ApiResponse<Response>, Query>(
     endpoint,
     query,
     mockResponse,
@@ -90,10 +90,10 @@ export function useApiV1<Response, Query extends Record<string, string> = any>(
 export function useApiV2<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
-  mockResponse?: ApiResponse<Response>,
+  mockResponse?: ApiResponseV2<Response>,
   debugDelay: number = 0,
-): SWRResponse<ApiResponse<Response>> {
-  return useApi<Response, Query>(
+): SWRResponse<ApiResponseV2<Response>> {
+  return useApi<ApiResponseV2<Response>, Query>(
     endpoint,
     query,
     mockResponse,

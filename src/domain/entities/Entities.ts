@@ -74,6 +74,7 @@ export interface ITopHolder {
   wallet: string;
   netWorth: number;
   holdingValue: number;
+  holdingPercent: number;
   winRate: number;
   holdingTime: number;
   topHoldings: ITopHolding[];

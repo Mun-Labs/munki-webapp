@@ -10,6 +10,10 @@ export interface ApiResponse<T> {
   last_updated: UnixTime;
   total?: number;
 }
+export interface ApiResponseV2<T> {
+  success?: boolean;
+  data?: T;
+}
 
 export interface Token {
   tokenAddress: Address;
@@ -172,4 +176,55 @@ export interface TokenAnalytics {
   topFollowers: TopFollower[];
   followers: FollowersData;
   mentions: MentionsData;
+}
+
+export interface TopHoldersTokenInfo {
+  price: 0.007916065713611295;
+  symbol: "Ghibli";
+  name: "Ghiblification";
+  logoURI: "https://ipfs.io/ipfs/QmT7pkJ1aTLRqWEVY8jY33k2YxacHYeiMb76iUGf6F6PuX";
+  liquidity: 958985.5350549937;
+  market_cap: 7915356.1194189675;
+  supply: 999910360.244849;
+  circulatingSupply: 999910360.244849;
+  fdv: 7915356.1194189675;
+  holder: 19569;
+  extensions: {
+    twitter: "https://x.com/search?q=ghibli";
+    description: "Ghiblify everyone";
+  };
+  priceChange1hPercent: 12.502595720348792;
+  creationTime: 1742982326;
+}
+
+export interface TokenHolding {
+  name?: string;
+  symbol?: string;
+  icon?: string;
+  logoURI?: string;
+
+  address: Address;
+  decimals: number;
+  balance: number;
+  uiAmount: number;
+  chainId: string;
+  priceUsd: number;
+  valueUsd: number;
+}
+
+export interface TopHoldersTokenItem {
+  count: number;
+  wallet: string;
+  amount: number;
+  share_in_percent: number;
+  net_worth: number;
+  net_worth_excluding: number;
+  first_top_holding: TokenHolding;
+  second_top_holding: TokenHolding;
+  third_top_holding: TokenHolding | number;
+}
+
+export interface TopHolders {
+  token_info: TopHoldersTokenInfo;
+  items: TopHoldersTokenItem[];
 }
