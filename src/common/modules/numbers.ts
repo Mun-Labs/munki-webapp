@@ -11,7 +11,7 @@ export class NumbersService {
     value: number | undefined,
     settings: { fixed?: number } = { fixed: 2 },
   ): string {
-    if (value == null) return "N/A";
+    if (value == null) return "n/a";
 
     const { fixed } = settings;
     const absValue = Math.abs(value);
@@ -27,6 +27,28 @@ export class NumbersService {
     }
 
     return result;
+  }
+
+  /**
+   * Formats a number with commas as thousand separators
+   * Example: 123456.78 => "123,456.78"
+   */
+  public static formatNumberWithCommas(
+    value: number | undefined,
+    settings: { fixed?: number } = {},
+  ): string {
+    if (value == null) return "n/a";
+
+    const { fixed } = settings;
+    let stringValue =
+      fixed !== undefined ? value.toFixed(fixed) : value.toString();
+
+    // Split number into integer and decimal parts
+    const parts = stringValue.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Join parts back together
+    return parts.join(".");
   }
 }
 

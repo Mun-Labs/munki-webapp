@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { NumbersService } from "../../../common/modules/numbers";
 import { COLORS } from "../../colors";
@@ -9,8 +9,11 @@ const CurrencyStyled = styled.div.attrs({
   className: "CurrencyStyled",
 })``;
 
-interface CurrencyProps extends ComponentProps<any> {
+interface CurrencyProps
+  extends ComponentProps<any>,
+    HTMLAttributes<HTMLElement> {
   value: number | undefined;
+  showRawValue?: boolean;
   showColors?: boolean;
   currency?: boolean;
   colors?: [positive?: string, negative?: string];
@@ -28,6 +31,7 @@ export const Currency: FC<CurrencyProps> = (props) => {
   const {
     style,
     showColors,
+    showRawValue,
     colors,
     value,
     prefixes,
@@ -54,7 +58,11 @@ export const Currency: FC<CurrencyProps> = (props) => {
       prefix = value > 0 ? prefixes[0] ?? "Bought" : prefixes[1] ?? "Sold";
     }
   }
-  const asValueString = NumbersService.numberToNumberString(value);
+
+  let asValueString = NumbersService.numberToNumberString(value);
+  if (showRawValue) {
+    asValueString = NumbersService.formatNumberWithCommas(value, { fixed: 2 });
+  }
 
   let finalFontFamily = undefined;
   if (fontFamily === "sans-serif")
@@ -62,7 +70,9 @@ export const Currency: FC<CurrencyProps> = (props) => {
   else if (fontFamily) finalFontFamily = fontFamily;
 
   return (
-    <CurrencyStyled style={{ color, fontFamily: finalFontFamily, ...style }}>
+    <CurrencyStyled
+      style={{ color, fontFamily: finalFontFamily as any, ...style }}
+    >
       {prefix} {currency && currencySymbol}
       {asValueString}
     </CurrencyStyled>

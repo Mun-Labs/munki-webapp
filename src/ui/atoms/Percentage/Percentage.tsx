@@ -27,6 +27,7 @@ interface PercentageProps
   value: number | undefined;
   plusMinus?: boolean;
   noSigns?: boolean;
+  fractionDigits?: number;
   neutralColor?: boolean;
   colors?: [positive?: string, negative?: string];
   suffix?: ReactNode;
@@ -43,6 +44,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
     colors,
     plusMinus,
     noSigns,
+    fractionDigits,
     value,
     suffix,
     styles,
@@ -51,7 +53,7 @@ export const Percentage: FC<PercentageProps> = (props) => {
   if (value == null) return <>n/a</>;
 
   const ensurePercent = value < 1 ? value * 100 : value;
-  let finalPercent = ensurePercent.toFixed() + "%";
+  let finalPercent = ensurePercent.toFixed(fractionDigits) + "%";
   if (value === 0) finalPercent = "0%";
   else if (value < 0.01) finalPercent = "<0.01%";
   else if (value === Infinity) finalPercent = "n/a";

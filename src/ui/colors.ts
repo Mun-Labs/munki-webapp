@@ -88,6 +88,9 @@ export const COL_DS = {
   card800: "#464e63",
   card900: "#343b4a",
   card1000: "#232731",
+
+  // Other
+  green: "#54f209",
 };
 
 export const COLORS = {
