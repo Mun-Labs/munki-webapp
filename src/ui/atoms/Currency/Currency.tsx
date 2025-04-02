@@ -79,7 +79,11 @@ export const Currency: FC<CurrencyProps> = (props) => {
       style={{ color, fontFamily: finalFontFamily as any, ...style }}
     >
       {prefix} {currency && currencySymbol}
-      <Tooltip title={value}>{asValueString}</Tooltip>
+      <Tooltip title={value}>
+        <span style={{ fontFamily: finalFontFamily as any }}>
+          {asValueString}
+        </span>
+      </Tooltip>
     </CurrencyStyled>
   );
 };
