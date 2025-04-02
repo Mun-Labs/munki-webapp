@@ -84,7 +84,7 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
               style={{
                 cursor: "pointer",
               }}
-              onClick={() => onCopyText("0xh2d.......i75d")}
+              onClick={() => onCopyText(tokenData.tokenAddress)}
               src={isCopy ? "/checked.svg" : "/icon-copy.png"}
               width={40}
               height={40}
