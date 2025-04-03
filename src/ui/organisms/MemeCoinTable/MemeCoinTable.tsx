@@ -577,9 +577,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       key: "price7D",
       width: 120,
       render: (_, record) => {
-        /* prettier-ignore */ console.log('%c------------------------------------------------------------------------------------------', `background: ${'darkblue'}`);
         const value = Number(record.token.volume24hChange) / 100;
-        /*prettier-ignore*/ console.log('>>>> _ >>>> ~ MemeCoinTable.tsx:573 ~ value:', value)
         return (
           <div className="content">
             <Percentage value={value} fontFamily="sans-serif" />
