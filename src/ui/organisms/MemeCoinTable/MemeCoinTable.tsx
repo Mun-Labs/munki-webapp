@@ -496,12 +496,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     {
       title: (
         <div className="head" style={{ textAlign: "left" }}>
-          # of smarts wallet in top holders
+          # smarts wallet
         </div>
       ),
       dataIndex: "top_smart_wallets_holders",
       key: "top_smart_wallets_holders",
-      width: 180,
+      width: 100,
       render: (_, record) => (
         <MunkiBadge>{record.token?.topSmartWalletsHolders}/50</MunkiBadge>
       ),
@@ -509,12 +509,12 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     {
       title: (
         <div className="head" style={{ textAlign: "left" }}>
-          # of fresh wallets in top holders
+          # fresh wallets
         </div>
       ),
       dataIndex: "top_fresh_wallet_holders",
       key: "top_fresh_wallet_holders",
-      width: 180,
+      width: 100,
       render: (_, record) => (
         <MunkiBadge color={COLORS.yellow30}>
           <span style={{ color: COL_DS.baseBlack }}>
@@ -527,7 +527,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       title: <div className="head">Smart followers</div>,
       dataIndex: "smart_followers",
       key: "smart_followers",
-      width: 150,
+      width: 90,
       render: (_, record) => (
         <div className="content">{record.token?.smartFollowers}</div>
       ),
