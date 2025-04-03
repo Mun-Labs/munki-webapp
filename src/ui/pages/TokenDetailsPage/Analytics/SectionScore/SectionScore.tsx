@@ -21,7 +21,8 @@ export const SectionScore: FC<SectionScoreProps> = () => {
   const { data: tokenAnalyticsData } = useTokenAnalyticsStore();
   const [isPremiumUser] = useState(false);
 
-  const munScore = 103;
+  const munScore = 87;
+  const riskScore = 58;
 
   return (
     <SectionScoreStyled>
@@ -55,7 +56,7 @@ export const SectionScore: FC<SectionScoreProps> = () => {
           </h4>
 
           <div style={{ width: "98%" }}>
-            <Slider marks={marks} value={103} />
+            <Slider marks={marks} value={munScore} />
           </div>
         </div>
       </section>
@@ -77,13 +78,13 @@ export const SectionScore: FC<SectionScoreProps> = () => {
           <FearAndGreedyChart
             isReverse={true}
             isShowNumber={false}
-            value={103}
+            value={riskScore}
           />
         </div>
 
         <div>
           <h4 className="safe">Safe</h4>
-          <h4 className="safe-value">{103}</h4>
+          <h4 className="safe-value">{riskScore}</h4>
         </div>
       </section>
 
