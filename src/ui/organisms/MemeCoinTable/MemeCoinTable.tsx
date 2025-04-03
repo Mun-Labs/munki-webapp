@@ -378,7 +378,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       key: "time",
       fixed: isSmallScreen ? undefined : "left",
       render: (_value) => {
-        const timeAgo = DateTime.fromMillis(_value * 1000).toRelative();
+        const timeAgo = DateTime.fromMillis(_value * 1000)
+          .setLocale("en-US")
+          .toRelative();
         return <div className="head">{timeAgo}</div>;
       },
     },

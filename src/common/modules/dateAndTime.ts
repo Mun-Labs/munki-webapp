@@ -8,5 +8,7 @@ export function unixToDate(
   if (format === "short") {
     finalFormat = { month: "numeric", day: "numeric", year: "2-digit" };
   }
-  return DateTime.fromSeconds(unix).toLocaleString(finalFormat);
+  return DateTime.fromSeconds(unix).toLocaleString(finalFormat, {
+    locale: "en-US",
+  });
 }
