@@ -628,7 +628,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
 
   const size = tableParams?.pagination?.pageSize ?? 10;
   return (
-    <MemeCoinTableStyled style={{ ...style, height: 85 * (size - 2) }}>
+    <MemeCoinTableStyled style={{ ...style, height: 85 * (size) }}>
       <div ref={tableRef} style={{ position: "relative" }}>
         <Button
           className={`table-scroll-button left-button ${
