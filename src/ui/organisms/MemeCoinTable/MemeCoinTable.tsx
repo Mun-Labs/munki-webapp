@@ -331,7 +331,8 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       key: "name",
       fixed: isSmallScreen ? undefined : "left",
       render: (_, record) => {
-        const asNum = Number(record.amount);
+        const asNum =
+          Number(record.amount) * Number(record.token.history24hPrice);
         const mappedWallet = kolMappingByWallet[record.walletAddress];
         return (
           <AvatarWithText
@@ -348,7 +349,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
                 colors={[undefined, COLORS.magenta]}
                 prefixes={["Bought", "Sold"]}
                 actionType={record.actionType}
-                currency={false}
+                currency={true}
               />
             }
             shape="square"
@@ -572,7 +573,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       ),
     },
     {
-      title: <div className="head">△%24hrs</div>,
+      title: <div className="head">Vol △%24h</div>,
       dataIndex: "price7D",
       key: "price7D",
       width: 120,
@@ -586,17 +587,14 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       },
     },
     {
-      title: <div className="head">Price</div>,
+      title: <div className="head">Price △%24h</div>,
       dataIndex: "price",
       key: "price",
       width: 120,
       render: (_, record) => (
         <div className="content">
-          <Currency
-            currency
-            value={Number(record.token.history24hPrice)}
-            showRawValue
-            fixed={10}
+          <Percentage
+            value={Number(record.token.priceChange24hPercent)}
             fontFamily="sans-serif"
           />
         </div>
