@@ -2,6 +2,63 @@ import { fontSizeResizeWidthMap } from "../constants";
 
 export class NumbersService {
   /**
+   * $0.00003226 => Returns object with parts to build subscripted number
+   */
+  public static formatNumberWithSubscript(
+    value: number | undefined,
+    settings: { fixed?: number } = {},
+  ): {
+    integerPart: string;
+    firstZero: string;
+    subscript: number | null;
+    remainingDecimal: string;
+  } {
+    if (value == null) {
+      return {
+        integerPart: "n/a",
+        firstZero: "",
+        subscript: null,
+        remainingDecimal: "",
+      };
+    }
+
+    const { fixed } = settings;
+    let stringValue =
+      fixed !== undefined ? value.toFixed(fixed) : value.toString();
+
+    // Split number into integer and decimal parts
+    const parts = stringValue.split(".");
+    const integerPart = parts[0];
+    let decimalPart = parts[1] || "";
+
+    // Count leading zeros in the decimal part
+    let leadingZerosCount = 0;
+    for (let i = 0; i < decimalPart.length; i++) {
+      if (decimalPart[i] === "0") {
+        leadingZerosCount++;
+      } else {
+        break;
+      }
+    }
+
+    // Format the integer part with commas
+    const formattedIntegerPart = integerPart.replace(
+      /\B(?=(\d{3})+(?!\d))/g,
+      ",",
+    );
+
+    return {
+      integerPart: formattedIntegerPart,
+      firstZero: "0",
+      subscript: leadingZerosCount > 0 ? leadingZerosCount : null,
+      remainingDecimal:
+        leadingZerosCount > 0
+          ? decimalPart.substring(leadingZerosCount)
+          : decimalPart,
+    };
+  }
+
+  /**
    * if 810505 => 810.5K
    * if 8105050 => 8.1M
    * if 1056 => 1.1K
@@ -51,6 +108,12 @@ export class NumbersService {
     return parts.join(".");
   }
 }
+
+// NumbersService.formatNumberWithSubscript(0.00003226); /*?*/
+// NumbersService.formatNumberWithSubscript(0.00003226); /*?*/
+// NumbersService.formatNumberWithSubscript(0.0003226); /*?*/
+// NumbersService.formatNumberWithSubscript(0.003226); /*?*/
+// NumbersService.formatNumberWithSubscript(0.03226); /*?*/
 
 export function getFontSizeFromRatio(
   givenRatio: number,

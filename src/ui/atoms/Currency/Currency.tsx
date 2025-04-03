@@ -1,4 +1,4 @@
-import { ComponentProps, FC, HTMLAttributes } from "react";
+import { ComponentProps, FC, HTMLAttributes, ReactNode } from "react";
 import styled from "styled-components";
 import { NumbersService } from "../../../common/modules/numbers";
 import { COLORS } from "../../colors";
@@ -62,8 +62,18 @@ export const Currency: FC<CurrencyProps> = (props) => {
     }
   }
 
-  let asValueString = NumbersService.numberToNumberString(value);
-  if (showRawValue) {
+  let asValueString: ReactNode = NumbersService.numberToNumberString(value);
+  if (value < 0.0001) {
+    const subscripted = NumbersService.formatNumberWithSubscript(value);
+    const { integerPart, firstZero, subscript, remainingDecimal } = subscripted;
+    asValueString = (
+      <>
+        {integerPart}.{firstZero}
+        <sub>{subscript}</sub>
+        {remainingDecimal}
+      </>
+    );
+  } else if (showRawValue) {
     asValueString = NumbersService.formatNumberWithCommas(value, {
       fixed: fixed ?? 2,
     });
