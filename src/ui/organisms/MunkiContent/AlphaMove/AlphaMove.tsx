@@ -1,6 +1,6 @@
 import { MemeCoinTable } from "../../MemeCoinTable/MemeCoinTable";
 import styled from "styled-components";
-import { ButtonFilter } from "../../../atoms/ButtonFilter/ButtonFilter";
+import { Styles } from "../../../uiStyles";
 
 const contentContainerHeight = 653;
 const contentHeaderHeight = 82;
@@ -12,7 +12,7 @@ export const AlphaMove = () => {
       <div className="head">
         <div className="title">
           <h3>Alpha Moves</h3>
-          <ButtonFilter>
+          {/* <ButtonFilter>
             <p>Buy + Sell</p>
           </ButtonFilter>
           <ButtonFilter>
@@ -20,10 +20,10 @@ export const AlphaMove = () => {
           </ButtonFilter>
           <ButtonFilter>
             <p>Alpha Group (3/3)</p>
-          </ButtonFilter>
+          </ButtonFilter> */}
         </div>
         <div>
-          <span>Last</span> 24h
+          <span style={{ ...Styles.fontSansSerif }}>Last 24h</span>
         </div>
       </div>
       <MemeCoinTable style={{ height: contentHeight }} />

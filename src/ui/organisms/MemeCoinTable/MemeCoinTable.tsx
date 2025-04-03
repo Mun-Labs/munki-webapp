@@ -368,7 +368,11 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           KOL: "🌟",
           SMART: "🧠",
         };
-        return <div className="head">{mapping[value]}</div>;
+        return (
+          <div className="head" style={{ marginBottom: "unset" }}>
+            {mapping[value]}
+          </div>
+        );
       },
     },
     {
@@ -381,7 +385,11 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
         const timeAgo = DateTime.fromMillis(_value * 1000)
           .setLocale("en-US")
           .toRelative();
-        return <div className="head">{timeAgo}</div>;
+        return (
+          <div className="head" style={{ marginBottom: "unset" }}>
+            {timeAgo}
+          </div>
+        );
       },
     },
     {
@@ -406,7 +414,10 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     },
     {
       title: (
-        <div className="head" style={{ color: COLORS.white }}>
+        <div
+          className="head"
+          style={{ color: COLORS.white, justifyContent: "center" }}
+        >
           Token
         </div>
       ),
@@ -561,6 +572,22 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
       ),
     },
     {
+      title: <div className="head">△%24hrs</div>,
+      dataIndex: "price7D",
+      key: "price7D",
+      width: 120,
+      render: (_, record) => {
+        /* prettier-ignore */ console.log('%c------------------------------------------------------------------------------------------', `background: ${'darkblue'}`);
+        const value = Number(record.token.volume24hChange) / 100;
+        /*prettier-ignore*/ console.log('>>>> _ >>>> ~ MemeCoinTable.tsx:573 ~ value:', value)
+        return (
+          <div className="content">
+            <Percentage value={value} fontFamily="sans-serif" />
+          </div>
+        );
+      },
+    },
+    {
       title: <div className="head">Price</div>,
       dataIndex: "price",
       key: "price",
@@ -587,21 +614,6 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           <Currency
             currency
             value={Number(record.token.marketcap)}
-            fontFamily="sans-serif"
-          />
-        </div>
-      ),
-    },
-    {
-      title: <div className="head">△%24hrs</div>,
-      dataIndex: "price7D",
-      key: "price7D",
-      width: 120,
-      render: (_, record) => (
-        <div className="content">
-          <Currency
-            currency
-            value={Number(record.token.history24hPrice)}
             fontFamily="sans-serif"
           />
         </div>
