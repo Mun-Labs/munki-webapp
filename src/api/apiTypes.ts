@@ -54,7 +54,7 @@ export interface TokenDetail {
 export interface TokenTrending
   extends Pick<Token, "tokenAddress" | "name" | "symbol" | "logoUri"> {
   volume24h: BigDecimal;
-  volume24hChange?: number;
+  volume24hPercent?: string;
   recordDate: UnixTime;
   holderCount: number;
 }
