@@ -65,7 +65,6 @@ const changelogItems = [
     ["MINDSHARE HEATMAP", "🧠"],
     ["SOLANA TICKER", "/solana.png"],
     ["ONCHAIN VOLUME", "📊"],
-    ["ALPHA MOVES", "🍀", "⭕"],
   ],
   [
     ["RESPONSIVE UI", "🌐"],
