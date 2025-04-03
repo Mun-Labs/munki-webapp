@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router";
 import { AppLayout } from "./AppLayout.tsx";
 import { TokenDetailsPage } from "./ui/pages/TokenDetailsPage/TokenDetailsPage.tsx";
 import { TermsOfUsePage } from "./ui/pages/TermsOfUsePage.tsx";
+import { Changelog } from "./ui/pages/Changelog.tsx";
 
 interface AppControllerProps extends ComponentProps<any> {}
 
@@ -64,6 +65,7 @@ export const AppController: FC<AppControllerProps> = (props) => {
           }
         />
         <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+        <Route path="/changelogs" element={<Changelog />} />
       </Routes>
     </AppControllerStyled>
   );
