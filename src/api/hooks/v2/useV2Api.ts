@@ -31,7 +31,7 @@ export function useTopHoldersApi(
     };
   }
   const canLoad = tokenAddress && finalQuery;
-  const url = canLoad ? `top-holders/${tokenAddress}` : null;
+  const url = canLoad ? `top-holders/?token=${tokenAddress}` : null;
   return useApiV2<TopHolders>(
     url as any,
     finalQuery,

@@ -20,7 +20,18 @@ const swrOptions: ISwrOptions = {
 };
 
 const fetcher = async (url: string) => {
-  const response = await fetch(url);
+  const apiKey = import.meta.env.VITE_MUNKI_API_KEY;
+
+  const response = await fetch(
+    url,
+    apiKey
+      ? {
+          headers: {
+            "x-api-key": apiKey,
+          },
+        }
+      : undefined,
+  );
 
   if (!response.ok) {
     throw new Error(`Failed to fetch data from ${url}`);
@@ -35,6 +46,7 @@ export function useApi<Response, Query extends Record<string, string> = any>(
   mockResponse?: Response,
   baseUrl: string = BASE_URL,
   debugOptions?: {
+    apiKey?: string;
     debugDelay?: number;
     forceMock?: boolean;
   },
@@ -97,10 +109,11 @@ export function useApiV2<Response, Query extends Record<string, string> = any>(
   endpoint: keyof typeof EndpointsEnum | null,
   query?: Query,
   mockResponse?: ApiResponseV2<Response>,
-  debugOptions?: {
+  debugOptions: {
+    apiKey?: string;
     debugDelay?: number;
     forceMock?: boolean;
-  },
+  } = {},
 ): SWRResponse<ApiResponseV2<Response>> {
   return useApi<ApiResponseV2<Response>, Query>(
     endpoint,
