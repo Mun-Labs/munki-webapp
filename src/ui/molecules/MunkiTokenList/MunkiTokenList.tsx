@@ -7,6 +7,7 @@ import { COLORS } from "../../colors";
 import { Currency } from "../../atoms/Currency/Currency";
 import { Percentage } from "../../atoms/Percentage/Percentage";
 import { Styles } from "../../uiStyles";
+import { useNavigate } from "react-router";
 
 interface IMunkiTokenListProps extends ComponentProps<any> {
   tokens: Token[];
@@ -43,6 +44,7 @@ const MunkiTokenListStyled = styled(List).attrs({
 
 export function MunkiTokenList(props: IMunkiTokenListProps) {
   const { tokens, loading } = props;
+  const navigate = useNavigate();
 
   return (
     <MunkiTokenListStyled>
@@ -54,7 +56,14 @@ export function MunkiTokenList(props: IMunkiTokenListProps) {
         // loadMore={loadMore}
         dataSource={tokens}
         renderItem={(token, index) => (
-          <a href={`/token/${token.tokenAddress}`} rel="noreferrer noopener">
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/token/${token.tokenAddress}`);
+            }}
+            href={`/token/${token.tokenAddress}`}
+            rel="noreferrer noopener"
+          >
             <List.Item
               style={{
                 borderTop: index !== 0 ? `1px solid ${COLORS.white60}` : "",

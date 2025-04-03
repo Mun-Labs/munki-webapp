@@ -5,6 +5,7 @@ import type { TokenTrending } from "../../../api/apiTypes";
 import { Button } from "antd";
 import { UI_COLORS } from "../../colors";
 import { Address } from "../../../domain/types/Types";
+import { useNavigate } from "react-router";
 
 const TokenStyled = styled.div.attrs({
   className: "TokenStyled",
@@ -34,11 +35,20 @@ interface ITokenProps extends ComponentProps<any> {
 
 export const Token: FC<ITokenProps> = (props) => {
   const { style, textStyle, token } = props;
+  const navigate = useNavigate();
   const address = token.tokenAddress ?? token.address;
   const url = `/token/${address}`;
+
   return (
     <TokenStyled style={{ ...style }}>
-      <a href={address ? url : undefined} rel="noreferrer noopener">
+      <a
+        onClick={(e) => {
+          e.preventDefault();
+          navigate(url);
+        }}
+        href={url}
+        rel="noreferrer noopener"
+      >
         <Button type="link">
           <div
             style={{

@@ -3,14 +3,25 @@ import { FC, HTMLAttributes } from "react";
 import { ITopHolding } from "../../../../../../domain/entities/Entities";
 import { Currency } from "../../../../../atoms/Currency/Currency";
 import { FileImageOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router";
 
 interface TopHolderTableProps
   extends ITopHolding,
     HTMLAttributes<HTMLElement> {}
 
 export const TopHoldingItem: FC<TopHolderTableProps> = (props) => {
+  const navigate = useNavigate();
+
   return (
-    <TopHoldingItemStyled href={props.address} target="_blank" rel="noreferrer">
+    <TopHoldingItemStyled
+      onClick={(e) => {
+        e.preventDefault();
+        navigate("/token/" + props.address);
+      }}
+      href={"/token/" + props.address}
+      target="_blank"
+      rel="noreferrer"
+    >
       {props.image ? (
         <p className="img">
           <img src={props.image} width={35} height={35} alt="name token" />

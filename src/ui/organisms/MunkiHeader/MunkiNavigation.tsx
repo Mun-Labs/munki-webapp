@@ -76,7 +76,14 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
         </MobileMenuButton>
 
         <DesktopNavigation className="navigation">
-          <a href="/" style={{ color: COL_DS.text300 }}>
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/");
+            }}
+            href="/"
+            style={{ color: COL_DS.text300 }}
+          >
             Home
           </a>
           {/* <a
@@ -97,7 +104,14 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
           >
             Meme Radar <ComingSoonButton style={{ marginLeft: 10 }} />
           </a> */}
-          <a href="#changelogs" style={{ color: COL_DS.text300 }}>
+          <a
+            href="/changelogs"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/changelogs");
+            }}
+            style={{ color: COL_DS.text300 }}
+          >
             Changelogs
           </a>
         </DesktopNavigation>
@@ -113,11 +127,25 @@ export const MunkiNavigation: FC<ComponentProps<any>> = ({ style }) => {
           }}
         >
           <MobileMenuContent>
-            <a href="/" style={{ color: COL_DS.text300 }}>
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/");
+              }}
+              style={{ color: COL_DS.text300 }}
+            >
               Home
             </a>
 
-            <a href="#changelogs" style={{ color: COL_DS.text300 }}>
+            <a
+              href="/changelogs"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/changelogs");
+              }}
+              style={{ color: COL_DS.text300 }}
+            >
               Changelogs
             </a>
             <div style={{ marginTop: 20 }}>
