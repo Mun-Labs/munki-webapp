@@ -11,7 +11,7 @@ export const DENY_LIST_TOKENS: string[] = [
   "Kamino",
   "Ray",
   "Raydium",
-  "Metaplex",
+  "Metaplex Token",
   "Binance Staked SOL",
 ];
 
