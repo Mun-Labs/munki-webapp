@@ -88,7 +88,7 @@ export const Changelog: FC = () => {
     <AppLayout>
       <ChangelogContainer>
         <Title level={1} className="changelog-title">
-          Progress Upate
+          Progress Update
         </Title>
 
         <Flex
