@@ -26,6 +26,7 @@ import { DebounceSelectDemo } from "../molecules/DebounceSelect/DebounceSelectDe
 import { MunkiTokenListDemo } from "../molecules/MunkiTokenList/MunkiTokenListDemo";
 import { MunkiSkeletonDemo } from "../atoms/MunkiSkeleton/MunkiSkeletonDemo";
 import { AddressDemo } from "../atoms/Address/AddressDemo";
+import { MunkiHoverCardDemo } from "../molecules/MunkiHoverCard/MunkiHoverCardDemo";
 
 type HoldersTrendColumn = Pick<
   IToken,
@@ -76,6 +77,9 @@ export const DemoPage = () => {
       style={{ display: "flex", flexDirection: "column", alignItems: "end" }}
     >
       <h1>DemoPage</h1>
+      <h2>MunkiHoverCardDemo</h2>
+      <MunkiHoverCardDemo />
+      <br /> <hr />
       <h2>AddressDemo</h2>
       <AddressDemo />
       <br /> <hr />
