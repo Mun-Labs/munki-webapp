@@ -11,7 +11,7 @@ const TopHolder = () => {
 
   return (
     <TopHolderStyled>
-      <div className="header">
+      <div className="header" style={{ marginBottom: 32 }}>
         <div
           className={`title ${
             activeTab === "topHolders" ? "active" : "disable"
@@ -44,12 +44,12 @@ const TopHolder = () => {
           </div>
         </div> */}
       </div>
-      <div className="updated">
+      {/* <div className="updated">
         <p className="text">Updated 3h ago</p>
         <div className="badge">
           <p>$gon was created on 06/12/24 2:43 AM</p>
         </div>
-      </div>
+      </div> */}
       {activeTab === "topHolders" && <TopHolderTable />}
       {activeTab === "freshWallets" && <FreshWalletTable />}
       {/* {activeTab === "holders" && <HoldersTable />} */}

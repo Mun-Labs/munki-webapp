@@ -106,9 +106,7 @@ const CustomizedContent: React.FC<CustomizedContentProps> = (
 export const TreeChart: FC<TreeChartProps> = (props) => {
   const { style, data, loading } = props;
 
-  const handleClick = useCallback((args: CustomizedContentProps) => {
-    /*prettier-ignore*/ console.log("[TreeChart.tsx,216] args: ", args);
-  }, []);
+  const handleClick = useCallback((args: CustomizedContentProps) => {}, []);
 
   const dataSortedBySize = useMemo(() => {
     return data.sort((a, b) => b.size - a.size);
