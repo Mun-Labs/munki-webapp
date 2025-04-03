@@ -34,12 +34,11 @@ interface ITokenProps extends ComponentProps<any> {
 
 export const Token: FC<ITokenProps> = (props) => {
   const { style, textStyle, token } = props;
+  const address = token.tokenAddress ?? token.address;
+  const url = `/token/${address}`;
   return (
     <TokenStyled style={{ ...style }}>
-      <a
-        href={`/token/${token.tokenAddress ?? token.address}`}
-        rel="noreferrer noopener"
-      >
+      <a href={address ? url : undefined} rel="noreferrer noopener">
         <Button type="link">
           <div
             style={{

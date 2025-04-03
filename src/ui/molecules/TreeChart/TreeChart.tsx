@@ -7,6 +7,7 @@ import { MunkiSkeleton } from "../../atoms/MunkiSkeleton/MunkiSkeleton";
 
 interface TreeChartProps extends ComponentProps<any> {
   data: ITreeChartNode[];
+  loading?: boolean;
 }
 
 const TreeChartStyled = styled.div.attrs({ className: "TreeChartStyled" })``;
@@ -103,7 +104,7 @@ const CustomizedContent: React.FC<CustomizedContentProps> = (
 };
 
 export const TreeChart: FC<TreeChartProps> = (props) => {
-  const { style, data } = props;
+  const { style, data, loading } = props;
 
   const handleClick = useCallback((args: CustomizedContentProps) => {
     /*prettier-ignore*/ console.log("[TreeChart.tsx,216] args: ", args);
@@ -116,7 +117,7 @@ export const TreeChart: FC<TreeChartProps> = (props) => {
   return (
     <TreeChartStyled style={{ width: "100%", height: "100%", ...style }}>
       <ResponsiveContainer width="100%" height="100%">
-        {dataSortedBySize.length ? (
+        {!loading ? (
           <Treemap
             aspectRatio={4 / 3}
             onClick={handleClick as any}

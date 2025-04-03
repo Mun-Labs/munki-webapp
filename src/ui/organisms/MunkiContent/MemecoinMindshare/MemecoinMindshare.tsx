@@ -13,7 +13,7 @@ import { COLORS } from "../../../colors";
 import { filterDenyListTokens } from "../../../../domain/businessLogic/denyListTokens";
 
 export const MemecoinMindshare = () => {
-  const { data } = useMindshareApi(undefined, MOCK_DATA_MINDSHARE);
+  const { data, isLoading } = useMindshareApi(undefined, MOCK_DATA_MINDSHARE);
   const [tokens, setTokens] = useState<ITreeChartNode[]>([]);
 
   const filteredTokens = useMemo(() => {
@@ -46,7 +46,11 @@ export const MemecoinMindshare = () => {
             Updates every 24h
           </Flex>
         </div>
-        <TreeChart data={filteredTokens} style={{ height: 490 }}></TreeChart>
+        <TreeChart
+          data={filteredTokens}
+          style={{ height: 490 }}
+          loading={isLoading}
+        ></TreeChart>
       </div>
       <div className="section-memeindex">
         <FearAndGreedWidget />
