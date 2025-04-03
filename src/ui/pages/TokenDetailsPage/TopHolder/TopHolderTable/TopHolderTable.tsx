@@ -326,6 +326,7 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
             fractionDigits={2}
             noSigns
             colors={[COL_DS.green]}
+            style={{ marginRight: -5 }}
           />
           )
         </div>
@@ -338,15 +339,15 @@ export const TopHolderTable: FC<TopHolderTableProps> = (props) => {
     //   width: 140,
     //   render: (_value) => <p className="tac cl-green-custom">{_value}%</p>,
     // },
-    {
-      title: <div className="head">Avg. Holding Time</div>,
-      dataIndex: "holdingTime",
-      key: "holdingTime",
-      width: 170,
-      render: (_value) => (
-        <p className="head cl-green-custom tac fwb">150hours</p>
-      ),
-    },
+    // {
+    //   title: <div className="head">Avg. Holding Time</div>,
+    //   dataIndex: "holdingTime",
+    //   key: "holdingTime",
+    //   width: 170,
+    //   render: (_value) => (
+    //     <p className="head cl-green-custom tac fwb">150hours</p>
+    //   ),
+    // },
     {
       title: <div className="head tal">Top Holdings</div>,
       dataIndex: "topHoldings",
