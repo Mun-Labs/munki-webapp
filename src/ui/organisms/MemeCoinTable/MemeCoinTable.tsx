@@ -225,7 +225,6 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   let { data, isLoading } = useAlphaMovesApi(
     paginationParams,
     MOCK_DATA_ALPHA_MOVES,
-    {forceMock: true},
   );
 
   // Update pagination total when data is received
@@ -627,8 +626,9 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
     },
   ];
 
+  const size = tableParams?.pagination?.pageSize ?? 10;
   return (
-    <MemeCoinTableStyled style={{ ...style, height: 850 }}>
+    <MemeCoinTableStyled style={{ ...style, height: 85 * (size - 2) }}>
       <div ref={tableRef} style={{ position: "relative" }}>
         <Button
           className={`table-scroll-button left-button ${
@@ -656,7 +656,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
           onChange={(pagination) => handleTableChange(pagination)}
           loading={isLoading}
           size="middle"
-          scroll={{ x: "max-content", y: 150 * 10 }}
+          scroll={{ x: "max-content", y: 150 * size }}
           onRow={(record) => ({
             onClick: () => handleRowClick(record),
             style: { cursor: "pointer" },
