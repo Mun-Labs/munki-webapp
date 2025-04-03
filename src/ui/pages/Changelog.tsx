@@ -1,40 +1,10 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { Flex, Typography, Divider, Tag } from "antd";
-import { COL_DS } from "../colors";
+import { Flex, Typography } from "antd";
+import { MunkiHoverCard } from "../molecules/MunkiHoverCard/MunkiHoverCard";
 import { AppLayout } from "../../AppLayout";
 
 const { Title, Text } = Typography;
-
-const ChangelogContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 20px;
-`;
-
-const ChangelogEntry = styled.div`
-  margin-bottom: 40px;
-`;
-
-const ChangelogVersion = styled(Title)`
-  margin-bottom: 8px !important;
-`;
-
-const ChangelogDate = styled(Text)`
-  display: block;
-  color: ${COL_DS.text200};
-  margin-bottom: 16px;
-`;
-
-const ChangeList = styled.ul`
-  margin-top: 16px;
-  padding-left: 20px;
-`;
-
-const ChangeItem = styled.li`
-  margin-bottom: 8px;
-  color: ${COL_DS.text300};
-`;
 
 interface ChangelogEntryType {
   version: string;
@@ -88,35 +58,135 @@ const getTagColor = (type: string) => {
   }
 };
 
+const changelogItems = [
+  [
+    ["LANDPAGE", "🌐"],
+    ["SEARCH BAR", "🔍"],
+    ["MINDSHARE HEATMAP", "🧠"],
+    ["SOLANA TICKER", "/solana.png"],
+    ["ONCHAIN VOLUME", "📊"],
+    ["ALPHA MOVES", "🍀", "⭕"],
+  ],
+  [
+    ["RESPONSIVE UI", "🌐"],
+    ["API OPTIMIZATION", "⚙️"],
+    ["TICKER BANNER", "🧠"],
+    ["ALPHA MOVES", "🍀"],
+    ["TOKEN SEARCH", "🔍"],
+  ],
+  [
+    ["TOKEN DETAILS API", "🌐"],
+    ["MARKET DATA API", "📊"],
+    ["HOLDERS DETAILS", "🧠"],
+    ["FRESH WALLETS", "🍀"],
+    ["NOTEWORTHY WALLETS", "🎙️"],
+  ],
+];
+
 export const Changelog: FC = () => {
   return (
     <AppLayout>
       <ChangelogContainer>
-        <Title level={1} style={{ marginBottom: 40, textAlign: "center" }}>
-          Changelog
+        <Title level={1} className="changelog-title">
+          Progress Upate
         </Title>
 
-        {changelogData.map((entry, index) => (
-          <ChangelogEntry key={index}>
-            <ChangelogVersion level={3}>{entry.version}</ChangelogVersion>
-            <ChangelogDate>{entry.date}</ChangelogDate>
-            <ChangeList>
-              {entry.changes.map((change, changeIndex) => (
-                <ChangeItem key={changeIndex}>
-                  <Tag
-                    color={getTagColor(change.type)}
-                    style={{ marginRight: 8 }}
-                  >
-                    {change.type}
-                  </Tag>
-                  {change.description}
-                </ChangeItem>
-              ))}
-            </ChangeList>
-            {index < changelogData.length - 1 && <Divider />}
-          </ChangelogEntry>
-        ))}
+        <Flex
+          gap={38}
+          vertical={true}
+          style={{
+            width: "100%",
+            alignItems: "center",
+          }}
+        >
+          {changelogItems.map((week, weekIndex) => {
+            return (
+              <MunkiHoverCard
+                style={{
+                  width: 530,
+                  minHeight: "100%",
+                }}
+              >
+                <StyledCardContent>
+                  <h1>Week {weekIndex + 1}</h1>
+                  <ul>
+                    {week.map(([text, icon, prefix], index) => {
+                      const prefixText = prefix ? `${prefix} ` : "✅";
+                      const finalIcon = icon.startsWith("/") ? (
+                        <img
+                          src={icon}
+                          alt={text}
+                          style={{ width: 50, height: 40 }}
+                        />
+                      ) : (
+                        icon
+                      );
+                      return (
+                        <li key={index} style={{ display: "block" }}>
+                          <span className="text">{index + 1}</span>.{" "}
+                          {prefixText} <span className="text">{text}</span>{" "}
+                          {finalIcon}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </StyledCardContent>
+              </MunkiHoverCard>
+            );
+          })}
+        </Flex>
       </ChangelogContainer>
     </AppLayout>
   );
 };
+
+const ChangelogContainer = styled.div.attrs({
+  className: "ChangelogContainer",
+})`
+  margin: 0 auto;
+  padding: 40px 20px;
+
+  .changelog-title {
+    font-size: 100px;
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 0 1px 21.2px ${"#FFF8C5"};
+    background: linear-gradient(to bottom, ivory, #ffefbd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+`;
+
+const StyledCardContent = styled.div.attrs({
+  className: "StyledCardContent",
+})`
+  h1 {
+    margin-bottom: 20px;
+    font-size: 52px;
+    text-align: center;
+    text-shadow: 0 1px 21.2px ${"#FFF8C5"};
+    background: linear-gradient(to bottom, ivory, #ffefbd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  ul {
+    font-size: 26px;
+
+    li {
+      img {
+        position: relative;
+        top: 7px;
+        left: -15px;
+      }
+
+      .text {
+        text-align: center;
+        text-shadow: 0 1px 21.2px ${"#FFF8C5"};
+        background: linear-gradient(to bottom, ivory, #ffefbd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+`;
