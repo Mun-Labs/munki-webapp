@@ -26,6 +26,12 @@ export interface Token {
   volume24h: number;
 }
 
+export interface TokenDetailMetaData {
+  description?: string;
+  website?: string;
+  twitter?: string;
+}
+
 export interface TokenDetail {
   tokenAddress: Address;
   name: string;
@@ -33,7 +39,7 @@ export interface TokenDetail {
   decimals: 6;
   logoUri: string;
   websiteUrl: null;
-  metadata: null;
+  metadata: TokenDetailMetaData | null;
   currentPrice: BigDecimal;
   totalSupply: BigDecimal;
   history24hPrice: null;

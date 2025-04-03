@@ -3,22 +3,22 @@ import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 import { MunkiBadge } from "../../../atoms/MunkiBadge/MunkiBadge";
 import { COLORS } from "../../../colors";
+import { useParams } from "react-router";
+import { useTokenDetailsStore } from "../../../../store/details/useTokenDetailsStore";
 
 interface TokenDetailsPageProps extends ComponentProps<any> {}
 
 export const BioInfo: FC<TokenDetailsPageProps> = (_props) => {
-  // const { style } = props;
-  // const params = useParams<{ tokenName: string }>();
+  const params = useParams<{ tokenName: string }>();
+  const { tokenName } = params;
+
+  const { tokenData } = useTokenDetailsStore(tokenName!); // on details page, should have param
 
   return (
     <BioInfoStyled>
       <div className="wrap-bio">
         <h3>Bio</h3>
-        <p>
-          $LUX The Multiplayer Internet, A Unified Way to Navigate the Internet.
-          Unlock Multiplayer Browsing. CA:
-          BmXfbamFqrBzrqihr9hbSmEsfQUXMVaqshAjgvZupump
-        </p>
+        <p>{tokenData?.metadata?.description ?? "n/a"}</p>
       </div>
       <div className="wrap-bio">
         <h3>Info</h3>

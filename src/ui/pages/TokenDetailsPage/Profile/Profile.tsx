@@ -91,7 +91,12 @@ export const Profile: FC<TokenDetailsPageProps> = (_props) => {
             />
           </Flex>
           <Flex gap={12} style={{ marginTop: "24px" }}>
-            {<LinkChip name="X" />}
+            {
+              <LinkChip
+                name="X"
+                uri={tokenData.metadata?.twitter ?? undefined}
+              />
+            }
             {
               <LinkChip
                 name="Birdeye"
