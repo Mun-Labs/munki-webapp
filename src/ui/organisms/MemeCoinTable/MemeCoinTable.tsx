@@ -225,6 +225,7 @@ export const MemeCoinTable: FC<MemeCoinTableProps> = (props) => {
   let { data, isLoading } = useAlphaMovesApi(
     paginationParams,
     MOCK_DATA_ALPHA_MOVES,
+    {forceMock: true},
   );
 
   // Update pagination total when data is received

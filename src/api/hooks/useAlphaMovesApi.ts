@@ -8,6 +8,10 @@ import { useApiV1 } from "./useApi";
 export function useAlphaMovesApi(
   query?: PaginationQueryParams | null,
   mockResponse?: ApiResponse<AlphaMovesItem[]>,
+  debugOptions?: {
+    debugDelay?: number;
+    forceMock?: boolean;
+  },
 ) {
   let finalQuery = query;
   if (query) {
@@ -18,5 +22,5 @@ export function useAlphaMovesApi(
     };
   }
   const url = finalQuery === null ? null : "alphamoves";
-  return useApiV1<AlphaMovesItem[]>(url, finalQuery, mockResponse);
+  return useApiV1<AlphaMovesItem[]>(url, finalQuery, mockResponse, debugOptions);
 }
